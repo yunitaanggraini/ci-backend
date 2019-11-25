@@ -1,4 +1,4 @@
-# ci-restserver
-Check the recent version at https://github.com/chriskacerguis/codeigniter-restserver
+# CI-BACKEND
 
-My alternate version https://github.com/ardisaurus/old-rest-ci
+1. ini adalah sebuah projek gila!!!
+2. programmer akan gila diatas jam 5
