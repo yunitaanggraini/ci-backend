@@ -16,7 +16,9 @@
                                 </div>
 
                                 <div class="form-group"><label class="col-sm-2 control-label">Auditor</label>
-                                    <div class="col-sm-5"><input type="text" class="form-control" name="auditor"></div>
+                                    <div class="col-sm-5"><input type="text" class="form-control" name="auditor">
+                                        
+                                    </div>
                                 </div>
 
                                 <div class="form-group"><label class="col-sm-2 control-label">Jenis Audit</label>
@@ -42,7 +44,8 @@
                                 </div>
 
                                 <div class="form-group"><label class="col-sm-2 control-label">Waktu</label>
-                                    <div class="col-sm-5"><input type="time" class="form-control" name="waktu" id="password" oncopy="return false" onpaste="return false"></div>
+                                    <div class="col-sm-5"><input type="time" class="form-control" name="waktu" id="waktu" oncopy="return false" onpaste="return false">
+                                    </div>
                                 </div>
 
                                 

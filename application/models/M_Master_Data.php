@@ -166,7 +166,7 @@ class M_Master_Data extends CI_Model {
 
     public function getSubInvById($id)
     {
-        $respon =  $this->_client->request('GET', 'subsinv',[
+        $respon =  $this->_client->request('GET', 'subinv',[
             'query' =>[
                 'id'=> $id
             ]
@@ -763,6 +763,59 @@ class M_Master_Data extends CI_Model {
         }
       }
 
+      public function cariSubInv($subinv,$jenisinv)
+    {
+        
+        $respon =  $this->_client->request('GET', 'carisubinv',[
+            'query'=>[
+                'subinv'=> $subinv,
+                'jenisinv'=> $jenisinv
+            ]
+        ]);
+
+        $result = json_decode($respon->getBody()->getContents(),true);
+
+        if ($result['status']==true) {
+            return $result['data'];
+        }else{
+            return false;
+        }
+    }
+
+    public function cariSubJenis($id)
+      {
+          $respon =  $this->_client->request('GET', 'carisubinv',[
+            'query' =>[
+                'jenisinv'=> $id
+            ]
+        ]);
+
+        $result = json_decode($respon->getBody()->getContents(),true);
+        // var_dump($result['data'][0]);die;
+        if ($result['status']==true) {
+            return $result['data'];
+        }else{
+            return false;
+        }
+      }
+
+      public function cariSub($id)
+      {
+          $respon =  $this->_client->request('GET', 'carisubinv',[
+            'query' =>[
+                'subinv'=> $id
+            ]
+        ]);
+
+        $result = json_decode($respon->getBody()->getContents(),true);
+        // var_dump($result['data'][0]);die;
+        if ($result['status']==true) {
+            return $result['data'];
+        }else{
+            return false;
+        }
+      }
+
       public function cariJenisInv($id)
       {
           $respon =  $this->_client->request('GET', 'carijenisinv',[
@@ -780,22 +833,7 @@ class M_Master_Data extends CI_Model {
         }
       }
 
-      public function cariSubInv($id)
-      {
-          $respon =  $this->_client->request('GET', 'carisubinv',[
-            'query' =>[
-                'subinvy'=> $id
-            ]
-        ]);
 
-        $result = json_decode($respon->getBody()->getContents(),true);
-        // var_dump($result['data'][0]);die;
-        if ($result['status']==true) {
-            return $result['data'];
-        }else{
-            return false;
-        }
-      }
 
       public function cariStatusInv($id)
       {

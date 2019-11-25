@@ -31,7 +31,7 @@
                     <div class="panel">
                         <h5 class="col-sm-3">List Data User</h5>
                         <div class="col-sm-9 text-right">
-                        <a href="<?php echo site_url('user/input_user'); ?>" type="button" class="btn btn-m btn-success">Add Data</a>
+                        <a href="<?php echo site_url('master_data/input_user'); ?>" type="button" class="btn btn-m btn-success">Add Data</a>
                         </div>
                       <span id="info_message"></span>
                     </div>

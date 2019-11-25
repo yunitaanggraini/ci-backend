@@ -86,6 +86,7 @@
     <script>
    $(document).ready(function() { 
     $('#jadwal_audit').load("<?php echo base_url();?>audit/ajax_get_jadwal_audit");
+    $('#list_audit').load("<?php echo base_url();?>audit/ajax_get_jadwal_audit");
     $('#Optjenisaudit').load("<?php echo base_url();?>audit/ajax_get_jenis_audit2");
     $('#Optcabang').load("<?php echo base_url();?>audit/ajax_get_cabang2");
 

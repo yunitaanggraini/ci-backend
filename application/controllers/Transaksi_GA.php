@@ -19,7 +19,7 @@ class Transaksi_GA extends CI_Controller {
             $this->load->view('_partial/header.php',$data);
             $this->load->view('_partial/sidebar.php');      
             $this->load->view('general_affairview/monitoring_office/v_monitoring_inv.php',$data);       
-            $this->load->view('general_affairview/_partial/footer.php');
+            $this->load->view('general_affairview/monitoring_office/_partial/footer.php');
     }
 
     public function inputOffice()
@@ -31,7 +31,7 @@ class Transaksi_GA extends CI_Controller {
         $this->load->view('_partial/header.php',$data);
         $this->load->view('_partial/sidebar.php');   
          $this->load->view('general_affairview/management_office/v_management_inv.php',$data);
-         $this->load->view('general_affairview/_partial/footer.php');
+         $this->load->view('general_affairview/management_office/_partial/footer.php');
     }
 
     public function ajax_get_Inventory()
@@ -108,22 +108,130 @@ class Transaksi_GA extends CI_Controller {
         if ($inventory) {
             $this->session->set_flashdata('warning', 'sudah ada');
 
-            redirect('management/inventory');
+            redirect('transaksi/management_office');
             
         } else {
             if ($result = $this->mtransga->addInventory($data)) {
                 $this->session->set_flashdata('berhasil', 'berhasil ditambah');
                 
-                redirect('management/inventory');
+                redirect('transaksi/management_office');
                 
             } else {
                 $this->session->set_flashdata('gagal', 'gagal ditambah');
 
-                redirect('management/inventory'); 
+                redirect('transaksi/management_office'); 
             }
             
         }
         
+    }
+
+    //----------//
+
+    //---------//
+    public function ajax_get_statusinv2()
+    {
+        $output = '';
+		$no = 0;
+        $liststatusinv = $this->mtransga->getStatusInv();
+		foreach ($liststatusinv as $list) {
+			$no++;
+			$output .='
+				<option value="'.$list['idstatus_inventory'].'">'.$list['idstatus_inventory'].' - '.$list['status_inventory'].'</option>
+			';
+        }
+        echo '<option value="">--- Pilih Status Inventory ---</option>';
+        echo $output;
+		
+    }
+
+    public function ajax_get_subinv2()
+    {
+        $output = '';
+        $no = 0;
+        $id = $this->input->post('idjenis_inventory');
+        $jenissubinv = $this->mtransga->getSubInvById($id);
+        var_dump($jenissubinv);
+		foreach ($jenissubinv as $list) {
+			$no++;
+			$output .='
+				<option value="'.$list['idsub_inventory'].'">'.$list['idsub_inventory'].' - '.$list['sub_inventory'].'</option>
+			';
+        }
+        echo '<option value="">--- Pilih Sub Inventory ---</option>';
+        echo $output;
+		
+    }
+
+
+    public function ajax_get_jenisinv2()
+    {
+        $output = '';
+		$no = 0;
+        $listjenisinv = $this->mtransga->getJenisInv();
+		foreach ($listjenisinv as $list) {
+			$no++;
+			$output .='
+				<option value="'.$list['idjenis_inventory'].'">'.$list['idjenis_inventory'].' - '.$list['jenis_inventory'].'</option>
+			';
+        }
+        echo '<option value="">--- Pilih Jenis Inventory ---</option>';
+        echo $output;
+		
+    }
+
+    public function ajax_get_vendor2()
+    {
+        $output = '';
+		$no = 0;
+        $listvendor = $this->mtransga->getVendor();
+		foreach ($listvendor as $list) {
+			$no++;
+			$output .='
+				<option value="'.$list['id_vendor'].'">'.$list['id_vendor'].' - '.$list['nama_vendor'].'</option>
+			';
+        }
+        echo '<option value="">--- Pilih Vendor ---</option>';
+        echo $output;
+		
+    }
+
+    public function ajax_get_cabang2()
+    {
+        $output = '';
+		$no = 0;
+        $listcabang = $this->mtransga->getCabang();
+		foreach ($listcabang as $list) {
+			$no++;
+			$output .='
+				<option value="'.$list['id_cabang'].'">'.$list['id_cabang'].' - '.$list['nama_cabang'].'</option>
+			';
+        }
+        echo '<option value="">--- Pilih Cabang ---</option>';
+        echo $output;
+		
+    }
+
+    public function ajax_get_lokasi2()
+    {
+        $output = '';
+		$no = 0;
+        $id=$this->input->post('id_cabang');
+        $lokasicabang = $this->mtransga->getLokasiCabang($id);
+        foreach ($lokasicabang as $lokcab) {
+            $idlokasi = $lokcab['id_lokasi'];
+            $listlokasi = $this->mtransga->getLokasiByid($idlokasi);
+            foreach ($listlokasi as $list) {
+                $no++;
+                $output .='
+                    <option value="'.$list['id_lokasi'].'">'.$list['id_lokasi'].' - '.$list['nama_lokasi'].'</option>
+                ';
+            }
+
+        }
+        echo '<option value="">--- Pilih Lokasi ---</option>';
+        echo $output;
+		
     }
 
 }

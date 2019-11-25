@@ -3,7 +3,7 @@
     <script>
     
     $(document).ready(function() {
-        $('#jenis').load("<?php echo base_url() ?>master_data/ajax_get_jenis_inv3");
+        $('#jenis_inv').load("<?php echo base_url() ?>master_data/ajax_get_jenis_inv2/<?php echo $id ?>");
         });
         $( "#FormSubInv" ).validate({
         rules: {

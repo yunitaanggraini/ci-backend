@@ -8,9 +8,15 @@ class Master_Data extends CI_Controller {
         parent::__construct();
         $this->load->model('m_master_data','mmasdat');
         $this->load->model('m_transaksi_ga','m_transga');
-        if ($this->session->userdata('usergroup')!= 'UG001') {
-            redirect('error');
-        }
+        // if (!$this->session->userdata('username')) {
+            
+        //     redirect('login/login');
+            
+        // }else{
+        //     if ($this->session->userdata('usergroup') != 'UG001') {
+        //         redirect('error');  
+        //     }
+        // }
         
     }
     public function viewUser()
@@ -225,16 +231,22 @@ class Master_Data extends CI_Controller {
         }
         echo $output;
     }
-    public function ajax_get_jenis_inv2()
+    public function ajax_get_jenis_inv2($id =null)
     {
         $output = '';
 		$no = 0;
         $listtypeinv = $this->mmasdat->getJenisInv();
 		foreach ($listtypeinv as $list) {
-			$no++;
-			$output .='
-				<option value="'.$list['idjenis_inventory'].'">'.$list['idjenis_inventory'].' - '.$list['jenis_inventory'].'</option>
-			';
+            $no++;
+            if ($list['idjenis_inventory']==$id) {
+                $output .='
+                    <option value="'.$list['idjenis_inventory'].'" selected>'.$list['idjenis_inventory'].' - '.$list['jenis_inventory'].'</option>
+                ';  
+            }else {
+                $output .='
+                    <option value="'.$list['idjenis_inventory'].'">'.$list['idjenis_inventory'].' - '.$list['jenis_inventory'].'</option>
+                ';
+            }
         }
         echo '<option value="">--- Pilih jenis Inventory ---</option>';
         echo $output;
@@ -246,10 +258,10 @@ class Master_Data extends CI_Controller {
 		$no = 0;
         $listtypeinv = $this->mmasdat->getJenisInv();
 		foreach ($listtypeinv as $list) {
-			$no++;
-			$output .='
-				<option value="'.$list['idjenis_inventory'].'">'.$list['idjenis_inventory'].' - '.$list['jenis_inventory'].'</option>
-			';
+            $no++;
+                $output .='
+                    <option value="'.$list['idjenis_inventory'].'">'.$list['idjenis_inventory'].' - '.$list['jenis_inventory'].'</option>
+                ';
         }
         echo '<option value="">--- Pilih jenis Inventory ---</option>';
         echo $output;
@@ -269,7 +281,7 @@ class Master_Data extends CI_Controller {
             <tr> 
                 <td>'.$no.'</td>
                 <td>
-                <a onclick="edit(id=\''.$list['idsub_inventory'].'\')" class="text-warning" ><i class="fa fa-pencil"></i></a>
+                <a onclick="edit(id=\''.$list['idsub_inventory'].'\',jenis=\''.$list['idjenis_inventory'].'\')" class="text-warning" ><i class="fa fa-pencil"></i></a>
                 <a href="'.$base.'master_data/delete_subinv/'.$list['idsub_inventory'].'" class="text-danger" onclick=\'return confirm("Konfirmasi menghapus data '.$list['idsub_inventory'].' - '.$list['sub_inventory'].' ? ");\'><i class="fa fa-trash"></i></a>
                 </td>
                 <td >'.$list['idsub_inventory'].'</td>
@@ -555,15 +567,16 @@ class Master_Data extends CI_Controller {
 
     public function edit_subinv()
     {
-        $id =$this->input->get('id');
-        // var_dump($id);die;
+        $id =$this->input->post('id');
+        $jenis = $this->input->post('jenis');
         $data=[
-            'edit' => $this->mmasdat->getSubInvById($id)
+            'edit' => $this->mmasdat->getSubInvById($id),
+            'id' => $jenis
         ];
 
 
             $this->load->view('general_affairview/sub_inventory/v_edit_subinv.php',$data);
-            $this->load->view('general_affairview/sub_inventory/_partial/footer2.php');
+            $this->load->view('general_affairview/sub_inventory/_partial/footer3.php');
     }
 
     public function edit_statusinv()
@@ -751,7 +764,7 @@ class Master_Data extends CI_Controller {
     public function post_sub_inv()
     {
         $data =[
-            'idjenis_inventory' => $this->input->post('idjenis_inventory',true),
+            'idjenis_inventory' => $this->input->post('jenis_inv',true),
             'idsub_inventory' => $this->input->post('idsub_inventory',true),
             'sub_inventory' => $this->input->post('sub_inventory',true)           
         ];
@@ -761,8 +774,6 @@ class Master_Data extends CI_Controller {
         $subinv = $this->mmasdat->getSubInvById($id);
         if ($subinv) {
             $this->session->set_flashdata('warning', 'sudah ada');
-            
-            
             redirect('master_data/sub_inventory','refresh');
             
         } else {
@@ -1013,13 +1024,13 @@ class Master_Data extends CI_Controller {
     public function put_subinv()
     {
         $data = [
-            'idjenis_inventory' => $this->input->post('idjenis_inventory',true),            
+            'idjenis_inventory' => $this->input->post('jenis_inv',true),            
             'sub_inventory'   =>$this->input->post('sub_inventory',true),   
             'id' => $this->input->post('idsub_inventory',true)
         ];
         // var_dump($data);die;
 
-                $exec = $this->mmasdat->UpadateSubInv($data);
+                $exec = $this->mmasdat->UpdateSubInv($data);
                 if ($exec) {
                     $this->session->set_flashdata('berhasil', 'berhasil diupdate');
                     redirect('master_data/sub_inventory');
@@ -1217,18 +1228,18 @@ class Master_Data extends CI_Controller {
             $this->session->set_flashdata('warning', 'tidak ada');
                 
                 
-                redirect('master_data/type_inventory');
+                redirect('master_data/sub_inventory');
         }else{
             $result=$this->mmasdat->delSubInv($id);
             if ($result) {
                 $this->session->set_flashdata('berhasil', 'Berhasil Dihapus');
                 
                 
-                redirect('master_data/type_inventory');
+                redirect('master_data/sub_inventory');
             }else{
                 $this->session->set_flashdata('gagal', 'Gagal dihapus');
   
-                redirect('master_data/type_inventory');
+                redirect('master_data/sub_inventory');
             }
         }
     }
@@ -1459,7 +1470,6 @@ class Master_Data extends CI_Controller {
         if ($jenisinv!= null) {
             $listjenisinv = $this->mmasdat->carijenisinv($jenisinv);
         }
-        // var_dump($listjenisinv[0]);die;
         
         if ($listjenisinv) {
             foreach ($listjenisinv as $list) {
@@ -1489,29 +1499,34 @@ class Master_Data extends CI_Controller {
 
     public function search_data_subinventory()
     {
-        $jenisinv = $this->input->post('subinv');
+        $subinv = $this->input->post('subinv');
+        $jenisinv = $this->input->post('jenisinv');
         $output = '';
         $no = 0;
         $base = base_url();
-        if ($jenisinv!= null) {
-            $listjenisinv = $this->mmasdat->carisubinv($subinv);
+        if ($subinv!= null && $jenisinv!=null) {
+            $listsubinv = $this->mmasdat->carisubinv($subinv,$jenisinv);
+        }elseif($subinv!=null&& $jenisinv==null){
+            $listsubinv = $this->mmasdat->carisub($subinv);
+        }elseif ($subinv=='' && $jenisinv!='') {
+            $listsubinv = $this->mmasdat->carisubjenis($jenisinv);
         }
-        // var_dump($listjenisinv[0]);die;
         
         if ($listsubinv) {
             foreach ($listsubinv as $list) {
                 
                 $no++;
                 $output .='
-                <tr>
+            <tr> 
                 <td>'.$no.'</td>
                 <td>
-                <a onclick="edit(id=\''.$list['idsub_inventory'].'\')" class="text-warning" ><i class="fa fa-pencil"></i></a>
-                <a href="'.$base.'sub_inventory/delete_subinv/'.$list['idsub_inv'].'" class="text-danger" onclick=\'return confirm("Konfirmasi Menghapus Data '.$list['idsub_inventory'].'?");\'><i class="fa fa-trash"></i></a>
+                <a onclick="edit(id=\''.$list['idsub_inventory'].'\',jenis=\''.$list['idjenis_inventory'].'\')" class="text-warning" ><i class="fa fa-pencil"></i></a>
+                <a href="'.$base.'master_data/delete_subinv/'.$list['idsub_inventory'].'" class="text-danger" onclick=\'return confirm("Konfirmasi menghapus data '.$list['idsub_inventory'].' - '.$list['sub_inventory'].' ? ");\'><i class="fa fa-trash"></i></a>
                 </td>
-                <td>'.$list['idsub_inventory'].'</td>
+                <td >'.$list['idsub_inventory'].'</td>
                 <td>'.$list['sub_inventory'].'</td>
-                </tr>
+                <td>'.$list['idjenis_inventory'].' - '.$list['jenis_inventory'].'</td>
+            </tr>
                 ';
             }
         }else{
@@ -1833,15 +1848,18 @@ class Master_Data extends CI_Controller {
 		
     }
 
+
+    
+
     //-------------------------------------BARCODE----------------------------------------//
     public function generate_barcode_qrcode()
     {
         $data=[
-            'judul'=> "Buat Barcode dan QR",
-            'judul1'=>'Master Data',
+            'judul'=> "Buat Barcode dan QR Code",
+            'judul1'=>'Master ',
 		];
 		$this->load->view('_partial/header.php',$data);
-        $this->load->view('_partial/sidebar.php');		
+        $this->load->view('_partial/sidebar.php',$data);		
         $this->load->view('general_affairview/barqrcode/v_buat_barqrcode.php',$data);		
         $this->load->view('general_affairview/barqrcode/_partial/footer.php');
     }

@@ -46,7 +46,7 @@
                 <div class="panel panel-primary">
                     <div class="ibox-title float-e-margins">
                         <div class="form-group">
-                            <label class="col-sm-3"> <h5>List Data Divisi</h5></label>
+                            <label class="col-sm-3"> <h5>List Data Audit</h5></label>
                             <div class="col-sm-9 text-right">
                             <input type="submit" value="Add Data" id="add" name="add" class="btn btn-success" onclick="show()">
                             </div>
@@ -55,16 +55,6 @@
                       <span id="info_message"></span>
                     </div>
                     <div class="panel-body">
-                    <?php if($this->session->flashdata('info')){
-                            ?>
-                            <div class="alert alert-success alert-dismissable col-6">
-                                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-                                    Data Divisi <?php echo $this->session->flashdata('info');
-                                    
-                                    ?>
-                                </div>
-                            <?php
-                            } ?>
                         <div class="table-responsive">
                     <table class="table table-striped table-bordered table-hover dataTables-example" >
                     <thead>

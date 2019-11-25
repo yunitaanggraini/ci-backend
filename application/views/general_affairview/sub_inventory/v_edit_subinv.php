@@ -7,10 +7,12 @@
             
             <div class="panel-body">
                 <form method="post" id="FormTypeInv" class="form-horizontal" action="<?php echo base_url() ?>master_data/put_subinv">
-                <?php foreach($edit['data'] as $e):?>
+                <?php 
+                foreach($edit as $e):
+                    ?>
                     <div>
                         <div class="form-group"><label class="col-sm-2 control-label">ID Sub Inventory</label>
-                        <input type="hidden" class="form-control" name="idsub_inventory" id="idsub_inv" value="<?php echo $e['idsub_inventory'] ?>">
+                        <input type="hidden" class="form-control" name="idsub_inventory" id="idsub_inventory" value="<?php echo $e['idsub_inventory'] ?>">
                            <div class="col-sm-4"><input type="text" class="form-control" value="<?php echo $e['idsub_inventory'] ?>" disabled></div>
                         </div>
                     </div>
@@ -22,7 +24,7 @@
 
                     <div>
                             <div class="form-group"><label class="col-sm-2 control-label">Jenis Inventory</label>
-                                    <div class="col-sm-6"><select class="form-control m-b" name="jenis_inventory" id="jenis_inventory">
+                                    <div class="col-sm-6"><select class="form-control m-b" name="jenis_inv" id="jenis_inv" >
                                     </select>
                                     </div>
                                     <div class="col-sm-4 text-right">

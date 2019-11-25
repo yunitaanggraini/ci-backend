@@ -88,18 +88,18 @@
 
    $(document).ready(function() {
     $('#sub_inv').load("<?php echo base_url() ?>master_data/ajax_get_sub_inv");
-    $('#jenis_inventory').load("<?php echo base_url() ?>master_data/ajax_get_jenis_inv2");
+    $('#jenisinv').load("<?php echo base_url() ?>master_data/ajax_get_jenis_inv2");
     function search() {
-            var subinv =$('#sub_inv').val();
-            var jenisinv = $('#jenis_inventory').val();
+            var subinv =$('#subinv').val();
+            var jenisinv = $('#jenisinv').val();
             
 
             if (subinv!='' && jenisinv!='') {
                     // $("#sub_inv").html(subinv);
                 $.ajax({
                     type:"post",
-                    url:"<?php echo base_url() ?>master_data/search_data_subinv",
-                    data:"sub_inventory="+sub_inv+"&jenis_inventory="+jenis_inv,
+                    url:"<?php echo base_url() ?>master_data/search_data_subinventory",
+                    data:"subinv="+subinv+"&jenisinv="+jenisinv,
                     success:function(data){
                       $("#sub_inv").html(data);
                       $("#subinv").val("");
@@ -110,7 +110,7 @@
                 if (subinv!= '' && jenisinv=='') {
                     $.ajax({
                     type:"post",
-                    url:"<?php echo base_url() ?>master_data/search_data_subinv",
+                    url:"<?php echo base_url() ?>master_data/search_data_subinventory",
                     data:"subinv="+subinv,
                     success:function(data){
                       $("#sub_inv").html(data);
@@ -122,7 +122,7 @@
                     if (subinv==''&& jenisinv!='') {
                         $.ajax({
                         type:"post",
-                        url:"<?php echo base_url() ?>master_data/search_data_subinv",
+                        url:"<?php echo base_url() ?>master_data/search_data_subinventory",
                         data:"jenisinv="+jenisinv,
                         success:function(data){
                         $("#sub_inv").html(data);
@@ -130,6 +130,8 @@
                         $("#jenisinv").val("");
                     }
                     });
+                    }else{
+                        $('#sub_inv').load("<?php echo base_url();?>master_data/ajax_get_sub_inv");  
                     }
                 }
             }
@@ -155,12 +157,12 @@
       });
     });
 
-    function edit(id) {
+    function edit(id, jenis) {
         // var id = $(this).attr('data-id');
         $.ajax({
             url: "<?php echo base_url().$this->uri->segment(1) ?>/edit_subinv",
             type: 'post',
-            data:"id="+id,
+            data:"id="+id+"&jenis="+jenis,
             dataType:'html',
             success: function(data) {
                 $('#data_input').html(data);

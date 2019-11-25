@@ -85,7 +85,7 @@
     </script>
     <script>
    $(document).ready(function() {
-    $('#jadwal_audit').load("<?php echo base_url() ?>audit/ajax_get_jadwal_audit");
+    $('#temp_part').load("<?php echo base_url() ?>audit/ajax_get_temp_part");
     $('#Optcabang').load("<?php echo base_url() ?>master_data/ajax_get_cabang2");
     function search() {
             var cabang =$('#Incabang').val();

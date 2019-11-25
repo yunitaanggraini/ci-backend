@@ -15,7 +15,7 @@
     <link href="<?php echo base_url() ?>assets/css/animate.css" rel="stylesheet">
     <link href="<?php echo base_url() ?>assets/css/style.css" rel="stylesheet">
     <link href="<?php echo base_url() ?>assets/css/plugins/iCheck/custom.css" rel="stylesheet">
-    <!-- <link href="<?php echo base_url() ?>assets/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet"> -->
+
     <script>
         function redirectCU(e) {
             if (e.ctrlKey && e.which == 85) {

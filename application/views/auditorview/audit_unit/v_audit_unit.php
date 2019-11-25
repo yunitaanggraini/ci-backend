@@ -64,6 +64,7 @@
                         <th width="5%">Aksi</th>
                         <th>ID Unit</th>
                         <th>No Mesin</th>
+                        <th>No Rangka</th>
                         <th>Cabang</th>
                         <th>Lokasi</th>
                         <th>Umur Unit</th>
@@ -84,6 +85,7 @@
                         <th>Aksi</th>
                         <th>ID Unit</th>
                         <th>No Mesin</th>
+                        <th>No Rangka</th>
                         <th>Cabang</th>
                         <th>Lokasi</th>
                         <th>Umur Unit</th>

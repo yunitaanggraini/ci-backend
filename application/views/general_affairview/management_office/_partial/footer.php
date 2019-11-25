@@ -16,11 +16,100 @@
 
     <!-- Mainly scripts -->
     <script src="<?php echo base_url() ?>assets/js/jquery-3.1.1.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/js/jquery.validate.js"></script>
+    <script>
+        $( "#FormInventory" ).validate({
+        rules: {
+            idtransaksi_inv:{
+                required: true,
+                maxlength: 8,
+                minlength:3
+            },
+            idstatus_inventory:{
+                required:true
+            },
+            idjenis_inventory:{
+                required:true
+            },
+            idsub_inventory:{
+                required:true
+            },
+            nilai_awal:{
+                required:true
+            },
+            ddp:{
+                required:true
+            },
+            nilai_asset:{
+                required:true
+            },
+            nilai_total_keseluruhan:{
+                required:true
+            },
+            tanggal_barang_terima:{
+                required:true
+            },
+            id_vendor:{
+                required:true
+            },
+            jenis_pembayaran:{
+                required:true
+            },
+            id_cabang:{
+                required:true
+            },
+            id_lokasi:{
+                required:true
+            },
+            nama_pengguna:{
+                required:true
+            },
+            keterangan:{
+                required:true
+            },
+            stok:{
+                required:true
+            },
+            foto:{
+                required:true
+            },
+            asal_hadiah:{
+                required:true
+            },
+            ppn:{
+                required:true
+            },
+            ket_ppn:{
+                required:true
+            },
+            merk:{
+                required:true
+            },
+            aksesoris_tambahan:{
+                required:true
+            },
+            serial_number:{
+                required:true
+            },
+            uang_muka:{
+                required:true
+            },
+            cicilan_perbulan:{
+                required:true
+            },
+            tenor:{
+                required:true
+            },
+            nilai_total:{
+                required:true
+            },
+
+        }
+        });
+    </script>
     <script src="<?php echo base_url() ?>assets/js/bootstrap.min.js"></script>
     <script src="<?php echo base_url() ?>assets/js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="<?php echo base_url() ?>assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-    <!-- Upload js-->
-    <script src="<?php echo base_url() ?>assets/js/plugins/jasny/jasny-bootstrap.min.js"></script>
     <!-- Idle Timer plugin -->
     <script src="<?php echo base_url() ?>assets/js/plugins/idle-timer/idle-timer.min.js"></script>
     <!-- Custom and plugin javascript -->
@@ -86,30 +175,111 @@
 
     </script>
     <script>
-   $(document).ready(function() {
-    $('#jenis_inv').load("<?php echo base_url() ?>master_data/ajax_get_jenis_inv");
-    function search(){
-            var jenisinv =$('#Injenisinv').val();
+   $(document).ready(function() { 
+    $('#user').load("<?php echo base_url();?>master_data/ajax_get_user");
+    $('#OptStatusInv').load("<?php echo base_url() ?>transaksi_ga/ajax_get_statusinv2");
+    $('#OptVendor').load("<?php echo base_url() ?>transaksi_ga/ajax_get_vendor2");
+    $('#OptJenisInv').load("<?php echo base_url() ?>transaksi_ga/ajax_get_jenisinv2");
+   $('#OptJenisInv').on('change', function(){
+       var idjenis_inventory = $(this).val();
 
-            if (jenisinv!='') {
+       if(idjenis_inventory == "")
+       {
+        $('#OptSubInv').prop('disabled',true);
+       }
+       else
+       {
+        $('#OptSubInv').prop('disabled',false);
+        $.ajax({
+            url:"<?php echo base_url();?>transaksi_ga/ajax_get_subinv2",
+            type: "POST",
+            data: {'idjenis_inventory':idjenis_inventory},
+            success: function(data){
+                $('#OptSubInv').html(data);
+            }
+        });
+       }
+   })
+   $('#OptCabang').load("<?php echo base_url() ?>transaksi_ga/ajax_get_cabang2");
+   $('#OptCabang').on('change', function(){
+       var id_cabang = $('#OptCabang').val();
+
+       if(id_cabang == "")
+       {
+        $('#OptLokasi').prop('disabled',true);
+       }
+       else
+       {
+        $('#OptLokasi').prop('disabled',false);
+        $.ajax({
+            url:"<?php echo base_url();?>transaksi_ga/ajax_get_lokasi2",
+            type: "POST",
+            data: {'id_cabang':id_cabang},
+            success: function(data){
+                $('#OptLokasi').html(data);
+            }
+        });
+       }
+   })
+    
+
+    function search() {
+            var username =$('#username').val();
+            var nama = $('#nama').val();
+
+            if (username!='' && nama!='') {
                 $.ajax({
                     type:"post",
-                    url:"<?php echo base_url() ?>master_data/search_data_jenisinv",
-                    data:"id="+jenisinv,
+                    url:"<?php echo base_url() ?>master_data/search_data_user",
+                    data:"username="+username+"&nama="+nama,
                     success:function(data){
-                      $("#jenis_inv").html(data);
+                      $("#user").html(data);
                       $("#search").val("");
                     }
                 });
             }else{
-                $('#jenis_inv').load("<?php echo base_url() ?>master_data/ajax_get_jenis_inv");
+                if (username!= '' && nama=='') {
+                    $.ajax({
+                    type:"post",
+                    url:"<?php echo base_url() ?>master_data/search_data_user",
+                    data:"username="+username,
+                    success:function(data){
+                      $("#user").html(data);
+                      $("#search").val("");
+                    }
+                });
+                } else {
+                    if (username==''&& nama!='') {
+                        $.ajax({
+                        type:"post",
+                        url:"<?php echo base_url() ?>master_data/search_data_user",
+                        data:"nama="+nama,
+                        success:function(data){
+                        $("#user").html(data);
+                        $("#search").val("");
+                    }
+                    });
+                    }else{
+                        $('#user').load("<?php echo base_url();?>master_data/ajax_get_user");  
+                    }
+                }
+            }
         }
-        }
-        $('#caribtn').click(function(){
+
+        $('#caribtn').click(function() {
             search();
         });
 
-        $('#Injenisinv').keyup(function(e) {
+        $('#username').keyup(function(e) {
+          if(e.keyCode == 13) {
+             search();
+          }else{
+              if (e.keyCode == 9) {
+                  $('#nama').focus();
+              }
+          }
+      });
+        $('#nama').keyup(function(e) {
           if(e.keyCode == 13) {
              search();
           }
@@ -119,7 +289,7 @@
     function edit(id) {
         // var id = $(this).attr('data-id');
         $.ajax({
-            url: "<?php echo base_url().$this->uri->segment(1) ?>/edit_jenisinv",
+            url: "<?php echo base_url().$this->uri->segment(1) ?>/edit_user",
             type: 'post',
             data:"id="+id,
             dataType:'html',
@@ -128,28 +298,9 @@
             }
 
         });
-        console.log(id);
       }
 
-
-    function show() {
-        $('#add').attr('disabled', true);
-        var $url = "<?php echo $this->uri->segment(1) ?>";
-        $.ajax({
-            url: "<?php echo base_url().$this->uri->segment(1) ?>/input_jenisinv",
-            type: 'post',
-            dataType:'html',
-            success: function(data) {
-                $('#data_input').html(data);
-            }
-
-        })
-    }
-
-    function hide() {
-        $('#add').attr('disabled', false);
-        $('#data_input').html('');
-    }
+    
     </script>
 
 </body>

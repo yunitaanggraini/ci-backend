@@ -9,11 +9,11 @@
                     <div class="panel-body">
                     <div>
                          <center>
-                         <a href="<?php echo site_url('audit/manual_audit'); ?>" type="button" class="btn btn-lg btn-success">Manual</a><br><br>
+                         <a href="<?php echo site_url('transaksi_auditor/manual_audit'); ?>" type="button" class="btn btn-lg btn-success">Manual</a><br><br>
                          </center>
                     </div>
                         <center>
-                        <a href="<?php echo site_url('audit/scaning_audit'); ?>" type="button" class="btn btn-lg btn-primary">Scaning</a>
+                        <a href="<?php echo site_url('transaksi_auditor/scaning_audit'); ?>" type="button" class="btn btn-lg btn-primary">Scaning</a>
                         </center>
                         
                         </div>

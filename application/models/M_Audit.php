@@ -8,10 +8,19 @@ class M_Audit extends CI_Model {
         {
             parent::__construct();
             $this->_client = new Client([
-                'base_uri'=> 'http://192.168.43.95/ci-server-lala/api/master/'
+                'base_uri'=> 'http://192.168.43.95/ci-server-lala/api/audit/'
             ]);
         }
 
+        public function getAudit()
+        {
+            $respon =  $this->_client->request('GET', 'audit');
+    
+            $result = json_decode($respon->getBody()->getContents(),true);
+    
+            return $result['data'];              
+        }  
+        
     public function getCabang()
     {
         $respon =  $this->_client->request('GET', 'cabang');
@@ -30,10 +39,60 @@ class M_Audit extends CI_Model {
         return $result['data'];              
     }
 
+    public function getTempUnit()
+    {
+      $respon =  $this->_client->request('GET', 'tempunit');
+
+      $result = json_decode($respon->getBody()->getContents(),true);
+
+      return $result['data'];
+    }
+
+    public function getTempPart()
+    {
+      $respon =  $this->_client->request('GET', 'temppart');
+
+      $result = json_decode($respon->getBody()->getContents(),true);
+
+      return $result['data'];
+    }
+
     //-----------------BY ID---------------//
     public function getJadwalAuditById($id)
     {
-        $respon =  $this->_client->request('GET', 'JadwalAudit',[
+        $respon =  $this->_client->request('GET', 'audit',[
+            'query' =>[
+                'id'=> $id
+            ]
+        ]);
+
+        $result = json_decode($respon->getBody()->getContents(),true);
+        if ($result['status']==true) {
+            return $result['data']; 
+        }else{
+            return false;
+        }
+    }
+
+    public function getTempUnitById($id)
+    {
+        $respon =  $this->_client->request('GET', 'tempunit',[
+            'query' =>[
+                'id'=> $id
+            ]
+        ]);
+
+        $result = json_decode($respon->getBody()->getContents(),true);
+        if ($result['status']==true) {
+            return $result['data']; 
+        }else{
+            return false;
+        }
+    }
+
+    public function getLokasiById($id)
+    {
+        $respon =  $this->_client->request('GET', 'lokasi',[
             'query' =>[
                 'id'=> $id
             ]
@@ -48,9 +107,9 @@ class M_Audit extends CI_Model {
     }
 
     //-----ADD---//
-    public function addJadwalAudit($data)
+    public function addAudit($data)
     {
-        $respon =  $this->_client->request('POST', 'user',[
+        $respon =  $this->_client->request('POST', 'audit',[
             'form_params'=> $data
         ]);
 
@@ -62,7 +121,7 @@ class M_Audit extends CI_Model {
     //----------UPDATE---------//
     public function UpdateJadwalAudit($data)
     {
-        $respon =  $this->_client->request('PUT', 'jadwalaudit',[
+        $respon =  $this->_client->request('PUT', 'audit',[
           'form_params'=>  $data
         ]);
 
@@ -74,7 +133,7 @@ class M_Audit extends CI_Model {
     //---------DELETE------------//
     public function delJadwalAudit($id)
     { 
-        $respon =  $this->_client->request('DELETE', 'jadwalaudit',[
+        $respon =  $this->_client->request('DELETE', 'audit',[
           'form_params'=>[
               'id'=> $id
           ]

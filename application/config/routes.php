@@ -84,9 +84,9 @@ $route['audit/input_jadwal']="audit/JadwalAudit";
 $route['audit/list_audit']="audit/viewListAudit";
 $route['data_temporary/unit']="audit/viewTempUnit";
 $route['data_temporary/part']="audit/viewTempPart";
-$route['transaksi/audit']="audit/audit";
-$route['transaksi/audit_unit']="audit/audit_unit";
-$route['transaksi/audit_part']="audit/audit_part";
+$route['transaksi/audit']="transaksi_auditor/audit";
+$route['transaksi/audit_unit']="transaksi_auditor/audit_unit";
+$route['transaksi/audit_part']="transaksi_auditor/audit_part";
 $route['laporan/laporan_audit_unit']="laporan_auditor/laporan_unit";
 
 

@@ -17,7 +17,6 @@
                     <thead>
                     <tr>
                         <th width="3%">No</th>
-                        <th width="5%">Aksi</th>
                         <th>ID Unit</th>
                         <th>No Mesin</th>
                         <th>No Rangka</th>
@@ -26,12 +25,11 @@
 
                     </tr>
                     </thead>
-                    <tbody id="list_audit">
+                    <tbody id="temp_unit">
                     </tbody >
                     <tfoot>
                     <tr>
                         <th>No</th>
-                        <th>Aksi</th>
                         <th>ID Unit</th>
                         <th>No Mesin</th>
                         <th>No Rangka</th>

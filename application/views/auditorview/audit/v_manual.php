@@ -15,7 +15,7 @@
             
         </div>
             <div class="panel-body">
-                <form method="post" class="form-horizontal" id="Formcabang" action="<?php echo base_url() ?>audit/post_manual">
+                <form method="post" class="form-horizontal" id="Formcabang" action="<?php echo base_url() ?>transaksi_auditor/post_manual">
                 <div>
                 <div class="form-group"><label class="col-sm-2 control-label">ID Unit</label>
                     <div class="col-sm-4"><input type="text" class="form-control" name="id_unit" id="id_unit"></div>
@@ -50,6 +50,7 @@
                 </div>
                 
                 <div >
+
                 <div class="form-group"><label class="col-sm-2 control-label"></label>
                 <div class="i-checks"><label> <input type="checkbox" value=""> <i></i> Aki</label></div>
                 </div> 
@@ -73,6 +74,8 @@
                 <div class="form-group"><label class="col-sm-2 control-label"></label>
                 <div class="i-checks"><label> <input type="checkbox" value=""> <i></i> Buku Servis</label></div>
                 </div>  
+
+                
                   
                 </form>    
         </div>
