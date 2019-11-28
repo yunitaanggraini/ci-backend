@@ -223,7 +223,7 @@
                 $this->session->set_flashdata('warning', 'sudah ada');
                 
                 
-                redirect('audit/jadwalaudit');
+                redirect('audit/JadwalAudit');
                 
                 
             }else{
@@ -231,10 +231,10 @@
                 if ($exec) {
 
                     $this->session->set_flashdata('berhasil', 'berhasil ditambahkan');
-                    redirect('audit/jadwalaudit');
+                    redirect('audit/JadwalAudit');
                 }else{
                     $this->session->set_flashdata('gagal', 'gagal ditambahkan');
-                    redirect('audit/jadwalaudit');
+                    redirect('audit/JadwalAudit');
                 }
             }
         

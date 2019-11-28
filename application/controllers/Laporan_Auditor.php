@@ -9,6 +9,7 @@ class laporan_auditor extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('m_laporan_auditor','mlap');
+        $this->load->model('m_master_data','mmasdat');
     }
 
     public function Laporan_Unit()
@@ -20,7 +21,7 @@ class laporan_auditor extends CI_Controller {
             $this->load->view('_partial/header.php',$data);
             $this->load->view('_partial/sidebar.php');      
             $this->load->view('auditorview/laporan_unit/v_laporan_unit.php',$data);       
-            $this->load->view('auditorview/audit/_partial/footer.php');
+            $this->load->view('auditorview/laporan_unit/_partial/footer.php');
             
         }
 
@@ -60,7 +61,7 @@ class laporan_auditor extends CI_Controller {
             $this->load->view('_partial/header.php',$data);
             $this->load->view('_partial/sidebar.php');      
             $this->load->view('auditorview/laporan_unit/v_laporan_audit_unit.php',$data);       
-            $this->load->view('auditorview/audit/_partial/footer.php');
+            $this->load->view('auditorview/laporan_unit/_partial/footer.php');
             
         }
 
@@ -102,6 +103,22 @@ class laporan_auditor extends CI_Controller {
             $this->load->view('auditorview/audit/_partial/footer.php');
             
         }
+
+        public function ajax_get_cabang2()
+    {
+        $output = '';
+		$no = 0;
+        $listcabang = $this->mmasdat->getCabang();
+		foreach ($listcabang as $list) {
+			$no++;
+			$output .='
+				<option value="'.$list['id_cabang'].'">'.$list['id_cabang'].' - '.$list['nama_cabang'].'</option>
+			';
+        }
+        echo '<option value="">--- Pilih Cabang ---</option>';
+        echo $output;
+		
+    }
 
 }
 

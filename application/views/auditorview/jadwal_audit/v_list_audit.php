@@ -22,12 +22,12 @@
                         <div class="col-sm-10">
                             <div>
                                 <div class="form-group"><label class="col-sm-4 control-label">Pencarian Berdasarkan Jenis Audit</label>
-                                <div class="col-sm-8"><select name="jenis_audit" class="form-control" id="jenis_audit"></select></div></div>
+                                <div class="col-sm-8"><select name="jenis_audit" class="form-control" id="Optjenisaudit"></select></div></div>
                             </div>
                         </div>
 
                         <div class="col-sm-2 text-center">
-                            <button class="btn btn-w-m btn-info" id="caribtn">Cari Data</button>
+                            <button class="btn btn-w-m btn-info m-t-md" id="caribtn">Cari Data</button>
                         </div>
                     </div>
                     </div>
@@ -70,7 +70,7 @@
                         <th>Keterangan</th>
                     </tr>
                     </thead>
-                    <tbody id="list_audit">
+                    <tbody id="list_jadwal_audit">
                     </tbody >
                     <tfoot>
                     <tr>

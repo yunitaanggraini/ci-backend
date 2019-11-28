@@ -87,69 +87,7 @@
     </script>
     <script>
    $(document).ready(function() {
-    $('#jenis_inv').load("<?php echo base_url() ?>master_data/ajax_get_jenis_inv");
-    function search(){
-            var jenisinv =$('#Injenisinv').val();
-
-            if (jenisinv!='') {
-                $.ajax({
-                    type:"post",
-                    url:"<?php echo base_url() ?>master_data/search_data_jenisinv",
-                    data:"id="+jenisinv,
-                    success:function(data){
-                      $("#jenis_inv").html(data);
-                      $("#search").val("");
-                    }
-                });
-            }else{
-                $('#jenis_inv').load("<?php echo base_url() ?>master_data/ajax_get_jenis_inv");
-        }
-        }
-        $('#caribtn').click(function(){
-            search();
-        });
-
-        $('#Injenisinv').keyup(function(e) {
-          if(e.keyCode == 13) {
-             search();
-          }
-      });
-    });
-
-    function edit(id) {
-        // var id = $(this).attr('data-id');
-        $.ajax({
-            url: "<?php echo base_url().$this->uri->segment(1) ?>/edit_jenisinv",
-            type: 'post',
-            data:"id="+id,
-            dataType:'html',
-            success: function(data) {
-                $('#data_input').html(data);
-            }
-
-        });
-        console.log(id);
-      }
-
-
-    function show() {
-        $('#add').attr('disabled', true);
-        var $url = "<?php echo $this->uri->segment(1) ?>";
-        $.ajax({
-            url: "<?php echo base_url().$this->uri->segment(1) ?>/input_jenisinv",
-            type: 'post',
-            dataType:'html',
-            success: function(data) {
-                $('#data_input').html(data);
-            }
-
-        })
-    }
-
-    function hide() {
-        $('#add').attr('disabled', false);
-        $('#data_input').html('');
-    }
+    $('#OptCabang').load("<?php echo base_url();?>master_data/ajax_get_cabang2");
     </script>
 
 </body>

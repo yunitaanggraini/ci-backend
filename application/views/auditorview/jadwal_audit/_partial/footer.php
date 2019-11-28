@@ -18,6 +18,8 @@
     <script src="<?php echo base_url() ?>assets/js/jquery-3.1.1.min.js"></script>
     <script src="<?php echo base_url() ?>assets/js/jquery.validate.js"></script>
     <script>
+    $('#Optcabang').load("<?php echo base_url() ?>audit/ajax_get_cabang2");
+     $('#Optjenisaudit').load("<?php echo base_url();?>audit/ajax_get_jenis_audit2");
         $( "#FormUser" ).validate({
         rules: {
             nik:{
@@ -84,17 +86,17 @@
 
     </script>
     <script>
-   $(document).ready(function() { 
-    $('#list_audit').load("<?php echo base_url();?>audit/ajax_get_jadwal_audit");
-    $('#jenis_audit').load("<?php echo base_url();?>audit/ajax_get_jenis_audit2");
-    $('#Optcabang').load("<?php echo base_url();?>audit/ajax_get_cabang2");
-
-    
+     $(document).ready(function() {
+        $('#list_jadwal_audit').load("<?php echo base_url();?>audit/ajax_get_jadwal_audit");  
+        $('#Optjenisaudit').load("<?php echo base_url();?>audit/ajax_get_jenis_audit2");
+    $('#audit_part').load("<?php echo base_url() ?>transaksi_auditor/ajax_get_part");
+    $('#Optcabang').load("<?php echo base_url() ?>master_data/ajax_get_cabang2");
 
     function search() {
-            var auditor =$('#auditor').val();
+        var auditor =$('#auditor').val();
             var tanggal_audit = $('#tanggal_audit').val();
             var jenis_audit = $('#jenis_audit').val();
+
 
             if (auditor!='' && tanggal_audit!='' && jenis_audit!='') {
                 $.ajax({
@@ -102,7 +104,7 @@
                     url:"<?php echo base_url() ?>audit/search_data_audit",
                     data:"auditor="+auditor+"&tanggal_audit="+tanggal_audit+"&jenis_audit="+jenis_audit,
                     success:function(data){
-                      $("#jadwal_audit").html(data);
+                      $("#list_jadwal_audit").html(data);
                       $("#search").val("");
                     }
                 });
@@ -113,17 +115,17 @@
                     url:"<?php echo base_url() ?>audit/search_data_audit",
                     data:"auditor="+auditor,
                     success:function(data){
-                      $("#jadwal_audit").html(data);
+                      $("#list_jadwal_audit").html(data);
                       $("#search").val("");
                     }
                 });
-                } else (auditor=='' && tanggal_audit!='' && jenis_audit=='') {
+                }else if (auditor=='' && tanggal_audit!='' && jenis_audit=='') {
                     $.ajax({
                     type:"post",
                     url:"<?php echo base_url() ?>audit/search_data_audit",
                     data:"tanggal_audit="+tanggal_audit,
                     success:function(data){
-                      $("#jadwal_audit").html(data);
+                      $("#list_jadwal_audit").html(data);
                       $("#search").val("");
                     }
                 });
@@ -134,12 +136,12 @@
                         url:"<?php echo base_url() ?>audit/search_data_audit",
                         data:"jenis_audit="+jenis_audit,
                         success:function(data){
-                        $("#jadwal_audit").html(data);
+                        $("#list_jadwal_audit").html(data);
                         $("#search").val("");
                     }
                     });
                     }else{
-                        $('#jadwal_audit').load("<?php echo base_url();?>audit/ajax_get_jadwal_audit");  
+                        $('#list_jadwal_audit').load("<?php echo base_url();?>audit/ajax_get_jadwal_audit");
                     }
                 }
             }
@@ -155,7 +157,7 @@
           }else{
               if (e.keyCode == 9) {
                   $('#tanggal_audit').focus();
-              }else(e.keyCode == 9){
+              }else if(e.keyCode == 9){
                   $('#jenis_audit').focus();
               }
           }
@@ -172,22 +174,7 @@
           }
       });
     });
-
-    function edit(id) {
-        // var id = $(this).attr('data-id');
-        $.ajax({
-            url: "<?php echo base_url().$this->uri->segment(1) ?>/edit_user",
-            type: 'post',
-            data:"id="+id,
-            dataType:'html',
-            success: function(data) {
-                $('#data_input').html(data);
-            }
-
-        });
-      }
-
-    
+   
     </script>
 
 </body>

@@ -1,9 +1,11 @@
+<div id="wrapper">
 <div class="wrapper wrapper-content m-t-xl animated fadeIn">
         <div class="row">
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Filter Report Audit <small class="m-l-sm">Berdasarkan Tanggal</small></h5>
+                        <h5>Filter Report Audit</h5>
+
                     </div>
                     <div class="ibox-content">
                         <div class="row form-horizontal">
@@ -24,6 +26,15 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Cabang</label>
+                                    <div class="col-sm-9">
+                                    <select class="form-control m-b" name="id_cabang" id="OptCabang"></select>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="col-sm-5 text-center m-t-lg">
@@ -31,13 +42,6 @@
                         </div>
                     </div></div>
 
-                        
-                    <div class="ibox-footer">
-                        <span class="pull-right">
-                          The righ side of the footer
-                    </span>
-                        This is simple footer example
-                    </div>
                 </div>
             </div>
         </div>

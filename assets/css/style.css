@@ -629,6 +629,11 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
 .btn-w-m {
   min-width: 120px;
 }
+
+.btn-w-md{
+  min-width: 320px;
+  min-height: 35px;
+}
 .btn-primary.btn-outline {
   color: #1ab394;
 }
@@ -998,7 +1003,7 @@ fieldset[disabled] .btn-white.active {
   transition: all .5s;
 }
 .btn-rounded {
-  border-radius: 50px;
+  border-radius: 5px;
 }
 .btn-large-dim {
   width: 90px;
