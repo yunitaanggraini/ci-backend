@@ -2,14 +2,19 @@
     defined('BASEPATH') OR exit('No direct script access allowed');
     class Laporan extends CI_Controller {
 
+        public function pdf()
+        {
+            $this->load->library('pdfgenerator');
 
-     function my_DOMPDF(){
-      $this->load->library('pdf');
-      $this->pdf->load_view('common/template');
-      $this->pdf->render();
-      $this->pdf->stream("laporan.pdf");
-     }
-    }
+            $data=[
+
+            ];
+
+            $html = $this->load->view('table_report', $data,true);
+
+            $this->pdfgenerator->generate($html,'contoh');
+        }
+
     
     /* End of file Laporan.php */
     

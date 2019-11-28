@@ -2,7 +2,7 @@
 <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-primary">
-                            <form method="post" class="form-horizontal" id="FormInventory" action="<?php echo base_url() ?>inventory/post_inventory">
+                            <form method="post" class="form-horizontal" id="FormInventory" action="<?php echo base_url() ?>transaksi_ga/post_inventory">
                         <div class="ibox-title">
                             <h5 class="col-md-10">Management Inventory</h5>
                             <div class="col-sm-2 text-right">
@@ -61,7 +61,7 @@
                                 </div>
 
                                 <div class="form-group"><label class="col-sm-2 control-label">Tanggal Barang Terima</label>
-                                    <div class="col-sm-5"><input type="text" class="form-control" name="tanggal_barang_terima">
+                                    <div class="col-sm-5"><input type="date" class="form-control" name="tanggal_barang_terima">
                                     </div>
                                 </div>
                                 
@@ -74,8 +74,8 @@
                                 <div class="form-group"><label class="col-sm-2 control-label">Jenis Pembayaran</label>
                                     <div class="col-sm-5"><select class="form-control m-b" name="jenis_pembayaran" id="OptJenisPemb">
                                         <option value="">--- Pilih Jenis Pembayaran ---</option>
-                                        <option id="Cash">Cash</option>
-                                        <option id="Kredit">Kredit</option>
+                                        <option value="Cash">Cash</option>
+                                        <option value="Kredit">Kredit</option>
                                     </select>
                                     </div>
                                 </div>
@@ -114,7 +114,7 @@
                                     <div class="col-sm-5">
                                     <div class="fileinput fileinput-new" data-provides="fileinput">
                                         <span class="btn btn-default btn-file"><span class="fileinput-new">Select file</span>
-                                        <span class="fileinput-exists">Change</span><input type="file" name="foto"/></span>
+                                        <span class="fileinput-exists">Change</span><input type="file" name="..."></span>
                                         <span class="fileinput-filename"></span>
                                         <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">×</a>
                                     </div> 

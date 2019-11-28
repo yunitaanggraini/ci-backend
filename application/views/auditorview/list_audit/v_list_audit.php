@@ -8,22 +8,22 @@
                         <div class="col-sm-10">
                             <div>
                                 <div class="form-group"><label class="col-sm-4 control-label">Pencarian Berdasarkan Nama Audit </label>
-                                <div class="col-sm-8"><input type="text" class="form-control" id="Indivisi"></div></div>        
+                                <div class="col-sm-8"><input type="text" class="form-control" id="auditor"></div></div>        
                             </div>        
                         </div>
 
                         <div class="col-sm-10">
                             <div>
                                 <div class="form-group"><label class="col-sm-4 control-label">Pencarian Berdasarkan Tanggal Audit </label>
-                                <div class="col-sm-8"><input type="text" class="form-control" id="Indivisi"></div></div>        
+                                <div class="col-sm-8"><input type="date" class="form-control" id="tanggal_audit"></div></div>        
                             </div>        
                         </div>
 
                         <div class="col-sm-10">
                             <div>
                                 <div class="form-group"><label class="col-sm-4 control-label">Pencarian Berdasarkan Jenis Audit</label>
-                                <div class="col-sm-8"><input type="text" class="form-control" id="Indivisi"></div></div>        
-                            </div>        
+                                <div class="col-sm-8"><select name="jenis_audit" class="form-control" id="jenis_audit"></select></div></div>
+                            </div>
                         </div>
 
                         <div class="col-sm-2 text-center">
@@ -55,16 +55,6 @@
                       <span id="info_message"></span>
                     </div>
                     <div class="panel-body">
-                    <?php if($this->session->flashdata('info')){
-                            ?>
-                            <div class="alert alert-success alert-dismissable col-6">
-                                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-                                    Data Divisi <?php echo $this->session->flashdata('info');
-                                    
-                                    ?>
-                                </div>
-                            <?php
-                            } ?>
                         <div class="table-responsive">
                     <table class="table table-striped table-bordered table-hover dataTables-example" >
                     <thead>

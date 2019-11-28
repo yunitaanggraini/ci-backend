@@ -8,22 +8,22 @@
                         <div class="col-sm-10">
                             <div>
                                 <div class="form-group"><label class="col-sm-4 control-label">Pencarian Berdasarkan Nama Audit </label>
-                                <div class="col-sm-8"><input type="text" class="form-control" id="Indivisi"></div></div>        
+                                <div class="col-sm-8"><input type="text" class="form-control" id="auditor"></div></div>        
                             </div>        
                         </div>
 
                         <div class="col-sm-10">
                             <div>
                                 <div class="form-group"><label class="col-sm-4 control-label">Pencarian Berdasarkan Tanggal Audit </label>
-                                <div class="col-sm-8"><input type="text" class="form-control" id="Indivisi"></div></div>        
+                                <div class="col-sm-8"><input type="date" class="form-control" id="tanggal_audit"></div></div>        
                             </div>        
                         </div>
 
                         <div class="col-sm-10">
                             <div>
                                 <div class="form-group"><label class="col-sm-4 control-label">Pencarian Berdasarkan Jenis Audit</label>
-                                <div class="col-sm-8"><input type="text" class="form-control" id="Indivisi"></div></div>        
-                            </div>        
+                                <div class="col-sm-8"><select name="jenis_audit" class="form-control" id="jenis_audit"></select></div></div>
+                            </div>
                         </div>
 
                         <div class="col-sm-2 text-center">
@@ -46,7 +46,7 @@
                 <div class="panel panel-primary">
                     <div class="ibox-title float-e-margins">
                         <div class="form-group">
-                            <label class="col-sm-3"> <h5>List Data Audit</h5></label>
+                            <label class="col-sm-3"> <h5>List Data Divisi</h5></label>
                             <div class="col-sm-9 text-right">
                             <input type="submit" value="Add Data" id="add" name="add" class="btn btn-success" onclick="show()">
                             </div>

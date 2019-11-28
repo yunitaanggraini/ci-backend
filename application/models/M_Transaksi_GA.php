@@ -23,9 +23,9 @@ class M_Transaksi_GA extends CI_Model {
         return $result['data'];
     }
 
-    public function getInvById($id)
+    public function getInventoryById($id)
     {
-        $respon =  $this->_client->request('GET', 'transaksi_inventory',[
+        $respon =  $this->_client->request('GET', 'inv',[
             'query' =>[
                 'id'=> $id
             ]
@@ -41,7 +41,7 @@ class M_Transaksi_GA extends CI_Model {
 
     public function addInv($data)
     {
-        $respon =  $this->_client->request('POST', 'transaksi_inventory',[
+        $respon =  $this->_client->request('POST', 'inv',[
             'form_params'=> $data
         ]);
 
@@ -52,7 +52,7 @@ class M_Transaksi_GA extends CI_Model {
 
     public function UpdateInv($data)
     {
-        $respon =  $this->_client->request('PUT', 'transaksi_inventory',[
+        $respon =  $this->_client->request('PUT', 'inv',[
           'form_params'=>  $data
         ]);
 
@@ -210,9 +210,27 @@ class M_Transaksi_GA extends CI_Model {
         }
     }
 
+    //--------------------------------//
+    public function cariJadwalAudit($auditor, $tanggal_audit, $jenis_audit)
+    {
+        
+        $respon =  $this->_client->request('GET', 'carijadwalaudit',[
+            'query'=>[
+                'auditor'=> $auditor,
+                'tanggal_audit'=> $tanggal_audit,
+                'jenis_audit'=> $jenis_audit
+            ]
+        ]);
 
+        $result = json_decode($respon->getBody()->getContents(),true);
 
-    
+        if ($result['status']==true) {
+            return $result['data'];
+        }else{
+            return false;
+        }
+    }
+   
 
 }
 

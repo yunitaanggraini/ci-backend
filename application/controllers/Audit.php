@@ -239,6 +239,58 @@
             }
         
     }
+
+    //------SEARCH------//
+
+    public function search_data_jadwal_audit()
+    {
+        $auditor = $this->input->post('auditor');
+        $tanggal_audit = $this->input->post('tanggal_audit');
+        $jenis_audit = $this->input->post('jenis_audit');
+        $output = '';
+        $no = 0;
+        $base = base_url();
+        if ($auditor!= null && $tanggal_audit!=null && $jenis_audit!=null) {
+            $listJdwAudit = $this->maudit->carijadwalaudit($auditor,$tanggal_audit,$jenis_audit);
+        }elseif($auditor!=null&& $tanggal_audit==null&& $jenis_audit==null){
+            $$listJdwAudit = $this->maudit->cariauditor($auditor);
+        }elseif ($auditor==null && $tanggal_audit!=null && $jenis_audit==null) {
+            $$listJdwAudit = $this->maudit->caritanggalaudit($tanggal_audit);
+        }elseif ($auditor==null && $tanggal_audit==null && $jenis_audit!=null) {
+            $$listJdwAudit = $this->maudit->carijenisaudit($jenis_audit);
+        }
+        
+        if ($$listJdwAudit) {
+            foreach ($$listJdwAudit as $list) {
+                $no++;
+            $output .='
+            <tr> 
+                <td>'.$no.'</td>
+                <td>
+                <a onclick="edit(id=\''.$list['idjadwal_audit'].'\')" class="text-warning" ><i class="fa fa-pencil"></i></a>
+                <a href="'.$base.'audit/deletejadwal_audit/'.$list['idjadwal_audit'].'" class="text-danger" onclick=\'return confirm("Konfirmasi menghapus data '.$list['idjadwal_audit'].' - '.$list['auditor'].' ? ");\'><i class="fa fa-trash"></i></a>
+                </td>
+                <td >'.$list['idjadwal_audit'].'</td>
+                <td>'.$list['auditor'].'</td>
+                <td>'.$list['tanggal'].'</td>
+                <td>'.$list['waktu'].'</td>
+                <td>'.$list['nama_cabang'].'</td>
+                <td>'.$list['jenis_audit'].'</td>
+                <td>'.$list['keterangan'].'</td>
+            </tr>
+            
+            ';
+        }
+        }else{
+            $output .='
+            <tr >
+            <td colspan="8" class="text-center">data not found</td>
+            </tr>
+            ';
+        }
+        echo $output;
+    }
+
     
     }
     

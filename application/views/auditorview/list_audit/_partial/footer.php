@@ -85,35 +85,88 @@
     </script>
     <script>
    $(document).ready(function() {
-    $('#jadwal_audit').load("<?php echo base_url() ?>audit/ajax_get_jadwal_audit");
-    $('#Optcabang').load("<?php echo base_url() ?>master_data/ajax_get_cabang2");
+    $('#list_audit').load("<?php echo base_url() ?>audit/ajax_get_jadwal_audit");
+    
     function search() {
-            var cabang =$('#Incabang').val();
+            var auditor =$('#auditor').val();
+            var tanggal_audit = $('#tanggal_audit').val();
+            var jenis_audit = $('#jenis_audit').val();
 
-            if (cabang!='') {
+            if (auditor!='' && tanggal_audit!='' && jenis_audit!='') {
                 $.ajax({
                     type:"post",
-                    url:"<?php echo base_url() ?>master_data/search_data_cabang",
-                    data:"cabang="+cabang,
+                    url:"<?php echo base_url() ?>audit/search_data_audit",
+                    data:"auditor="+auditor+"&tanggal_audit="+tanggal_audit+"&jenis_audit="+jenis_audit,
                     success:function(data){
-                      $("#cabang").html(data);
+                      $("#jadwal_audit").html(data);
                       $("#search").val("");
                     }
                 });
             }else{
-                $('#cabang').load("<?php echo base_url() ?>master_data/ajax_get_cabang");
+                if (auditor!='' && tanggal_audit=='' && jenis_audit=='') {
+                    $.ajax({
+                    type:"post",
+                    url:"<?php echo base_url() ?>audit/search_data_audit",
+                    data:"auditor="+auditor,
+                    success:function(data){
+                      $("#jadwal_audit").html(data);
+                      $("#search").val("");
                     }
+                });
+                } else (auditor=='' && tanggal_audit!='' && jenis_audit=='') {
+                    $.ajax({
+                    type:"post",
+                    url:"<?php echo base_url() ?>audit/search_data_audit",
+                    data:"tanggal_audit="+tanggal_audit,
+                    success:function(data){
+                      $("#jadwal_audit").html(data);
+                      $("#search").val("");
+                    }
+                });
+                } else {
+                    if (auditor=='' && tanggal_audit=='' && jenis_audit!='') {
+                        $.ajax({
+                        type:"post",
+                        url:"<?php echo base_url() ?>audit/search_data_audit",
+                        data:"jenis_audit="+jenis_audit,
+                        success:function(data){
+                        $("#jadwal_audit").html(data);
+                        $("#search").val("");
+                    }
+                    });
+                    }else{
+                        $('#jadwal_audit').load("<?php echo base_url();?>audit/ajax_get_jadwal_audit");  
+                    }
+                }
+            }
         }
-        $('#caribtn').click(function(){
+
+        $('#caribtn').click(function() {
             search();
         });
-        $('#Incabang').keyup(function(e) {
+
+        $('#auditor').keyup(function(e) {
+          if(e.keyCode == 13) {
+             search();
+          }else{
+              if (e.keyCode == 9) {
+                  $('#tanggal_audit').focus();
+              }else(e.keyCode == 9){
+                  $('#jenis_audit').focus();
+              }
+          }
+      });
+        $('#tanggal_audit').keyup(function(e) {
           if(e.keyCode == 13) {
              search();
           }
       });
 
-
+      $('#jenis_audit').keyup(function(e) {
+          if(e.keyCode == 13) {
+             search();
+          }
+      });
     });
 
     function edit(id) {
