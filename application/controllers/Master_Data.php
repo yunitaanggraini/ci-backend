@@ -8,15 +8,15 @@ class Master_Data extends CI_Controller {
         parent::__construct();
         $this->load->model('m_master_data','mmasdat');
         $this->load->model('m_transaksi_ga','m_transga');
-        // if (!$this->session->userdata('username')) {
+        if (!$this->session->userdata('username')) {
             
-        //     redirect('login/login');
+            redirect('login/login');
             
-        // }else{
-        //     if ($this->session->userdata('usergroup') != 'UG001') {
-        //         redirect('error');  
-        //     }
-        // }
+        }else{
+            if ($this->session->userdata('usergroup') != 'UG001') {
+                redirect('error');  
+            }
+        }
         
     }
     public function viewUser()
@@ -669,6 +669,7 @@ class Master_Data extends CI_Controller {
                 'id_cabang' => $this->input->post('id_cabang'),
                 'id_lokasi' => $this->input->post('id_lokasi'),
                 'id_usergroup' => $this->input->post('id_usergroup'),
+                'user'  => $this->session->userdata('username')
                 
             ];
             $id = $data['nik'];
@@ -700,7 +701,8 @@ class Master_Data extends CI_Controller {
     {
         $data = [
             'id_usergroup' =>$this->input->post('id_usergroup',true),
-            'user_group'   =>$this->input->post('user_group',true)   
+            'user_group'   =>$this->input->post('user_group',true),
+            'user'  => $this->session->userdata('username')   
         ];
 
         $id = $data['id_usergroup'];
@@ -733,7 +735,8 @@ class Master_Data extends CI_Controller {
     {
         $data =[
             'idjenis_inventory' => $this->input->post('idjenis_inventory',true),
-            'jenis_inventory' => $this->input->post('jenis_inventory',true)           
+            'jenis_inventory' => $this->input->post('jenis_inventory',true),
+            'user'  => $this->session->userdata('username')           
         ];
 
         $id = $this->input->post('idjenis_inventory',true);
@@ -766,7 +769,8 @@ class Master_Data extends CI_Controller {
         $data =[
             'idjenis_inventory' => $this->input->post('jenis_inv',true),
             'idsub_inventory' => $this->input->post('idsub_inventory',true),
-            'sub_inventory' => $this->input->post('sub_inventory',true)           
+            'sub_inventory' => $this->input->post('sub_inventory',true),
+            'user'  => $this->session->userdata('username')           
         ];
 
         $id = $this->input->post('idsub_inventory',true);
@@ -796,7 +800,8 @@ class Master_Data extends CI_Controller {
     {
         $data =[
             'idstatus_inventory' => $this->input->post('idstatus_inventory',true),
-            'status_inventory' => $this->input->post('status_inventory',true)           
+            'status_inventory' => $this->input->post('status_inventory',true),
+            'user'  => $this->session->userdata('username')           
         ];
 
         $id = $this->input->post('idstatus_inventory',true);
@@ -829,7 +834,8 @@ class Master_Data extends CI_Controller {
     {
         $data =[
             'id_perusahaan' => $this->input->post('id_perusahaan',true),
-        'nama_perusahaan' => $this->input->post('nama_perusahaan',true)           
+            'nama_perusahaan' => $this->input->post('nama_perusahaan',true),
+            'user'  => $this->session->userdata('username')           
         ];
 
         $id = $this->input->post('id_perusahaan',true);
@@ -861,7 +867,8 @@ class Master_Data extends CI_Controller {
     {
         $data =[
             'id_cabang' => $this->input->post('id_cabang',true),
-        'nama_cabang' => $this->input->post('nama_cabang',true)           
+            'nama_cabang' => $this->input->post('nama_cabang',true),
+            'user'  => $this->session->userdata('username')           
         ];
 
         $id = $this->input->post('id_cabang',true);
@@ -893,7 +900,8 @@ class Master_Data extends CI_Controller {
     {
         $data =[
             'id_lokasi' => $this->input->post('id_lokasi',true),
-        'nama_lokasi' => $this->input->post('nama_lokasi',true)           
+            'nama_lokasi' => $this->input->post('nama_lokasi',true),
+            'user'  => $this->session->userdata('username')           
         ];
 
         $id = $this->input->post('id_lokasi',true);
@@ -925,7 +933,8 @@ class Master_Data extends CI_Controller {
     {
         $data =[
             'id_vendor' => $this->input->post('id_vendor',true),
-        'nama_vendor' => $this->input->post('nama_vendor',true)           
+            'nama_vendor' => $this->input->post('nama_vendor',true),
+            'user'  => $this->session->userdata('username')           
         ];
 
         $id = $this->input->post('id_vendor',true);
@@ -957,7 +966,8 @@ class Master_Data extends CI_Controller {
     {
         $data =[
             'idjenis_audit' => $this->input->post('idjenis_audit',true),
-            'jenis_audit' => $this->input->post('jenis_audit',true)           
+            'jenis_audit' => $this->input->post('jenis_audit',true),
+            'user'  => $this->session->userdata('username')           
         ];
 
         $id = $this->input->post('idjenis_audit',true);
@@ -988,7 +998,8 @@ class Master_Data extends CI_Controller {
     {
         $data = [
             'user_group'   =>$this->input->post('user_group',true),   
-            'id'           => $this->input->post('id_usergroup',true)
+            'id'           => $this->input->post('id_usergroup',true),
+            'user'  => $this->session->userdata('username')
         ];
 
                 $exec = $this->mmasdat->UpdateUserGroup($data);
@@ -1006,7 +1017,8 @@ class Master_Data extends CI_Controller {
     {
         $data = [
             'jenis_inventory'   =>$this->input->post('jenis_inventory',true),   
-            'id'          => $this->input->post('idjenis_inventory',true)
+            'id'          => $this->input->post('idjenis_inventory',true),
+            'user'  => $this->session->userdata('username')
         ];
         // var_dump($data);die;
 
@@ -1026,7 +1038,8 @@ class Master_Data extends CI_Controller {
         $data = [
             'idjenis_inventory' => $this->input->post('jenis_inv',true),            
             'sub_inventory'   =>$this->input->post('sub_inventory',true),   
-            'id' => $this->input->post('idsub_inventory',true)
+            'id' => $this->input->post('idsub_inventory',true),
+            'user'  => $this->session->userdata('username')
         ];
         // var_dump($data);die;
 
@@ -1045,7 +1058,8 @@ class Master_Data extends CI_Controller {
     {
         $data = [        
             'status_inventory'   =>$this->input->post('status_inventory',true),   
-            'id' => $this->input->post('idstatus_inventory',true)
+            'id' => $this->input->post('idstatus_inventory',true),
+            'user'  => $this->session->userdata('username')
         ];
         //  var_dump($data);die;
 
@@ -1064,7 +1078,8 @@ class Master_Data extends CI_Controller {
     {
         $data = [           
             'nama_perusahaan'   =>$this->input->post('nama_perusahaan',true),   
-            'id' => $this->input->post('id_perusahaan',true)
+            'id' => $this->input->post('id_perusahaan',true),
+            'user'  => $this->session->userdata('username')
         ];
         // var_dump($data);die;
 
@@ -1083,7 +1098,8 @@ class Master_Data extends CI_Controller {
     {
         $data = [           
             'nama_cabang'   =>$this->input->post('nama_cabang',true),   
-            'id' => $this->input->post('id_cabang',true)
+            'id' => $this->input->post('id_cabang',true),
+            'user'  => $this->session->userdata('username')
         ];
         // var_dump($data);die;
 
@@ -1102,7 +1118,8 @@ class Master_Data extends CI_Controller {
     {
         $data = [           
             'nama_lokasi'   =>$this->input->post('nama_lokasi',true),   
-            'id' => $this->input->post('id_lokasi',true)
+            'id' => $this->input->post('id_lokasi',true),
+            'user'  => $this->session->userdata('username')
         ];
         // var_dump($data);die;
 
@@ -1121,7 +1138,8 @@ class Master_Data extends CI_Controller {
     {
         $data = [           
             'nama_vendor'   =>$this->input->post('nama_vendor',true),   
-            'id' => $this->input->post('id_vendor',true)
+            'id' => $this->input->post('id_vendor',true),
+            'user'  => $this->session->userdata('username')
         ];
         // var_dump($data);die;
 
@@ -1139,7 +1157,8 @@ class Master_Data extends CI_Controller {
     {
         $data = [           
             'jenis_audit'   =>$this->input->post('jenis_audit',true),   
-            'id' => $this->input->post('idjenis_audit',true)
+            'id' => $this->input->post('idjenis_audit',true),
+            'user'  => $this->session->userdata('username')
         ];
         // var_dump($data);die;
 

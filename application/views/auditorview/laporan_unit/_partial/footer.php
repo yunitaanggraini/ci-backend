@@ -87,7 +87,8 @@
     </script>
     <script>
    $(document).ready(function() {
-    $('#OptCabang').load("<?php echo base_url();?>master_data/ajax_get_cabang2");
+        $('#audit_unit').load("<?php echo base_url() ?>transaksi_auditor/ajax_get_unit");
+    $('#OptCabang').load("<?php echo base_url();?>master_data/ajax_get_cabang2");});
     </script>
 
 </body>

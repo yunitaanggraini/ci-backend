@@ -59,7 +59,7 @@
         </div>
             <ul class="nav navbar-top-links navbar-right">
             <li>
-                    <span class="m-r-sm text-muted welcome-message">Sistem Informasi Manajemen Gudang</span>
+                    <span class="m-r-sm text-muted welcome-message">Sistem Informasi Manajemen Audit</span>
                 </li>
             <li class="">
                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">

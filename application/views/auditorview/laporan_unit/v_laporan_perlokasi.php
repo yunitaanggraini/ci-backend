@@ -11,8 +11,9 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="form-group">
-                            <label class="col-sm-6"> <h3>List Data Audit Belum Sesuai</h3></label>
-                            
+                            <label class="col-sm-3"> <h5>List Data Audit Unit Perlokasi</h5></label>
+                            <div class="col-sm-9 text-right">
+                            </div>
                         </div>
 
                       <span id="info_message"></span>
@@ -23,21 +24,29 @@
                     <thead>
                     <tr>
                         
+                        <tr>
+                        <th rowspan="2" class="text-center">No</th>
+                        <th rowspan="2">Lokasi</th>
+                        <th rowspan="2">Jumlah Unit</th>
+                        <th colspan="5" class="text-center">Jumlah Aksesoris</th>
+                        <th colspan="5" class="text-center">Selisih</th>
+                        </tr>
                         
                         <tr>
-                        <th>No</th>
-                        <th>No Mesin</th>
-                        <th>No Rangka</th>  
-                        <th>Kode Item</th>  
-                        <th>Type Unit</th> 
-                        <th>Usia Unit</th>
-                        <th>Lokasi</th>
-                        <th>Status</th>  
-                        </tr>
-   
+                        <th>Aki</th>
+                        <th>Spion</th>
+                        <th>Helm</th>  
+                        <th>Tools</th>  
+                        <th>Buku Service</th> 
+                        <th>Aki</th>
+                        <th>Spion</th>
+                        <th>Helm</th>  
+                        <th>Tools</th>  
+                        <th>Buku Service</th>  
+                        </tr> 
                     </tr>
                     </thead>
-                    <tbody id="unit_belum_sesuai">
+                    <tbody id="unit_perlokasi">
                     </tbody >
                     </table>
                         </div>

@@ -7,6 +7,15 @@ class Laporan_GA extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('m_laporan_GA','mlapga');
+        if (!$this->session->userdata('username')) {
+            
+            redirect('login/login');
+            
+        }else{
+            if ($this->session->userdata('usergroup') != 'UG001') {
+                redirect('error');  
+            }
+        }
     }
 
     public function viewLaporanOffice()

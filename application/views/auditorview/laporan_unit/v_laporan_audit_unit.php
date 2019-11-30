@@ -8,12 +8,11 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                <div class="panel panel-primary">
-                    <div class="ibox-title float-e-margins">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
                         <div class="form-group">
-                            <label class="col-sm-3"> <h5>List Data Perusahaan</h5></label>
+                            <label class="col-sm-3"> <h5>List Data Audit Unit</h5></label>
                             <div class="col-sm-9 text-right">
-                            <input type="submit" value="Add Data" id="add" name="add" class="btn btn-success" onclick="show()">
                             </div>
                         </div>
 
@@ -45,13 +44,10 @@
                         <th>Tools</th>  
                         <th>Buku Service</th>  
                         </tr>
-                        
-                         
-                        
-                        
+  
                     </tr>
                     </thead>
-                    <tbody id="">
+                    <tbody id="audit_unit">
                     </tbody >
                     </table>
                         </div>

@@ -1,9 +1,11 @@
 <div class="wrapper wrapper-content m-t-xl wrapper wrapper-content animated fadeInRight">
             <div class="row">
                 <div class="col-lg-12">
-                <div class="panel panel-danger">
+                <div class="panel panel-default">
                 <div class="panel-heading">
-                    <i class="fa fa-info-circle"></i> Report Audit Data Unit, Pilih Data Berdasarkan Cabang?                      
+                    <h4>
+                    <i class="fa fa-info-circle"></i> Report Audit Data Unit, Pilih Data Berdasarkan Cabang?  
+                    </h4>                    
                 </div>
                     <div class="panel-body">
                     <div class="row form-horizontal">

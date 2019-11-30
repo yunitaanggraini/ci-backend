@@ -1,32 +1,50 @@
 <div class="wrapper wrapper-content m-t-xl wrapper wrapper-content animated fadeInRight">
+
+            <div class="row">
+                <div class="col-lg-12" id="data_input">
+            </div>
+            </div>
+
+
             <div class="row">
                 <div class="col-lg-12">
-                <div class="panel panel-danger">
-                <div class="panel-heading">
-                    <i class="fa fa-info-circle"></i> Laporan Inventory Office,
-                     Pilih Data Berdasarkan Tanggal Periode?                     
-                </div>
-                    <div class="panel-body">
-                    <div class="row form-horizontal">
-                        <div class="col-sm-7">
-                            <div>
-                                <div class="form-group"><label class="col-sm-3 control-label">Tanggal Awal</label>
-                                <div class="col-sm-9"><input type="date" class="form-control" id="tanggal_awal"></div></div>        
-                            </div>        
-                    
-                            <div>
-                                <div class="form-group"><label class="col-sm-3 control-label">Tanggal_Akhir</label>
-                                <div class="col-sm-9"><input type="date" class="form-control" id="tanggal_akhir"></div></div>
-                            </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="form-group">
+                            <label class="col-sm-8"> <h3>List Data Audit Belum Ditemukan</h3></label>
                         </div>
 
-                        <div class="col-sm-5 text-center m-t-lg">
-                        <a href="<?php echo site_url('laporan_auditor/filter_cabang'); ?>" type="button" class="btn btn-m btn-success">Next</a>
-                        </div>
-                        
+                      <span id="info_message"></span>
                     </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover dataTables-example" >
+                    <thead>
+                    <tr>
+                        
+                        
+                        <tr>
+                        <th>No</th>
+                        <th>No Mesin</th>
+                        <th>No Rangka</th>  
+                        <th>Kode Item</th>  
+                        <th>Type Unit</th> 
+                        <th>Usia Unit</th>
+                        <th>Lokasi</th>
+                        <th>Status</th>  
+                        </tr>  
+                    </tr>
+                    </thead>
+                    <tbody id="unit_belum_ditemukan">
+                    </tbody >
+                    </table>
+                        </div>
+
                     </div>
                 </div>
                 </div>
             </div>
+            </div>
+        </div>
 </div>
+

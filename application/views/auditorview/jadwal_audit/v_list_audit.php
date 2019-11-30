@@ -2,7 +2,7 @@
             
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="panel panel-success">
+                    <div class="panel panel-default">
                     <div class="panel-body">
                     <div class="row">
                         <div class="col-sm-10">
@@ -36,21 +36,12 @@
             </div>
 
             <div class="row">
-                <div class="col-lg-12" id="data_input">
-            </div>
-            </div>
-
-
-            <div class="row">
                 <div class="col-lg-12">
-                <div class="panel panel-primary">
-                    <div class="ibox-title float-e-margins">
-                        <div class="form-group">
-                            <label class="col-sm-3"> <h5>List Data Divisi</h5></label>
-                            <div class="col-sm-9 text-right">
-                            <input type="submit" value="Add Data" id="add" name="add" class="btn btn-success" onclick="show()">
-                            </div>
-                        </div>
+                <div class="panel panel-default">
+
+                <div class="panel-heading">
+
+                    <h4><i class="fa fa-info-circle"></i> List Jadwal Audit</h4>
 
                       <span id="info_message"></span>
                     </div>

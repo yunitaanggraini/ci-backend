@@ -7,6 +7,15 @@ class Transaksi_Auditor extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('m_transaksi_auditor','mtransauditor');
+        if (!$this->session->userdata('username')) {
+            
+            redirect('login/login');
+            
+        }else{
+            if ($this->session->userdata('usergroup') != 'UG002') {
+                redirect('error');  
+            }
+        }
     }
 
     public function Audit()
@@ -95,12 +104,13 @@ class Transaksi_Auditor extends CI_Controller {
                 <td>'.$list['nama_lokasi'].'</td>
                 <td>'.$list['umur_unit'].'</td>
                 <td>'.$list['status_unit'].'</td>
-                <td>'.$list['aki'].'</td>
-                <td>'.$list['spion'].'</td>
-                <td>'.$list['helm'].'</td>
-                <td>'.$list['tools'].'</td>
-                <td>'.$list['buku_service'].'</td>
+                <td class="text-center">'.$list['aki'].'</td>
+                <td class="text-center">'.$list['spion'].'</td>
+                <td class="text-center">'.$list['helm'].'</td>
+                <td class="text-center">'.$list['tools'].'</td>
+                <td class="text-center">'.$list['buku_service'].'</td>
                 <td>'.$list['keterangan'].'</td>
+                <td>'.$list['tanggal_audit'].'</td>
             </tr>
             
             ';

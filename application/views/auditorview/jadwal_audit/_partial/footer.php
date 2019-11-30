@@ -173,6 +173,19 @@
              search();
           }
       });
+
+    //   function (fobj) {
+    //       elmTanggal= this.GetElements("Tanggal_Mulai");
+    //       var CurrentDate = new Date();
+    //       CurrentDate = ew_ParseDate(CurrentDate, 1);
+    //       var SelectedDate = new Date($("#Tanggal_Mulai").val());
+    //       SelectedDate = ew_ParseDate(SelectedDate,1);
+    //       if(SelectedDate < CurrentDate){
+    //           return this.OnError(elmTanggal,"Tanggal Mulai Baru")
+    //       }
+    //       return true;   
+    //   }
+
     });
    
     </script>

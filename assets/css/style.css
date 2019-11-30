@@ -1894,7 +1894,7 @@ div.dt-button-info {
 }
 .form-control,
 .single-line {
-  background-color: #FFFFFF;
+  background-color: rgb(255, 255, 255);
   background-image: none;
   border: 1px solid #e5e6e7;
   border-radius: 1px;
@@ -4072,7 +4072,7 @@ table.table-mail tr td {
   color: #110202;
 }
 .black-bg {
-  background-color: #262626;
+  background-color: #0e0d0d;
 }
 .panel-primary {
   border-color: #1ab394;

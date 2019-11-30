@@ -7,6 +7,16 @@ class Transaksi_GA extends CI_Controller {
         parent::__construct();
         $this->load->model('m_transaksi_GA','mtransga');
         $_tgl = date('Y-m-d');
+
+        if (!$this->session->userdata('username')) {
+            
+            redirect('login/login');
+            
+        }else{
+            if ($this->session->userdata('usergroup') != 'UG001') {
+                redirect('error');  
+            }
+        }
     }
     
 
@@ -116,6 +126,7 @@ class Transaksi_GA extends CI_Controller {
                 'nilai_total' => $this->input->post('nilai_total'),
                 'barcode' => $this->input->post('barcode'),
                 'qrcode' => $this->input->post('qrcode'),
+                'user'  => $this->session->userdata('username')
             
         ];
 

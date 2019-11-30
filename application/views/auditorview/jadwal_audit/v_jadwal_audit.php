@@ -2,15 +2,17 @@
 <div class="row">
                 <div class="col-lg-12">
                     <form class="form-horizontal" method="post" action="<?php echo base_url('audit/post_jadwal_audit') ?>" id="FormJadwalAudit">
-                    <div class="panel panel-success"  >
-                        <div class="ibox-title">
-                            <h5 class="col-md-10">Input Jadwal Audit</h5>
-                            <div class="col-sm-2 text-right">
-                            <a href="<?php echo base_url('audit/input_jadwal') ?>" type="submit" class="btn btn-m btn-danger">Batal</a>
-                            <button type="submit" class="btn btn-primary btn-m" id="btn-simpan">Simpan</button>
-                            </div>
+                    <div class="panel panel-default"  >
+                        <div class="panel-heading">
+
+                        <div class="col-lg-10" ><h4><i class="fa fa-info-circle"></i> Input Jadwal Audit</h4></div>
+                        <div >
+                        <a href="<?php echo base_url('audit/input_jadwal') ?>" type="submit" class="btn btn-m btn-danger">Batal</a>
+                        <button type="submit" class="btn btn-success btn-m" id="btn-simpan">Simpan</button>                        
                         </div>
-                        <div class="ibox-content">
+                      
+                    </div>
+                        <div class="panel-body">
                                 <div class="form-group"><label class="col-sm-2 control-label">ID Jadwal Audit</label>
                                     <div class="col-sm-5"><input type="text" class="form-control" name="idjadwal_audit" id="idjadwal_audit"></div>
                                 </div>

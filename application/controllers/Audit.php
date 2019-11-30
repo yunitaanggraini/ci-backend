@@ -6,6 +6,17 @@
         public function __construct() {
             parent::__construct();
             $this->load->model('m_audit','maudit');
+            
+            if (!$this->session->userdata('username')) {
+            
+                redirect('login/login');
+                
+            }else{
+                if ($this->session->userdata('usergroup') != 'UG002') {
+                    redirect('error');  
+                }
+            }
+            
         }
     
         public function JadwalAudit()
@@ -60,6 +71,18 @@
             
         }
 
+        public function viewWaktuAudit()
+        {
+            $data=[
+                'judul'=> "Waktu Audit",
+                'judul1'=>'Audit'
+            ];
+            $this->load->view('_partial/header.php',$data);
+            $this->load->view('_partial/sidebar.php');      
+            $this->load->view('auditorview/jadwal_audit/v_waktu_audit.php',$data);       
+            $this->load->view('auditorview/jadwal_audit/_partial/footer.php');    
+        }
+
     //---------------------------------------GET-----------------------------------------------------//
     public function ajax_get_jadwal_audit()
     {
@@ -73,9 +96,8 @@
             $output .='
             <tr> 
                 <td>'.$no.'</td>
-                <td>
-                <a onclick="edit(id=\''.$list['idjadwal_audit'].'\')" class="text-warning" ><i class="fa fa-pencil"></i></a>
-                <a href="'.$base.'audit/deletejadwal_audit/'.$list['idjadwal_audit'].'" class="text-danger" onclick=\'return confirm("Konfirmasi menghapus data '.$list['idjadwal_audit'].' - '.$list['auditor'].' ? ");\'><i class="fa fa-trash"></i></a>
+                <td class="text-center">
+                <a href="'.$base.'audit/delete_jadwalaudit/'.$list['idjadwal_audit'].'" class="text-danger" onclick=\'return confirm("Konfirmasi menghapus data '.$list['idjadwal_audit'].' - '.$list['auditor'].' ? ");\'><i class="fa fa-trash"></i></a>
                 </td>
                 <td >'.$list['idjadwal_audit'].'</td>
                 <td>'.$list['auditor'].'</td>
@@ -213,7 +235,8 @@
             'waktu'          => $this->input->post('waktu', true),
             'idjenis_audit'  => $this->input->post('idjenis_audit', true),
             'id_cabang'      => $this->input->post('id_cabang', true),
-            'keterangan'     => $this->input->post('keterangan', true)
+            'keterangan'     => $this->input->post('keterangan', true),
+            'user'  => $this->session->userdata('username')
              ];
             $id = $data['idjadwal_audit'];
 
@@ -267,7 +290,6 @@
             <tr> 
                 <td>'.$no.'</td>
                 <td>
-                <a onclick="edit(id=\''.$list['idjadwal_audit'].'\')" class="text-warning" ><i class="fa fa-pencil"></i></a>
                 <a href="'.$base.'audit/deletejadwal_audit/'.$list['idjadwal_audit'].'" class="text-danger" onclick=\'return confirm("Konfirmasi menghapus data '.$list['idjadwal_audit'].' - '.$list['auditor'].' ? ");\'><i class="fa fa-trash"></i></a>
                 </td>
                 <td >'.$list['idjadwal_audit'].'</td>
@@ -289,6 +311,68 @@
             ';
         }
         echo $output;
+    }
+
+        public function search_data_usergroup()
+    {
+        $usergroup = $this->input->post('id');
+        $output = '';
+        $no = 0;
+        $base = base_url();
+        // var_dump($usergroup);
+        if ($usergroup!= null) {
+            $listUserGroup = $this->mmasdat->cariusergroup($usergroup);
+        }
+        
+        if ($listUserGroup) {
+            foreach ($listUserGroup as $list) {
+                
+                $no++;
+                $output .='
+                <tr> 
+                    <td>'.$no.'</td>
+                    <td>
+                    <a id="'.$list['id_usergroup'].'" class="text-warning"><i class="fa fa-pencil"></i></a>
+                    <a href="'.$base.'master_data/delete_usergroup/'.$list['id_usergroup'].'" class="text-danger" onclick=\'return confirm("Konfirmasi menghapus data '.$list['id_usergroup'].' - '.$list['user_group'].' ? ");\'><i class="fa fa-trash"></i></a>
+                    </td>
+                    <td>'.$list['id_usergroup'].'</td>
+                    <td>'.$list['user_group'].'</td>
+                </tr>
+                
+                ';
+            }
+        }else{
+            $output .='
+            <tr >
+            <td colspan="8" class="text-center">data not found</td>
+            </tr>
+            ';
+        }
+        echo $output;
+    }
+
+    //-----DELETE------//
+    public function delete_jadwalaudit($id=null)
+    {
+        if ($id===null) {
+            $this->session->set_flashdata('warning', 'tidak ada');
+                
+                
+                redirect('audit/viewListAudit');
+        }else{
+            $result=$this->maudit->delJadwalAudit($id);
+            if ($result) {
+                $this->session->set_flashdata('berhasil', 'Berhasil Dihapus');
+                
+                
+                redirect('audit/viewListAudit');
+            }else{
+                $this->session->set_flashdata('gagal', 'Gagal dihapus');
+                
+                
+                redirect('audit/viewListAudit');
+            }
+        }
     }
 
     
