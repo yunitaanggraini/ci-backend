@@ -8,7 +8,7 @@ class laporan_auditor extends CI_Controller {
     
     public function __construct() {
         parent::__construct();
-        $this->load->model('m_laporan_auditor','mlap');
+        $this->load->model('m_laporan_auditor','mlapaudit');
         $this->load->model('m_master_data','mmasdat');
 
         if (!$this->session->userdata('username')) {
@@ -131,7 +131,7 @@ class laporan_auditor extends CI_Controller {
     {
         $output = '';
 		$no = 0;
-        $listcabang = $this->mmasdat->getCabang();
+        $listcabang = $this->mlapaudit->getCabang();
 		foreach ($listcabang as $list) {
 			$no++;
 			$output .='

@@ -15,6 +15,8 @@
     <link href="<?php echo base_url() ?>assets/css/animate.css" rel="stylesheet">
     <link href="<?php echo base_url() ?>assets/css/style.css" rel="stylesheet">
     <link href="<?php echo base_url() ?>assets/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="<?php echo base_url() ?>assets/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+    <link href="<?php echo base_url() ?>assets/css/plugins/clockpicker/clockpicker.css" rel="stylesheet">
 
     <script>
         function redirectCU(e) {

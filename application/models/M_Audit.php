@@ -114,8 +114,11 @@ class M_Audit extends CI_Model {
         ]);
 
         $result = json_decode($respon->getBody()->getContents(),true);
-
-        return $result['data'];
+        if ($result['status']==true) {
+            return $result['data']; 
+        }else{
+            return false;
+        }
     }
 
     //----------UPDATE---------//
@@ -126,8 +129,11 @@ class M_Audit extends CI_Model {
         ]);
 
         $result = json_decode($respon->getBody()->getContents(),true);
-
-        return $result['data'];
+        if ($result['status']==true) {
+            return $result['data']; 
+        }else{
+            return false;
+        }
     }
 
     //---------DELETE------------//
@@ -142,6 +148,18 @@ class M_Audit extends CI_Model {
       $result = json_decode($respon->getBody()->getContents(),true);
 
       return true;       
+    }
+    //----------------BUAT KODE------------------//
+    public function buatkodejadwalaudit()
+    {
+      $respon =  $this->_client->request('GET', 'jadwalauditcount');
+
+      $result = json_decode($respon->getBody()->getContents(),true);
+        if ($result['status']==true) {
+            return $result['data']; 
+        }else{
+            return 0;
+        }
     }
 
 }

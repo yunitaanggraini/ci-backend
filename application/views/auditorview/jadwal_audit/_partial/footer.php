@@ -56,6 +56,9 @@
 
     <script src="<?php echo base_url() ?>assets/js/plugins/toastr/toastr.min.js"></script>
 
+    <script src="<?php echo base_url() ?>assets/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+
+    <script src="<?php echo base_url() ?>assets/js/plugins/clockpicker/clockpicker.js"></script>
 
     <script>
     $(document).ready(function() { 
@@ -185,6 +188,17 @@
     //       }
     //       return true;   
     //   }
+
+    $('#data_1 .input-group.date').datepicker({
+        todayBtn: "linked",
+        keyboardNavigation: false,
+        forceParse: false,
+        calendarWeeks: true,
+        autoclose: true
+    });
+
+    $('.clockpicker').clockpicker();
+
 
     });
    

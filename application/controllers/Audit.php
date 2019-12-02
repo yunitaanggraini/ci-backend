@@ -23,8 +23,10 @@
         {
             $data=[
                 'judul'=> "Daftar Jadwal Audit",
-                'judul1'=>'Audit'
+                'judul1'=>'Audit',
+                'code'=> $this->maudit->buatkodejadwalaudit()
             ];
+                
             $this->load->view('_partial/header.php',$data);
             $this->load->view('_partial/sidebar.php');      
             $this->load->view('auditorview/jadwal_audit/v_jadwal_audit.php',$data);       
@@ -90,6 +92,7 @@
         $base = base_url();
         $no = 0;
         // data['kodeunik'] = $this->musergroup->kode(); 
+        
         $listJadwalAudit =$this->maudit->getAudit();
         foreach ($listJadwalAudit as $list){
             $no++;
@@ -231,16 +234,17 @@
         $data=[
             'idjadwal_audit' => $this->input->post('idjadwal_audit',true),
             'auditor'        => $this->input->post('auditor',true),
-            'tanggal'        => $this->input->post('tanggal', true),
-            'waktu'          => $this->input->post('waktu', true),
             'idjenis_audit'  => $this->input->post('idjenis_audit', true),
             'id_cabang'      => $this->input->post('id_cabang', true),
+            'tanggal'        => $this->input->post('tanggal', true),
+            'waktu'          => $this->input->post('waktu', true),
             'keterangan'     => $this->input->post('keterangan', true),
             'user'  => $this->session->userdata('username')
              ];
             $id = $data['idjadwal_audit'];
 
             $cek = $this->maudit->getJadwalAuditById($id);
+             /*var_dump($cek);die;*/
             if ($cek['status']===true) {
 
                 $this->session->set_flashdata('warning', 'sudah ada');

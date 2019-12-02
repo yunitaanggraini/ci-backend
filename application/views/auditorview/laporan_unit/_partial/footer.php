@@ -28,6 +28,7 @@
     <script src="<?php echo base_url() ?>assets/js/plugins/pace/pace.min.js"></script>
 
     <script src="<?php echo base_url() ?>assets/js/plugins/toastr/toastr.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/js/plugins/datapicker/bootstrap-datepicker.js"></script>
 
 
     <script>
@@ -87,8 +88,26 @@
     </script>
     <script>
    $(document).ready(function() {
-        $('#audit_unit').load("<?php echo base_url() ?>transaksi_auditor/ajax_get_unit");
-    $('#OptCabang').load("<?php echo base_url();?>master_data/ajax_get_cabang2");});
+    $('#audit_unit').load("<?php echo base_url() ?>transaksi_auditor/ajax_get_unit");
+    $('#OptCabang').load("<?php echo base_url();?>laporan_auditor/ajax_get_cabang2");
+    
+
+    $('#data_1 .input-group.date').datepicker({
+        todayBtn: "linked",
+        keyboardNavigation: false,
+        forceParse: false,
+        calendarWeeks: true,
+        autoclose: true
+    });
+
+    $('#data_5 .input-daterange').datepicker({
+        keyboardNavigation: false,
+        forceParse: false,
+        autoclose: true
+    });
+
+    
+    });
     </script>
 
 </body>

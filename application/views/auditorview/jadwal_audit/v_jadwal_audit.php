@@ -12,9 +12,15 @@
                         </div>
                       
                     </div>
-                        <div class="panel-body">
+
+                    <?php
+                        $noUrut = $code;
+                        $noUrut++;
+                        $id = "AUDIT". sprintf("%05s", $noUrut);
+                    ?>
+                                <div class="panel-body">
                                 <div class="form-group"><label class="col-sm-2 control-label">ID Jadwal Audit</label>
-                                    <div class="col-sm-5"><input type="text" class="form-control" name="idjadwal_audit" id="idjadwal_audit"></div>
+                                    <div class="col-sm-5"><input type="text" class="form-control" name="idjadwal_audit" id="idjadwal_audit" value="<?php echo $id; ?>" readonly></div>
                                 </div>
 
                                 <div class="form-group"><label class="col-sm-2 control-label">Auditor</label>
@@ -41,14 +47,27 @@
                                     </div>
                                 </div> -->
                                 
-                                <div class="form-group"><label class="col-sm-2 control-label">Tanggal</label>
-                                    <div class="col-sm-5"><input type="date" class="form-control" name="tanggal" ></div>
-                                </div>
-
-                                <div class="form-group"><label class="col-sm-2 control-label">Waktu</label>
-                                    <div class="col-sm-5"><input type="time" class="form-control" name="waktu" id="waktu" oncopy="return false" onpaste="return false">
+                                <div class="form-group" id="data_1"><label class="col-sm-2 control-label">Tanggal</label>
+                                    <div class="col-sm-5">
+                                    <div class="input-group date">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        <input type="text" class="form-control" name="tanggal" id="tanggal">
                                     </div>
                                 </div>
+                                </div> 
+
+                                <div class="form-group"><label class="col-sm-2 control-label">Waktu</label>
+                                    <div class="col-sm-5">
+                                <div class="input-group clockpicker" data-autoclose="true">
+                                    <input type="text" class="form-control" name="waktu" id="waktu"  >
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-clock-o"></span>
+                                    </span>
+                                </div>
+                            </div>
+                                </div>
+
+
 
                                 
 
