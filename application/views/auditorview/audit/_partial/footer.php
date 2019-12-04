@@ -26,6 +26,7 @@
     <script src="<?php echo base_url() ?>assets/js/plugins/pace/pace.min.js"></script>
 
     <script src="<?php echo base_url() ?>assets/js/plugins/toastr/toastr.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/js/plugins/iCheck/icheck.min.js"></script>
 
 
     <script>
@@ -87,6 +88,12 @@
    $(document).ready(function() {
     $('#jadwal_audit').load("<?php echo base_url() ?>audit/ajax_get_jadwal_audit");
     $('#Optcabang').load("<?php echo base_url() ?>master_data/ajax_get_cabang2");
+
+    $('.i-checks').iCheck({
+                    checkboxClass: 'icheckbox_square-green',
+                    radioClass: 'iradio_square-green',
+                });
+
     function search() {
             var cabang =$('#Incabang').val();
 

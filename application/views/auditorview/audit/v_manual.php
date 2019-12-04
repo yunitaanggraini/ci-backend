@@ -1,19 +1,12 @@
 <div class="wrapper wrapper-content m-t-xl wrapper wrapper-content animated fadeInRight">
-    <div class="panel panel-success">
+    <div class="panel panel-default">
         <div class="panel-heading" >
-            <div>
-            <i class="fa fa-info-circle"></i> Unit
-
-            <div class=" text-right">
-            <a href="<?php echo base_url('audit/audit') ?>" type="submit" class="btn btn-m btn-danger">Kembali</a>
-            <button type="submit" class="btn btn-primary btn-m" id="btn-simpan">Simpan</button>
-            </div>
-            </div>
-            
-          
-            
-            
-        </div>
+        <div class="col-lg-10" ><h4><i class="fa fa-info-circle"></i> Input Inventory</h4></div>
+                        <div >
+                        <a href="<?php echo base_url('master_data/input_management_inv') ?>" type="submit" class="btn btn-m btn-danger">Batal</a>
+                        <button type="submit" class="btn btn-success btn-m" id="btn-simpan">Simpan</button>                        
+                        </div>
+                        </div>
             <div class="panel-body">
                 <form method="post" class="form-horizontal" id="Formcabang" action="<?php echo base_url() ?>transaksi_auditor/post_manual">
                 <div>
@@ -51,28 +44,28 @@
                 
                 <div >
 
-                <div class="form-group"><label class="col-sm-2 control-label"></label>
-                <div class="i-checks"><label> <input type="checkbox" value=""> <i></i> Aki</label></div>
+                <div class="form-group"><label class="col-sm-2 control-label">Aki</label>
+                <div class="i-checks"><label> <input type="checkbox" value=""> <i></i> </label></div>
                 </div> 
 
                 <div >
-                <div class="form-group"><label class="col-sm-2 control-label"></label>
-                <div class="i-checks"><label> <input type="checkbox" value=""> <i></i> Spion</label></div>
+                <div class="form-group"><label class="col-sm-2 control-label">Spion</label>
+                <div class="i-checks"><label> <input type="checkbox" value=""> <i></i> </label></div>
                 </div> 
 
                 <div >
-                <div class="form-group"><label class="col-sm-2 control-label"></label>
-                <div class="i-checks"><label> <input type="checkbox" value=""> <i></i> Helm</label></div>
+                <div class="form-group"><label class="col-sm-2 control-label">Helm</label>
+                <div class="i-checks"><label> <input type="checkbox" value=""> <i></i> </label></div>
                 </div> 
 
                 <div >
-                <div class="form-group"><label class="col-sm-2 control-label"></label>
-                <div class="i-checks"><label> <input type="checkbox" value=""> <i></i> Tools</label></div>
+                <div class="form-group"><label class="col-sm-2 control-label">Tools</label>
+                <div class="i-checks"><label> <input type="checkbox" value=""> <i></i> </label></div>
                 </div> 
 
                 <div >
-                <div class="form-group"><label class="col-sm-2 control-label"></label>
-                <div class="i-checks"><label> <input type="checkbox" value=""> <i></i> Buku Servis</label></div>
+                <div class="form-group"><label class="col-sm-2 control-label">Buku Servis</label>
+                <div class="i-checks"><label> <input type="checkbox" value=""> <i></i></label></div>
                 </div>  
 
                 

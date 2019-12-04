@@ -1,11 +1,11 @@
 <div class="wrapper wrapper-content m-t-xl wrapper wrapper-content animated fadeInRight">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <div class="col-lg-10" ><h4><i class="fa fa-info-circle"></i> Unit</h4></div>
-            <div >
-            <a href="<?php echo base_url('audit/audit') ?>" type="submit" class="btn btn-m btn-danger">Batal</a>
-            <button type="submit" class="btn btn-success btn-m" id="btn-simpan">Simpan</button>                        
-            </div>           
+        <div class="col-lg-10" ><h4><i class="fa fa-info-circle"></i> Unit</h4></div>
+                        <div >
+                        <a href="<?php echo base_url('master_data/input_management_inv') ?>" type="submit" class="btn btn-m btn-danger">Batal</a>
+                        <button type="submit" class="btn btn-success btn-m" id="btn-simpan">Simpan</button>                        
+                        </div>         
         </div>
             <div class="panel-body">
                 <form method="post" class="form-horizontal" id="Formcabang" action="<?php echo base_url() ?>audit/post_manual">
