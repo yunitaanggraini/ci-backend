@@ -30,10 +30,7 @@
                       <span id="info_message"></span>
                     </div>
                     <div class="panel-body">
-                    <div>
-                    <div class="row">
-                            <div class="col-lg-12">
-                                 <div class="row form-horizontal">
+
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">Cabang</label>
@@ -41,33 +38,29 @@
                                         </div>
                                     </div>        
                                 </div> 
-                            </div>
-                        </div>
-                            
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="row form-horizontal">
+
+
+
                                 <div class="col-sm-6">
                                         <div class="form-group" id="data_5">
                                             <label class="col-sm-3 control-label">Periode Tanggal</label>
                                             <div class="col-sm-9">
                                             <div class="input-daterange input-group" id="datepicker">
-                                                <input type="text" class="input-sm form-control" name="tgl_awal" value="05/14/2019"/>
+                                                <input type="text" class="input-m form-control" name="tgl_awal" value="05/14/2019"/>
                                                 <span class="input-group-addon" id="tgl_awal">to</span>
-                                                <input type="text" class="input-sm form-control" name="tgl_akhir" value="05/22/2019" />
+                                                <input type="text" class="input-m form-control" name="tgl_akhir" value="05/22/2019" />
                                             </div>
                                         </div>
                                         </div>
                                 </div>  
-                                </div>
-                            </div>
-                        </div>
 
-                    </div>
+
+
                   <hr size="100px">
-                    
-                        <div class="table-responsive">
+                  <div class="row">
+                      <div class="col-lg-12">
+                        
+                    <div class="table-responsive">
                     <table class="table table-striped table-bordered table-hover dataTables-example gray-bg" >
                     <thead>
                     <tr >
@@ -112,7 +105,13 @@
                     </tr>
                     </tfoot>
                     </table>
-                        </div>
+                </div>
+
+                    </div>
+
+                  </div>
+                    
+                
 
                     </div>
                 </div>

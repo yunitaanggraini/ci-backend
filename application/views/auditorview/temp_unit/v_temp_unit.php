@@ -1,15 +1,9 @@
 <div class="wrapper wrapper-content m-t-xl wrapper wrapper-content animated fadeInRight">
             <div class="row">
                 <div class="col-lg-12">
-                <div class="panel panel-primary">
-                    <div class="ibox-title float-e-margins">
-                        <div class="form-group">
-                            <label class="col-sm-3"> <h5>List Data Temporary Unit</h5></label>
-                            <div class="col-sm-9 text-right">
-                            </div>
-                        </div>
-
-                      <span id="info_message"></span>
+                <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4><i class="fa fa-info-circle"></i> Data Temporary Unit</h4>                     
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">

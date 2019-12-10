@@ -10,7 +10,7 @@ class M_Transaksi_GA extends CI_Model {
         {
             parent::__construct();
             $this->_client = new Client([
-                'base_uri'=> 'http://192.168.43.95/ci-server-lala/api/transaksi/'
+                'base_uri'=> SERVER_BASE.'ci-server-lala/api/transaksi/'
             ]);
         }
     

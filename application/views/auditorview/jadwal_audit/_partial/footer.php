@@ -61,25 +61,51 @@
     <script src="<?php echo base_url() ?>assets/js/plugins/clockpicker/clockpicker.js"></script>
 
     <script>
-    $(document).ready(function() { 
-            
-                // setTimeout(function() {
-                //     toastr.options = {
-                //         positionClass: 'toast-bottom-left',
-                //         closeButton: true,
-                //         progressBar: true,
-                //         showMethod: 'slideDown',
-                //         timeOut: 4000
-                //     };
-                // //     toastr.success('Selamat Datang Username', 'Login berhasil');
+     $(document).ready(function() { 
+        <?php if($this->session->flashdata('berhasil')) {?>
+        setTimeout(function() {
+                    toastr.options = {
+                        positionClass: 'toast-bottom-left',
+                        closeButton: true,
+                        progressBar: true,
+                        showMethod: 'slideDown',
+                        timeOut: 4000
+                    };
+                    toastr.success('<?php echo $this->session->flashdata('berhasil') ?>', 'Status');
         
-                // }, 1300);
+                }, 1300);
+            <?php }?>
+        <?php if($this->session->flashdata('gagal')) {?>
+        setTimeout(function() {
+                    toastr.options = {
+                        positionClass: 'toast-bottom-left',
+                        closeButton: true,
+                        progressBar: true,
+                        showMethod: 'slideDown',
+                        timeOut: 4000
+                    };
+                    toastr.error('<?php echo $this->session->flashdata('gagal') ?>', 'Status');
+        
+                }, 1300);
+            <?php }?>
+        <?php if($this->session->flashdata('warning')) {?>
+        setTimeout(function() {
+                    toastr.options = {
+                        positionClass: 'toast-bottom-left',
+                        closeButton: true,
+                        progressBar: true,
+                        showMethod: 'slideDown',
+                        timeOut: 4000
+                    };
+                    toastr.warning('<?php echo $this->session->flashdata('warning') ?>', 'Status');
+        
+                }, 1300);
+            <?php }?>
                 $( document ).idleTimer( 10000);
     });
 
     $( document ).on( "idle.idleTimer", function(event, elem, obj){
         document.getElementById("stat").innerHTML="<span class='label label-danger'> <span class='text-warning'><i class='fa fa-circle'></i></span> Offline</span>";
-
     });
 
     $( document ).on( "active.idleTimer", function(event, elem, obj, triggerevent ){
@@ -198,6 +224,38 @@
     });
 
     $('.clockpicker').clockpicker();
+
+    
+    // var tanggal_audit = $('#tanggal').val();
+    // var waktu_audit = $('#waktu').val();
+
+    // var countDownDate = new Date("Dec 05, 2019 14:03:00").getTime();
+
+    // // Update the count down every 1 second
+    // var x = setInterval(function() {
+
+    // // Get today's date and time
+    // var now = new Date().getTime();
+        
+    // // Find the distance between now and the count down date
+    // var distance = countDownDate - now;
+        
+    // // Time calculations for days, hours, minutes and seconds
+    // var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    // var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    // var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    // var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+    // // Output the result in an element with id="demo"
+    // document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+    // + minutes + "m " + seconds + "s ";
+        
+    // // If the count down is over, write some text 
+    // if (distance < 0) {
+    //     clearInterval(x);
+    //     document.getElementById("demo").innerHTML = "EXPIRED";
+    // }
+    // }, 1000);
 
 
     });

@@ -39,6 +39,24 @@
                 'judul'=> "List Audit",
                 'judul1'=>'Audit'
             ];
+            $tglnow = Date('Y-m-d');
+            $wktnow=Date('H:i:s',time()+60*60*7);
+            $wktnow = str_replace(':','',$wktnow);
+            $waktujadwalaudit = $this->maudit->getAudit();
+            foreach ($waktujadwalaudit as $waktuaudit) {
+            $tanggal = $waktuaudit['tanggal'];
+            $waktu = $waktuaudit['waktu'];
+            $waktu = str_replace(':','',$waktu);
+            // var_dump($waktu.'+'.$wktnow);
+                if ($tanggal == $tglnow && $wktnow >= $waktu && $waktuaudit['keterangan']== 'waiting') {
+                    $data =[
+                        'idjadwal_audit' => $waktuaudit['idjadwal_audit'],
+                        'keterangan' => 'in progress'
+                    ];
+                    $this->maudit->updatejadwalaudit($data);
+                    
+                }
+            }
             $this->load->view('_partial/header.php',$data);
             $this->load->view('_partial/sidebar.php');      
             $this->load->view('auditorview/jadwal_audit/v_list_audit.php',$data);       
@@ -95,6 +113,16 @@
         
         $listJadwalAudit =$this->maudit->getAudit();
         foreach ($listJadwalAudit as $list){
+
+            if ($list['keterangan']=='waiting') {
+                
+            }else if($list['keterangan']=='in progress'){
+
+
+            }else if ($list['keterangan']=='done'){
+
+            }
+
             $no++;
             $output .='
             <tr> 
@@ -238,7 +266,7 @@
             'id_cabang'      => $this->input->post('id_cabang', true),
             'tanggal'        => $this->input->post('tanggal', true),
             'waktu'          => $this->input->post('waktu', true),
-            'keterangan'     => $this->input->post('keterangan', true),
+            'keterangan'     => 'waiting',
             'user'  => $this->session->userdata('username')
              ];
             $id = $data['idjadwal_audit'];
@@ -377,6 +405,32 @@
                 redirect('audit/viewListAudit');
             }
         }
+    }
+
+    //---WAKTU AUDIT---//
+
+    public function waktu_audit()
+    {
+        $tglnow = Date('Y-m-d');
+        $wktnow=Date('H:i:s',time()+60*60*8);
+        $wktnow = str_replace(':','',$wktnow);
+        $waktujadwalaudit = $this->maudit->getAudit();
+        foreach ($waktujadwalaudit as $waktuaudit) {
+           $tanggal = $waktuaudit['tanggal'];
+           $waktu = $waktuaudit['waktu'];
+           $waktu = str_replace(':','',$waktu);
+            if ($tanggal == $tglnow && $wktnow >= $waktu && $waktuaudit['keterangan']== 'waiting') {
+                $data =[
+                    'idjadwal_audit' => $waktuaudit['idjadwal_audit'],
+                    'keterangan' => 'in progress'
+                ];
+                $this->maudit->updatejadwalaudit($data);
+                
+                redirect('audit/list_audit','refresh');
+                
+            }
+        }
+        
     }
 
     

@@ -86,11 +86,9 @@
     <script>
    $(document).ready(function() {
     $('#audit_unit').load("<?php echo base_url() ?>transaksi_auditor/ajax_get_unit");
-    $('#Optcabang').load("<?php echo base_url() ?>master_data/ajax_get_cabang2");
-    function search() {
-            var cabang =$('#Incabang').val();
-
-            if (cabang!='') {
+    
+    function TampilStatus(str) {
+            if (str=='') {
                 $.ajax({
                     type:"post",
                     url:"<?php echo base_url() ?>master_data/search_data_cabang",
@@ -130,25 +128,6 @@
         });
       }
 
-
-    function show() {
-        $('#add').attr('disabled', true);
-        var $url = "<?php echo $this->uri->segment(1) ?>";
-        $.ajax({
-            url: "<?php echo base_url().$this->uri->segment(1) ?>/input_cabang",
-            type: 'post',
-            dataType:'html',
-            success: function(data) {
-                $('#data_input').html(data);
-            }
-
-        })
-    }
-
-    function hide() {
-        $('#add').attr('disabled', false);
-        $('#data_input').html('');
-    }
     </script>
 
 </body>

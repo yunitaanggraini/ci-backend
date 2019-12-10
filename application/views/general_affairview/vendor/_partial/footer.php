@@ -149,6 +149,24 @@
         $('#add').attr('disabled', false);
         $('#data_input').html('');
     }
+
+    function load_data(page) {
+        $.ajax({
+            url:"<?php echo base_url() ?>master_data/ajax_get_vendor",
+            method: "POST",
+            dataType: "json",
+            success:function (data) 
+            {
+                $('#country_table').html(data.country_table);
+                $('#pagination_link').html(data.pagination_link);
+            }
+            });
+            }
+            
+            load_country_data(1);
+
+            });
+
     </script>
 
 </body>

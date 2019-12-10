@@ -50,7 +50,7 @@
         </div>
     </nav>
 
-        <div id="page-wrapper" class="gray-bg">
+        <div id="page-wrapper" class="red-bg">
         <div class="row border-bottom">
         <nav class="navbar navbar-fixed-top  " role="navigation" style="margin-bottom: 0">
         <div class="navbar-header pull-left">

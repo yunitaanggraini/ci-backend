@@ -8,7 +8,7 @@ class M_Audit extends CI_Model {
         {
             parent::__construct();
             $this->_client = new Client([
-                'base_uri'=> 'http://192.168.43.95/ci-server-lala/api/audit/'
+                'base_uri'=> SERVER_BASE.'ci-server-lala/api/audit/'
             ]);
         }
 
@@ -124,7 +124,7 @@ class M_Audit extends CI_Model {
     //----------UPDATE---------//
     public function UpdateJadwalAudit($data)
     {
-        $respon =  $this->_client->request('PUT', 'audit',[
+        $respon =  $this->_client->request('PUT', 'auditket',[
           'form_params'=>  $data
         ]);
 
@@ -161,6 +161,8 @@ class M_Audit extends CI_Model {
             return 0;
         }
     }
+
+    
 
 }
 

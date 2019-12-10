@@ -6,6 +6,7 @@ class Master_Data extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
+        $this->$this->load->library('pagination');
         $this->load->model('m_master_data','mmasdat');
         $this->load->model('m_transaksi_ga','m_transga');
         if (!$this->session->userdata('username')) {
@@ -189,22 +190,25 @@ class Master_Data extends CI_Controller {
         $no = 0;
         // data['kodeunik'] = $this->musergroup->kode(); 
         $listUserGroup =$this->mmasdat->getUserGroup();
-        foreach ($listUserGroup as $list){
-            $no++;
-            $output .='
-            <tr> 
-                <td>'.$no.'</td>
-                <td>
-                <a onclick="edit(id=\''.$list['id_usergroup'].'\')" class="text-warning" ><i class="fa fa-pencil"></i></a>
-                <a href="'.$base.'master_data/delete_usergroup/'.$list['id_usergroup'].'" class="text-danger" onclick=\'return confirm("Konfirmasi menghapus data '.$list['id_usergroup'].' - '.$list['user_group'].' ? ");\'><i class="fa fa-trash"></i></a>
-                </td>
-                <td >'.$list['id_usergroup'].'</td>
-                <td>'.$list['user_group'].'</td>
-            </tr>
-            
-            ';
-        }
-        echo $output;
+       
+            foreach ($listUserGroup as $list){
+                $no++;
+                $output .='
+                <tr> 
+                    <td>'.$no.'</td>
+                    <td>
+                    <a onclick="edit(id=\''.$list['id_usergroup'].'\')" class="text-warning" ><i class="fa fa-pencil"></i></a>
+                    <a href="'.$base.'master_data/delete_usergroup/'.$list['id_usergroup'].'" class="text-danger" onclick=\'return confirm("Konfirmasi menghapus data '.$list['id_usergroup'].' - '.$list['user_group'].' ? ");\'><i class="fa fa-trash"></i></a>
+                    </td>
+                    <td >'.$list['id_usergroup'].'</td>
+                    <td>'.$list['user_group'].'</td>
+                </tr>
+                
+                ';
+            }
+            echo $output;
+       
+        
     }
 
     public function ajax_get_jenis_inv()
@@ -302,22 +306,33 @@ class Master_Data extends CI_Controller {
         $no = 0;
         // data['kodeunik'] = $this->musergroup->kode(); 
         $listStatusInventory =$this->mmasdat->getStatusInv();
-        foreach ($listStatusInventory as $list){
-            $no++;
-            $output .='
-            <tr> 
-                <td>'.$no.'</td>
-                <td>
-                <a onclick="edit(id=\''.$list['idstatus_inventory'].'\')" class="text-warning" ><i class="fa fa-pencil"></i></a>
-                <a href="'.$base.'master_data/delete_statusinv/'.$list['idstatus_inventory'].'" class="text-danger" onclick=\'return confirm("Konfirmasi menghapus data '.$list['idstatus_inventory'].' - '.$list['status_inventory'].' ? ");\'><i class="fa fa-trash"></i></a>
-                </td>
-                <td >'.$list['idstatus_inventory'].'</td>
-                <td>'.$list['status_inventory'].'</td>
-            </tr>
+        if ($listStatusInventory!=null) {
+            foreach ($listStatusInventory as $list){
+                $no++;
+                $output .='
+                <tr> 
+                    <td>'.$no.'</td>
+                    <td>
+                    <a onclick="edit(id=\''.$list['idstatus_inventory'].'\')" class="text-warning" ><i class="fa fa-pencil"></i></a>
+                    <a href="'.$base.'master_data/delete_statusinv/'.$list['idstatus_inventory'].'" class="text-danger" onclick=\'return confirm("Konfirmasi menghapus data '.$list['idstatus_inventory'].' - '.$list['status_inventory'].' ? ");\'><i class="fa fa-trash"></i></a>
+                    </td>
+                    <td >'.$list['idstatus_inventory'].'</td>
+                    <td>'.$list['status_inventory'].'</td>
+                </tr>
+                
+                ';
+                
+            }
+            echo $output;
             
+        }else {
+            echo $output .='
+            <tr >
+            <td colspan="8" class="text-center">data not found</td>
+            </tr>
             ';
         }
-        echo $output;
+        
     }
 
     public function ajax_get_perusahaan()
@@ -402,22 +417,31 @@ class Master_Data extends CI_Controller {
         $no = 0;
         // data['kodeunik'] = $this->musergroup->kode(); 
         $listVendor =$this->mmasdat->getVendor();
-        foreach ($listVendor as $list){
-            $no++;
-            $output .='
-            <tr> 
-                <td>'.$no.'</td>
-                <td>
-                <a onclick="edit(id=\''.$list['id_vendor'].'\')" class="text-warning" ><i class="fa fa-pencil"></i></a>
-                <a href="'.$base.'master_data/delete_vendor/'.$list['id_vendor'].'" class="text-danger" onclick=\'return confirm("Konfirmasi menghapus data '.$list['id_vendor'].' - '.$list['nama_vendor'].' ? ");\'><i class="fa fa-trash"></i></a>
-                </td>
-                <td >'.$list['id_vendor'].'</td>
-                <td>'.$list['nama_vendor'].'</td>
+        if ($listVendor!=null) {
+            foreach ($listVendor as $list){
+                $no++;
+                $output .='
+                <tr> 
+                    <td>'.$no.'</td>
+                    <td>
+                    <a onclick="edit(id=\''.$list['id_vendor'].'\')" class="text-warning" ><i class="fa fa-pencil"></i></a>
+                    <a href="'.$base.'master_data/delete_vendor/'.$list['id_vendor'].'" class="text-danger" onclick=\'return confirm("Konfirmasi menghapus data '.$list['id_vendor'].' - '.$list['nama_vendor'].' ? ");\'><i class="fa fa-trash"></i></a>
+                    </td>
+                    <td >'.$list['id_vendor'].'</td>
+                    <td>'.$list['nama_vendor'].'</td>
+                </tr>
+                
+                ';
+            }
+            echo $output;
+        }else {
+            echo $output .='
+            <tr >
+            <td colspan="8" class="text-center">data not found</td>
             </tr>
-            
             ';
         }
-        echo $output;
+        
     }
 
     public function ajax_get_jenis_audit()

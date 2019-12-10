@@ -9,7 +9,7 @@ class M_Master_Data extends CI_Model {
         {
             parent::__construct();
             $this->_client = new Client([
-                'base_uri'=> 'http://192.168.43.95/ci-server-lala/api/master/'
+                'base_uri'=> SERVER_BASE.'ci-server-lala/api/master/'
             ]);
         }
 
@@ -19,7 +19,12 @@ class M_Master_Data extends CI_Model {
 
         $result = json_decode($respon->getBody()->getContents(),true);
 
-        return $result['data'];
+        if ($result['status']==true) {
+
+            return $result['data'];
+        }else {
+            return false;
+        }
     }
 
     public function getUserGroup()
@@ -28,7 +33,12 @@ class M_Master_Data extends CI_Model {
 
       $result = json_decode($respon->getBody()->getContents(),true);
 
-      return $result['data'];
+      if ($result['status']==true) {
+
+        return $result['data'];
+        }else {
+            return false;
+        }
     }
 
     public function getJenisInv ()
@@ -37,7 +47,12 @@ class M_Master_Data extends CI_Model {
       
         $result = json_decode($respon->getBody()->getContents(),true);
 
-        return $result['data'];              
+        if ($result['status']==true) {
+
+            return $result['data'];
+        }else {
+            return false;
+        }              
     }
 
     public function getSubInv()
@@ -46,7 +61,12 @@ class M_Master_Data extends CI_Model {
 
         $result = json_decode($respon->getBody()->getContents(),true);
 
-        return $result['data'];
+        if ($result['status']==true) {
+
+            return $result['data'];
+        }else {
+            return false;
+        }
     }
 
     public function getStatusInv()
@@ -54,8 +74,13 @@ class M_Master_Data extends CI_Model {
         $respon =  $this->_client->request('GET', 'statusinv');
 
         $result = json_decode($respon->getBody()->getContents(),true);
+        if ($result['status']==true) {
 
-        return $result['data'];
+            return $result['data'];
+        }else {
+            return false;
+        }
+        
     }
 
     public function getPerusahaan()
@@ -64,7 +89,12 @@ class M_Master_Data extends CI_Model {
 
         $result = json_decode($respon->getBody()->getContents(),true);
 
-        return $result['data'];              
+        if ($result['status']==true) {
+
+            return $result['data'];
+        }else {
+            return false;
+        }              
     }
 
     public function getCabang()
@@ -73,7 +103,12 @@ class M_Master_Data extends CI_Model {
 
         $result = json_decode($respon->getBody()->getContents(),true);
 
-        return $result['data'];              
+        if ($result['status']==true) {
+
+            return $result['data'];
+        }else {
+            return false;
+        }              
     }
     
     public function getLokasi()
@@ -82,7 +117,12 @@ class M_Master_Data extends CI_Model {
 
         $result = json_decode($respon->getBody()->getContents(),true);
 
-        return $result['data'];              
+        if ($result['status']==true) {
+
+            return $result['data'];
+        }else {
+            return false;
+        }              
     }
 
     public function getLokasiCabang($id)
@@ -104,7 +144,12 @@ class M_Master_Data extends CI_Model {
 
         $result = json_decode($respon->getBody()->getContents(),true);
 
-        return $result['data'];              
+        if ($result['status']==true) {
+
+            return $result['data'];
+        }else {
+            return false;
+        }              
     }
 
     public function getJenisAudit()
@@ -112,7 +157,12 @@ class M_Master_Data extends CI_Model {
         $respon =  $this->_client->request('GET', 'jenisaudit');
 
         $result = json_decode($respon->getBody()->getContents(),true);
-        return $result['data'];              
+        if ($result['status']==true) {
+
+            return $result['data'];
+        }else {
+            return false;
+        }              
     }
 
     //-----------------------------------------------GET BY ID------------------------------------------------------//
@@ -649,7 +699,11 @@ class M_Master_Data extends CI_Model {
 
       $result = json_decode($respon->getBody()->getContents(),true);
 
-      return $result['data'];
+      if ($result['status']==true) {
+        return $result['data']; 
+        }else{
+            return 0;
+        }
     }
 
     
@@ -660,7 +714,11 @@ class M_Master_Data extends CI_Model {
 
       $result = json_decode($respon->getBody()->getContents(),true);
 
-      return $result['data'];
+      if ($result['status']==true) {
+        return $result['data']; 
+        }else{
+            return 0;
+        }
     }
 
     public function buatkodestatusinventory()
@@ -669,7 +727,11 @@ class M_Master_Data extends CI_Model {
 
       $result = json_decode($respon->getBody()->getContents(),true);
 
-      return $result['data'];
+      if ($result['status']==true) {
+        return $result['data']; 
+        }else{
+            return 0;
+        }
     }
 
     public function buatkodevendor()
@@ -678,7 +740,11 @@ class M_Master_Data extends CI_Model {
 
       $result = json_decode($respon->getBody()->getContents(),true);
 
-      return $result['data'];
+      if ($result['status']==true) {
+        return $result['data']; 
+        }else{
+            return 0;
+        }
     }
 
     public function buatkodejenisaudit()
@@ -687,7 +753,11 @@ class M_Master_Data extends CI_Model {
 
       $result = json_decode($respon->getBody()->getContents(),true);
 
-      return $result['data'];
+      if ($result['status']==true) {
+        return $result['data']; 
+    }else{
+        return false;
+    }
     }
 
 

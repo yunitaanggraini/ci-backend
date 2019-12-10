@@ -59,6 +59,7 @@
                         <th>Cabang</th>
                         <th>Jenis Audit</th>
                         <th>Keterangan</th>
+                        
                     </tr>
                     </thead>
                     <tbody id="list_jadwal_audit">
@@ -78,6 +79,8 @@
                     </tfoot>
                     </table>
                         </div>
+
+                        <p id="demo"></p>
 
                     </div>
                 </div>
