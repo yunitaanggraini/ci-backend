@@ -156,6 +156,18 @@
         $('#add').attr('disabled', false);
         $('#data_input').html('');
     }
+
+
+    function () {
+        $('#no_mesin').change(function () {
+            ver no_mesin = $('#no_mesin').val();
+
+            $.ajax({
+                url: 
+            })
+        })
+        
+    }
     </script>
 
 </body>

@@ -118,7 +118,7 @@
                 
             }else if($list['keterangan']=='in progress'){
 
-
+                $list['keterangan']='<a href="'.$base.'audit/delete_jadwalaudit/'.$list['idjadwal_audit'].'" class="btn btn-primary" onclick=\'return confirm("Konfirmasi menghapus data '.$list['idjadwal_audit'].' - '.$list['auditor'].' ? ");\'>BUKA</a>';
             }else if ($list['keterangan']=='done'){
 
             }
@@ -148,19 +148,23 @@
     {
         $output = '';
         $base = base_url();
-        $no = 0;
+        
         // data['kodeunik'] = $this->musergroup->kode(); 
         $listTempUnit =$this->maudit->getTempUnit();
         foreach ($listTempUnit as $list){
-            $no++;
+            
             $output .='
             <tr> 
-                <td>'.$no.'</td>
-                <td>'.$list['id_unit'].'</td>
-                <td>'.$list['no_mesin'].'</td>
-                <td>'.$list['no_rangka'].'</td>
-                <td>'.$list['nama_lokasi'].'</td>
-                <td>'.$list['keterangan'].'</td>
+                
+                <td class="text-center">'.$list['id_unit'].'</td>
+                <td class="text-center">'.$list['nama_cabang'].'</td>
+                <td class="text-center">'.$list['nama_lokasi'].'</td>
+                <td class="text-center">'.$list['no_mesin'].'</td>
+                <td class="text-center">'.$list['no_rangka'].'</td>
+                <td class="text-center">'.$list['tahun'].'</td>
+                <td class="text-center">'.$list['type'].'</td>
+                <td class="text-center">'.$list['kode_item'].'</td>
+              
             </tr>
             
             ';

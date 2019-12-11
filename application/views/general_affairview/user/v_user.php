@@ -1,7 +1,7 @@
 <div class="wrapper wrapper-content m-t-xl wrapper wrapper-content animated fadeInRight">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="panel panel-success">
+                    <div class="panel panel-default">
                     <div class="panel-body">
                     <div class="row form-horizontal">
                         <div class="col-sm-10">
@@ -27,13 +27,15 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                <div class="panel panel-primary">
-                    <div class="panel">
-                        <h5 class="col-sm-3">List Data User</h5>
-                        <div class="col-sm-9 text-right">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+
+                        <div class="col-lg-11" ><h3><i class="fa fa-info-circle"></i> List Data User</h3></div>
+                        <div >
                         <a href="<?php echo site_url('master_data/input_user'); ?>" type="button" class="btn btn-m btn-success">Add Data</a>
                         </div>
-                      <span id="info_message"></span>
+
+                      
                     </div>
                     <div class="panel-body">
                     <?php if($this->session->flashdata('info')){

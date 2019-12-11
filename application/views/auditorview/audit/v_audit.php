@@ -31,8 +31,10 @@
                 </div>
                     <div class="panel-body">
                             <div class="form-group"><label class="col-sm-2 control-label">Data Unit </label>
-                            <div class="col-sm-8"><input type="text" class="form-control" placeholder="Masukkan Data"></div>
-                            <button class="btn btn-info btn-w-m">Scan Data</button>
+                            <div class="col-sm-7"><input type="text" class="form-control" placeholder="Masukkan Data"></div>
+                            <div>
+                            <button class="btn btn-info btn-m">Scan Data</button>
+                            </div>
                             </div>
 
                             <div class="text-right col-sm-11 ">

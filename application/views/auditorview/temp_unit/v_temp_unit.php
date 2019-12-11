@@ -10,12 +10,16 @@
                     <table class="table table-striped table-bordered table-hover dataTables-example" >
                     <thead>
                     <tr>
-                        <th width="3%">No</th>
-                        <th>ID Unit</th>
-                        <th>No Mesin</th>
-                        <th>No Rangka</th>
-                        <th>Lokasi</th>
-                        <th>Keterangan</th>
+                        
+                        <th class="text-center">ID Unit</th>
+                        <th class="text-center">Cabang</th>
+                        <th class="text-center">Lokasi</th>
+                        <th class="text-center">No Mesin</th>
+                        <th class="text-center">No Rangka</th>
+                        <th class="text-center">Tahun</th>
+                        <th class="text-center">Type</th>
+                        <th class="text-center">Kode Item</th>
+                        
 
                     </tr>
                     </thead>
@@ -23,12 +27,16 @@
                     </tbody >
                     <tfoot>
                     <tr>
-                        <th>No</th>
-                        <th>ID Unit</th>
-                        <th>No Mesin</th>
-                        <th>No Rangka</th>
-                        <th>Lokasi</th>
-                        <th>Keterangan</th>
+                        
+                        <th class="text-center">ID Unit</th>
+                        <th class="text-center">Cabang</th>
+                        <th class="text-center">Lokasi</th>
+                        <th class="text-center">No Mesin</th>
+                        <th class="text-center">No Rangka</th>
+                        <th class="text-center">Tahun</th>
+                        <th class="text-center">Type</th>
+                        <th class="text-center">Kode Item</th>
+                        
                     </tr>
                     </tfoot>
                     </table>

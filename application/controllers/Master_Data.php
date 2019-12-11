@@ -6,7 +6,7 @@ class Master_Data extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-        $this->$this->load->library('pagination');
+        // $this->$this->load->library('pagination');
         $this->load->model('m_master_data','mmasdat');
         $this->load->model('m_transaksi_ga','m_transga');
         if (!$this->session->userdata('username')) {

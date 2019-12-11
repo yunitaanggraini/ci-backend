@@ -109,7 +109,12 @@ class Transaksi_Auditor extends CI_Controller {
                 <td class="text-center">'.$list['helm'].'</td>
                 <td class="text-center">'.$list['tools'].'</td>
                 <td class="text-center">'.$list['buku_service'].'</td>
+                <td>'.$list['tahun'].'</td>
+                <td>'.$list['type'].'</td>
+                <td>'.$list['kode_item'].'</td>
+                <td>'.$list['foto'].'</td>
                 <td>'.$list['keterangan'].'</td>
+                <td>'.$list['is_ready'].'</td>
                 <td>'.$list['tanggal_audit'].'</td>
             </tr>
             

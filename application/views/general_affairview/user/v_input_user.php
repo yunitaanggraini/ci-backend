@@ -2,15 +2,19 @@
 <div class="row">
                 <div class="col-lg-12">
                     <form class="form-horizontal" method="post" action="<?php echo base_url('master_data/post_user') ?>" id="FormUser">
-                    <div class="ibox float-e-margins"  >
-                        <div class="ibox-title">
-                            <h5 class="col-md-10">Input Data User</h5>
-                            <div class="col-sm-2 text-right">
-                            <a href="<?php echo base_url('user') ?>" type="submit" class="btn btn-m btn-danger">Batal</a>
-                            <button type="submit" class="btn btn-primary btn-m" id="btn-simpan">Simpan</button>
-                            </div>
+                    <div class="panel panel-default"  >
+                        <div class="panel-heading">
+
+                        <div class="col-lg-10" ><h3><i class="fa fa-info-circle"></i> Input Data User</h3></div>
+                        <div >
+                        <a href="<?php echo base_url('user') ?>" type="submit" class="btn btn-ws-m btn-danger">Batal</a>
+                            <button type="submit" class="btn btn-primary btn-ws-m" id="btn-simpan">Simpan</button>
                         </div>
-                        <div class="ibox-content">
+                      
+
+                            
+                        </div>
+                        <div class="panel-body">
                         <?php if($this->session->flashdata('info')){
 
                             ?>
