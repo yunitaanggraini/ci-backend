@@ -50,15 +50,15 @@
                     <table class="table table-striped table-bordered table-hover dataTables-example" >
                     <thead>
                     <tr>
-                        <th width="3%">No</th>
-                        <th width="5%">Aksi</th>
-                        <th>ID Waktu Audit</th>
-                        <th>Auditor</th>
-                        <th>Tanggal</th>
-                        <th>Waktu</th>
-                        <th>Cabang</th>
-                        <th>Jenis Audit</th>
-                        <th>Keterangan</th>
+                        <th width="3%" class="text-center">No</th>
+                        <th width="5%" class="text-center">Aksi</th>
+                        <th class="text-center">ID Waktu Audit</th>
+                        <th class="text-center">Auditor</th>
+                        <th class="text-center">Tanggal</th>
+                        <th class="text-center">Waktu</th>
+                        <th class="text-center">Cabang</th>
+                        <th class="text-center">Jenis Audit</th>
+                        <th class="text-center">Keterangan</th>
                         
                     </tr>
                     </thead>
@@ -66,7 +66,7 @@
                     </tbody >
                     <tfoot>
                     <tr>
-                        <th>No</th>
+                        <th width="3%" class="text-center">No</th>
                         <th>Aksi</th>
                         <th>ID Waktu Audit</th>
                         <th>Auditor</th>

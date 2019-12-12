@@ -32,10 +32,13 @@ class Login extends CI_Controller {
                     'usergroup' => $log['id_usergroup']
                 ];
                 $this->session->set_userdata($data);
-                if ($log['id_usergroup']) {
+                // var_dump($log['id_usergroup']);
+                if ($log['id_usergroup']=='UG005') {
+                    $this->session->set_flashdata("pesan",'Login Berhasil');
+                    redirect('config/config');
+                }else{
                     $this->session->set_flashdata("pesan",'Login Berhasil');
                     redirect('dashboard');
-                    
                 }
                 
             }

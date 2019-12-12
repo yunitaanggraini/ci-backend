@@ -21,7 +21,7 @@ class Transaksi_Auditor extends CI_Controller {
     public function Audit()
         {
             $data=[
-                'judul'=> "Teporary Data Unit",
+                'judul'=> "Audit",
                 'judul1'=>'Transaksi Auditor'
             ];
             $this->load->view('_partial/header.php',$data);
@@ -60,7 +60,7 @@ class Transaksi_Auditor extends CI_Controller {
         public function Audit_Unit()
         {
             $data=[
-                'judul'=> "Audit Data Unit",
+                'judul'=> "Audit Unit",
                 'judul1'=>'Transaksi Auditor'
             ];
             $this->load->view('_partial/header.php',$data);
@@ -73,7 +73,7 @@ class Transaksi_Auditor extends CI_Controller {
         public function Audit_Part()
         {
             $data=[
-                'judul'=> "Audit Data Part",
+                'judul'=> "Audit Part",
                 'judul1'=>'Transaksi Auditor'
             ];
             $this->load->view('_partial/header.php',$data);

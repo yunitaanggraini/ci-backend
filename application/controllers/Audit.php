@@ -22,7 +22,7 @@
         public function JadwalAudit()
         {
             $data=[
-                'judul'=> "Daftar Jadwal Audit",
+                'judul'=> "Daftar Jadwal",
                 'judul1'=>'Audit',
                 'code'=> $this->maudit->buatkodejadwalaudit()
             ];
@@ -68,7 +68,7 @@
         public function viewTempPart()
         {
             $data=[
-                'judul'=> "Teporary Data Part",
+                'judul'=> "Temporary Data Part",
                 'judul1'=>'Audit'
             ];
             $this->load->view('_partial/header.php',$data);
@@ -81,8 +81,8 @@
         public function viewTempUnit()
         {
             $data=[
-                'judul'=> "Teporary Data Unit",
-                'judul1'=>'Audit'
+                'judul'=> "Data Temporary Unit",
+                'judul1'=>'Data Temporary'
             ];
             $this->load->view('_partial/header.php',$data);
             $this->load->view('_partial/sidebar.php');      
@@ -118,7 +118,7 @@
                 
             }else if($list['keterangan']=='in progress'){
 
-                $list['keterangan']='<a href="'.$base.'audit/delete_jadwalaudit/'.$list['idjadwal_audit'].'" class="btn btn-primary" onclick=\'return confirm("Konfirmasi menghapus data '.$list['idjadwal_audit'].' - '.$list['auditor'].' ? ");\'>BUKA</a>';
+                $list['keterangan']='<a href="'.$base.'audit/viewTempUnit/'.$list['idjadwal_audit'].'" class="btn btn-success">BUKA</a>';
             }else if ($list['keterangan']=='done'){
 
             }
@@ -126,17 +126,17 @@
             $no++;
             $output .='
             <tr> 
-                <td>'.$no.'</td>
+                <td class="text-center">'.$no.'</td>
                 <td class="text-center">
                 <a href="'.$base.'audit/delete_jadwalaudit/'.$list['idjadwal_audit'].'" class="text-danger" onclick=\'return confirm("Konfirmasi menghapus data '.$list['idjadwal_audit'].' - '.$list['auditor'].' ? ");\'><i class="fa fa-trash"></i></a>
                 </td>
-                <td >'.$list['idjadwal_audit'].'</td>
-                <td>'.$list['auditor'].'</td>
-                <td>'.$list['tanggal'].'</td>
-                <td>'.$list['waktu'].'</td>
-                <td>'.$list['nama_cabang'].'</td>
-                <td>'.$list['jenis_audit'].'</td>
-                <td>'.$list['keterangan'].'</td>
+                <td class="text-center">'.$list['idjadwal_audit'].'</td>
+                <td class="text-center">'.$list['auditor'].'</td>
+                <td class="text-center">'.$list['tanggal'].'</td>
+                <td class="text-center">'.$list['waktu'].'</td>
+                <td class="text-center">'.$list['nama_cabang'].'</td>
+                <td class="text-center">'.$list['jenis_audit'].'</td>
+                <td class="text-center">'.$list['keterangan'].'</td>
             </tr>
             
             ';
