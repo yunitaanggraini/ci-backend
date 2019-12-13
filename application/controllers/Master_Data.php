@@ -9,6 +9,7 @@ class Master_Data extends CI_Controller {
         // $this->$this->load->library('pagination');
         $this->load->model('m_master_data','mmasdat');
         $this->load->model('m_transaksi_ga','m_transga');
+        $this->load->library('pagination');
         if (!$this->session->userdata('username')) {
             
             redirect('login/login');
@@ -25,7 +26,38 @@ class Master_Data extends CI_Controller {
         $data=[
             'judul'=> "User",
             'judul1'=>'Master Data',
-		];
+        ];
+        // $config['base_url'] = base_url()."master_data/user";
+        // $config['page_query_string'] = TRUE;
+        // $config['query_string_segment'] ="pages";
+        // $config['total_rows'] = $this->mmasdat->countUser();
+        // $config['per_page'] = 15;
+        $config['base_url'] = base_url()."master_data/user";
+        $config['total_rows'] = 6;
+        $config['per_page'] = 15;
+        $config['page_query_string']=TRUE;
+        $config['query_string_segment'] = 'pages';
+        $config['num_links'] = 3;
+
+        $config['full_tag_open'] = '<p>';
+        $config['full_tag_close'] = '</p>';
+        $config['first_link'] = 'First';
+        $config['first_tag_open'] = '<div>';
+        $config['first_tag_close'] = '</div>';
+        $config['last_link'] = 'Last';
+        $config['last_tag_open'] = '<div>';
+        $config['last_tag_close'] = '</div>';
+        $config['next_link'] = '&gt;';
+        $config['next_tag_open'] = '<div>';
+        $config['next_tag_close'] = '</div>';
+        $config['prev_link'] = '&lt;';
+        $config['prev_tag_open'] = '<div>';
+        $config['prev_tag_close'] = '</div>';
+        $config['cur_tag_open'] = '<b>';
+        $config['cur_tag_close'] = '</b>';
+        
+        $this->pagination->initialize($config);
+        $data['pagination']= $this->pagination->create_links();
 		$this->load->view('_partial/header.php',$data);
         $this->load->view('_partial/sidebar.php');		
         $this->load->view('general_affairview/user/v_user.php',$data);		
@@ -109,7 +141,33 @@ class Master_Data extends CI_Controller {
         $data=[
             'judul'=> "Lokasi",
             'judul1'=>'Master Data',
-		];
+        ];
+        $config['base_url'] = base_url()."master_data/lokasi";
+        $config['total_rows'] = 154;
+        $config['per_page'] = 15;
+        $config['page_query_string']=TRUE;
+        $config['query_string_segment'] = 'pages';
+        $config['num_links'] = 3;
+
+        $config['full_tag_open'] = '<p>';
+        $config['full_tag_close'] = '</p>';
+        $config['first_link'] = 'First';
+        $config['first_tag_open'] = '<div>';
+        $config['first_tag_close'] = '</div>';
+        $config['last_link'] = 'Last';
+        $config['last_tag_open'] = '<div>';
+        $config['last_tag_close'] = '</div>';
+        $config['next_link'] = '&gt;';
+        $config['next_tag_open'] = '<div>';
+        $config['next_tag_close'] = '</div>';
+        $config['prev_link'] = '&lt;';
+        $config['prev_tag_open'] = '<div>';
+        $config['prev_tag_close'] = '</div>';
+        $config['cur_tag_open'] = '<b>';
+        $config['cur_tag_close'] = '</b>';
+        
+        $this->pagination->initialize($config);
+        $data['pagination']= $this->pagination->create_links();
 		$this->load->view('_partial/header.php',$data);
         $this->load->view('_partial/sidebar.php');		
         $this->load->view('general_affairview/lokasi/v_lokasi.php',$data);		
@@ -158,7 +216,9 @@ class Master_Data extends CI_Controller {
         $output = '';
 		$no = 0;
         $base = base_url();
-        $listUser = $this->mmasdat->getUser();
+        $offset= 0;
+        $listUser = $this->mmasdat->getUser($offset);
+        
 		foreach ($listUser as $list) {
             $no++;
 			$output .="
@@ -177,8 +237,9 @@ class Master_Data extends CI_Controller {
 					<td>".$list['user_group']."</td>
 					<td>".$list['status']."</td>
 				</tr>
-			";
-		}
+            ";
+                               
+        }
 		
 		echo $output;
     }
@@ -1905,6 +1966,31 @@ class Master_Data extends CI_Controller {
         $this->load->view('_partial/sidebar.php',$data);		
         $this->load->view('general_affairview/barqrcode/v_buat_barqrcode.php',$data);		
         $this->load->view('general_affairview/barqrcode/_partial/footer.php');
+    }
+
+    //-------------------------------PAGINATION-----------------------------//
+    public function UserPagination()
+    {
+        
+        // Membuat Style pagination untuk BootStrap v4
+        $config['first_link']       = 'First';
+        $config['last_link']        = 'Last';
+        $config['next_link']        = 'Next';
+        $config['prev_link']        = 'Prev';
+        $config['full_tag_open']    = '<div class="pagging text-center"><nav><ul class="pagination justify-content-center">';
+        $config['full_tag_close']   = '</ul></nav></div>';
+        $config['num_tag_open']     = '<li class="page-item"><span class="page-link">';
+        $config['num_tag_close']    = '</span></li>';
+        $config['cur_tag_open']     = '<li class="page-item active"><span class="page-link">';
+        $config['cur_tag_close']    = '<span class="sr-only">(current)</span></span></li>';
+        $config['next_tag_open']    = '<li class="page-item"><span class="page-link">';
+        $config['next_tagl_close']  = '<span aria-hidden="true">&raquo;</span></span></li>';
+        $config['prev_tag_open']    = '<li class="page-item"><span class="page-link">';
+        $config['prev_tagl_close']  = '</span>Next</li>';
+        $config['first_tag_open']   = '<li class="page-item"><span class="page-link">';
+        $config['first_tagl_close'] = '</span></li>';
+        $config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
+        $config['last_tagl_close']  = '</span></li>';
     }
 }
 

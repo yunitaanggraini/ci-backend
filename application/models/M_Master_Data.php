@@ -13,9 +13,28 @@ class M_Master_Data extends CI_Model {
             ]);
         }
 
-    public function getUser()
+    // public function getUser()
+    // {
+    //     $respon =  $this->_client->request('GET', 'user');
+
+    //     $result = json_decode($respon->getBody()->getContents(),true);
+
+    //     if ($result['status']==true) {
+
+    //         return $result['data'];
+    //     }else {
+    //         return false;
+    //     }
+        
+    // }
+
+    public function getUser($offset)
     {
-        $respon =  $this->_client->request('GET', 'user');
+        $respon =  $this->_client->request('GET', 'user',[
+            'query' =>[
+                'pages' => $offset
+            ]
+        ]);
 
         $result = json_decode($respon->getBody()->getContents(),true);
 
@@ -24,8 +43,24 @@ class M_Master_Data extends CI_Model {
             return $result['data'];
         }else {
             return false;
-        }
+        }  
     }
+    public function countUser()
+    {
+        $respon =  $this->_client->request('GET', 'countuser');
+
+        $result = json_decode($respon->getBody()->getContents(),true);
+
+        if ($result['status']==true) {
+
+            return $result['data'];
+        }else {
+            return false;
+        }  
+    }
+    
+
+
 
     public function getUserGroup()
     {
@@ -1009,7 +1044,6 @@ class M_Master_Data extends CI_Model {
             return false;
         }
       }
-
 
 
 

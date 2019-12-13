@@ -68,6 +68,7 @@
                     </tr>
                     </tfoot>
                     </table>
+                    <?php echo $pagination; ?>
                         </div>
 
                     </div>
