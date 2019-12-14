@@ -85,8 +85,36 @@
     </script>
     <script>
    $(document).ready(function() {
-    $('#temp_unit').load("<?php echo base_url() ?>audit/ajax_get_temp_unit");
+    // $('#temp_unit').load("<?php echo base_url() ?>audit/ajax_get_temp_unit");
     $('#Optcabang').load("<?php echo base_url() ?>master_data/ajax_get_cabang2");
+    $('#temp_unit').ready(function () {
+        var valu = getUrlParameter('pages');
+        console.log(valu);
+        
+        $.ajax({
+            type:'post',
+            url:"<?php echo base_url() ?>audit/ajax_get_temp_unit",
+            data:"pages="+valu,
+            success:function (res) {
+                console.log(res);
+                $('#temp_unit').html(res);
+            }
+        });
+    });
+    var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = window.location.search.substring(1),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+        }
+    }
+    
     function search() {
             var cabang =$('#Incabang').val();
 

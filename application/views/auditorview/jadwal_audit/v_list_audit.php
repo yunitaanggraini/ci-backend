@@ -67,20 +67,22 @@
                     <tfoot>
                     <tr>
                         <th width="3%" class="text-center">No</th>
-                        <th>Aksi</th>
-                        <th>ID Waktu Audit</th>
-                        <th>Auditor</th>
-                        <th>Tanggal</th>
-                        <th>Waktu</th>
-                        <th>Cabang</th>
-                        <th>Jenis Audit</th>
-                        <th>Keterangan</th>
+                        <th class="text-center">Aksi</th>
+                        <th class="text-center">ID Waktu Audit</th>
+                        <th class="text-center">Auditor</th>
+                        <th class="text-center">Tanggal</th>
+                        <th class="text-center">Waktu</th>
+                        <th class="text-center">Cabang</th>
+                        <th class="text-center">Jenis Audit</th>
+                        <th class="text-center">Keterangan</th>
                     </tr>
                     </tfoot>
                     </table>
                         </div>
 
-                        <p id="demo"></p>
+                        <div class="pull-right m-t-n-xl">
+                        <?php echo $pagination;?>
+                        </div>
 
                     </div>
                 </div>

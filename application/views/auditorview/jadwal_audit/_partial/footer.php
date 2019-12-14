@@ -116,10 +116,41 @@
     </script>
     <script>
      $(document).ready(function() {
-        $('#list_jadwal_audit').load("<?php echo base_url();?>audit/ajax_get_jadwal_audit");  
+        // $('#list_jadwal_audit').load("<?php echo base_url();?>audit/ajax_get_jadwal_audit");  
         $('#Optjenisaudit').load("<?php echo base_url();?>audit/ajax_get_jenis_audit2");
     $('#audit_part').load("<?php echo base_url() ?>transaksi_auditor/ajax_get_part");
     $('#Optcabang').load("<?php echo base_url() ?>master_data/ajax_get_cabang2");
+
+    $('#list_jadwal_audit').ready(function () {
+        var valu = getUrlParameter('pages');
+        console.log(valu);
+        
+        $.ajax({
+            type:'post',
+            url:"<?php echo base_url() ?>audit/ajax_get_jadwal_audit",
+            data:"pages="+valu,
+            success:function (res) {
+                console.log(res);
+                $('#list_jadwal_audit').html(res);
+            }
+        });
+    });
+    var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = window.location.search.substring(1),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+        }
+    }
+    }
+
+    
 
     function search() {
         var auditor =$('#auditor').val();

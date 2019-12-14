@@ -146,9 +146,13 @@ class M_Master_Data extends CI_Model {
         }              
     }
     
-    public function getLokasi()
+    public function getLokasi($offset)
     {
-        $respon =  $this->_client->request('GET', 'lokasi');
+        $respon =  $this->_client->request('GET', 'lokasi',[
+            'query'=>[
+                'offset' => $offset
+            ]
+        ]);
 
         $result = json_decode($respon->getBody()->getContents(),true);
 
@@ -1035,6 +1039,18 @@ class M_Master_Data extends CI_Model {
                 'jenisaudit'=> $id
             ]
         ]);
+
+        $result = json_decode($respon->getBody()->getContents(),true);
+        // var_dump($result['data'][0]);die;
+        if ($result['status']==true) {
+            return $result['data'];
+        }else{
+            return false;
+        }
+      }
+      public function countlokasi()
+      {
+          $respon =  $this->_client->request('GET', 'countlokasi');
 
         $result = json_decode($respon->getBody()->getContents(),true);
         // var_dump($result['data'][0]);die;

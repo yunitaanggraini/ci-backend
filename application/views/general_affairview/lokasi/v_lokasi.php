@@ -26,16 +26,15 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                <div class="panel panel-primary">
-                    <div class="ibox-title float-e-margins">
-                            <label class="col-sm-3"> <h5>List Data Lokasi Inventory</h5></label>
-                            <div class="col-sm-9 text-right">
-                                <input type="submit" value="Add Data" id="add" name="add" class="btn btn-success" onclick="show()">
-                            </div>
-                      <span id="info_message"></span>
-                    </div>
-                    <div class="panel-body">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="col-lg-11" ><h4><i class="fa fa-info-circle"></i>List Data Lokasi Inventory</h4></div>
+                            <div >
+                            <input type="submit" value="Add Data" id="add" name="add" class="btn btn-success" onclick="show()">                   
+                            </div>                      
+                        </div>
 
+                    <div class="panel-body">
                     <?php if($this->session->flashdata('info')){
                         ?>
                         <div class="alert alert-success alert-dismissable col-6">
@@ -50,32 +49,33 @@
                     <div class="table-responsive">
                     <table class="table table-striped table-bordered table-hover dataTables-example" >
                     <thead>
-                    <tr>
-                        <th width="3%">No</th>
-                        <th width="5%">Aksi</th>
-                        <th>ID Lokasi</th>
-                        <th>Nama Lokasi</th>
+                    <tr class="red-bg">
+                        <th width="3%" class="text-center">No</th>
+                        <th width="5%" class="text-center">Aksi</th>
+                        <th class="text-center" >ID Lokasi</th>
+                        <th class="text-center" >Nama Lokasi</th>
                     </tr>
                     </thead>
                     <tbody id="lokasi">
                     </tbody>
                     <tfoot>
                     <tr>
-                        <th>No</th>
-                        <th>Aksi</th>
-                        <th>ID Lokasi</th>
-                        <th>Nama Lokasi</th>
+                        <th class="text-center">No</th>
+                        <th class="text-center">Aksi</th>
+                        <th class="text-center">ID Lokasi</th>
+                        <th class="text-center">Nama Lokasi</th>
                     </tr>
                     </tfoot>
-                    </table>
-                    <?php echo $pagination; ?>
-                        </div>
-
+                    </table>  
                     </div>
+
+                    <div class="pull-right m-t-n-xl">
+                    <?php echo $pagination;?>
+                    </div>
+
+                        </div>
                 </div>
                 </div>
             </div>
             </div>
-        </div>
-</div>
 

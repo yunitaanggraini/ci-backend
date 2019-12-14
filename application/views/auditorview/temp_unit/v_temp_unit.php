@@ -41,7 +41,9 @@
                     </tfoot>
                     </table>
                         </div>
-
+                        <div class="pull-right m-t-n-xl">
+                    <?php echo $pagination;?>
+                    </div>
                     </div>
                 </div>
                 </div>

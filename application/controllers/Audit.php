@@ -6,6 +6,7 @@
         public function __construct() {
             parent::__construct();
             $this->load->model('m_audit','maudit');
+            $this->load->library('pagination');
             
             if (!$this->session->userdata('username')) {
             
@@ -57,6 +58,35 @@
                     
                 }
             }
+
+            $config['base_url'] = base_url()."audit/list_audit";
+            $config['total_rows'] = $this->maudit->countjadwalaudit();
+            $config['per_page'] = 15;
+            $config['page_query_string']=TRUE;
+            $config['query_string_segment'] = 'pages';
+            $config['num_links'] = 2;
+
+            $config['full_tag_open'] = '<div class="pagination"><nav><ul class="pagination">';
+            $config['full_tag_close'] = '</ul></nav></div>';
+            $config['first_link'] = 'First';
+            $config['first_tag_open'] = '<li class="page-item"><span class="page-link">';
+            $config['first_tag_close'] = '</li>';
+            $config['last_link'] = 'Last';
+            $config['last_tag_open'] = '<li class="page-item"><span class="page-link">';
+            $config['last_tag_close'] = '</li>';
+            $config['next_link'] = '&gt;';
+            $config['next_tag_open'] = '<li class="page-item"><span class="page-link">';
+            $config['next_tag_close'] = '</li>';
+            $config['prev_link'] = '&lt;&nbsp;';
+            $config['prev_tag_open'] = '<li class="page-item"><span class="page-link">';
+            $config['prev_tag_close'] = '</li>';
+            $config['num_tag_open'] = '<li class="page-item"><span class="page-link">';
+            $config['num_tag_close'] = '</li>';
+            $config['cur_tag_open'] = '<li class="page-item"><span class="page-link">';
+            $config['cur_tag_close'] = '</li>';
+            
+            $this->pagination->initialize($config);
+            $data['pagination']= $this->pagination->create_links();
             $this->load->view('_partial/header.php',$data);
             $this->load->view('_partial/sidebar.php');      
             $this->load->view('auditorview/jadwal_audit/v_list_audit.php',$data);       
@@ -71,6 +101,7 @@
                 'judul'=> "Temporary Data Part",
                 'judul1'=>'Audit'
             ];
+            
             $this->load->view('_partial/header.php',$data);
             $this->load->view('_partial/sidebar.php');      
             $this->load->view('auditorview/temp_part/v_temp_part.php',$data);       
@@ -84,6 +115,34 @@
                 'judul'=> "Data Temporary Unit",
                 'judul1'=>'Data Temporary'
             ];
+            $config['base_url'] = base_url()."data_temporary/unit";
+            $config['total_rows'] = $this->maudit->counttempunit();
+            $config['per_page'] = 15;
+            $config['page_query_string']=TRUE;
+            $config['query_string_segment'] = 'pages';
+            $config['num_links'] = 2;
+
+            $config['full_tag_open'] = '<div class="pagination"><nav><ul class="pagination">';
+            $config['full_tag_close'] = '</ul></nav></div>';
+            $config['first_link'] = 'First';
+            $config['first_tag_open'] = '<li class="page-item"><span class="page-link">';
+            $config['first_tag_close'] = '</li>';
+            $config['last_link'] = 'Last';
+            $config['last_tag_open'] = '<li class="page-item"><span class="page-link">';
+            $config['last_tag_close'] = '</li>';
+            $config['next_link'] = '&gt;';
+            $config['next_tag_open'] = '<li class="page-item"><span class="page-link">';
+            $config['next_tag_close'] = '</li>';
+            $config['prev_link'] = '&lt;&nbsp;';
+            $config['prev_tag_open'] = '<li class="page-item"><span class="page-link">';
+            $config['prev_tag_close'] = '</li>';
+            $config['num_tag_open'] = '<li class="page-item"><span class="page-link">';
+            $config['num_tag_close'] = '</li>';
+            $config['cur_tag_open'] = '<li class="page-item"><span class="page-link">';
+            $config['cur_tag_close'] = '</li>';
+            
+            $this->pagination->initialize($config);
+            $data['pagination']= $this->pagination->create_links();
             $this->load->view('_partial/header.php',$data);
             $this->load->view('_partial/sidebar.php');      
             $this->load->view('auditorview/temp_unit/v_temp_unit.php',$data);       
@@ -108,10 +167,15 @@
     {
         $output = '';
         $base = base_url();
-        $no = 0;
+        
+        if ($this->input->post('pages')!='undefined') {
+            $offset = $this->input->post('pages');
+        }else{
+            $offset=0;
+        }
         // data['kodeunik'] = $this->musergroup->kode(); 
         
-        $listJadwalAudit =$this->maudit->getAudit();
+        $listJadwalAudit =$this->maudit->getAudit($offset);
         foreach ($listJadwalAudit as $list){
 
             if ($list['keterangan']=='waiting') {
@@ -123,10 +187,10 @@
 
             }
 
-            $no++;
+            $offset++;
             $output .='
             <tr> 
-                <td class="text-center">'.$no.'</td>
+                <td class="text-center">'.$offset.'</td>
                 <td class="text-center">
                 <a href="'.$base.'audit/delete_jadwalaudit/'.$list['idjadwal_audit'].'" class="text-danger" onclick=\'return confirm("Konfirmasi menghapus data '.$list['idjadwal_audit'].' - '.$list['auditor'].' ? ");\'><i class="fa fa-trash"></i></a>
                 </td>
@@ -148,14 +212,18 @@
     {
         $output = '';
         $base = base_url();
+        if ($this->input->post('pages')!='undefined') {
+            $offset = $this->input->post('pages');
+        }else{
+            $offset=0;
+        }
         
         // data['kodeunik'] = $this->musergroup->kode(); 
-        $listTempUnit =$this->maudit->getTempUnit();
+        $listTempUnit =$this->maudit->getTempUnit($offset);
         foreach ($listTempUnit as $list){
-            
+            $offset++;
             $output .='
             <tr> 
-                
                 <td class="text-center">'.$list['id_unit'].'</td>
                 <td class="text-center">'.$list['nama_cabang'].'</td>
                 <td class="text-center">'.$list['nama_lokasi'].'</td>

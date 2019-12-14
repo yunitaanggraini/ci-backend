@@ -12,9 +12,13 @@ class M_Audit extends CI_Model {
             ]);
         }
 
-        public function getAudit()
+        public function getAudit($offset=null)
         {
-            $respon =  $this->_client->request('GET', 'audit');
+            $respon =  $this->_client->request('GET', 'audit',[
+                'query' => [
+                    'offset' => $offset
+                ]
+            ]);
     
             $result = json_decode($respon->getBody()->getContents(),true);
     
@@ -39,9 +43,13 @@ class M_Audit extends CI_Model {
         return $result['data'];              
     }
 
-    public function getTempUnit()
+    public function getTempUnit($offset)
     {
-      $respon =  $this->_client->request('GET', 'tempunit');
+      $respon =  $this->_client->request('GET', 'tempunit',[
+          'query'=>[
+              'offset'=>$offset
+          ]
+      ]);
 
       $result = json_decode($respon->getBody()->getContents(),true);
 
@@ -161,6 +169,32 @@ class M_Audit extends CI_Model {
             return 0;
         }
     }
+
+    public function counttempunit()
+      {
+          $respon =  $this->_client->request('GET', 'counttempunit');
+
+        $result = json_decode($respon->getBody()->getContents(),true);
+        // var_dump($result['data'][0]);die;
+        if ($result['status']==true) {
+            return $result['data'];
+        }else{
+            return false;
+        }
+      }
+
+      public function countjadwalaudit()
+      {
+          $respon =  $this->_client->request('GET', 'countjadwalaudit');
+
+        $result = json_decode($respon->getBody()->getContents(),true);
+        // var_dump($result['data'][0]);die;
+        if ($result['status']==true) {
+            return $result['data'];
+        }else{
+            return false;
+        }
+      }
 
     
 

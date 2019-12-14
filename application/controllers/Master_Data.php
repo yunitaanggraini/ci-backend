@@ -143,28 +143,30 @@ class Master_Data extends CI_Controller {
             'judul1'=>'Master Data',
         ];
         $config['base_url'] = base_url()."master_data/lokasi";
-        $config['total_rows'] = 154;
+        $config['total_rows'] = $this->mmasdat->countlokasi();
         $config['per_page'] = 15;
         $config['page_query_string']=TRUE;
         $config['query_string_segment'] = 'pages';
-        $config['num_links'] = 3;
+        $config['num_links'] = 2;
 
-        $config['full_tag_open'] = '<p>';
-        $config['full_tag_close'] = '</p>';
+        $config['full_tag_open'] = '<div class="pagination"><nav><ul class="pagination">';
+        $config['full_tag_close'] = '</ul></nav></div>';
         $config['first_link'] = 'First';
-        $config['first_tag_open'] = '<div>';
-        $config['first_tag_close'] = '</div>';
+        $config['first_tag_open'] = '<li class="page-item"><span class="page-link">';
+        $config['first_tag_close'] = '</li>';
         $config['last_link'] = 'Last';
-        $config['last_tag_open'] = '<div>';
-        $config['last_tag_close'] = '</div>';
+        $config['last_tag_open'] = '<li class="page-item"><span class="page-link">';
+        $config['last_tag_close'] = '</li>';
         $config['next_link'] = '&gt;';
-        $config['next_tag_open'] = '<div>';
-        $config['next_tag_close'] = '</div>';
-        $config['prev_link'] = '&lt;';
-        $config['prev_tag_open'] = '<div>';
-        $config['prev_tag_close'] = '</div>';
-        $config['cur_tag_open'] = '<b>';
-        $config['cur_tag_close'] = '</b>';
+        $config['next_tag_open'] = '<li class="page-item"><span class="page-link">';
+        $config['next_tag_close'] = '</li>';
+        $config['prev_link'] = '&lt;&nbsp;';
+        $config['prev_tag_open'] = '<li class="page-item"><span class="page-link">';
+        $config['prev_tag_close'] = '</li>';
+        $config['num_tag_open'] = '<li class="page-item"><span class="page-link">';
+        $config['num_tag_close'] = '</li>';
+        $config['cur_tag_open'] = '<li class="page-item"><span class="page-link">';
+        $config['cur_tag_close'] = '</li>';
         
         $this->pagination->initialize($config);
         $data['pagination']= $this->pagination->create_links();
@@ -223,19 +225,19 @@ class Master_Data extends CI_Controller {
             $no++;
 			$output .="
 				<tr>
-					<td>".$no."</td>
-                    <td>
+					<td class='text-center'>".$no."</td>
+                    <td class='text-center'>
                     <a href='".$base."master_data/edit_user/".$list['nik']."' class='text-warning'><i class='fa fa-pencil'></i></a>
                     <a href='".$base."master_data/delete_user/".$list['nik']."' class='text-danger' onclick=\"return confirm('Konfirmasi menghapus data ".$list['nik']."');\"><i class='fa fa-trash'></i></a>
                     </td>
-					<td>".$list['nik']."</td>
-					<td>".$list['username']."</td>
-                    <td>".$list['nama']."</td>
-                    <td>".$list['nama_perusahaan']."</td>
-                    <td>".$list['nama_cabang']."</td>
-                    <td>".$list['nama_lokasi']."</td>
-					<td>".$list['user_group']."</td>
-					<td>".$list['status']."</td>
+					<td class='text-center'>".$list['nik']."</td>
+					<td class='text-center'>".$list['username']."</td>
+                    <td class='text-center'>".$list['nama']."</td>
+                    <td class='text-center'>".$list['nama_perusahaan']."</td>
+                    <td class='text-center'>".$list['nama_cabang']."</td>
+                    <td class='text-center'>".$list['nama_lokasi']."</td>
+					<td class='text-center'>".$list['user_group']."</td>
+					<td class='text-center'>".$list['status']."</td>
 				</tr>
             ";
                                
@@ -256,13 +258,13 @@ class Master_Data extends CI_Controller {
                 $no++;
                 $output .='
                 <tr> 
-                    <td>'.$no.'</td>
-                    <td>
+                    <td class="text-center">'.$no.'</td>
+                    <td class="text-center">
                     <a onclick="edit(id=\''.$list['id_usergroup'].'\')" class="text-warning" ><i class="fa fa-pencil"></i></a>
                     <a href="'.$base.'master_data/delete_usergroup/'.$list['id_usergroup'].'" class="text-danger" onclick=\'return confirm("Konfirmasi menghapus data '.$list['id_usergroup'].' - '.$list['user_group'].' ? ");\'><i class="fa fa-trash"></i></a>
                     </td>
-                    <td >'.$list['id_usergroup'].'</td>
-                    <td>'.$list['user_group'].'</td>
+                    <td class="text-center">'.$list['id_usergroup'].'</td>
+                    <td class="text-center">'.$list['user_group'].'</td>
                 </tr>
                 
                 ';
@@ -283,13 +285,13 @@ class Master_Data extends CI_Controller {
             $no++;
             $output .='
             <tr> 
-                <td>'.$no.'</td>
-                <td>
+                <td class="text-center">'.$no.'</td>
+                <td class="text-center">
                 <a onclick="edit(id=\''.$list['idjenis_inventory'].'\')" class="text-warning" ><i class="fa fa-pencil"></i></a>
                 <a href="'.$base.'master_data/delete_jenisinv/'.$list['idjenis_inventory'].'" class="text-danger" onclick=\'return confirm("Konfirmasi menghapus data '.$list['idjenis_inventory'].' - '.$list['jenis_inventory'].' ? ");\'><i class="fa fa-trash"></i></a>
                 </td>
-                <td >'.$list['idjenis_inventory'].'</td>
-                <td>'.$list['jenis_inventory'].'</td>
+                <td class="text-center" >'.$list['idjenis_inventory'].'</td>
+                <td class="text-center">'.$list['jenis_inventory'].'</td>
             </tr>
             
             ';
@@ -344,14 +346,14 @@ class Master_Data extends CI_Controller {
             $no++;
             $output .='
             <tr> 
-                <td>'.$no.'</td>
-                <td>
+                <td class="text-center">'.$no.'</td>
+                <td class="text-center">
                 <a onclick="edit(id=\''.$list['idsub_inventory'].'\',jenis=\''.$list['idjenis_inventory'].'\')" class="text-warning" ><i class="fa fa-pencil"></i></a>
                 <a href="'.$base.'master_data/delete_subinv/'.$list['idsub_inventory'].'" class="text-danger" onclick=\'return confirm("Konfirmasi menghapus data '.$list['idsub_inventory'].' - '.$list['sub_inventory'].' ? ");\'><i class="fa fa-trash"></i></a>
                 </td>
-                <td >'.$list['idsub_inventory'].'</td>
-                <td>'.$list['sub_inventory'].'</td>
-                <td>'.$list['idjenis_inventory'].' - '.$list['jenis_inventory'].'</td>
+                <td class="text-center">'.$list['idsub_inventory'].'</td>
+                <td class="text-center">'.$list['sub_inventory'].'</td>
+                <td class="text-center">'.$list['idjenis_inventory'].' - '.$list['jenis_inventory'].'</td>
             </tr>
             
             ';
@@ -372,13 +374,13 @@ class Master_Data extends CI_Controller {
                 $no++;
                 $output .='
                 <tr> 
-                    <td>'.$no.'</td>
-                    <td>
+                    <td class="text-center">'.$no.'</td>
+                    <td class="text-center">
                     <a onclick="edit(id=\''.$list['idstatus_inventory'].'\')" class="text-warning" ><i class="fa fa-pencil"></i></a>
                     <a href="'.$base.'master_data/delete_statusinv/'.$list['idstatus_inventory'].'" class="text-danger" onclick=\'return confirm("Konfirmasi menghapus data '.$list['idstatus_inventory'].' - '.$list['status_inventory'].' ? ");\'><i class="fa fa-trash"></i></a>
                     </td>
-                    <td >'.$list['idstatus_inventory'].'</td>
-                    <td>'.$list['status_inventory'].'</td>
+                    <td class="text-center">'.$list['idstatus_inventory'].'</td>
+                    <td class="text-center">'.$list['status_inventory'].'</td>
                 </tr>
                 
                 ';
@@ -407,13 +409,13 @@ class Master_Data extends CI_Controller {
             $no++;
             $output .='
             <tr> 
-                <td>'.$no.'</td>
-                <td>
+                <td class="text-center">'.$no.'</td>
+                <td class="text-center">
                 <a onclick="edit(id=\''.$list['id_perusahaan'].'\')" class="text-warning" ><i class="fa fa-pencil"></i></a>
                 <a href="'.$base.'master_data/delete_perusahaan/'.$list['id_perusahaan'].'" class="text-danger" onclick=\'return confirm("Konfirmasi menghapus data '.$list['id_perusahaan'].' - '.$list['nama_perusahaan'].' ? ");\'><i class="fa fa-trash"></i></a>
                 </td>
-                <td >'.$list['id_perusahaan'].'</td>
-                <td>'.$list['nama_perusahaan'].'</td>
+                <td class="text-center">'.$list['id_perusahaan'].'</td>
+                <td class="text-center">'.$list['nama_perusahaan'].'</td>
             </tr>
             
             ';
@@ -432,13 +434,13 @@ class Master_Data extends CI_Controller {
             $no++;
             $output .='
             <tr> 
-                <td>'.$no.'</td>
-                <td>
+                <td class="text-center">'.$no.'</td>
+                <td class="text-center">
                 <a onclick="edit(id=\''.$list['id_cabang'].'\')" class="text-warning" ><i class="fa fa-pencil"></i></a>
                 <a href="'.$base.'master_data/delete_cabang/'.$list['id_cabang'].'" class="text-danger" onclick=\'return confirm("Konfirmasi menghapus data '.$list['id_cabang'].' - '.$list['nama_cabang'].' ? ");\'><i class="fa fa-trash"></i></a>
                 </td>
-                <td >'.$list['id_cabang'].'</td>
-                <td>'.$list['nama_cabang'].'</td>
+                <td class="text-center">'.$list['id_cabang'].'</td>
+                <td class="text-center">'.$list['nama_cabang'].'</td>
             </tr>
             
             ';
@@ -451,19 +453,26 @@ class Master_Data extends CI_Controller {
         $output = '';
         $base = base_url();
         $no = 0;
+        if ($this->input->post('pages')!='undefined') {
+            $offset = $this->input->post('pages');
+        }else{
+            $offset=0;
+        }
+
+        var_dump($offset);
         // data['kodeunik'] = $this->musergroup->kode(); 
-        $listLokasi =$this->mmasdat->getLokasi();
+        $listLokasi =$this->mmasdat->getLokasi($offset);
         foreach ($listLokasi as $list){
-            $no++;
+            $offset++;
             $output .='
             <tr> 
-                <td>'.$no.'</td>
-                <td>
+                <td class="text-center">'.$offset.'</td>
+                <td class="text-center">
                 <a onclick="edit(id=\''.$list['id_lokasi'].'\')" class="text-warning" ><i class="fa fa-pencil"></i></a>
                 <a href="'.$base.'master_data/delete_lokasi/'.$list['id_lokasi'].'" class="text-danger" onclick=\'return confirm("Konfirmasi menghapus data '.$list['id_lokasi'].' - '.$list['nama_lokasi'].' ? ");\'><i class="fa fa-trash"></i></a>
                 </td>
-                <td >'.$list['id_lokasi'].'</td>
-                <td>'.$list['nama_lokasi'].'</td>
+                <td class="text-center">'.$list['id_lokasi'].'</td>
+                <td class="text-center">'.$list['nama_lokasi'].'</td>
             </tr>
             
             ';
@@ -483,13 +492,13 @@ class Master_Data extends CI_Controller {
                 $no++;
                 $output .='
                 <tr> 
-                    <td>'.$no.'</td>
-                    <td>
+                    <td class="text-center">'.$no.'</td>
+                    <td class="text-center">
                     <a onclick="edit(id=\''.$list['id_vendor'].'\')" class="text-warning" ><i class="fa fa-pencil"></i></a>
                     <a href="'.$base.'master_data/delete_vendor/'.$list['id_vendor'].'" class="text-danger" onclick=\'return confirm("Konfirmasi menghapus data '.$list['id_vendor'].' - '.$list['nama_vendor'].' ? ");\'><i class="fa fa-trash"></i></a>
                     </td>
-                    <td >'.$list['id_vendor'].'</td>
-                    <td>'.$list['nama_vendor'].'</td>
+                    <td class="text-center">'.$list['id_vendor'].'</td>
+                    <td class="text-center">'.$list['nama_vendor'].'</td>
                 </tr>
                 
                 ';
@@ -521,8 +530,8 @@ class Master_Data extends CI_Controller {
                 <a onclick="edit(id=\''.$list['idjenis_audit'].'\')" class="text-warning" ><i class="fa fa-pencil"></i></a>
                 <a href="'.$base.'master_data/delete_jenisaudit/'.$list['idjenis_audit'].'" class="text-danger" onclick=\'return confirm("Konfirmasi menghapus data '.$list['idjenis_audit'].' - '.$list['jenis_audit'].' ? ");\'><i class="fa fa-trash"></i></a>
                 </td>
-                <td >'.$list['idjenis_audit'].'</td>
-                <td>'.$list['jenis_audit'].'</td>
+                <td class="text-center">'.$list['idjenis_audit'].'</td>
+                <td class="text-center">'.$list['jenis_audit'].'</td>
             </tr>
             
             ';

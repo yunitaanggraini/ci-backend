@@ -86,7 +86,35 @@
     </script>
     <script>
    $(document).ready(function() {
-    $('#lokasi').load("<?php echo base_url() ?>master_data/ajax_get_lokasi");
+    // $('#lokasi').load("<?php echo base_url() ?>master_data/ajax_get_lokasi");
+    $('#lokasi').ready(function () {
+        var valu = getUrlParameter('pages');
+        console.log(valu);
+        
+        $.ajax({
+            type:'post',
+            url:"<?php echo base_url() ?>master_data/ajax_get_lokasi",
+            data:"pages="+valu,
+            success:function (res) {
+                // console.log(res);
+                $('#lokasi').html(res);
+            }
+        })
+    });
+    var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = window.location.search.substring(1),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+        }
+    }
+};
     function search(){
             var lokasi =$('#Inlokasi').val();
 
@@ -113,6 +141,8 @@
              search();
           }
       });
+
+
 
     });
 
