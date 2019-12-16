@@ -115,9 +115,10 @@
 
     </script>
     <script>
+    
      $(document).ready(function() {
         // $('#list_jadwal_audit').load("<?php echo base_url();?>audit/ajax_get_jadwal_audit");  
-        $('#Optjenisaudit').load("<?php echo base_url();?>audit/ajax_get_jenis_audit2");
+    $('#Optjenisaudit').load("<?php echo base_url();?>audit/ajax_get_jenis_audit2");
     $('#audit_part').load("<?php echo base_url() ?>transaksi_auditor/ajax_get_part");
     $('#Optcabang').load("<?php echo base_url() ?>master_data/ajax_get_cabang2");
 
@@ -135,6 +136,7 @@
             }
         });
     });
+    
     var getUrlParameter = function getUrlParameter(sParam) {
     var sPageURL = window.location.search.substring(1),
         sURLVariables = sPageURL.split('&'),
@@ -148,103 +150,9 @@
             return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
         }
     }
-    }
-
-    
-
-    function search() {
-        var auditor =$('#auditor').val();
-            var tanggal_audit = $('#tanggal_audit').val();
-            var jenis_audit = $('#jenis_audit').val();
+    };
 
 
-            if (auditor!='' && tanggal_audit!='' && jenis_audit!='') {
-                $.ajax({
-                    type:"post",
-                    url:"<?php echo base_url() ?>audit/search_data_audit",
-                    data:"auditor="+auditor+"&tanggal_audit="+tanggal_audit+"&jenis_audit="+jenis_audit,
-                    success:function(data){
-                      $("#list_jadwal_audit").html(data);
-                      $("#search").val("");
-                    }
-                });
-            }else{
-                if (auditor!='' && tanggal_audit=='' && jenis_audit=='') {
-                    $.ajax({
-                    type:"post",
-                    url:"<?php echo base_url() ?>audit/search_data_audit",
-                    data:"auditor="+auditor,
-                    success:function(data){
-                      $("#list_jadwal_audit").html(data);
-                      $("#search").val("");
-                    }
-                });
-                }else if (auditor=='' && tanggal_audit!='' && jenis_audit=='') {
-                    $.ajax({
-                    type:"post",
-                    url:"<?php echo base_url() ?>audit/search_data_audit",
-                    data:"tanggal_audit="+tanggal_audit,
-                    success:function(data){
-                      $("#list_jadwal_audit").html(data);
-                      $("#search").val("");
-                    }
-                });
-                } else {
-                    if (auditor=='' && tanggal_audit=='' && jenis_audit!='') {
-                        $.ajax({
-                        type:"post",
-                        url:"<?php echo base_url() ?>audit/search_data_audit",
-                        data:"jenis_audit="+jenis_audit,
-                        success:function(data){
-                        $("#list_jadwal_audit").html(data);
-                        $("#search").val("");
-                    }
-                    });
-                    }else{
-                        $('#list_jadwal_audit').load("<?php echo base_url();?>audit/ajax_get_jadwal_audit");
-                    }
-                }
-            }
-        }
-
-        $('#caribtn').click(function() {
-            search();
-        });
-
-        $('#auditor').keyup(function(e) {
-          if(e.keyCode == 13) {
-             search();
-          }else{
-              if (e.keyCode == 9) {
-                  $('#tanggal_audit').focus();
-              }else if(e.keyCode == 9){
-                  $('#jenis_audit').focus();
-              }
-          }
-      });
-        $('#tanggal_audit').keyup(function(e) {
-          if(e.keyCode == 13) {
-             search();
-          }
-      });
-
-      $('#jenis_audit').keyup(function(e) {
-          if(e.keyCode == 13) {
-             search();
-          }
-      });
-
-    //   function (fobj) {
-    //       elmTanggal= this.GetElements("Tanggal_Mulai");
-    //       var CurrentDate = new Date();
-    //       CurrentDate = ew_ParseDate(CurrentDate, 1);
-    //       var SelectedDate = new Date($("#Tanggal_Mulai").val());
-    //       SelectedDate = ew_ParseDate(SelectedDate,1);
-    //       if(SelectedDate < CurrentDate){
-    //           return this.OnError(elmTanggal,"Tanggal Mulai Baru")
-    //       }
-    //       return true;   
-    //   }
 
     $('#data_1 .input-group.date').datepicker({
         todayBtn: "linked",
@@ -256,40 +164,8 @@
 
     $('.clockpicker').clockpicker();
 
-    
-    // var tanggal_audit = $('#tanggal').val();
-    // var waktu_audit = $('#waktu').val();
-
-    // var countDownDate = new Date("Dec 05, 2019 14:03:00").getTime();
-
-    // // Update the count down every 1 second
-    // var x = setInterval(function() {
-
-    // // Get today's date and time
-    // var now = new Date().getTime();
-        
-    // // Find the distance between now and the count down date
-    // var distance = countDownDate - now;
-        
-    // // Time calculations for days, hours, minutes and seconds
-    // var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    // var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    // var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    // var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        
-    // // Output the result in an element with id="demo"
-    // document.getElementById("demo").innerHTML = days + "d " + hours + "h "
-    // + minutes + "m " + seconds + "s ";
-        
-    // // If the count down is over, write some text 
-    // if (distance < 0) {
-    //     clearInterval(x);
-    //     document.getElementById("demo").innerHTML = "EXPIRED";
-    // }
-    // }, 1000);
-
-
-    });
+});
+   
    
     </script>
 
