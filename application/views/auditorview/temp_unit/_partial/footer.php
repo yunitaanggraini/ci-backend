@@ -114,6 +114,7 @@
             return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
         }
     }
+    };
     
     function search() {
             var cabang =$('#Incabang').val();
@@ -144,6 +145,7 @@
 
     });
 
+    
     function edit(id) {
         // var id = $(this).attr('data-id');
         $.ajax({

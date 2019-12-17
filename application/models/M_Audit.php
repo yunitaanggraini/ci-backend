@@ -22,7 +22,12 @@ class M_Audit extends CI_Model {
     
             $result = json_decode($respon->getBody()->getContents(),true);
     
-            return $result['data'];              
+            if ($result['status']==true) {
+
+                return $result['data'];
+            }else {
+                return false;
+            }              
         }  
         
     public function getCabang()
@@ -31,7 +36,12 @@ class M_Audit extends CI_Model {
 
         $result = json_decode($respon->getBody()->getContents(),true);
 
-        return $result['data'];              
+        if ($result['status']==true) {
+
+            return $result['data'];
+        }else {
+            return false;
+        }              
     }
 
     public function getJenisAudit()
@@ -40,20 +50,31 @@ class M_Audit extends CI_Model {
 
         $result = json_decode($respon->getBody()->getContents(),true);
 
-        return $result['data'];              
+        if ($result['status']==true) {
+
+            return $result['data'];
+        }else {
+            return false;
+        }              
     }
 
-    public function getTempUnit($offset)
+    public function getTempUnit($cabang,$offset)
     {
-      $respon =  $this->_client->request('GET', 'tempunit',[
+      $respon =  $this->_client->request('GET', 'tounit',[
           'query'=>[
-              'offset'=>$offset
+              'offset'=>$offset,
+              'id_cabang' => $cabang
           ]
       ]);
 
       $result = json_decode($respon->getBody()->getContents(),true);
 
-      return $result['data'];
+      if ($result['status']==true) {
+
+        return $result['data'];
+    }else {
+        return false;
+    }
     }
 
     public function getTempPart()
@@ -62,7 +83,12 @@ class M_Audit extends CI_Model {
 
       $result = json_decode($respon->getBody()->getContents(),true);
 
-      return $result['data'];
+      if ($result['status']==true) {
+
+        return $result['data'];
+    }else {
+        return false;
+    }
     }
 
     //-----------------BY ID---------------//
@@ -170,9 +196,13 @@ class M_Audit extends CI_Model {
         }
     }
 
-    public function counttempunit()
+    public function counttempunit($cabang)
       {
-          $respon =  $this->_client->request('GET', 'counttempunit');
+          $respon =  $this->_client->request('GET', 'counttempunit',[
+              'query'=>[
+                  'id_cabang' => $cabang
+              ]
+          ]);
 
         $result = json_decode($respon->getBody()->getContents(),true);
         // var_dump($result['data'][0]);die;

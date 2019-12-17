@@ -27,6 +27,7 @@
                                 </div>
 
                                 <button class="btn btn-w-m btn-success" id="caribtn">Cari Data</button>
+                            </div>
                             </form>                         
                                    
                            
@@ -34,6 +35,7 @@
                         
                     </div>
                 </div>
+            </div>
 
                     
                         <div class="table-responsive">
@@ -99,5 +101,5 @@
             </div>
             </div>
         </div>
-</div>
+
 

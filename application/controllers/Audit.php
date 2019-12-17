@@ -27,6 +27,17 @@
                 'judul1'=>'Audit',
                 'code'=> $this->maudit->buatkodejadwalaudit()
             ];
+            
+            $this->session->unset_userdata('id_cabang');
+            // $this->session->sess_destroy();            
+            $sesi = array(
+                'id_cabang' => $this->input->post('id_cabang')
+            );
+            
+            $this->session->set_userdata($sesi);
+            print_r(
+            $this->session->userdata()
+            );
                 
             $this->load->view('_partial/header.php',$data);
             $this->load->view('_partial/sidebar.php');      
@@ -115,8 +126,11 @@
                 'judul'=> "Data Temporary Unit",
                 'judul1'=>'Data Temporary'
             ];
+            
+            $cabang = $this->session->userdata('id_cabang');
+            
             $config['base_url'] = base_url()."data_temporary/unit";
-            $config['total_rows'] = $this->maudit->counttempunit();
+            $config['total_rows'] = $this->maudit->counttempunit($cabang);
             $config['per_page'] = 15;
             $config['page_query_string']=TRUE;
             $config['query_string_segment'] = 'pages';
@@ -182,11 +196,25 @@
                 
             }else if($list['keterangan']=='in progress'){
 
-                $list['keterangan']='<a href="'.$base.'audit/viewTempUnit/'.$list['idjadwal_audit'].'" class="btn btn-success">BUKA</a>';
+                $list['keterangan']='
+                <form action="'.$base.'audit/JadwalAudit" method="POST">
+                <input type="hidden" name="id_cabang" value="'.$list['id_cabang'].'"/>
+                <button type="submit" name="submit" class="btn btn-success">BUKA</button>
+                </form>
+                ';
+ 
+            
             }else if ($list['keterangan']=='done'){
-
+                 
             }
-
+            // $this->session->unset_userdata('id_cabang');
+            $data = array(
+                'id_cabang' => $list['id_cabang']
+            );
+            $this->session->set_userdata( $data );
+            
+                
+               
             $offset++;
             $output .='
             <tr> 
@@ -210,34 +238,45 @@
 
     public function ajax_get_temp_unit()
     {
+              
         $output = '';
         $base = base_url();
-        if ($this->input->post('pages')!='undefined') {
-            $offset = $this->input->post('pages');
-        }else{
-            $offset=0;
-        }
-        
-        // data['kodeunik'] = $this->musergroup->kode(); 
-        $listTempUnit =$this->maudit->getTempUnit($offset);
-        foreach ($listTempUnit as $list){
-            $offset++;
-            $output .='
-            <tr> 
-                <td class="text-center">'.$list['id_unit'].'</td>
-                <td class="text-center">'.$list['nama_cabang'].'</td>
-                <td class="text-center">'.$list['nama_lokasi'].'</td>
-                <td class="text-center">'.$list['no_mesin'].'</td>
-                <td class="text-center">'.$list['no_rangka'].'</td>
-                <td class="text-center">'.$list['tahun'].'</td>
-                <td class="text-center">'.$list['type'].'</td>
-                <td class="text-center">'.$list['kode_item'].'</td>
-              
-            </tr>
-            
-            ';
+        // var_dump( $this->session->userdata('id_cabang'));die;    
+        $cabang = $this->session->userdata('id_cabang');
+        // print_r($cabang);die;
+            if ($this->input->post('pages')!='undefined') {
+                $offset = $this->input->post('pages');
+            }else{
+                $offset=0;
+            }
+            // data['kodeunik'] = $this->musergroup->kode(); 
+            $listTempUnit =$this->maudit->getTempUnit($cabang,$offset);
+            if ($listTempUnit!=null) {
+            foreach ($listTempUnit as $list){
+                $offset++;
+                $output .='
+                <tr> 
+                    <td class="text-center">'.$list['id_unit'].'</td>
+                    <td class="text-center">'.$list['nama_cabang'].'</td>
+                    <td class="text-center">'.$list['nama_lokasi'].'</td>
+                    <td class="text-center">'.$list['no_mesin'].'</td>
+                    <td class="text-center">'.$list['no_rangka'].'</td>
+                    <td class="text-center">'.$list['tahun'].'</td>
+                    <td class="text-center">'.$list['type'].'</td>
+                    <td class="text-center">'.$list['kode_item'].'</td>
+                  
+                </tr>
+                
+                ';
         }
         echo $output;
+        }else {
+            echo $output .='
+            <tr >
+            <td colspan="8" class="text-center">data not found</td>
+            </tr>
+            ';
+        }
     }
 
     public function ajax_get_temp_part()
