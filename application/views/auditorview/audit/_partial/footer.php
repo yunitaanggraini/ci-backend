@@ -94,34 +94,100 @@
                     radioClass: 'iradio_square-green',
                 });
 
-    function search() {
-            var cabang =$('#Incabang').val();
-
-            if (cabang!='') {
-                $.ajax({
-                    type:"post",
-                    url:"<?php echo base_url() ?>master_data/search_data_cabang",
-                    data:"cabang="+cabang,
-                    success:function(data){
-                      $("#cabang").html(data);
-                      $("#search").val("");
-                    }
+    function getdataunit(){
+        var no_mesin = $("#no_mesin").val();
+        var no_rangka = $("#no_rangka").val();
+            $.ajax({
+                    type: "POST",
+                    url: '<?php echo base_url() ?>audit/ajax_get_temp_unit',
+                    data:"no_mesin="+no_mesin,
+                    dataTpye: "json",
+            ).success(function (data) {
+                    var json = data,
+                    obj = JSON.parse(json);
+                    $('#id_unit').val(obj.id_unit);
+                    $('#no_mesin').val(obj.no_mesin);
+                    $('#no_rangka').val(obj.no_rangka);
+                    $('#lokasi').val(obj.lokasi);
+                    $('#type_unit').val(obj.type_unit);
+                    $('#usia_unit').val(obj.usia_unit);
                 });
-            }else{
-                $('#cabang').load("<?php echo base_url() ?>master_data/ajax_get_cabang");
-                    }
-        }
-        $('#caribtn').click(function(){
-            search();
-        });
-        $('#Incabang').keyup(function(e) {
-          if(e.keyCode == 13) {
-             search();
-          }
-      });
+            }
+
+    
+
+    // function getdata() {
+    //     $("#loading").show();
+    //     $.ajax({
+    //         type: "POST",
+    //         url: "<?php echo base_url() ?>audit/ajax_get_temp_unit",
+    //         data: {no_mesin:$("#no_mesin").val()},
+    //         dataTpye: "json",
+    //         beforeSend: function(e){
+    //             if(e $$ e.overrideMimeType){
+    //                 e.overrideMimeType("application/json;charset=UTF-8")
+    //             }
+    //         },
+    //         success: function (e) {
+    //             $("#loading").hide()
+                
+    //             if (respoonse.status == "success") {
+    //                 $("#no_rangka").val(response.no_rangka);
+    //                 $("#lokasi").val(response.lokasi);
+    //                 $("#type_unit").val(response.type_unit);
+    //                 $("#usia_unit").val(response.usia_unit);
+
+    //             }else{
+    //                 alert("Data Tidak Ditemukan")
+    //             }
+    //         },
+    //         error: function (xhr,ajaxOptions, thrownError) {
+    //             alert(xhr.responseText)
+    //         }
+    //     })
+    // }
+
+    // $("#loading").hide();
+
+    //     $("#btn-cari").click(function () {
+    //         getdata();
+    //     });
+
+    //     $("#no_mesin").keyup(function (event) {
+    //         if(event.keyCode == 13){ // Jika user menekan tombol ENTER
+    //     getdata(); // Panggil function search
+    //     });
+
+    // function search() {
+    //         var cabang =$('#Incabang').val();
+
+    //         if (cabang!='') {
+    //             $.ajax({
+    //                 type:"post",
+    //                 url:"<?php echo base_url() ?>master_data/search_data_cabang",
+    //                 data:"cabang="+cabang,
+    //                 success:function(data){
+    //                   $("#cabang").html(data);
+    //                   $("#search").val("");
+    //                 }
+    //             });
+    //         }else{
+    //             $('#cabang').load("<?php echo base_url() ?>master_data/ajax_get_cabang");
+    //                 }
+    //     }
+    //     $('#caribtn').click(function(){
+    //         search();
+    //     });
+    //     $('#Incabang').keyup(function(e) {
+    //       if(e.keyCode == 13) {
+    //          search();
+    //       }
+    //   });
 
 
     });
+
+    
 
     function edit(id) {
         // var id = $(this).attr('data-id');

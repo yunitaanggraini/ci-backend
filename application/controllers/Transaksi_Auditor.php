@@ -154,6 +154,45 @@ class Transaksi_Auditor extends CI_Controller {
     }
 
 
+    
+        public function post_unitmanual()
+    {
+        $data = [
+            'id_unit'     =>$this->input->post('id_unit',true),
+            'no_mesin'    =>$this->input->post('no_mesin',true),
+            'no_rangka'   =>$this->input->post('no_rangka',true),
+            'type_unit'   =>$this->input->post('type_unit',true),
+            'usia_unit'   =>$this->input->post('usia_unit',true),
+            'user'        =>$this->session->userdata('username')   
+        ];
+
+        $id = $data['id_unit'];
+
+            $cek = $this->mtransauditor->getUnitById($id);
+            // var_dump($cek);die;
+            if ($cek['status']===true) {
+
+                $this->session->set_flashdata('warning', 'Data sudah ada');
+                
+                
+                redirect('transaksi_auditor/audit_unit');
+                
+                
+            }else{
+                $exec = $this->mtransauditor->addUnit($data);
+                if ($exec) {
+
+                    $this->session->set_flashdata('berhasil', 'Data Berhasil Ditambahkan');
+                    redirect('transaksi_auditor/audit_unit');
+                }else{
+                    $this->session->set_flashdata('gagal', 'gagal ditambahkan');
+                    redirect('transaksi_auditor/audit_unit');
+                }
+            }
+        
+    }
+   
+
 
 
 }

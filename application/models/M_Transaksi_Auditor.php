@@ -32,6 +32,17 @@ class M_Transaksi_Auditor extends CI_Model {
       return $result['data'];
     }
 
+    public function addUnit($data)
+    {
+        $respon =  $this->_client->request('POST', 'user',[
+            'form_params'=> $data
+        ]);
+
+        $result = json_decode($respon->getBody()->getContents(),true);
+
+        return $result['data'];
+    }
+
 }
 
 /* End of file M_Transaksi_Auditor.php */

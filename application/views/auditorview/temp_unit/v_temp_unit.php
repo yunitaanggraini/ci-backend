@@ -1,7 +1,7 @@
 <div class="wrapper wrapper-content m-t-xl wrapper wrapper-content animated fadeInRight">
             <div class="row">
                 <div class="col-lg-12">
-                <div class="panel panel-default">
+                <div class="panel panel-bluedark">
                 <div class="panel-heading">
                     <h4><i class="fa fa-info-circle"></i> Data Temporary Unit</h4>                     
                     </div>

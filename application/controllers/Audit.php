@@ -8,7 +8,7 @@
             $this->load->model('m_audit','maudit');
             $this->load->library('pagination');
             
-            if (!$this->session->userdata('username')) {
+            if (!$this->session->userdata('no_mesin')) {
             
                 redirect('login/login');
                 
@@ -226,7 +226,7 @@
                 <td class="text-center">'.$list['auditor'].'</td>
                 <td class="text-center">'.$list['tanggal'].'</td>
                 <td class="text-center">'.$list['waktu'].'</td>
-                <td class="text-center">'.$list['nama_cabang'].'</td>
+                <td class="text-center">'.$list['no_rangk$no_rangka_cabang'].'</td>
                 <td class="text-center">'.$list['jenis_audit'].'</td>
                 <td class="text-center">'.$list['keterangan'].'</td>
             </tr>
@@ -257,8 +257,8 @@
                 $output .='
                 <tr> 
                     <td class="text-center">'.$list['id_unit'].'</td>
-                    <td class="text-center">'.$list['nama_cabang'].'</td>
-                    <td class="text-center">'.$list['nama_lokasi'].'</td>
+                    <td class="text-center">'.$list['no_rangk$no_rangka_cabang'].'</td>
+                    <td class="text-center">'.$list['no_rangk$no_rangka_lokasi'].'</td>
                     <td class="text-center">'.$list['no_mesin'].'</td>
                     <td class="text-center">'.$list['no_rangka'].'</td>
                     <td class="text-center">'.$list['tahun'].'</td>
@@ -292,8 +292,8 @@
             <tr> 
                 <td>'.$no.'</td>
                 <td >'.$list['id_part'].'</td>
-                <td>'.$list['nama_cabang'].'</td>
-                <td>'.$list['nama_lokasi'].'</td>
+                <td>'.$list['no_rangk$no_rangka_cabang'].'</td>
+                <td>'.$list['no_rangk$no_rangka_lokasi'].'</td>
                 <td>'.$list['part_number'].'</td>
                 <td>'.$list['id_rak'].'</td>
                 <td>'.$list['id_bin_box'].'</td>
@@ -317,7 +317,7 @@
 		foreach ($listcabang as $list) {
 			$no++;
 			$output .='
-				<option value="'.$list['id_cabang'].'">'.$list['id_cabang'].' - '.$list['nama_cabang'].'</option>
+				<option value="'.$list['id_cabang'].'">'.$list['id_cabang'].' - '.$list['no_rangk$no_rangka_cabang'].'</option>
 			';
         }
         echo '<option value="">--- Pilih Cabang ---</option>';
@@ -378,7 +378,7 @@
             'tanggal'        => $this->input->post('tanggal', true),
             'waktu'          => $this->input->post('waktu', true),
             'keterangan'     => 'waiting',
-            'user'  => $this->session->userdata('username')
+            'user'  => $this->session->userdata('no_mesin')
              ];
             $id = $data['idjadwal_audit'];
 
@@ -439,7 +439,7 @@
                 <td>'.$list['auditor'].'</td>
                 <td>'.$list['tanggal'].'</td>
                 <td>'.$list['waktu'].'</td>
-                <td>'.$list['nama_cabang'].'</td>
+                <td>'.$list['no_rangk$no_rangka_cabang'].'</td>
                 <td>'.$list['jenis_audit'].'</td>
                 <td>'.$list['keterangan'].'</td>
             </tr>
@@ -464,11 +464,11 @@
         $base = base_url();
         // var_dump($usergroup);
         if ($usergroup!= null) {
-            $listUserGroup = $this->mmasdat->cariusergroup($usergroup);
+            $listUnitGroup = $this->mmasdat->cariunitgroup($usergroup);
         }
         
-        if ($listUserGroup) {
-            foreach ($listUserGroup as $list) {
+        if ($listUnitGroup) {
+            foreach ($listUnitGroup as $list) {
                 
                 $no++;
                 $output .='
@@ -544,10 +544,25 @@
         
     }
 
+    // public function search_data_unit()
+    // {
+    //     $no_mesin = $this->input->post('no_mesin');
+    //     $no_rangka = $this->input->post('no_rangka');
+    //     $output = '';
+    //     $no = 0;
+    //     $base = base_url();
+    //     if ($no_mesin!= null && $no_rangka!=null) {
+    //         $listUnit = $this->mmasdat->cariunit($no_mesin,$no_rangka);
+    //     }elseif($no_mesin!=null&& $no_rangka==null){
+    //         $listUnit = $this->mmasdat->carino_mesin($no_mesin);
+    //     }elseif ($no_mesin=='' && $no_rangka!='') {
+    //         $listUnit = $this->mmasdat->carino_rangka($no_rangka);
+    //     }
+
     
-    }
+    // }
     
     /* End of file Audit.php */
     
-
+    }
 ?>

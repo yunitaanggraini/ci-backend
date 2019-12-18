@@ -2,7 +2,7 @@
 <div class="row">
                 <div class="col-lg-12">
                     <form class="form-horizontal" method="post" action="<?php echo base_url('audit/post_jadwal_audit') ?>" id="FormJadwalAudit">
-                    <div class="panel panel-default"  >
+                    <div class="panel panel-bluedark"  >
                         <div class="panel-heading">
 
                         <div class="col-lg-10" ><h4><i class="fa fa-info-circle"></i> Input Jadwal Audit</h4></div>

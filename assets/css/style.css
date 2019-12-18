@@ -3555,6 +3555,7 @@ a:focus {
 .b-r {
   border-right: 1px solid #e7eaec;
 }
+
 .hr-line-dashed {
   border-top: 1px dashed #e7eaec;
   color: #ffffff;
@@ -4085,9 +4086,19 @@ table.table-mail tr td {
   border-color: #1ab394;
 }
 .panel-primary > .panel-heading {
-  background-color: #1ab394;
+  background-color: #293846;
   border-color: #1ab394;
 }
+
+.panel-bluedark {
+  border-color: #ed1c25
+}
+.panel-bluedark > .panel-heading {
+  color: #fbf5f5;
+  background-color: #293846;
+  border-color: #0e0e0e;
+}
+
 .panel-success {
   border-color: #1c84c6;
 }
