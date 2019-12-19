@@ -93,6 +93,7 @@
     
 
     $('#data_1 .input-group.date').datepicker({
+        format: 'mm/dd/yyyy',
         todayBtn: "linked",
         keyboardNavigation: false,
         forceParse: false,
@@ -101,6 +102,7 @@
     });
 
     $('#data_5 .input-daterange').datepicker({
+        format: 'mm/dd/yyyy',
         keyboardNavigation: false,
         forceParse: false,
         autoclose: true
@@ -108,6 +110,25 @@
 
     
     });
+
+    function preview() {
+        var cabang = $('#OptCabang').val();
+        var tgl_awal = $('#tgl_awal').val();
+        var tgl_akhir = $('#tgl_akhir').val();
+        var status = $('#status').val();
+        console.log($('#tgl_awal').val());
+        
+        $.ajax({
+            type: 'post',
+            url: '<?php echo base_url() ?>laporan_auditor/preview',
+            data: 'id_cabang='+cabang+'&&tgl_awal='+tgl_awal+'&&tgl_akhir='+tgl_akhir+'&&status='+status,
+            success:function(data){
+            $('#unit').html(data);
+            
+            }
+        })
+        
+    }
     </script>
 
 </body>

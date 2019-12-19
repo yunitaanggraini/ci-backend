@@ -3,7 +3,7 @@
                 <div class="col-lg-12">
                 <div class="panel panel-default">
                 <div class="panel-heading">
-                    <i class="fa fa-info-circle"></i> Report Audit Data Unit, Pilih Data Berdasarkan Cabang?                      
+                    <i class="fa fa-info-circle"></i> Report Audit Data Audit Unit                     
                 </div>
                     <div class="panel-body">
                     <div class="row form-horizontal">
@@ -11,7 +11,7 @@
                     <div>
                     <div class="col-sm-6">
                          <a href="<?php echo site_url('laporan_auditor/lap_audit_unit'); ?>" type="button" class="btn btn-w-md btn-danger btn-outline">Report Audit Unit</a><br><br>
-                         <a href="<?php echo site_url('laporan_auditor/lap_perlokasi'); ?>" type="button" class="btn btn-w-md btn-danger btn-outline">Report Unit Per Lokasi</a><br><br>
+                         <a href="<?php echo site_url('laporan_auditor/lap_perlokasi'); ?>" type="button" class="btn btn-w-md btn-danger btn-outline">Report Aksesoris Per Lokasi</a><br><br>
                          <a href="<?php echo site_url('laporan_auditor/lap_sesuai'); ?>" type="button" class="btn btn-w-md btn-danger btn-outline">Report Unit Sesuai</a><br><br>
                     </div>
                     <div class="col-sm-6">

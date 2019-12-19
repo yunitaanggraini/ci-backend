@@ -20,6 +20,37 @@ class M_Laporan_Auditor extends CI_Model {
 
         return $result['data'];              
     }
+    public function getCabangbyid($id)
+    {
+        $respon =  $this->_client->request('GET', 'cabang',[
+            'query'=>[
+                'id'=>$id
+            ]
+        ]);
+
+        $result = json_decode($respon->getBody()->getContents(),true);
+
+        return $result['data'];              
+    }
+    public function cetakUnit($a,$b,$c,$d)
+    {
+        $respon =  $this->_client->request('GET', 'cetakunit',[
+            'query'=>[
+                'id_cabang' => $a,
+                'tanggal_awal'=>$b,
+                'tanggal_akhir'=>$c,
+                'status'=> $d
+            ]
+        ]);
+
+        $result = json_decode($respon->getBody()->getContents(),true);
+
+        if ($result['status']==true) {
+            return $result['data'];              
+        }else{
+            return false;
+        }
+    }
 
 }
 
