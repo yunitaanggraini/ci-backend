@@ -8,7 +8,7 @@
             $this->load->model('m_audit','maudit');
             $this->load->library('pagination');
             
-            if (!$this->session->userdata('no_mesin')) {
+            if (!$this->session->userdata('username')) {
             
                 redirect('login/login');
                 
@@ -35,9 +35,9 @@
             );
             
             $this->session->set_userdata($sesi);
-            print_r(
-            $this->session->userdata()
-            );
+            // print_r(
+            // $this->session->userdata()
+            // );
                 
             $this->load->view('_partial/header.php',$data);
             $this->load->view('_partial/sidebar.php');      
@@ -226,7 +226,7 @@
                 <td class="text-center">'.$list['auditor'].'</td>
                 <td class="text-center">'.$list['tanggal'].'</td>
                 <td class="text-center">'.$list['waktu'].'</td>
-                <td class="text-center">'.$list['no_rangk$no_rangka_cabang'].'</td>
+                <td class="text-center">'.$list['nama_cabang'].'</td>
                 <td class="text-center">'.$list['jenis_audit'].'</td>
                 <td class="text-center">'.$list['keterangan'].'</td>
             </tr>

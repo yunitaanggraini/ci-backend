@@ -63,11 +63,39 @@ class Transaksi_Auditor extends CI_Controller {
                 'judul'=> "Audit Unit",
                 'judul1'=>'Transaksi Auditor'
             ];
+
+            $config['base_url'] = base_url()."transaksi_auditor/";
+            $config['total_rows'] = $this->mtransauditor->counttunit();
+            $config['per_page'] = 15;
+            $config['page_query_string']=TRUE;
+            $config['query_string_segment'] = 'pages';
+            $config['num_links'] = 2;
+
+            $config['full_tag_open'] = '<div class="pagination"><nav><ul class="pagination">';
+            $config['full_tag_close'] = '</ul></nav></div>';
+            $config['first_link'] = 'First';
+            $config['first_tag_open'] = '<li class="page-item"><span class="page-link">';
+            $config['first_tag_close'] = '</li>';
+            $config['last_link'] = 'Last';
+            $config['last_tag_open'] = '<li class="page-item"><span class="page-link">';
+            $config['last_tag_close'] = '</li>';
+            $config['next_link'] = '&gt;';
+            $config['next_tag_open'] = '<li class="page-item"><span class="page-link">';
+            $config['next_tag_close'] = '</li>';
+            $config['prev_link'] = '&lt;&nbsp;';
+            $config['prev_tag_open'] = '<li class="page-item"><span class="page-link">';
+            $config['prev_tag_close'] = '</li>';
+            $config['num_tag_open'] = '<li class="page-item"><span class="page-link">';
+            $config['num_tag_close'] = '</li>';
+            $config['cur_tag_open'] = '<li class="page-item"><span class="page-link">';
+            $config['cur_tag_close'] = '</li>';
+            
+            $this->pagination->initialize($config);
+            $data['pagination']= $this->pagination->create_links();
             $this->load->view('_partial/header.php',$data);
             $this->load->view('_partial/sidebar.php');      
             $this->load->view('auditorview/audit_unit/v_audit_unit.php',$data);       
-            $this->load->view('auditorview/audit_unit/_partial/footer.php');
-            
+            $this->load->view('auditorview/audit_unit/_partial/footer.php');           
         }
 
         public function Audit_Part()
@@ -151,6 +179,22 @@ class Transaksi_Auditor extends CI_Controller {
             ';
         }
         echo $output;
+    }
+
+    public function ajax_get_cabang2()
+    {
+        $output = '';
+		$no = 0;
+        $listcabang = $this->mtransauditor->getCabang();
+		foreach ($listcabang as $list) {
+			$no++;
+			$output .='
+				<option value="'.$list['id_cabang'].'">'.$list['id_cabang'].' - '.$list['nama_cabang'].'</option>
+			';
+        }
+        echo '<option value="">--- Pilih Cabang ---</option>';
+        echo $output;
+		
     }
 
 

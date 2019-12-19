@@ -29,7 +29,7 @@
 
 
     <script>
-            $(document).ready(function() { 
+        $(document).ready(function() { 
         <?php if($this->session->flashdata('berhasil')) {?>
         setTimeout(function() {
                     toastr.options = {
@@ -85,48 +85,48 @@
     </script>
     <script>
    $(document).ready(function() {
+    $('#OptCabang').load("<?php echo base_url();?>transaksi_auditor/ajax_get_cabang2");
     $('#audit_unit').load("<?php echo base_url() ?>transaksi_auditor/ajax_get_unit");
+
+        // function tampil() {
+            
+        //     $('#status_unit').on('change',function(){
+        //          var status_unit = $('#status_unit').val();
+        //     if (select_status=='sesuai') 
+        //     {
+        //         $('#tampil').show();
+        //         // $.ajax({
+        //         //     url:"<?php echo base_url() ?>transaksi_auditor/ajax_get_unit",
+        //         //     type: "POST",
+        //         //     // data: {'id_cabang':id_cabang},
+        //         //     // success: function(data){
+        //         //     //     $('#Optlokasi').html(data);
+        //         //     // }
+        //         // });
+        //     }
+
+        //     else if (select_status=='belum_sesuai')
+        //     {
+        //         $('#tampil').show();
+        //     }
+
+        //     else if (select_status=='tidak_ditemukan')
+        //     {
+        //         $('#tampil').show();
+        //     }
+
+        //     else
+        //     {
+        //         $('#tampil').hide();
+        //     }
+        // }
+        // }
+
+
+
+
+});
     
-    function TampilStatus(str) {
-            if (str=='') {
-                $.ajax({
-                    type:"post",
-                    url:"<?php echo base_url() ?>master_data/search_data_cabang",
-                    data:"cabang="+cabang,
-                    success:function(data){
-                      $("#cabang").html(data);
-                      $("#search").val("");
-                    }
-                });
-            }else{
-                $('#cabang').load("<?php echo base_url() ?>master_data/ajax_get_cabang");
-                    }
-        }
-        $('#caribtn').click(function(){
-            search();
-        });
-        $('#Incabang').keyup(function(e) {
-          if(e.keyCode == 13) {
-             search();
-          }
-      });
-
-
-    });
-
-    function edit(id) {
-        // var id = $(this).attr('data-id');
-        $.ajax({
-            url: "<?php echo base_url().$this->uri->segment(1) ?>/edit_cabang",
-            type: 'post',
-            data:"id="+id,
-            dataType:'html',
-            success: function(data) {
-                $('#data_input').html(data);
-            }
-
-        });
-      }
 
     </script>
 

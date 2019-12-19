@@ -14,9 +14,13 @@ class M_Transaksi_Auditor extends CI_Model {
         }
 
 
-    public function getUnit()
+    public function getUnit($offset)
     {
-      $respon =  $this->_client->request('GET', 'unit');
+      $respon =  $this->_client->request('GET', 'unit',[
+          'query' => [
+              'offset' => $offset
+          ]
+      ]);
 
       $result = json_decode($respon->getBody()->getContents(),true);
 
@@ -41,6 +45,15 @@ class M_Transaksi_Auditor extends CI_Model {
         $result = json_decode($respon->getBody()->getContents(),true);
 
         return $result['data'];
+    }
+
+    public function getCabang()
+    {
+        $respon =  $this->_client->request('GET', 'cabang');
+
+        $result = json_decode($respon->getBody()->getContents(),true);
+
+        return $result['data'];              
     }
 
 }
