@@ -16,6 +16,7 @@
 
     <!-- Mainly scripts -->
     <script src="<?php echo base_url() ?>assets/js/jquery-3.1.1.min.js"></script>
+    
     <script src="<?php echo base_url() ?>assets/js/bootstrap.min.js"></script>
     <script src="<?php echo base_url() ?>assets/js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="<?php echo base_url() ?>assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
@@ -26,6 +27,7 @@
     <script src="<?php echo base_url() ?>assets/js/plugins/pace/pace.min.js"></script>
 
     <script src="<?php echo base_url() ?>assets/js/plugins/toastr/toastr.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/js/plugins/datapicker/bootstrap-datepicker.js"></script>
 
 
     <script>
@@ -86,47 +88,67 @@
     <script>
    $(document).ready(function() {
     $('#OptCabang').load("<?php echo base_url();?>transaksi_auditor/ajax_get_cabang2");
-    $('#audit_unit').load("<?php echo base_url() ?>transaksi_auditor/ajax_get_unit");
+    // $('#audit_unit').load("<?php echo base_url() ?>transaksi_auditor/ajax_get_unit");
 
-        // function tampil() {
-            
-        //     $('#status_unit').on('change',function(){
-        //          var status_unit = $('#status_unit').val();
-        //     if (select_status=='sesuai') 
-        //     {
-        //         $('#tampil').show();
-        //         // $.ajax({
-        //         //     url:"<?php echo base_url() ?>transaksi_auditor/ajax_get_unit",
-        //         //     type: "POST",
-        //         //     // data: {'id_cabang':id_cabang},
-        //         //     // success: function(data){
-        //         //     //     $('#Optlokasi').html(data);
-        //         //     // }
-        //         // });
-        //     }
+    // $('#audit_unit').ready(function () {
+    //     var valu = getUrlParameter('pages');
+    //     console.log(valu);
+        
+    //     $.ajax({
+    //         type:'post',
+    //         url:"<?php echo base_url() ?>transaksi_auditor/ajax_get_unit",
+    //         data:"pages="+valu,
+    //         success:function (res) {
+    //             // console.log(res);
+    //             $('#audit_unit').html(res);
+    //         }
+    //     })
+    // });
+        var getUrlParameter = function getUrlParameter(sParam) {
+        var sPageURL = window.location.search.substring(1),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
 
-        //     else if (select_status=='belum_sesuai')
-        //     {
-        //         $('#tampil').show();
-        //     }
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
 
-        //     else if (select_status=='tidak_ditemukan')
-        //     {
-        //         $('#tampil').show();
-        //     }
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+            }
+        }
+    };
 
-        //     else
-        //     {
-        //         $('#tampil').hide();
-        //     }
-        // }
-        // }
-
-
+        $('#data_5 .input-daterange').datepicker({
+        keyboardNavigation: false,
+        forceParse: false,
+        autoclose: true
+    });
 
 
 });
-    
+
+
+        function preview() {
+            
+            var cabang = $('#OptCabang').val();
+            var tgl_awal = $('#tgl_awal').val();
+            var tgl_akhir = $('#tgl_akhir').val();
+            var status = $('#status').val();
+
+                    console.log(cabang,tgl_awal,tgl_akhir,status);
+            $.ajax({
+                type: 'post',
+                url :"<?php echo base_url() ?>transaksi_auditor/preview",
+                data : 'id_cabang='+cabang+'&&tgl_awal='+tgl_awal+'&&tgl_akhir='+tgl_akhir+'&&status='+status,
+                success: function (data)
+                {
+                    $('#audit_unit').html(data);    
+                    
+                }
+            });
+  
+        }
 
     </script>
 

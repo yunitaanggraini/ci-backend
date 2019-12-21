@@ -24,7 +24,12 @@ class M_Transaksi_Auditor extends CI_Model {
 
       $result = json_decode($respon->getBody()->getContents(),true);
 
-      return $result['data'];
+        if ($result['status']==true) {
+
+        return $result['data'];
+        }else {
+            return false;
+        }   
     }
 
     public function getPart()
@@ -55,6 +60,39 @@ class M_Transaksi_Auditor extends CI_Model {
 
         return $result['data'];              
     }
+
+    public function countunit()
+      {
+          $respon =  $this->_client->request('GET', 'countunit');
+
+        $result = json_decode($respon->getBody()->getContents(),true);
+        // var_dump($result['data'][0]);die;
+        if ($result['status']==true) {
+            return $result['data'];
+        }else{
+            return false;
+        }
+      }
+
+      public function previewUnit($a,$b,$c,$d,$e)
+    {
+        $respon =  $this->_client->request('GET', 'previewUnit',[
+            'query'=>[
+                'id_cabang' => $a,
+                'tanggal_awal'=>$b,
+                'tanggal_akhir'=>$c,
+                'status'=> $d,
+                'offset' => $e
+            ]
+        ]);
+        $result = json_decode($respon->getBody()->getContents(),true);
+        if ($result['status']==true) {
+            return $result['data'];              
+        }else{
+            return false;
+        }
+    }
+
 
 }
 

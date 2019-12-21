@@ -799,9 +799,6 @@ class M_Master_Data extends CI_Model {
     }
     }
 
-
-
-
     //---------------------------------------------CARI------------------------------------------------------------//
     public function cariUser($username,$nama)
     {
