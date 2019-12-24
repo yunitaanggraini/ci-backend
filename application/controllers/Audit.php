@@ -28,16 +28,16 @@
                 'code'=> $this->maudit->buatkodejadwalaudit()
             ];
             
-            $this->session->unset_userdata('id_cabang');
-            // $this->session->sess_destroy();            
-            $sesi = array(
-                'id_cabang' => $this->input->post('id_cabang')
-            );
-            
-            $this->session->set_userdata($sesi);
-            // print_r(
-            // $this->session->userdata()
+            // $this->session->unset_userdata('id_cabang');
+            // // $this->session->sess_destroy();            
+            // $sesi = array(
+            //     'id_cabang' => $this->input->post('id_cabang')
             // );
+            
+            // $this->session->set_userdata($sesi);
+            // // print_r(
+            // // $this->session->userdata()
+            // // );
                 
             $this->load->view('_partial/header.php',$data);
             $this->load->view('_partial/sidebar.php');      
@@ -180,15 +180,12 @@
     public function ajax_get_jadwal_audit()
     {
         $output = '';
-        $base = base_url();
-        
+        $base = base_url(); 
         if ($this->input->post('pages')!='undefined') {
             $offset = $this->input->post('pages');
         }else{
             $offset=0;
         }
-        // data['kodeunik'] = $this->musergroup->kode(); 
-        
         $listJadwalAudit =$this->maudit->getAudit($offset);
         foreach ($listJadwalAudit as $list){
 
@@ -197,24 +194,18 @@
             }else if($list['keterangan']=='in progress'){
 
                 $list['keterangan']='
-                <form action="'.$base.'audit/JadwalAudit" method="POST">
+                <form action="'.$base.'data_temporary/unit" method="POST">
                 <input type="hidden" name="id_cabang" value="'.$list['id_cabang'].'"/>
                 <button type="submit" name="submit" class="btn btn-success">BUKA</button>
                 </form>
                 ';
- 
-            
             }else if ($list['keterangan']=='done'){
                  
             }
-            // $this->session->unset_userdata('id_cabang');
             $data = array(
                 'id_cabang' => $list['id_cabang']
             );
             $this->session->set_userdata( $data );
-            
-                
-               
             $offset++;
             $output .='
             <tr> 
@@ -257,8 +248,8 @@
                 $output .='
                 <tr> 
                     <td class="text-center">'.$list['id_unit'].'</td>
-                    <td class="text-center">'.$list['no_rangk$no_rangka_cabang'].'</td>
-                    <td class="text-center">'.$list['no_rangk$no_rangka_lokasi'].'</td>
+                    <td class="text-center">'.$list['nama_cabang'].'</td>
+                    <td class="text-center">'.$list['nama_lokasi'].'</td>
                     <td class="text-center">'.$list['no_mesin'].'</td>
                     <td class="text-center">'.$list['no_rangka'].'</td>
                     <td class="text-center">'.$list['tahun'].'</td>
@@ -292,8 +283,8 @@
             <tr> 
                 <td>'.$no.'</td>
                 <td >'.$list['id_part'].'</td>
-                <td>'.$list['no_rangk$no_rangka_cabang'].'</td>
-                <td>'.$list['no_rangk$no_rangka_lokasi'].'</td>
+                <td>'.$list['nama_cabang'].'</td>
+                <td>'.$list['nama_lokasi'].'</td>
                 <td>'.$list['part_number'].'</td>
                 <td>'.$list['id_rak'].'</td>
                 <td>'.$list['id_bin_box'].'</td>
@@ -317,7 +308,7 @@
 		foreach ($listcabang as $list) {
 			$no++;
 			$output .='
-				<option value="'.$list['id_cabang'].'">'.$list['id_cabang'].' - '.$list['no_rangk$no_rangka_cabang'].'</option>
+				<option value="'.$list['id_cabang'].'">'.$list['id_cabang'].' - '.$list['nama_cabang'].'</option>
 			';
         }
         echo '<option value="">--- Pilih Cabang ---</option>';
@@ -439,7 +430,7 @@
                 <td>'.$list['auditor'].'</td>
                 <td>'.$list['tanggal'].'</td>
                 <td>'.$list['waktu'].'</td>
-                <td>'.$list['no_rangk$no_rangka_cabang'].'</td>
+                <td>'.$list['nama_cabang'].'</td>
                 <td>'.$list['jenis_audit'].'</td>
                 <td>'.$list['keterangan'].'</td>
             </tr>
@@ -542,6 +533,33 @@
             }
         }
         
+    }
+
+    public function scan_data_unit()
+    {
+        $scanunit = $this->input->post('id');
+        $output = '';
+        $base = base_url();
+        // var_dump($usergroup);
+        if ($scanunit!= null) {
+            $dataUnit = $this->mmasdat->cariscanunit($scanunit);
+        }
+        
+        if ($dataUnit) {
+            foreach ($dataUnit as $unit) {
+                $data=[
+                    'no_mesin' => $unit['no_mesin'],
+                    'no_rangka' => $unit['no_rangka'],
+                    'kode_item' => $unit['kode_item']
+                ];
+            }
+        }else{
+            $data=[
+                    'status' => 'failed'
+            ];
+            
+        }
+        echo $data;
     }
 
     // public function search_data_unit()

@@ -34,9 +34,11 @@ class Transaksi_Auditor extends CI_Controller {
 
         public function Manual_Audit()
         {
+            $no_mesin =$this->input->get('no_mesin');
             $data=[
                 'judul'=> "Manual Audit",
-                'judul1'=>'Transaksi Auditor'
+                'judul1'=>'Transaksi Auditor',
+                'edit' => $this->mtransauditor->getUnitField($no_mesin)
             ];
             $this->load->view('_partial/header.php',$data);
             $this->load->view('_partial/sidebar.php');      
@@ -61,10 +63,14 @@ class Transaksi_Auditor extends CI_Controller {
 
         public function Edit_Audit()
         {
+            $id =$this->input->get('id');
             $data=[
                 'judul'=> "Audit Unit",
-                'judul1'=>'Transaksi Auditor'
+                'judul1'=>'Transaksi Auditor',
+                'edit' => $this->mtransauditor->getUnitById($id)
+                
             ];
+            // var_dump($data['edit']);die;
             $this->load->view('_partial/header.php',$data);
             $this->load->view('_partial/sidebar.php');      
             $this->load->view('auditorview/audit_unit/v_edit_unit.php',$data);       
@@ -74,6 +80,14 @@ class Transaksi_Auditor extends CI_Controller {
 
         public function Audit_Unit()
         {
+            $cabang = $this->input->post('id_cabang');
+            $tgl_awal = $this->input->post('tgl_awal');
+            $tgl_awal = strtotime($tgl_awal);
+            $tgl_awal= date('Y-m-d',$tgl_awal);
+            $tgl_akhir = $this->input->post('tgl_akhir');
+            $tgl_akhir = strtotime($tgl_akhir);
+            $tgl_akhir= date('Y-m-d',$tgl_akhir);
+            $status = $this->input->post('status');
             $data=[
                 'judul'=> "Audit Unit",
                 'judul1'=>'Transaksi Auditor',
@@ -81,7 +95,7 @@ class Transaksi_Auditor extends CI_Controller {
             ];
 
             $config['base_url'] = base_url()."transaksi/audit_unit";
-            $config['total_rows'] = $this->mtransauditor->countunit();
+            $config['total_rows'] = $this->mtransauditor->countunit($cabang, $tgl_awal,$tgl_akhir,$status);
             $config['per_page'] = 15;
             $config['page_query_string']=TRUE;
             $config['query_string_segment'] = 'pages';
@@ -137,66 +151,129 @@ class Transaksi_Auditor extends CI_Controller {
             $tgl_akhir = strtotime($tgl_akhir);
             $tgl_akhir= date('Y-m-d',$tgl_akhir);
             $status = $this->input->post('status');
-            $offset = $this->input->post('pages');
-            $tampil = $this->mtransauditor->previewUnit($cabang, $tgl_awal,$tgl_akhir,$status,$offset);
-            // var_dump($tampil);die;
-            $no=0;
-            $output ='';
-            $base = base_url();
-            $aksi='';
-            if ($tampil) {
-                
-                foreach ($tampil as $list) {                    
-                    if ($list['status_unit']=='Sesuai') {
-                        $aksi='<i></i>
-                                ';
-                    }else if ($list['status_unit']=='Belum Sesuai'){
-                        $aksi='
-                        <a href="'.$base."transaksi_auditor/edit_audit/".$list['id_unit'].'" class="text-warning"><i class="fa fa-pencil"></i></a>
-                        ';
-                        
-                    }else if ($list['status_unit']=='Belum ditemukan'){
-                        $aksi='
-                        <a href="'.$base."transaksi_auditor/edit_audit/".$list['id_unit'].'" class="text-warning"><i class="fa fa-pencil"></i></a>
-                        ';
-                    }
-                    $no++;
-                    $output .='
-                    <tr> 
-                        <td>'.$no.'</td>
-                        <td>'.$aksi.'</td>
-                        <td>'.$list['id_unit'].'</td>
-                        <td>'.$list['no_mesin'].'</td>
-                        <td>'.$list['no_rangka'].'</td>
-                        <td>'.$list['nama_cabang'].'</td>
-                        <td>'.$list['nama_lokasi'].'</td>
-                        <td>'.$list['umur_unit'].'</td>
-                        <td>'.$list['status_unit'].'</td>
-                        <td class="text-center">'.$list['aki'].'</td>
-                        <td class="text-center">'.$list['spion'].'</td>
-                        <td class="text-center">'.$list['helm'].'</td>
-                        <td class="text-center">'.$list['tools'].'</td>
-                        <td class="text-center">'.$list['buku_service'].'</td>
-                        <td>'.$list['tahun'].'</td>
-                        <td>'.$list['type'].'</td>
-                        <td>'.$list['kode_item'].'</td>
-                        <td>'.$list['foto'].'</td>
-                        <td>'.$list['keterangan'].'</td>
-                        <td>'.$list['is_ready'].'</td>
-                        <td>'.$list['tanggal_audit'].'</td>
-                    </tr>
-                    
-                    ';
-                }
-            }else{
-                $output .='
-                <tr>
-                <td colspan="21" class="text-center">data not found.</td>
-                </tr>
-                ';
+            
+            $count= $this->mtransauditor->countunit($cabang, $tgl_awal,$tgl_akhir,$status);
+            $this->load->library('pagination');
+            // $base= 'lap_belum_ditemukan';
+            $config['base_url'] = base_url().'transaksi_auditor/preview';
+            $config['total_rows'] = $count;
+            $config['per_page'] = 15;
+            $config['uri_segment']= 3;
+            $config['use_page_numbers'] =TRUE;
+            $config['num_links'] = 3;
+
+            $config['full_tag_open'] = '<ul class="pagination">';
+            $config['full_tag_close'] = '</ul>';
+            $config['first_link'] = 'First';
+            $config['first_tag_open'] = '<li class="page-item"><span class="page-link">';
+            $config['first_tag_close'] = '</li>';
+            $config['last_link'] = 'Last';
+            $config['last_tag_open'] = '<li class="page-item"><span class="page-link">';
+            $config['last_tag_close'] = '</li>';
+            $config['next_link'] = '&gt;';
+            $config['next_tag_open'] = '<li class="page-item"><span class="page-link">';
+            $config['next_tag_close'] = '</li>';
+            $config['prev_link'] = '&lt;&nbsp;';
+            $config['prev_tag_open'] = '<li class="page-item"><span class="page-link">';
+            $config['prev_tag_close'] = '</li>';
+            $config['num_tag_open'] = '<li class="page-item"><span class="page-link">';
+            $config['num_tag_close'] = '</li>';
+            $config['cur_tag_open'] = '<li class="page-item"><span class="page-link">';
+            $config['cur_tag_close'] = '</li>';
+            
+            $this->pagination->initialize($config);
+            
+            $page = $this->uri->segment(3);
+            if ($page==null) {
+                $page=1;
             }
-            echo $output;
+            $start= ($page-1)*$config['per_page'];
+            
+            
+            $cetak= $this->mtransauditor->previewUnit($cabang, $tgl_awal,$tgl_akhir,$status,$start);
+            $row_entry ='
+                <div class=" label label-default">'.$count.'</div>
+            ';
+            $output = [
+                'pagination_link'   => $this->pagination->create_links(),
+                'unit_list'         => $cetak,
+                'row_entry' => $row_entry,
+            ];
+
+            echo json_encode($output);
+
         }
+
+        // public function preview()
+        // {
+        //     $cabang = $this->input->post('id_cabang');
+        //     $tgl_awal = $this->input->post('tgl_awal');
+        //     $tgl_awal = strtotime($tgl_awal);
+        //     $tgl_awal= date('Y-m-d',$tgl_awal);
+        //     $tgl_akhir = $this->input->post('tgl_akhir');
+        //     $tgl_akhir = strtotime($tgl_akhir);
+        //     $tgl_akhir= date('Y-m-d',$tgl_akhir);
+        //     $status = $this->input->post('status');
+        //     $offset = $this->input->post('pages');
+        //     $tampil = $this->mtransauditor->previewUnit($cabang, $tgl_awal,$tgl_akhir,$status,$offset);
+        //     // var_dump($tampil);die;
+        //     $no=0;
+        //     $output ='';
+        //     $base = base_url();
+        //     $aksi='';
+        //     if ($tampil) {
+                
+        //         foreach ($tampil as $list) {                    
+                    // if ($list['status_unit']=='Sesuai') {
+                    //     $aksi='<i></i>
+                    //             ';
+                    // }else if ($list['status_unit']=='Belum Sesuai'){
+                    //     $aksi='
+                    //     <a href="'.$base."transaksi_auditor/edit_audit/".$list['id_unit'].'" class="text-warning"><i class="fa fa-pencil"></i></a>
+                    //     ';
+                        
+                    // }else if ($list['status_unit']=='Belum ditemukan'){
+                    //     $aksi='
+                    //     <a href="'.$base."transaksi_auditor/edit_audit/".$list['id_unit'].'" class="text-warning"><i class="fa fa-pencil"></i></a>
+                    //     ';
+                    // }
+        //             $no++;
+        //             $output .='
+        //             <tr> 
+        //                 <td>'.$no.'</td>
+        //                 <td>'.$aksi.'</td>
+        //                 <td>'.$list['id_unit'].'</td>
+        //                 <td>'.$list['no_mesin'].'</td>
+        //                 <td>'.$list['no_rangka'].'</td>
+        //                 <td>'.$list['nama_cabang'].'</td>
+        //                 <td>'.$list['nama_lokasi'].'</td>
+        //                 <td>'.$list['umur_unit'].'</td>
+        //                 <td>'.$list['status_unit'].'</td>
+        //                 <td class="text-center">'.$list['aki'].'</td>
+        //                 <td class="text-center">'.$list['spion'].'</td>
+        //                 <td class="text-center">'.$list['helm'].'</td>
+        //                 <td class="text-center">'.$list['tools'].'</td>
+        //                 <td class="text-center">'.$list['buku_service'].'</td>
+        //                 <td>'.$list['tahun'].'</td>
+        //                 <td>'.$list['type'].'</td>
+        //                 <td>'.$list['kode_item'].'</td>
+        //                 <td>'.$list['foto'].'</td>
+        //                 <td>'.$list['keterangan'].'</td>
+        //                 <td>'.$list['is_ready'].'</td>
+        //                 <td>'.$list['tanggal_audit'].'</td>
+        //             </tr>
+                    
+        //             ';
+        //         }
+        //     }else{
+        //         $output .='
+        //         <tr>
+        //         <td colspan="21" class="text-center">data not found.</td>
+        //         </tr>
+        //         ';
+        //     }
+        //     echo $output;
+        // }
 
         //-------------------------GET--------------------------------///
         public function ajax_get_unit()
@@ -275,6 +352,7 @@ class Transaksi_Auditor extends CI_Controller {
         echo $output;
     }
 
+
     public function ajax_get_cabang2()
     {
         $output = '';
@@ -328,6 +406,35 @@ class Transaksi_Auditor extends CI_Controller {
                 }
             }
         
+    }
+
+    public function scan_data_unit()
+    {
+        $scanunit = $this->input->post('id');
+        
+        $output = '';
+        $base = base_url();
+        // var_dump($usergroup);
+        if ($scanunit!= null) {
+            $dataUnit = $this->mtransauditor->cariscanunit($scanunit);
+        }
+       
+        if ($dataUnit) {
+            foreach ($dataUnit as $unit) {
+                $data=[
+                    'no_mesin' => $unit['no_mesin'],
+                    'no_rangka' => $unit['no_rangka'],
+                    'kode_item' => $unit['kode_item']
+                ];
+            }
+        }else{
+            $data=[
+                    'status' => 'failed'
+            ];
+            
+        }
+        var_dump($data);die;
+        echo $data;
     }
    
 

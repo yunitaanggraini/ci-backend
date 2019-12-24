@@ -89,151 +89,68 @@
     $('#jadwal_audit').load("<?php echo base_url() ?>audit/ajax_get_jadwal_audit");
     $('#Optcabang').load("<?php echo base_url() ?>master_data/ajax_get_cabang2");
 
+
+    
+    function scan_getdata() {
+            var cari =$('#cari').val();
+            console.log(cari);
+
+            if (cari!='') {
+                $.ajax({
+                    type:"post",
+                    url:"<?php echo base_url() ?>transaksi_auditor/scan_data_unit",
+                    data:"id="+cari,
+                    success:function(data){
+                      $("#no_mesin").val();
+                      $("#no_rangka").val();
+                      $("#kode_item").val();
+                    }
+                });
+            }else{
+
+                alert ('data not found')
+                    }
+        }
+        $('#cari').click(function(){
+            scan_getdata();
+        });
+        $('#cari').keyup(function(e) {
+          if(e.keyCode == 13) {
+              scan_getdata();
+             
+          }
+      });
+    });
+
+
     $('.i-checks').iCheck({
                     checkboxClass: 'icheckbox_square-green',
                     radioClass: 'iradio_square-green',
-                });
-
-    function getdataunit(){
-        var no_mesin = $("#no_mesin").val();
-        var no_rangka = $("#no_rangka").val();
-            $.ajax({
-                    type: "POST",
-                    url: '<?php echo base_url() ?>audit/ajax_get_temp_unit',
-                    data:"no_mesin="+no_mesin,
-                    dataTpye: "json",
-            ).success(function (data) {
-                    var json = data,
-                    obj = JSON.parse(json);
-                    $('#id_unit').val(obj.id_unit);
-                    $('#no_mesin').val(obj.no_mesin);
-                    $('#no_rangka').val(obj.no_rangka);
-                    $('#lokasi').val(obj.lokasi);
-                    $('#type_unit').val(obj.type_unit);
-                    $('#usia_unit').val(obj.usia_unit);
-                });
-            }
-
-    
-
-    // function getdata() {
-    //     $("#loading").show();
-    //     $.ajax({
-    //         type: "POST",
-    //         url: "<?php echo base_url() ?>audit/ajax_get_temp_unit",
-    //         data: {no_mesin:$("#no_mesin").val()},
-    //         dataTpye: "json",
-    //         beforeSend: function(e){
-    //             if(e $$ e.overrideMimeType){
-    //                 e.overrideMimeType("application/json;charset=UTF-8")
-    //             }
-    //         },
-    //         success: function (e) {
-    //             $("#loading").hide()
-                
-    //             if (respoonse.status == "success") {
-    //                 $("#no_rangka").val(response.no_rangka);
-    //                 $("#lokasi").val(response.lokasi);
-    //                 $("#type_unit").val(response.type_unit);
-    //                 $("#usia_unit").val(response.usia_unit);
-
-    //             }else{
-    //                 alert("Data Tidak Ditemukan")
-    //             }
-    //         },
-    //         error: function (xhr,ajaxOptions, thrownError) {
-    //             alert(xhr.responseText)
-    //         }
-    //     })
-    // }
-
-    // $("#loading").hide();
-
-    //     $("#btn-cari").click(function () {
-    //         getdata();
-    //     });
-
-    //     $("#no_mesin").keyup(function (event) {
-    //         if(event.keyCode == 13){ // Jika user menekan tombol ENTER
-    //     getdata(); // Panggil function search
-    //     });
-
-    // function search() {
-    //         var cabang =$('#Incabang').val();
-
-    //         if (cabang!='') {
-    //             $.ajax({
-    //                 type:"post",
-    //                 url:"<?php echo base_url() ?>master_data/search_data_cabang",
-    //                 data:"cabang="+cabang,
-    //                 success:function(data){
-    //                   $("#cabang").html(data);
-    //                   $("#search").val("");
-    //                 }
-    //             });
-    //         }else{
-    //             $('#cabang').load("<?php echo base_url() ?>master_data/ajax_get_cabang");
-    //                 }
-    //     }
-    //     $('#caribtn').click(function(){
-    //         search();
-    //     });
-    //     $('#Incabang').keyup(function(e) {
-    //       if(e.keyCode == 13) {
-    //          search();
-    //       }
-    //   });
-
-
     });
-
     
-
-    function edit(id) {
-        // var id = $(this).attr('data-id');
-        $.ajax({
-            url: "<?php echo base_url().$this->uri->segment(1) ?>/edit_cabang",
-            type: 'post',
-            data:"id="+id,
-            dataType:'html',
-            success: function(data) {
-                $('#data_input').html(data);
-            }
-
-        });
-      }
+    // $(document).scannerDetection({
+    //     timeBeforeScanTest: 200, // wait for the next character for upto 200ms
+    //     endChar: [13], // be sure the scan is complete if key 13 (enter) is detected
+    //     avgTimeByChar: 40, // it's not a barcode if a character takes longer than 40ms
+    //     ignoreIfFocusOn: 'input', // turn off scanner detection if an input has focus
+    //     onComplete: function(barcode, qty){ ... }, // main callback function
+    //     scanButtonKeyCode: 116, // the hardware scan button acts as key 116 (F5)
+    //     scanButtonLongPressThreshold: 5, // assume a long press if 5 or more events come in sequence
+    //     onScanButtonLongPressed: showKeyPad, // callback for long pressing the scan button
+    //     onError: function(string){alert('Error ' + string);}
+    // });
 
 
-    function show() {
-        $('#add').attr('disabled', true);
-        var $url = "<?php echo $this->uri->segment(1) ?>";
-        $.ajax({
-            url: "<?php echo base_url().$this->uri->segment(1) ?>/input_cabang",
-            type: 'post',
-            dataType:'html',
-            success: function(data) {
-                $('#data_input').html(data);
-            }
+    // function () {
+    //     $('#no_mesin').change(function () {
+    //         ver no_mesin = $('#no_mesin').val();
 
-        })
-    }
-
-    function hide() {
-        $('#add').attr('disabled', false);
-        $('#data_input').html('');
-    }
-
-
-    function () {
-        $('#no_mesin').change(function () {
-            ver no_mesin = $('#no_mesin').val();
-
-            $.ajax({
-                url: 
-            })
-        })
+    //         $.ajax({
+    //             url: 
+    //         })
+    //     })
         
-    }
+    // }
     </script>
 
 </body>

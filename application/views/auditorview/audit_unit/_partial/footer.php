@@ -104,20 +104,20 @@
     //         }
     //     })
     // });
-        var getUrlParameter = function getUrlParameter(sParam) {
-        var sPageURL = window.location.search.substring(1),
-            sURLVariables = sPageURL.split('&'),
-            sParameterName,
-            i;
+    //     var getUrlParameter = function getUrlParameter(sParam) {
+    //     var sPageURL = window.location.search.substring(1),
+    //         sURLVariables = sPageURL.split('&'),
+    //         sParameterName,
+    //         i;
 
-        for (i = 0; i < sURLVariables.length; i++) {
-            sParameterName = sURLVariables[i].split('=');
+    //     for (i = 0; i < sURLVariables.length; i++) {
+    //         sParameterName = sURLVariables[i].split('=');
 
-            if (sParameterName[0] === sParam) {
-                return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
-            }
-        }
-    };
+    //         if (sParameterName[0] === sParam) {
+    //             return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+    //         }
+    //     }
+    // };
 
         $('#data_5 .input-daterange').datepicker({
         keyboardNavigation: false,
@@ -125,30 +125,65 @@
         autoclose: true
     });
 
+    $('#preview').click(function(e){
+        e.preventDefault();
+        preview(1);
+    });
 
-});
-
-
-        function preview() {
+    $(document).on('click', '.pagination li a', function(event) {
+        event.preventDefault();
+        var page = $(this).data('ci-pagination-page');
+        preview(page);
+        
+    });
+    
+    function preview(page) {
+        var cabang = $('#OptCabang').val();
+        var tgl_awal = $('#tgl_awal').val();
+        var tgl_akhir = $('#tgl_akhir').val();
+        var status = $('#status').val();
+        var action ='preview';
+        $.ajax({
+            method: 'post',
+            dataType:'JSON',
+            url: '<?php echo base_url() ?>transaksi_auditor/preview/'+page,
+            data:{id_cabang: cabang, tgl_awal: tgl_awal, tgl_akhir: tgl_akhir, status: status, action: action},
+            // data: 'id_cabang='+cabang+'&&tgl_awal='+tgl_awal+'&&tgl_akhir='+tgl_akhir+'&&status='+status+'&&pages='+valu,
+            success:function(data){
+                
+            $('#audit_unit').html(data.unit_list);
+            $('#pagination').html(data.pagination_link);
+            $('#rows_entry').html(data.row_entry);
             
-            var cabang = $('#OptCabang').val();
-            var tgl_awal = $('#tgl_awal').val();
-            var tgl_akhir = $('#tgl_akhir').val();
-            var status = $('#status').val();
+            }
+        });
+    }
+   
 
-                    console.log(cabang,tgl_awal,tgl_akhir,status);
-            $.ajax({
-                type: 'post',
-                url :"<?php echo base_url() ?>transaksi_auditor/preview",
-                data : 'id_cabang='+cabang+'&&tgl_awal='+tgl_awal+'&&tgl_akhir='+tgl_akhir+'&&status='+status,
-                success: function (data)
-                {
-                    $('#audit_unit').html(data);    
+})
+
+
+
+        // function preview() {
+            
+        //     var cabang = $('#OptCabang').val();
+        //     var tgl_awal = $('#tgl_awal').val();
+        //     var tgl_akhir = $('#tgl_akhir').val();
+        //     var status = $('#status').val();
+
+        //             console.log(cabang,tgl_awal,tgl_akhir,status);
+        //     $.ajax({
+        //         type: 'post',
+        //         url :"<?php echo base_url() ?>transaksi_auditor/preview",
+        //         data : 'id_cabang='+cabang+'&&tgl_awal='+tgl_awal+'&&tgl_akhir='+tgl_akhir+'&&status='+status,
+        //         success: function (data)
+        //         {
+        //             $('#audit_unit').html(data);    
                     
-                }
-            });
+        //         }
+        //     });
   
-        }
+        // }
 
     </script>
 

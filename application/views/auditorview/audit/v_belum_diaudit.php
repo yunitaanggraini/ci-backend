@@ -12,74 +12,13 @@
                         <div class="col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-body">
-                            <form action="" method="post">
-                            
-                                <div class="col-sm-4">
-                                    <label>Cabang</label>
-                                    <div class="form-group">
-                                        <select name="id_cabang" class="form-control" id="OptCabang"></select>
-                                    </div>
-                                            
-                                </div> 
-
-
-
-                                <div class="col-sm-4">
-                                        <label>Periode Tanggal</label>
-                                        <div class="form-group" id="data_5">
-                                            <div class="input-daterange input-group" id="datepicker">
-                                                <input type="text" class="input-m form-control" name="tgl_awal" id="tgl_awal" value="<?php echo $tgl ?>"/>
-                                                <span class="input-group-addon" id="tgl_awal">to</span>
-                                                <input type="text" class="input-m form-control" name="tgl_akhir" id="tgl_akhir" value="<?php echo $tgl ?>" />
-                                            </div>
-                                        </div>
-                                        
-                                </div>  
-
-                                <div class="col-sm-3">
-                                    <label>Status Unit</label>
-                                    <div class="form-group">
-                                    <select name="status_unit" class="form-control" id="status">
-                                    <option value="hide">--- Pilih Status Audit Unit ---</option>
-                                    <option value="Sesuai" id="sesuai">Sesuai</option>
-                                    <option value="Belum Sesuai" id="belum_sesuai">Belum Sesuai</option>
-                                    <option value="Belum ditemukan" id="belum_ditemukan">Belum Ditemukan</option>
-                                    </select>
-                                    </div>      
-                                </div>
-
-                                <div class="col-sm-1" >
-                                    <div class="form-group m-t-md">
-                                    <a id="preview" class="btn btn-primary">Preview</a>
-                                   </div>                                           
-                                </div> 
-                            </form>
-                            
-                            
-
-
-                            <!-- <form role="form" class="form-inline">
-                            <div class="form-group col-sm-7"><label>Cari Status Audit</label><br>
-                                <div class="form-group">
-                                <select name="status_unit" class="form-control" id="status_unit" onchange="tampil()">
-                                <option value="hide">--- Pilih Status Audit Unit ---</option>
-                                <option value="Sesuai" id="sesuai">Sesuai</option>
-                                <option value="Belum Sesuai" id="belum_sesuai">Belum Sesuai</option>
-                                <option value="Tidak Ditemukan" id="tidak_ditemukan">Tidak Ditemukan</option>
-                                </select>
-                                </div>
-
-                                <button class="btn btn-w-m btn-success" id="caribtn"  onclick="showhide()">Cari Data</button>
-                                <input type="submit" value="Add Data" id="add" name="add" class="btn btn-success"  onclick="show()">
-                            </div>
-                            </form>                          -->
                                    
                            
                             </div>
                         
                     </div>
                 </div>
-            </div>
+
 
                     <div class="row">
                         <div class="col-lg-12" >

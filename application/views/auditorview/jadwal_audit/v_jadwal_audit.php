@@ -36,7 +36,7 @@
                                 </div>
                                 
                                 <div class="form-group"><label class="col-sm-2 control-label">Cabang</label>
-                                    <div class="col-sm-5"><select class="form-control m-b" name="id_cabang"  id="Optcabang">
+                                    <div class="col-sm-5"><select class="form-control m-b" name="id_cabang"  id="OptCabang">
                                     </select>
                                     </div>
                                 </div>

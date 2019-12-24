@@ -120,7 +120,7 @@
         // $('#list_jadwal_audit').load("<?php echo base_url();?>audit/ajax_get_jadwal_audit");  
     $('#Optjenisaudit').load("<?php echo base_url();?>audit/ajax_get_jenis_audit2");
     $('#audit_part').load("<?php echo base_url() ?>transaksi_auditor/ajax_get_part");
-    $('#Optcabang').load("<?php echo base_url() ?>master_data/ajax_get_cabang2");
+    $('#OptCabang').load("<?php echo base_url() ?>audit/ajax_get_cabang2");
 
     $('#list_jadwal_audit').ready(function () {
         var valu = getUrlParameter('pages');

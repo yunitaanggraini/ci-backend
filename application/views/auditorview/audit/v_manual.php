@@ -32,6 +32,7 @@
                 <div class="col-lg-12">
                     <div class="panel-body" id="show()">
                         <form method="post" class="form-horizontal" id="Formcabang" action="<?php echo base_url() ?>transaksi_auditor/post_manual">
+                        
                         <div>
                         <!-- <div class="form-group"><label class="col-sm-2 control-label">ID Unit</label>
                             <div class="col-sm-4"><input type="text" class="form-control" name="id_unit" id="id_unit"></div>
@@ -94,13 +95,25 @@
                         <div class="form-group"><label class="col-sm-2 control-label">Buku Servis</label>
                         <div class="i-checks"><label> <input type="checkbox" value="1"> <i></i></label></div>
                         </div>  
+
+                        <div>
+                            <div class="form-group"><label class="col-sm-2 control-label">Ready</label>
+                            <div class="col-sm-4">
+                            <select name="status_unit" class="form-control" id="status">
+                            <option value="hide">--- Pilih Status Ready Unit ---</option>
+                            <option value="Unit Ready" id="unit_ready">Unit Ready</option>
+                            <option value="Unit Not Ready" id="unit_not_ready">Unit Not Ready</option>
+                            </select>
+                            </div>      
+                            </div>
+                        </div>
             </div>
         </div>
     </div>
 </div>
 </div>
           </div>      
-                  
+                        
                 </form>     
                     </div>
                 </div>
