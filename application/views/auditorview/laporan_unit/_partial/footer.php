@@ -108,27 +108,78 @@
         autoclose: true
     });
 
-    
-    });
+    $('#preview').click(function(e){
+        e.preventDefault();
+        get_data(1);
+    //     var cabang = $('#OptCabang').val();
+    //     var tgl_awal = $('#tgl_awal').val();
+    //     var tgl_akhir = $('#tgl_akhir').val();
+    //     var status = $('#status').val();
+    //     var getUrlParameter = function getUrlParameter(sParam) {
+    //     var sPageURL = window.location.search.substring(1),
+    //         sURLVariables = sPageURL.split('&'),
+    //         sParameterName,
+    //         i;
 
-    function preview() {
+    //     for (i = 0; i < sURLVariables.length; i++) {
+    //         sParameterName = sURLVariables[i].split('=');
+
+    //         if (sParameterName[0] === sParam) {
+    //             return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+    //         }
+    //     }
+    // };
+
+    //     var valu = getUrlParameter('pages');
+        
+    //     $.ajax({
+    //         method: 'post',
+    //         dataType:'JSON',
+    //         url: '<?php echo base_url() ?>laporan_auditor/preview',
+    //         data:{id_cabang: cabang, tgl_awal: tgl_awal, tgl_akhir: tgl_akhir, status: status, pages: valu},
+    //         // data: 'id_cabang='+cabang+'&&tgl_awal='+tgl_awal+'&&tgl_akhir='+tgl_akhir+'&&status='+status+'&&pages='+valu,
+    //         success:function(data){
+    //             console.log(data.pagination_link);
+                
+    //         $('#unit').html(data.unit_list);
+    //         $('#pagination').html(data.pagination_link);
+    //         $('#pagination').html(data.pagination_link);
+            
+    //         }
+    //     })
+        
+    });
+    $(document).on('click', '.pagination li a', function(event) {
+        event.preventDefault();
+        var page = $(this).data('ci-pagination-page');
+        get_data(page);
+        
+    });
+    
+    function get_data(page) {
         var cabang = $('#OptCabang').val();
         var tgl_awal = $('#tgl_awal').val();
         var tgl_akhir = $('#tgl_akhir').val();
         var status = $('#status').val();
-        console.log($('#tgl_awal').val());
-        
+        var action ='preview';
         $.ajax({
-            type: 'post',
-            url: '<?php echo base_url() ?>laporan_auditor/preview',
-            data: 'id_cabang='+cabang+'&&tgl_awal='+tgl_awal+'&&tgl_akhir='+tgl_akhir+'&&status='+status,
+            method: 'post',
+            dataType:'JSON',
+            url: '<?php echo base_url() ?>laporan_auditor/preview/'+page,
+            data:{id_cabang: cabang, tgl_awal: tgl_awal, tgl_akhir: tgl_akhir, status: status, action: action},
+            // data: 'id_cabang='+cabang+'&&tgl_awal='+tgl_awal+'&&tgl_akhir='+tgl_akhir+'&&status='+status+'&&pages='+valu,
             success:function(data){
-            $('#unit').html(data);
+                
+            $('#unit').html(data.unit_list);
+            $('#pagination').html(data.pagination_link);
+            $('#rows_entry').html(data.row_entry);
             
             }
-        })
-        
+        });
     }
+    
+    });
+
     </script>
 
 </body>

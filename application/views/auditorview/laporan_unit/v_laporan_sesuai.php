@@ -32,7 +32,7 @@
                         </div>
                         <div class="col-sm-3">
                             <input type="hidden" name="status" value="Sesuai" id="status"/>
-                            <a onclick="preview()" class="btn btn-primary">Preview</a>
+                            <a id="preview" class="btn btn-primary">Preview</a>
                             <button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-print"></i> CETAK</button>
                         </div> 
                         </form>
@@ -69,7 +69,9 @@
                         </tr>
                     </tfoot>
                     </table>
-                        </div></div></div></div>
+                        </div></div></div>
+                        <div id="pagination"></div>
+                        </div>
                     </div>
                 </div>
                 </div>

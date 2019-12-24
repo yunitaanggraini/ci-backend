@@ -178,37 +178,56 @@ class laporan_auditor extends CI_Controller {
             $tgl_akhir = strtotime($tgl_akhir);
             $tgl_akhir= date('Y-m-d',$tgl_akhir);
             $status = $this->input->post('status');
+            
+            $count= $this->mlapaudit->countunit($cabang, $tgl_awal,$tgl_akhir,$status);
+            $this->load->library('pagination');
+            // $base= 'lap_belum_ditemukan';
+            $config['base_url'] = base_url().'laporan_auditor/preview';
+            $config['total_rows'] = $count;
+            $config['per_page'] = 15;
+            $config['uri_segment']= 3;
+            $config['use_page_numbers'] =TRUE;
+            $config['num_links'] = 3;
 
-            $cetak = $this->mlapaudit->cetakUnit($cabang, $tgl_awal,$tgl_akhir,$status);
-            // var_dump($cabang, $tgl_awal,$tgl_akhir,$status);die;
-            $no=0;
-            $output ='';
-            if ($cetak) {
-                
-                foreach ($cetak as $c) {
-                    $no++;
-                    $output .='
-                    <tr> 
-                        <td>'.$no.'</td>
-                        <td>'.$c['no_mesin'].'</td>
-                        <td>'.$c['no_rangka'].'</td>
-                        <td>'.$c['kode_item'].'</td>
-                        <td>'.$c['type'].'</td>
-                        <td>'.$c['umur_unit'].'</td>
-                        <td>'.$c['nama_lokasi'].'</td>
-                        <td>'.$c['status_unit'].'</td>
-                    </tr>
-                    
-                    ';
-                }
-            }else{
-                $output .='
-                <tr>
-                <td colspan="8" class="text-center">data not found.</td>
-                </tr>
-                ';
+            $config['full_tag_open'] = '<ul class="pagination">';
+            $config['full_tag_close'] = '</ul>';
+            $config['first_link'] = 'First';
+            $config['first_tag_open'] = '<li class="page-item"><span class="page-link">';
+            $config['first_tag_close'] = '</li>';
+            $config['last_link'] = 'Last';
+            $config['last_tag_open'] = '<li class="page-item"><span class="page-link">';
+            $config['last_tag_close'] = '</li>';
+            $config['next_link'] = '&gt;';
+            $config['next_tag_open'] = '<li class="page-item"><span class="page-link">';
+            $config['next_tag_close'] = '</li>';
+            $config['prev_link'] = '&lt;&nbsp;';
+            $config['prev_tag_open'] = '<li class="page-item"><span class="page-link">';
+            $config['prev_tag_close'] = '</li>';
+            $config['num_tag_open'] = '<li class="page-item"><span class="page-link">';
+            $config['num_tag_close'] = '</li>';
+            $config['cur_tag_open'] = '<li class="page-item"><span class="page-link">';
+            $config['cur_tag_close'] = '</li>';
+            
+            $this->pagination->initialize($config);
+            
+            $page = $this->uri->segment(3);
+            if ($page==null) {
+                $page=1;
             }
-            echo $output;
+            $start= ($page-1)*$config['per_page'];
+            
+            
+            $cetak= $this->mlapaudit->previewUnit($cabang, $tgl_awal,$tgl_akhir,$status,$start);
+            $row_entry ='
+                <div class=" label label-default">'.$count.'</div>
+            ';
+            $output = [
+                'pagination_link'   => $this->pagination->create_links(),
+                'unit_list'         => $cetak,
+                'row_entry' => $row_entry,
+            ];
+
+            echo json_encode($output);
 
         }
 
@@ -274,6 +293,7 @@ class laporan_auditor extends CI_Controller {
                 'judul1'=>'Laporan Auditor',
                 'tgl' => date('m/d/Y'),
             ];
+            
             $this->load->view('_partial/header.php',$data);
             $this->load->view('_partial/sidebar.php');      
             $this->load->view('auditorview/laporan_unit/v_laporan_sesuai.php',$data);       
@@ -334,7 +354,7 @@ class laporan_auditor extends CI_Controller {
         $base = base_url();
         // var_dump($usergroup);
         if ($jadwal!= null) {
-            $listUserGroup = $this->mmasdat->cariusergroup($usergroup);
+            $listUserGroup = $this->mmasdat->cariusergroup($jadwal);
         }
         
         if ($listUserGroup) {

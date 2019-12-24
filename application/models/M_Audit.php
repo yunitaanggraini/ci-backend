@@ -196,11 +196,14 @@ class M_Audit extends CI_Model {
         }
     }
 
-    public function counttempunit($cabang)
+    public function counttempunit($a,$b,$c,$d)
       {
           $respon =  $this->_client->request('GET', 'counttempunit',[
               'query'=>[
-                  'id_cabang' => $cabang
+                  'id_cabang' => $a,
+                  'tgl_awal' =>$b,
+                  'tgl_akhir' =>$c,
+                  'status' =>$d
               ]
           ]);
 
@@ -209,7 +212,7 @@ class M_Audit extends CI_Model {
         if ($result['status']==true) {
             return $result['data'];
         }else{
-            return false;
+            return 0;
         }
       }
 

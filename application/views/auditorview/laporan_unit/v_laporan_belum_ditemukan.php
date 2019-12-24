@@ -30,7 +30,7 @@
                         </div>
                         <div class="col-sm-3">
                             <input type="hidden" name="status" id="status" value="Belum ditemukan"/>
-                            <a onclick="preview()" class="btn btn-primary">Preview</a>
+                            <a id="preview" class="btn btn-primary">Preview</a>
                             <button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-print"></i> CETAK</button>
                         </div> 
                         </form>
@@ -67,14 +67,14 @@
                     </tfoot>
                     </table>
                         </div>
-                        </div>
-                </div>
-
+                        <div class="text-right" > <span id="pagination"></span></div>
                     </div>
                 </div>
-                </div>
-                </div>
             </div>
+                </div>
+                </div>
+                </div>
+                </div>
         </div>
 </div>
 
