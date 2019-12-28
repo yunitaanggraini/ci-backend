@@ -16,35 +16,7 @@
 
     <!-- Mainly scripts -->
     <script src="<?php echo base_url() ?>assets/js/jquery-3.1.1.min.js"></script>
-    <script src="<?php echo base_url() ?>assets/js/jquery.validate.js"></script>
-    <script>
-    $('#Optcabang').load("<?php echo base_url() ?>audit/ajax_get_cabang2");
-     $('#Optjenisaudit').load("<?php echo base_url();?>audit/ajax_get_jenis_audit2");
-        $( "#FormUser" ).validate({
-        rules: {
-            nik:{
-                required: true,
-                minlength: 8
-            },
-            username:{
-                required: true,
-                minlength: 5
-            },
-            nama:"required",
-            usergroup:"required",
-            divisi:"required",
-            status:"required",
-            password: {
-                required: true,
-                minlength:6
-            },
-            confirm_password: {
-            equalTo: "#password"
-            }
-
-        }
-        });
-    </script>
+    
     <script src="<?php echo base_url() ?>assets/js/bootstrap.min.js"></script>
     <script src="<?php echo base_url() ?>assets/js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="<?php echo base_url() ?>assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
@@ -55,13 +27,11 @@
     <script src="<?php echo base_url() ?>assets/js/plugins/pace/pace.min.js"></script>
 
     <script src="<?php echo base_url() ?>assets/js/plugins/toastr/toastr.min.js"></script>
-
     <script src="<?php echo base_url() ?>assets/js/plugins/datapicker/bootstrap-datepicker.js"></script>
 
-    <script src="<?php echo base_url() ?>assets/js/plugins/clockpicker/clockpicker.js"></script>
 
     <script>
-     $(document).ready(function() { 
+        $(document).ready(function() { 
         <?php if($this->session->flashdata('berhasil')) {?>
         setTimeout(function() {
                     toastr.options = {
@@ -106,6 +76,7 @@
 
     $( document ).on( "idle.idleTimer", function(event, elem, obj){
         document.getElementById("stat").innerHTML="<span class='label label-danger'> <span class='text-warning'><i class='fa fa-circle'></i></span> Offline</span>";
+
     });
 
     $( document ).on( "active.idleTimer", function(event, elem, obj, triggerevent ){
@@ -115,52 +86,105 @@
 
     </script>
     <script>
-    
-     $(document).ready(function() {
-    // $('#list_jadwal_audit').load("<?php echo base_url();?>audit/ajax_get_jadwal_audit");  
-    $('#Optjenisaudit').load("<?php echo base_url();?>audit/ajax_get_jenis_audit2");
-    $('#audit_part').load("<?php echo base_url() ?>transaksi_auditor/ajax_get_part");
-    $('#OptCabang').load("<?php echo base_url() ?>audit/ajax_get_cabang2");
+   $(document).ready(function() {
+    $('#OptCabang').load("<?php echo base_url();?>transaksi_auditor/ajax_get_cabang2");
+    // $('#audit_unit').load("<?php echo base_url() ?>transaksi_auditor/ajax_get_unit");
 
-    $('#list_jadwal_audit').ready(function () {
-        var valu = getUrlParameter('pages');
-        console.log(valu);
+    // $('#audit_unit').ready(function () {
+    //     var valu = getUrlParameter('pages');
+    //     console.log(valu);
         
-        $.ajax({
-            type:'post',
-            url:"<?php echo base_url() ?>audit/ajax_get_jadwal_audit",
-            data:"pages="+valu,
-            success:function (res) {
-                console.log(res);
-                $('#list_jadwal_audit').html(res);
-            }
-        });
-    }); 
-    var getUrlParameter = function getUrlParameter(sParam) {
-    var sPageURL = window.location.search.substring(1),
-        sURLVariables = sPageURL.split('&'),
-        sParameterName,
-        i;
+    //     $.ajax({
+    //         type:'post',
+    //         url:"<?php echo base_url() ?>transaksi_auditor/ajax_get_unit",
+    //         data:"pages="+valu,
+    //         success:function (res) {
+    //             // console.log(res);
+    //             $('#audit_unit').html(res);
+    //         }
+    //     })
+    // });
+    //     var getUrlParameter = function getUrlParameter(sParam) {
+    //     var sPageURL = window.location.search.substring(1),
+    //         sURLVariables = sPageURL.split('&'),
+    //         sParameterName,
+    //         i;
 
-    for (i = 0; i < sURLVariables.length; i++) {
-        sParameterName = sURLVariables[i].split('=');
+    //     for (i = 0; i < sURLVariables.length; i++) {
+    //         sParameterName = sURLVariables[i].split('=');
 
-        if (sParameterName[0] === sParam) {
-            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
-        }
-    }
-    };
-    $('#data_1 .input-group.date').datepicker({
-        todayBtn: "linked",
+    //         if (sParameterName[0] === sParam) {
+    //             return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+    //         }
+    //     }
+    // };
+
+        $('#data_5 .input-daterange').datepicker({
         keyboardNavigation: false,
         forceParse: false,
-        calendarWeeks: true,
         autoclose: true
     });
 
-    $('.clockpicker').clockpicker();
+    $('#preview').click(function(e){
+        e.preventDefault();
+        preview(1);
+    });
 
-}); 
+    $(document).on('click', '.pagination li a', function(event) {
+        event.preventDefault();
+        var page = $(this).data('ci-pagination-page');
+        preview(page);
+        
+    });
+    
+    function preview(page) {
+        var cabang = $('#OptCabang').val();
+        var tgl_awal = $('#tgl_awal').val();
+        var tgl_akhir = $('#tgl_akhir').val();
+        var status = $('#status').val();
+        var action ='preview';
+        $.ajax({
+            method: 'post',
+            dataType:'JSON',
+            url: '<?php echo base_url() ?>transaksi_auditor/preview/'+page,
+            data:{id_cabang: cabang, tgl_awal: tgl_awal, tgl_akhir: tgl_akhir, status: status, action: action},
+            // data: 'id_cabang='+cabang+'&&tgl_awal='+tgl_awal+'&&tgl_akhir='+tgl_akhir+'&&status='+status+'&&pages='+valu,
+            success:function(data){
+                
+            $('#audit_unit').html(data.unit_list);
+            $('#pagination').html(data.pagination_link);
+            $('#rows_entry').html(data.row_entry);
+            
+            }
+        });
+    }
+   
+
+})
+
+
+
+        // function preview() {
+            
+        //     var cabang = $('#OptCabang').val();
+        //     var tgl_awal = $('#tgl_awal').val();
+        //     var tgl_akhir = $('#tgl_akhir').val();
+        //     var status = $('#status').val();
+
+        //             console.log(cabang,tgl_awal,tgl_akhir,status);
+        //     $.ajax({
+        //         type: 'post',
+        //         url :"<?php echo base_url() ?>transaksi_auditor/preview",
+        //         data : 'id_cabang='+cabang+'&&tgl_awal='+tgl_awal+'&&tgl_akhir='+tgl_akhir+'&&status='+status,
+        //         success: function (data)
+        //         {
+        //             $('#audit_unit').html(data);    
+                    
+        //         }
+        //     });
+  
+        // }
+
     </script>
 
 </body>

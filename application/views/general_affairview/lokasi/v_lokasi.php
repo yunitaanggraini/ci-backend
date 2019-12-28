@@ -26,7 +26,7 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                <div class="panel panel-default">
+                <div class="panel panel-bluedark">
                     <div class="panel-heading">
                         <div class="col-lg-11" ><h4><i class="fa fa-info-circle"></i>List Data Lokasi Inventory</h4></div>
                             <div >
@@ -45,29 +45,38 @@
                             </div>
                         <?php
                         } ?>
-
-                    <div class="table-responsive">
+                   
+                   <div class="table-responsive">
                     <table class="table table-striped table-bordered table-hover dataTables-example" >
-                    <thead>
-                    <tr class="red-bg">
-                        <th width="3%" class="text-center">No</th>
-                        <th width="5%" class="text-center">Aksi</th>
-                        <th class="text-center" >ID Lokasi</th>
-                        <th class="text-center" >Nama Lokasi</th>
-                    </tr>
-                    </thead>
-                    <tbody id="lokasi">
-                    </tbody>
-                    <tfoot>
-                    <tr>
-                        <th class="text-center">No</th>
-                        <th class="text-center">Aksi</th>
-                        <th class="text-center">ID Lokasi</th>
-                        <th class="text-center">Nama Lokasi</th>
-                    </tr>
-                    </tfoot>
+                        <div class="tbl-header">
+                            <thead>
+                        <tr class="red-bg">
+                            <th width="3%" class="text-center">No</th>
+                            <th width="5%" class="text-center">Aksi</th>
+                            <th class="text-center" >ID Lokasi</th>
+                            <th class="text-center" >Nama Lokasi</th>
+                        </tr>
+                        </thead>
+                        </div>
+                     
+                    
+                        
+                    
+                        <tbody id="lokasi">
+                            </tbody>
+                   
+                    
+                        <tfoot>
+                        <tr>
+                            <th class="text-center">No</th>
+                            <th class="text-center">Aksi</th>
+                            <th class="text-center">ID Lokasi</th>
+                            <th class="text-center">Nama Lokasi</th>
+                        </tr>
+                        </tfoot>
                     </table>  
                     </div>
+
 
                     <div class="pull-right m-t-n-xl">
                     <?php echo $pagination;?>

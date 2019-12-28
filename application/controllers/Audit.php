@@ -19,25 +19,20 @@
             }
             
         }
-    
         public function JadwalAudit()
         {
             $data=[
                 'judul'=> "Daftar Jadwal",
                 'judul1'=>'Audit',
+                'tgl' => date('m/d/Y'),
                 'code'=> $this->maudit->buatkodejadwalaudit()
             ];
             
-            // $this->session->unset_userdata('id_cabang');
-            // // $this->session->sess_destroy();            
-            // $sesi = array(
-            //     'id_cabang' => $this->input->post('id_cabang')
-            // );
-            
-            // $this->session->set_userdata($sesi);
-            // // print_r(
-            // // $this->session->userdata()
-            // // );
+            $this->session->unset_userdata('id_cabang');           
+            $sesi = array(
+                'id_cabang' => $this->input->post('id_cabang')
+            ); 
+            $this->session->set_userdata($sesi);
                 
             $this->load->view('_partial/header.php',$data);
             $this->load->view('_partial/sidebar.php');      
@@ -59,17 +54,14 @@
             $tanggal = $waktuaudit['tanggal'];
             $waktu = $waktuaudit['waktu'];
             $waktu = str_replace(':','',$waktu);
-            // var_dump($waktu.'+'.$wktnow);
                 if ($tanggal == $tglnow && $wktnow >= $waktu && $waktuaudit['keterangan']== 'waiting') {
                     $data =[
                         'idjadwal_audit' => $waktuaudit['idjadwal_audit'],
                         'keterangan' => 'in progress'
                     ];
                     $this->maudit->updatejadwalaudit($data);
-                    
                 }
             }
-
             $config['base_url'] = base_url()."audit/list_audit";
             $config['total_rows'] = $this->maudit->countjadwalaudit();
             $config['per_page'] = 15;
@@ -188,9 +180,7 @@
         }
         $listJadwalAudit =$this->maudit->getAudit($offset);
         foreach ($listJadwalAudit as $list){
-
             if ($list['keterangan']=='waiting') {
-                
             }else if($list['keterangan']=='in progress'){
 
                 $list['keterangan']='
@@ -199,8 +189,7 @@
                 <button type="submit" name="submit" class="btn btn-success">BUKA</button>
                 </form>
                 ';
-            }else if ($list['keterangan']=='done'){
-                 
+            }else if ($list['keterangan']=='done'){     
             }
             $data = array(
                 'id_cabang' => $list['id_cabang']
@@ -535,32 +524,7 @@
         
     }
 
-    public function scan_data_unit()
-    {
-        $scanunit = $this->input->post('id');
-        $output = '';
-        $base = base_url();
-        // var_dump($usergroup);
-        if ($scanunit!= null) {
-            $dataUnit = $this->mmasdat->cariscanunit($scanunit);
-        }
-        
-        if ($dataUnit) {
-            foreach ($dataUnit as $unit) {
-                $data=[
-                    'no_mesin' => $unit['no_mesin'],
-                    'no_rangka' => $unit['no_rangka'],
-                    'kode_item' => $unit['kode_item']
-                ];
-            }
-        }else{
-            $data=[
-                    'status' => 'failed'
-            ];
-            
-        }
-        echo $data;
-    }
+    
 
     // public function search_data_unit()
     // {

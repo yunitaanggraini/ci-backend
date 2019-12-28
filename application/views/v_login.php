@@ -18,35 +18,34 @@
 </head>
 
 <body class="red-bg">
-<div class="panel panel-danger2">
+
 
 <div class="middle-box text-center animated fadeInDown">
-        
         <div>
             <div>
-
                 <h2 class="logo-name">SIMA</h2>
-
             </div>
             <div class="label-danger">
             <h3>Sistem Management Audit</h3>
             </div>
             
-            
             <form method="post" action="<?php echo base_url() ?>login/login">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Username" name="username">
-                </div>
-                <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Password" name="password">
-                </div>
-                <button type="submit" class="btn btn-danger full-width center sm-b">Login</button>
+            <div class="input-group m-b">
+                <span class="input-group-addon"><i class="fa fa-user-circle-o"></i></span> 
+                <input type="text" placeholder="Username" class="form-control" name="username">
+            </div>
+
+            <div class="input-group m-b">
+                <span class="input-group-addon"><i class="fa fa-unlock-alt"></i></span> 
+                <input type="password" placeholder="Password" class="form-control" name="password">
+            </div>
+                <button type="submit" class="btn btn-default full-width center sm-b">Login</button>
 
             </form>
         </div>
     </div>
 
-</div>
+
     
 
     <!-- Mainly scripts -->

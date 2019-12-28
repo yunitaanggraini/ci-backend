@@ -33,10 +33,9 @@
                                     <label>Status Unit</label>
                                     <div class="form-group">
                                     <select name="status_unit" class="form-control" id="status">
-                                    <option value="hide">--- Pilih Status Audit Unit ---</option>
-                                    <option value="Sesuai" id="sesuai">Sesuai</option>
-                                    <option value="Belum Sesuai" id="belum_sesuai">Belum Sesuai</option>
-                                    <option value="Belum ditemukan" id="belum_ditemukan">Belum Ditemukan</option>
+                                    <option value="hide">--- Pilih Status Part ---</option>
+                                    <option value="Sesuai" id="sesuai">Baik</option>
+                                    <option value="Belum Sesuai" id="belum_sesuai">Rusak</option>
                                     </select>
                                     </div>      
                                 </div>
@@ -59,55 +58,36 @@
                     <div class="table-responsive">
                     <table class="table table-striped table-bordered table-hover dataTables-example gray-bg" >
                     <thead>
-                    <tr >
-                        <th class="text-center" width="3%">No</th>
-                        <th class="text-center" width="3%">Aksi</th>
-                        <th class="text-center">ID Unit</th>
-                        <th class="text-center">No Mesin</th>
-                        <th class="text-center">No Rangka</th>
-                        <th class="text-center">Cabang</th>
-                        <th class="text-center">Lokasi</th>
-                        <th class="text-center">Umur Unit</th>
-                        <th class="text-center">Status Unit</th>
-                        <th class="text-center">Aki</th>
-                        <th class="text-center">Spion</th>
-                        <th class="text-center">Helm</th>
-                        <th class="text-center">Tools</th>
-                        <th class="text-center">Buku Servis</th>
-                        <th class="text-center">Tahun</th>
-                        <th class="text-center">Type</th>
-                        <th class="text-center">Kode Item</th>
-                        <th class="text-center">Foto</th>
-                        <th class="text-center">Keterangan</th>
-                        <th class="text-center">Is Ready</th>
-                        <th class="text-center">Tanggal Audit</th>
+                    <tr>
+                        <th width="3%">No</th>
+                        <th width="5%">Aksi</th>
+                        <th>ID Part</th>
+                        <th>Cabang</th>
+                        <th>Lokasi</th>
+                        <th>Part Number</th>
+                        <th>ID Rak</th>
+                        <th>ID Bin Box</th>
+                        <th>Deskripsi</th>
+                        <th>Qty</th>
+                        <th>Status</th>
+
                     </tr>
                     </thead>
-                    <tbody id="audit_unit">
+                    <tbody id="audit_part">
                     </tbody >
                     <tfoot>
                     <tr>
-                        <th class="text-center" width="3%">No</th>
-                        <th class="text-center" width="3%">Aksi</th>
-                        <th class="text-center">ID Unit</th>
-                        <th class="text-center">No Mesin</th>
-                        <th class="text-center">No Rangka</th>
-                        <th class="text-center">Cabang</th>
-                        <th class="text-center">Lokasi</th>
-                        <th class="text-center">Umur Unit</th>
-                        <th class="text-center">Status Unit</th>
-                        <th class="text-center">Aki</th>
-                        <th class="text-center">Spion</th>
-                        <th class="text-center">Helm</th>
-                        <th class="text-center">Tools</th>
-                        <th class="text-center">Buku Servis</th>
-                        <th class="text-center">Tahun</th>
-                        <th class="text-center">Type</th>
-                        <th class="text-center">Kode Item</th>
-                        <th class="text-center">Foto</th>
-                        <th class="text-center">Keterangan</th>
-                        <th class="text-center">Is Ready</th>
-                        <th class="text-center">Tanggal Audit</th>
+                        <th>No</th>
+                        <th>Aksi</th>
+                        <th>ID Part</th>
+                        <th>Cabang</th>
+                        <th>Lokasi</th>
+                        <th>Part Number</th>
+                        <th>ID Rak</th>
+                        <th>ID Bin Box</th>
+                        <th>Deskripsi</th>
+                        <th>Qty</th>
+                        <th>Status</th>
                     </tr>
                     </tfoot>
                     </table>

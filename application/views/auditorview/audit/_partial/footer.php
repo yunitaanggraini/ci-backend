@@ -87,11 +87,10 @@
     <script>
    $(document).ready(function() {
     $('#jadwal_audit').load("<?php echo base_url() ?>audit/ajax_get_jadwal_audit");
-    $('#Optcabang').load("<?php echo base_url() ?>master_data/ajax_get_cabang2");
-
-
+    $('#OptCabang').load("<?php echo base_url() ?>audit/ajax_get_cabang2");
     
     function scan_getdata() {
+            var cabang =$('#OptCabang').val();
             var cari =$('#cari').val();
             console.log(cari);
 
@@ -99,19 +98,14 @@
                 $.ajax({
                     type:"post",
                     url:"<?php echo base_url() ?>transaksi_auditor/scan_data_unit",
-                    data:"id="+cari,
+                    data:{id : cari , cabang: cabang},
                     success:function(data){
-                      $("#no_mesin").val();
-                      $("#no_rangka").val();
-                      $("#kode_item").val();
+                        console.log(data);
                     }
                 });
-            }else{
-
-                alert ('data not found')
-                    }
+            }else{alert ('data not found')}
         }
-        $('#cari').click(function(){
+        $('#preview').click(function(){
             scan_getdata();
         });
         $('#cari').keyup(function(e) {
@@ -120,37 +114,15 @@
              
           }
       });
+        
     });
-
 
     $('.i-checks').iCheck({
-                    checkboxClass: 'icheckbox_square-green',
-                    radioClass: 'iradio_square-green',
+        checkboxClass: 'icheckbox_square-green',
+        radioClass: 'iradio_square-green',
     });
     
-    // $(document).scannerDetection({
-    //     timeBeforeScanTest: 200, // wait for the next character for upto 200ms
-    //     endChar: [13], // be sure the scan is complete if key 13 (enter) is detected
-    //     avgTimeByChar: 40, // it's not a barcode if a character takes longer than 40ms
-    //     ignoreIfFocusOn: 'input', // turn off scanner detection if an input has focus
-    //     onComplete: function(barcode, qty){ ... }, // main callback function
-    //     scanButtonKeyCode: 116, // the hardware scan button acts as key 116 (F5)
-    //     scanButtonLongPressThreshold: 5, // assume a long press if 5 or more events come in sequence
-    //     onScanButtonLongPressed: showKeyPad, // callback for long pressing the scan button
-    //     onError: function(string){alert('Error ' + string);}
-    // });
 
-
-    // function () {
-    //     $('#no_mesin').change(function () {
-    //         ver no_mesin = $('#no_mesin').val();
-
-    //         $.ajax({
-    //             url: 
-    //         })
-    //     })
-        
-    // }
     </script>
 
 </body>

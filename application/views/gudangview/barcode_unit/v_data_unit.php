@@ -18,12 +18,28 @@
                                         <select name="id_cabang" class="form-control" id="OptCabang"></select>
                                     </div>        
                                 </div> 
-                                <div class="col-sm-6">
-                                        <label>Data Unit</label>
-                                        <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Cari Data Unit" id="cari">
+                                <div class="col-sm-4">
+                                        <label>Periode Tanggal</label>
+                                        <div class="form-group" id="data_5">
+                                            <div class="input-daterange input-group" id="datepicker">
+                                                <input type="text" class="input-m form-control" name="tgl_awal" id="tgl_awal" value="<?php echo $tgl ?>"/>
+                                                <span class="input-group-addon" id="tgl_awal">to</span>
+                                                <input type="text" class="input-m form-control" name="tgl_akhir" id="tgl_akhir" value="<?php echo $tgl ?>" />
+                                            </div>
                                         </div>
                                 </div>  
+
+                                <div class="col-sm-3">
+                                    <label>Status Unit</label>
+                                    <div class="form-group">
+                                    <select name="status_unit" class="form-control" id="status">
+                                    <option value="hide">--- Pilih Status Unit ---</option>
+                                    <option value="Sesuai" id="sesuai">Sesuai</option>
+                                    <option value="Belum Sesuai" id="belum_sesuai">Belum Sesuai</option>
+                                    <option value="Belum ditemukan" id="belum_ditemukan">Belum Ditemukan</option>
+                                    </select>
+                                    </div>      
+                                </div>
 
                                 <div class="col-sm-1" >
                                     <div class="form-group m-t-md">
@@ -31,7 +47,6 @@
                                    </div>                                           
                                 </div> 
                             </form>                                
-                           
                             </div>
                         
                     </div>
@@ -46,6 +61,7 @@
                     <tr >
                         <th class="text-center" width="3%">No</th>
                         <th class="text-center" width="3%">Aksi</th>
+                        <th class="text-center">Cetak Barcode/QRCode</th>
                         <th class="text-center">ID Unit</th>
                         <th class="text-center">No Mesin</th>
                         <th class="text-center">No Rangka</th>
@@ -73,6 +89,7 @@
                     <tr>
                         <th class="text-center" width="3%">No</th>
                         <th class="text-center" width="3%">Aksi</th>
+                        <th class="text-center">Cetak Barcode/QRCode</th>
                         <th class="text-center">ID Unit</th>
                         <th class="text-center">No Mesin</th>
                         <th class="text-center">No Rangka</th>

@@ -51,7 +51,7 @@
                                     <div class="col-sm-5">
                                     <div class="input-group date">
                                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                        <input type="text" class="form-control" name="tanggal" id="tanggal">
+                                        <input type="text" class="form-control" name="tanggal" id="tanggal" value="<?php echo $tgl ?>">
                                     </div>
                                 </div>
                                 </div> 
@@ -59,21 +59,14 @@
                                 <div class="form-group"><label class="col-sm-2 control-label">Waktu</label>
                                     <div class="col-sm-5">
                                 <div class="input-group clockpicker" data-autoclose="true">
-                                    <input type="text" class="form-control" name="waktu" id="waktu"  >
+                                    <input type="text" class="form-control" name="waktu" id="waktu" >
                                     <span class="input-group-addon">
                                         <span class="fa fa-clock-o"></span>
                                     </span>
                                 </div>
                             </div>
                                 </div>
-
-
-
-                                
-
-                                
-
-                                <input type="hidden" name="data_insert" id="data_insert" value="Insert"/>
+                                <!-- <input type="hidden" name="data_insert" id="data_insert" value="Insert"/> -->
                         </div>
                     </div>
                             </form>

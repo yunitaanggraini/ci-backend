@@ -188,7 +188,7 @@ class M_Transaksi_Auditor extends CI_Model {
             }             
         }else{
             $output.= '
-                <tr><td colspan="8" class="text-center">Data not found.</td></tr>
+                <tr><td colspan="24" class="text-center">Data not found.</td></tr>
             ';
         }
         return $output;
@@ -232,11 +232,12 @@ class M_Transaksi_Auditor extends CI_Model {
     }
     }
 
-    public function cariscanunit($id)
+    public function cariscanunit($id,$cabang)
       {
-          $respon =  $this->_client->request('GET', 'cariscanunit',[
+          $respon =  $this->_client->request('GET', 'listaud',[
             'query' =>[
-                'cari'=> $id
+                'id'=> $id,
+                'id_cabang' => $cabang
             ]
         ]);
 
@@ -247,6 +248,17 @@ class M_Transaksi_Auditor extends CI_Model {
         }else{
           return false;
         }
+      }
+
+      public function addScanUnit($data)
+      {
+        var_dump($data);die;
+          $respon =  $this->_client->request('POST', 'listaud',[
+              'form_params'=> $data
+          ]);
+          $result = json_decode($respon->getBody()->getContents(),true);
+  
+          return $result['data'];
       }
 
 
