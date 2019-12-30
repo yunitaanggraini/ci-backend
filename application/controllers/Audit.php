@@ -19,25 +19,20 @@
             }
             
         }
-    
         public function JadwalAudit()
         {
             $data=[
                 'judul'=> "Daftar Jadwal",
                 'judul1'=>'Audit',
+                'tgl' => date('m/d/Y'),
                 'code'=> $this->maudit->buatkodejadwalaudit()
             ];
             
-            $this->session->unset_userdata('id_cabang');
-            // $this->session->sess_destroy();            
+            $this->session->unset_userdata('id_cabang');           
             $sesi = array(
                 'id_cabang' => $this->input->post('id_cabang')
-            );
-            
+            ); 
             $this->session->set_userdata($sesi);
-            print_r(
-            $this->session->userdata()
-            );
                 
             $this->load->view('_partial/header.php',$data);
             $this->load->view('_partial/sidebar.php');      
@@ -59,17 +54,14 @@
             $tanggal = $waktuaudit['tanggal'];
             $waktu = $waktuaudit['waktu'];
             $waktu = str_replace(':','',$waktu);
-            // var_dump($waktu.'+'.$wktnow);
                 if ($tanggal == $tglnow && $wktnow >= $waktu && $waktuaudit['keterangan']== 'waiting') {
                     $data =[
                         'idjadwal_audit' => $waktuaudit['idjadwal_audit'],
                         'keterangan' => 'in progress'
                     ];
                     $this->maudit->updatejadwalaudit($data);
-                    
                 }
             }
-
             $config['base_url'] = base_url()."audit/list_audit";
             $config['total_rows'] = $this->maudit->countjadwalaudit();
             $config['per_page'] = 15;
@@ -180,41 +172,29 @@
     public function ajax_get_jadwal_audit()
     {
         $output = '';
-        $base = base_url();
-        
+        $base = base_url(); 
         if ($this->input->post('pages')!='undefined') {
             $offset = $this->input->post('pages');
         }else{
             $offset=0;
         }
-        // data['kodeunik'] = $this->musergroup->kode(); 
-        
         $listJadwalAudit =$this->maudit->getAudit($offset);
         foreach ($listJadwalAudit as $list){
-
             if ($list['keterangan']=='waiting') {
-                
             }else if($list['keterangan']=='in progress'){
 
                 $list['keterangan']='
-                <form action="'.$base.'audit/JadwalAudit" method="POST">
+                <form action="'.$base.'data_temporary/unit" method="POST">
                 <input type="hidden" name="id_cabang" value="'.$list['id_cabang'].'"/>
                 <button type="submit" name="submit" class="btn btn-success">BUKA</button>
                 </form>
                 ';
- 
-            
-            }else if ($list['keterangan']=='done'){
-                 
+            }else if ($list['keterangan']=='done'){     
             }
-            // $this->session->unset_userdata('id_cabang');
             $data = array(
                 'id_cabang' => $list['id_cabang']
             );
             $this->session->set_userdata( $data );
-            
-                
-               
             $offset++;
             $output .='
             <tr> 
@@ -378,7 +358,7 @@
             'tanggal'        => $this->input->post('tanggal', true),
             'waktu'          => $this->input->post('waktu', true),
             'keterangan'     => 'waiting',
-            'user'  => $this->session->userdata('username')
+            'user'  => $this->session->userdata('no_mesin')
              ];
             $id = $data['idjadwal_audit'];
 
@@ -464,11 +444,11 @@
         $base = base_url();
         // var_dump($usergroup);
         if ($usergroup!= null) {
-            $listUserGroup = $this->mmasdat->cariusergroup($usergroup);
+            $listUnitGroup = $this->mmasdat->cariunitgroup($usergroup);
         }
         
-        if ($listUserGroup) {
-            foreach ($listUserGroup as $list) {
+        if ($listUnitGroup) {
+            foreach ($listUnitGroup as $list) {
                 
                 $no++;
                 $output .='
@@ -545,9 +525,26 @@
     }
 
     
-    }
+
+    // public function search_data_unit()
+    // {
+    //     $no_mesin = $this->input->post('no_mesin');
+    //     $no_rangka = $this->input->post('no_rangka');
+    //     $output = '';
+    //     $no = 0;
+    //     $base = base_url();
+    //     if ($no_mesin!= null && $no_rangka!=null) {
+    //         $listUnit = $this->mmasdat->cariunit($no_mesin,$no_rangka);
+    //     }elseif($no_mesin!=null&& $no_rangka==null){
+    //         $listUnit = $this->mmasdat->carino_mesin($no_mesin);
+    //     }elseif ($no_mesin=='' && $no_rangka!='') {
+    //         $listUnit = $this->mmasdat->carino_rangka($no_rangka);
+    //     }
+
+    
+    // }
     
     /* End of file Audit.php */
     
-
+    }
 ?>

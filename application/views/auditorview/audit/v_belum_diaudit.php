@@ -7,36 +7,18 @@
                         <h3><i class="fa fa-info-circle"></i> Data Audit Unit</h3>
                     </div>
                     <div class="panel-body">
+                        
                     <div class="row">
                         <div class="col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-body">
-                            <form action="" method="post">
-                                <div class="col-sm-4">
-                                    <label>Cabang</label>
-                                    <div class="form-group">
-                                        <select name="id_cabang" class="form-control" id="OptCabang"></select>
-                                    </div>        
-                                </div> 
-                                <div class="col-sm-6">
-                                        <label>Data Unit</label>
-                                        <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Cari Data Unit" id="cari">
-                                        </div>
-                                </div>  
-
-                                <div class="col-sm-1" >
-                                    <div class="form-group m-t-md">
-                                    <a id="preview" class="btn btn-primary">Preview</a>
-                                   </div>                                           
-                                </div> 
-                            </form>                                
+                                   
                            
                             </div>
                         
                     </div>
                 </div>
-            </div>
+
 
                     <div class="row">
                         <div class="col-lg-12" >

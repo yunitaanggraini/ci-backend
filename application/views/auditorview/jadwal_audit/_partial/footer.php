@@ -117,10 +117,10 @@
     <script>
     
      $(document).ready(function() {
-        // $('#list_jadwal_audit').load("<?php echo base_url();?>audit/ajax_get_jadwal_audit");  
+    // $('#list_jadwal_audit').load("<?php echo base_url();?>audit/ajax_get_jadwal_audit");  
     $('#Optjenisaudit').load("<?php echo base_url();?>audit/ajax_get_jenis_audit2");
     $('#audit_part').load("<?php echo base_url() ?>transaksi_auditor/ajax_get_part");
-    $('#Optcabang').load("<?php echo base_url() ?>master_data/ajax_get_cabang2");
+    $('#OptCabang').load("<?php echo base_url() ?>audit/ajax_get_cabang2");
 
     $('#list_jadwal_audit').ready(function () {
         var valu = getUrlParameter('pages');
@@ -135,8 +135,7 @@
                 $('#list_jadwal_audit').html(res);
             }
         });
-    });
-    
+    }); 
     var getUrlParameter = function getUrlParameter(sParam) {
     var sPageURL = window.location.search.substring(1),
         sURLVariables = sPageURL.split('&'),
@@ -151,9 +150,6 @@
         }
     }
     };
-
-
-
     $('#data_1 .input-group.date').datepicker({
         todayBtn: "linked",
         keyboardNavigation: false,
@@ -164,9 +160,7 @@
 
     $('.clockpicker').clockpicker();
 
-});
-   
-   
+}); 
     </script>
 
 </body>

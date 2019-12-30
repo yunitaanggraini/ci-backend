@@ -229,6 +229,25 @@ class M_Audit extends CI_Model {
         }
       }
 
+      public function cariUnit($no_mesin,$no_rangka)
+      {
+          
+          $respon =  $this->_client->request('GET', 'cariUnit',[
+              'query'=>[
+                  'no_mesin'=> $no_mesin,
+                  'no_rangka'=> $no_rangka
+              ]
+          ]);
+  
+          $result = json_decode($respon->getBody()->getContents(),true);
+  
+          if ($result['status']==true) {
+              return $result['data'];
+          }else{
+              return false;
+          }
+      }
+
     
 
 }

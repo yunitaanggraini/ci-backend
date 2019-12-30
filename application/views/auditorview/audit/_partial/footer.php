@@ -87,87 +87,42 @@
     <script>
    $(document).ready(function() {
     $('#jadwal_audit').load("<?php echo base_url() ?>audit/ajax_get_jadwal_audit");
-    $('#Optcabang').load("<?php echo base_url() ?>master_data/ajax_get_cabang2");
+    $('#OptCabang').load("<?php echo base_url() ?>audit/ajax_get_cabang2");
+    
+    function scan_getdata() {
+            var cabang =$('#OptCabang').val();
+            var cari =$('#cari').val();
+            console.log(cari);
 
-    $('.i-checks').iCheck({
-                    checkboxClass: 'icheckbox_square-green',
-                    radioClass: 'iradio_square-green',
-                });
-
-    function search() {
-            var cabang =$('#Incabang').val();
-
-            if (cabang!='') {
+            if (cari!='') {
                 $.ajax({
                     type:"post",
-                    url:"<?php echo base_url() ?>master_data/search_data_cabang",
-                    data:"cabang="+cabang,
+                    url:"<?php echo base_url() ?>transaksi_auditor/scan_data_unit",
+                    data:{id : cari , cabang: cabang},
                     success:function(data){
-                      $("#cabang").html(data);
-                      $("#search").val("");
+                        console.log(data);
                     }
                 });
-            }else{
-                $('#cabang').load("<?php echo base_url() ?>master_data/ajax_get_cabang");
-                    }
+            }else{alert ('data not found')}
         }
-        $('#caribtn').click(function(){
-            search();
+        $('#preview').click(function(){
+            scan_getdata();
         });
-        $('#Incabang').keyup(function(e) {
+        $('#cari').keyup(function(e) {
           if(e.keyCode == 13) {
-             search();
+              scan_getdata();
+             
           }
       });
-
-
+        
     });
 
-    function edit(id) {
-        // var id = $(this).attr('data-id');
-        $.ajax({
-            url: "<?php echo base_url().$this->uri->segment(1) ?>/edit_cabang",
-            type: 'post',
-            data:"id="+id,
-            dataType:'html',
-            success: function(data) {
-                $('#data_input').html(data);
-            }
+    $('.i-checks').iCheck({
+        checkboxClass: 'icheckbox_square-green',
+        radioClass: 'iradio_square-green',
+    });
+    
 
-        });
-      }
-
-
-    function show() {
-        $('#add').attr('disabled', true);
-        var $url = "<?php echo $this->uri->segment(1) ?>";
-        $.ajax({
-            url: "<?php echo base_url().$this->uri->segment(1) ?>/input_cabang",
-            type: 'post',
-            dataType:'html',
-            success: function(data) {
-                $('#data_input').html(data);
-            }
-
-        })
-    }
-
-    function hide() {
-        $('#add').attr('disabled', false);
-        $('#data_input').html('');
-    }
-
-
-    function () {
-        $('#no_mesin').change(function () {
-            ver no_mesin = $('#no_mesin').val();
-
-            $.ajax({
-                url: 
-            })
-        })
-        
-    }
     </script>
 
 </body>

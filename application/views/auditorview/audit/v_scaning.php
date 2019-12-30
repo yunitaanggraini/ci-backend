@@ -10,16 +10,16 @@
             <div class="panel-body">
                 <form method="post" class="form-horizontal" id="Formcabang" action="<?php echo base_url() ?>audit/post_manual">
                 <div>
-                <div class="form-group"><label class="col-sm-2 control-label">ID Unit</label>
-                    <div class="col-sm-4"><input type="text" class="form-control" name="id_unit" id="id_unit" readonly></div>
-                </div>
+                <!-- <div class="form-group"><label class="col-sm-2 control-label">ID Unit</label>
+                    <div class="col-sm-4"><input type="text" class="form-control" name="id_unit" id="id_unit" ></div>
+                </div> -->
 
                 <div class="form-group"><label class="col-sm-2 control-label">No Mesin</label>
-                    <div class="col-sm-4"><input type="text" class="form-control" name="no_mesin" id="no_mesin"readonly></div>
+                    <div class="col-sm-4"><input type="text" class="form-control" name="no_mesin" id="no_mesin"></div>
                 </div>
 
                 <div class="form-group"><label class="col-sm-2 control-label">No Rangka</label>
-                    <div class="col-sm-4"><input type="text" class="form-control" name="no_rangka" id="no_rangka"readonly></div>
+                    <div class="col-sm-4"><input type="text" class="form-control" name="no_rangka" id="no_rangka"></div>
                 </div>
 
                 <div class="form-group"><label class="col-sm-2 control-label">Lokasi</label>

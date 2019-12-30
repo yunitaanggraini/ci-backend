@@ -52,6 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'login/login';
 
 $route['dashboard']="dashboard";
+$route['profil']="profil/profil";
 
 
 $route['home']="welcome/home";
@@ -87,7 +88,14 @@ $route['data_temporary/part']="audit/viewTempPart";
 $route['transaksi/audit']="transaksi_auditor/audit";
 $route['transaksi/audit_unit']="transaksi_auditor/audit_unit";
 $route['transaksi/audit_part']="transaksi_auditor/audit_part";
+$route['transaksi/audit_inventory']="transaksi_auditor/audit_inventory";
+$route['transaksi/list_audit_inventory']="transaksi_auditor/listaudit_inventory";
+$route['transaksi/list_audit_part']="transaksi_auditor/listaudit_part";
 $route['laporan/laporan_audit_unit']="laporan_auditor/laporan_unit";
+
+$route['cetak_barcode/data_part']="barcode/BarcodePart";
+$route['cetak_barcode/data_unit']="barcode/BarcodeUnit";
+
 
 
 $route['error']='error';

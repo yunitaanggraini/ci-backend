@@ -87,37 +87,7 @@
     </script>
     <script>
    $(document).ready(function() {
-    $('#OptCabang').load("<?php echo base_url();?>transaksi_auditor/ajax_get_cabang2");
-    // $('#audit_unit').load("<?php echo base_url() ?>transaksi_auditor/ajax_get_unit");
-
-    // $('#audit_unit').ready(function () {
-    //     var valu = getUrlParameter('pages');
-    //     console.log(valu);
-        
-    //     $.ajax({
-    //         type:'post',
-    //         url:"<?php echo base_url() ?>transaksi_auditor/ajax_get_unit",
-    //         data:"pages="+valu,
-    //         success:function (res) {
-    //             // console.log(res);
-    //             $('#audit_unit').html(res);
-    //         }
-    //     })
-    // });
-    //     var getUrlParameter = function getUrlParameter(sParam) {
-    //     var sPageURL = window.location.search.substring(1),
-    //         sURLVariables = sPageURL.split('&'),
-    //         sParameterName,
-    //         i;
-
-    //     for (i = 0; i < sURLVariables.length; i++) {
-    //         sParameterName = sURLVariables[i].split('=');
-
-    //         if (sParameterName[0] === sParam) {
-    //             return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
-    //         }
-    //     }
-    // };
+    $('#OptCabang').load("<?php echo base_url();?>barcode/ajax_get_cabang2");
 
         $('#data_5 .input-daterange').datepicker({
         keyboardNavigation: false,
@@ -149,41 +119,17 @@
             url: '<?php echo base_url() ?>transaksi_auditor/preview/'+page,
             data:{id_cabang: cabang, tgl_awal: tgl_awal, tgl_akhir: tgl_akhir, status: status, action: action},
             // data: 'id_cabang='+cabang+'&&tgl_awal='+tgl_awal+'&&tgl_akhir='+tgl_akhir+'&&status='+status+'&&pages='+valu,
-            success:function(data){
-                
+            
+            success:function(data){    
             $('#audit_unit').html(data.unit_list);
             $('#pagination').html(data.pagination_link);
             $('#rows_entry').html(data.row_entry);
+            }          
             
-            }
         });
-    }
-   
-
+    } 
 })
 
-
-
-        // function preview() {
-            
-        //     var cabang = $('#OptCabang').val();
-        //     var tgl_awal = $('#tgl_awal').val();
-        //     var tgl_akhir = $('#tgl_akhir').val();
-        //     var status = $('#status').val();
-
-        //             console.log(cabang,tgl_awal,tgl_akhir,status);
-        //     $.ajax({
-        //         type: 'post',
-        //         url :"<?php echo base_url() ?>transaksi_auditor/preview",
-        //         data : 'id_cabang='+cabang+'&&tgl_awal='+tgl_awal+'&&tgl_akhir='+tgl_akhir+'&&status='+status,
-        //         success: function (data)
-        //         {
-        //             $('#audit_unit').html(data);    
-                    
-        //         }
-        //     });
-  
-        // }
 
     </script>
 

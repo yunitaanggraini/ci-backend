@@ -86,7 +86,8 @@
     <script>
    $(document).ready(function() {
     $('#audit_part').load("<?php echo base_url() ?>transaksi_auditor/ajax_get_part");
-    $('#Optcabang').load("<?php echo base_url() ?>master_data/ajax_get_cabang2");
+    // $('#list_audit_part').load("<?php echo base_url() ?>transaksi_auditor/ajax_get_part");
+    $('#OptCabang').load("<?php echo base_url();?>transaksi_auditor/ajax_get_cabang2");
     function search() {
             var cabang =$('#Incabang').val();
 
