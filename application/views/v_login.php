@@ -17,32 +17,40 @@
 
 </head>
 
-<body class="red-bg">
-
+<body class="gray-bg">
 
 <div class="middle-box text-center animated fadeInDown">
-        <div>
+    <div class="panel" >
+        <div class="panel-heading red-bg">
             <div>
-                <h2 class="logo-name">SIMA</h2>
+                <h2 class="logo-name text-white">SIMA</h2>
             </div>
-            <div class="label-danger">
-            <h3>Sistem Management Audit</h3>
+            <div class=" m-t-n text-white">
+            <h4>Sistem Informasi Management Audit</h4>
             </div>
-            
-            <form method="post" action="<?php echo base_url() ?>login/login">
+        </div>
+        <div class="panel-body">
+            <form id="FormLog" method="post" action="<?php echo base_url() ?>login/login">
+            <?php if ($this->session->userdata('pesan')) {?>
+                
+                    <?php echo $this->session->userdata('pesan'); ?>
+            <?php
+            }?>
             <div class="input-group m-b">
-                <span class="input-group-addon"><i class="fa fa-user-circle-o"></i></span> 
+                <span class="input-group-addon"><i class="fa fa-fw fa-user-circle-o"></i></span> 
                 <input type="text" placeholder="Username" class="form-control" name="username">
             </div>
-
+        
             <div class="input-group m-b">
-                <span class="input-group-addon"><i class="fa fa-unlock-alt"></i></span> 
+                <span class="input-group-addon"><i class="fa fa-fw fa-unlock-alt"></i></span> 
                 <input type="password" placeholder="Password" class="form-control" name="password">
             </div>
-                <button type="submit" class="btn btn-default full-width center sm-b">Login</button>
-
+                <button type="submit" class="btn btn-danger full-width center sm-b">LOG IN</button>
+        
             </form>
         </div>
+    </div>
+            
     </div>
 
 
@@ -51,7 +59,20 @@
     <!-- Mainly scripts -->
     <script src="<?php echo base_url() ?>assets/js/jquery-3.1.1.min.js"></script>
     <script src="<?php echo base_url() ?>assets/js/bootstrap.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/js/jquery.validate.js"></script>
+    <script>
+        $( "#FormLog" ).validate({
+        rules: {
+            username:{
+                required: true
+            },
+            password:{
+                required:true
+            }
 
+        }
+        });
+    </script>
 </body>
 
 </html>

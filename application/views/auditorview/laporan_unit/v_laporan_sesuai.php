@@ -9,7 +9,7 @@
                     </div>
                     <div class="panel-body">
                     <div class="row">
-                    <form action="<?php echo base_url()?>laporan_auditor/cetakexcel" method="post">
+                    <form class="form-horizontal" action="<?php echo base_url()?>laporan_auditor/cetakexcel" method="post">
 
                         <div class="col-sm-4">
                             <div class="form-group">
@@ -18,7 +18,7 @@
                                 </div>
                             </div>        
                         </div> 
-                        <div class="col-sm-5">
+                        <div class="col-sm-5 ">
                                 <div class="form-group" id="data_5">
                                     <label class="col-sm-3 control-label">Periode Tanggal</label>
                                     <div class="col-sm-9">
@@ -33,7 +33,8 @@
                         <div class="col-sm-3">
                             <input type="hidden" name="status" value="Sesuai" id="status"/>
                             <a id="preview" class="btn btn-primary">Preview</a>
-                            <button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-print"></i> CETAK</button>
+                            <button type="submit" class="btn btn-primary" id="type" name="type" value="excel"><i class="fa fa-fw fa-print"></i>Excel</button>
+                            <button type="submit" class="btn btn-danger" id="type" name="type" value="pdf"><i class="fa fa-fw fa-file-pdf-o"></i>Pdf</button>
                         </div> 
                         </form>
                         </div>

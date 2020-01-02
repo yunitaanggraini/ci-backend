@@ -40,6 +40,7 @@ class ComposerStaticInit5ad674a21ff5f834fc445412e1676e40
         ),
         'F' => 
         array (
+            'Fpdf\\' => 5,
             'FontLib\\' => 8,
         ),
         'E' => 
@@ -92,6 +93,10 @@ class ComposerStaticInit5ad674a21ff5f834fc445412e1676e40
         'GuzzleHttp\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
+        ),
+        'Fpdf\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/fpdf/fpdf/src/Fpdf',
         ),
         'FontLib\\' => 
         array (

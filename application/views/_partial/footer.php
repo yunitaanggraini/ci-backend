@@ -1,3 +1,4 @@
+
 <div class="footer fixed">
             <div class="pull-right">
                 <div id="stat">

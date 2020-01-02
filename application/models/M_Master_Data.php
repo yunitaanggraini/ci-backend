@@ -215,7 +215,7 @@ class M_Master_Data extends CI_Model {
 
         $result = json_decode($respon->getBody()->getContents(),true);
         if ($result['status']==true) {
-            return $result['data']['0']; 
+            return $result['data']; 
         }else{
             return false;
         }

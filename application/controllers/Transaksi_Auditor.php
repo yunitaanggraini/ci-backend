@@ -475,7 +475,7 @@ class Transaksi_Auditor extends CI_Controller {
                 var_dump($postscan);die;
                 $getunit = $this->mtransauditor->getUnit();
                 if ($getunit) {
-                    foreach ($getUnit as $unit) {
+                    foreach ($getunit as $unit) {
                         $output .='
                                 <tr> 
                                     <td>'.$offset.'</td>

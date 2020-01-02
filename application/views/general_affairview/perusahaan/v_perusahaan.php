@@ -45,20 +45,20 @@
                     <table class="table table-striped table-bordered table-hover dataTables-example" >
                     <thead>
                     <tr>
-                        <th width="3%">No</th>
-                        <th width="5%">Aksi</th>
-                        <th>ID Perusahaan</th>
-                        <th>Nama Perusahaan</th>
+                        <th class="text-center" width="3%">No</th>
+                        <th class="text-center" width="5%">Aksi</th>
+                        <th class="text-center">ID Perusahaan</th>
+                        <th class="text-center">Nama Perusahaan</th>
                     </tr>
                     </thead>
                     <tbody id="perusahaan">
                     </tbody >
                     <tfoot>
                     <tr>
-                        <th>No</th>
-                        <th>Aksi</th>
-                        <th>ID Perusahaan</th>
-                        <th>Nama Perusahaan</th>
+                        <th class="text-center">No</th>
+                        <th class="text-center">Aksi</th>
+                        <th class="text-center">ID Perusahaan</th>
+                        <th class="text-center">Nama Perusahaan</th>
                     </tr>
                     </tfoot>
                     </table>

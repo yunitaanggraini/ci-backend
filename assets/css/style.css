@@ -4116,7 +4116,6 @@ td{
 .red-bg,
 .bg-danger {
   background-color: #EE1C25;
-  color: #110202;
 }
 .black-bg {
   background-color: #0e0d0d;
@@ -4782,9 +4781,9 @@ body.mini-navbar.fixed-sidebar .logo-element {
   max-width: 400px;
   z-index: 100;
   margin: 0 auto;
-  padding-top: 50px;
+  margin-top: 0px;
   padding-left: 20px;
-  padding-right: 20px;;
+  padding-right: 20px;
 }
 .lockscreen.middle-box {
   width: 200px;
@@ -4806,13 +4805,16 @@ body.mini-navbar.fixed-sidebar .logo-element {
 }
 .logo-name {
   /* color: #f5515x1; */
-  color: rgb(246, 246, 246);
-  font-size: 120px;
+  /* color: rgb(246, 246, 246);
+   */
+   color: #ffff;
+  font-size: 86px;
   font-weight: 800;
   letter-spacing: -10px;
   margin-top: 55px;
   margin-bottom: 0;
   padding-top: 2px;
+  letter-spacing: 1rem
 }
 .middle-box h1 {
   font-size: 170px;
@@ -8663,4 +8665,6 @@ body.md-skin {
   #page-wrapper {
     margin: 0;
   }
+
+/*Custom*/
 }

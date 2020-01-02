@@ -88,6 +88,7 @@
     $('#jenis_inv').load("<?php echo base_url() ?>master_data/ajax_get_jenis_inv");
     function search(){
             var jenisinv =$('#Injenisinv').val();
+            $("#jenis_inv").html('<tr> <td colspan="10" id="loading"> </td></tr>');
 
             if (jenisinv!='') {
                 $.ajax({

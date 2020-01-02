@@ -66,7 +66,7 @@
                 <span class="text-white text-xs block"><i class="fa fa-user-circle-o"></i> <?php echo $this->session->userdata('nama');
                  ?> <b class="caret"></b></span></a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a href="<?php echo base_url() ?>profil/profil">Profile</a></li>
+                            <li><a data-toggle="modal" data-target="#myModal">Profile</a></li>
                             <li><a href="contacts.html">Change Password</a></li>
                             <li class="divider"></li>
                             <li><a href="<?php echo base_url() ?>login/logout"> <i class="fa fa-sign-out"></i> <strong>Logout</strong> </a></li>
@@ -74,8 +74,89 @@
             </li>    
 
             </ul>
-
         </nav>
+        <div class="modal inmodal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog">
+                                <div class="modal-content ">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                            <h4 class="modal-title">Profile Detail</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div id="profil">
+                                                <div class="row">
+                                                    <div class="col-sm-3">
+                                                        <label >NIK</label>
+                                                    </div>
+                                                    <div class="col-sm-1">
+                                                        <label >:</label>
+                                                    </div>
+                                                    <div class="col-sm-8">
+                                                        <?php echo 
+                                                        $this->session->userdata('nik');
+                                                         ?>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-3">
+                                                        <label >Username</label>
+                                                    </div>
+                                                    <div class="col-sm-1">
+                                                        <label >:</label>
+                                                    </div>
+                                                    <div class="col-sm-8">
+                                                        <?php echo 
+                                                        $this->session->userdata('username');
+                                                         ?>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-3">
+                                                        <label >Perusahaan</label>
+                                                    </div>
+                                                    <div class="col-sm-1">
+                                                        <label >:</label>
+                                                    </div>
+                                                    <div class="col-sm-8">
+                                                        <?php echo 
+                                                        $this->session->userdata('perusahaan');
+                                                         ?>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-3">
+                                                        <label >Cabang</label>
+                                                    </div>
+                                                    <div class="col-sm-1">
+                                                        <label >:</label>
+                                                    </div>
+                                                    <div class="col-sm-8">
+                                                        <?php echo 
+                                                        $this->session->userdata('cabang');
+                                                         ?>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-3">
+                                                        <label >Status</label>
+                                                    </div>
+                                                    <div class="col-sm-1">
+                                                        <label >:</label>
+                                                    </div>
+                                                    <div class="col-sm-8">
+                                                        <?php echo 
+                                                        $this->session->userdata('status');
+                                                         ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
         </div>
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-sm-6">

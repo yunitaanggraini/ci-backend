@@ -15,7 +15,8 @@
 		"dompdf/dompdf": "^0.8.3",
 		"picqer/php-barcode-generator": "^0.3.0",
 		"endroid/qr-code": "^2.5",
-		"phpoffice/phpexcel": "^1.8"
+		"phpoffice/phpexcel": "^1.8",
+		"fpdf/fpdf": "^1.81"
 	},
 	"autoload": {
 		"classmap": [

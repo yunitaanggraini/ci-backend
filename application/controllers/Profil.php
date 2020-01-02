@@ -13,10 +13,9 @@ class Profil extends CI_Controller {
  
     public function profil()
     {
-        $data['judul']='Profil';
-        $this->load->view('v_profil',$data);
-		$this->load->view('_partial/header.php',$data);
-        $this->load->view('_partial/sidebar.php');			
+        $this->load->view('_partial/header.php');
+        $this->load->view('v_profil.php');
+        			
     }
 
 }

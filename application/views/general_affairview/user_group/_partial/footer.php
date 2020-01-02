@@ -84,13 +84,14 @@
     });
 
     </script>
+    
     <script>
    $(document).ready(function() {
     $('#usergroup').load("<?php echo base_url() ?>master_data/ajax_get_usergroup");
     function search() {
             var usergroup =$('#Inusergroup').val();
             console.log(usergroup);
-            
+            $("#usergroup").html('<tr> <td colspan="4" id="loading"> </td></tr>');
             if (usergroup!='') {
                 $.ajax({
                     type:"post",

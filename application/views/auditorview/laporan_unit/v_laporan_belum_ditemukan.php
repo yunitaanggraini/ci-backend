@@ -31,7 +31,8 @@
                         <div class="col-sm-3">
                             <input type="hidden" name="status" id="status" value="Belum ditemukan"/>
                             <a id="preview" class="btn btn-primary">Preview</a>
-                            <button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-print"></i> CETAK</button>
+                            <button type="submit" class="btn btn-primary" id="type" name="type" value="excel"><i class="fa fa-fw fa-print"></i>Excel</button>
+                            <button type="submit" class="btn btn-danger" id="type" name="type" value="pdf"><i class="fa fa-fw fa-file-pdf-o"></i>Pdf</button>
                         </div> 
                         </form>
                         <hr size="100px">

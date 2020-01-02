@@ -2,7 +2,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Master_Data extends CI_Controller {
-
     public function __construct()
     {
         parent::__construct();
@@ -227,7 +226,7 @@ class Master_Data extends CI_Controller {
 				<tr>
 					<td class='text-center'>".$no."</td>
                     <td class='text-center'>
-                    <a href='".$base."master_data/edit_user/".$list['nik']."' class='text-warning'><i class='fa fa-pencil'></i></a>
+                    <a href='".$base."master_data/edit_user?id=".$list['nik']."&&usergroup=".$list['id_usergroup']."&&perusahaan=".$list['id_perusahaan']."&&lokasi=".$list['id_lokasi']."&&cabang=".$list['id_cabang']."' class='text-warning'><i class='fa fa-pencil'></i></a>
                     <a href='".$base."master_data/delete_user/".$list['nik']."' class='text-danger' onclick=\"return confirm('Konfirmasi menghapus data ".$list['nik']."');\"><i class='fa fa-trash'></i></a>
                     </td>
 					<td class='text-center'>".$list['nik']."</td>
@@ -622,16 +621,26 @@ class Master_Data extends CI_Controller {
     //------------------------------------------------EDIT--------------------------------------------------------//
     public function edit_user()
     {
+        $id = $this->input->get('id');
+        $cabang = $this->input->get('cabang');
+        $lokasi = $this->input->get('lokasi');
+        $perusahaan = $this->input->get('perusahaan');
+        $usergroup = $this->input->get('usergroup');
+        
          $data = [
             'judul' => 'User',
              'judul1'=>'Master Data',
-            //  'user' => $this->muser->getUserById($id)
+             'user' => $this->mmasdat->getUserById($id),
+             'cabang'=>$cabang,
+             'lokasi' =>$lokasi,
+             'perusahaan' => $perusahaan,
+             'usergroup' =>$usergroup
          ];
              
          $this->load->view('_partial/header.php',$data);
          $this->load->view('_partial/sidebar.php',$data);
          $this->load->view('general_affairview/user/v_edit_user.php', $data);
-         $this->load->view('general_affairview/user/_partial/footer.php');
+         $this->load->view('general_affairview/user/_partial/footer2.php');
     }
 
     public function edit_usergroup()
@@ -1088,6 +1097,33 @@ class Master_Data extends CI_Controller {
         }
     }
     //----------------------------------------------------PUT------------------------------------------------------//
+    public function put_user()
+    {
+            $data=[
+                'id' => $this->input->post('nik',true),
+                'username' => $this->input->post('username'),
+                'nama' => $this->input->post('nama'),
+                'password' => $this->input->post('password'),
+                'id_perusahaan' => $this->input->post('id_perusahaan'),
+                'id_cabang' => $this->input->post('id_cabang'),
+                'id_lokasi' => $this->input->post('id_lokasi'),
+                'id_usergroup' => $this->input->post('id_usergroup'),
+                'user'  => $this->session->userdata('username'),
+                'status' =>$this->input->post('status')
+                
+            ];
+            
+                $exec = $this->mmasdat->editUser($data);
+                if ($exec) {
+
+                    $this->session->set_flashdata('berhasil', 'berhasil diubah');
+                    redirect('master_data/user');
+                }else{
+                    $this->session->set_flashdata('gagal', 'gagal diubah');
+                    redirect('master_data/user');
+                }
+        
+    }
     public function put_usergroup()
     {
         $data = [
@@ -1875,55 +1911,75 @@ class Master_Data extends CI_Controller {
         echo $output;
     }
     //----------------------------------GET 2------------------------------//
-    public function ajax_get_usergroup2()
+    public function ajax_get_usergroup2($id=null)
     {
         $output = '';
 		$no = 0;
         $listgroup = $this->mmasdat->getUserGroup();
 		foreach ($listgroup as $list) {
-			$no++;
-			$output .='
-				<option value="'.$list['id_usergroup'].'">'.$list['id_usergroup'].' - '.$list['user_group'].'</option>
-			';
+            $no++;
+            if ($list['id_usergroup']==$id) {
+                $output .='
+                    <option value="'.$list['id_usergroup'].'" selected>'.$list['id_usergroup'].' - '.$list['user_group'].'</option>
+                ';
+                
+            }else{
+                $output .='
+                    <option value="'.$list['id_usergroup'].'">'.$list['id_usergroup'].' - '.$list['user_group'].'</option>
+                ';
+            }
         }
         echo '<option value="">--- Pilih User Group ---</option>';
         echo $output;
 		
     }
 
-    public function ajax_get_perusahaan2()
+    public function ajax_get_perusahaan2($id=null)
     {
         $output = '';
 		$no = 0;
         $listperusahaan = $this->mmasdat->getPerusahaan();
 		foreach ($listperusahaan as $list) {
-			$no++;
-			$output .='
-				<option value="'.$list['id_perusahaan'].'">'.$list['id_perusahaan'].' - '.$list['nama_perusahaan'].'</option>
-			';
+            $no++;
+            if ($list['id_perusahaan']==$id) {
+                $output .='
+                    <option value="'.$list['id_perusahaan'].'" selected>'.$list['id_perusahaan'].' - '.$list['nama_perusahaan'].'</option>
+                ';
+            }else{
+                $output .='
+                    <option value="'.$list['id_perusahaan'].'">'.$list['id_perusahaan'].' - '.$list['nama_perusahaan'].'</option>
+                ';
+            }
         }
         echo '<option value="">--- Pilih Perusahaan ---</option>';
         echo $output;
 		
     }
 
-    public function ajax_get_cabang2()
+    public function ajax_get_cabang2($id=null)
     {
         $output = '';
 		$no = 0;
         $listcabang = $this->mmasdat->getCabang();
 		foreach ($listcabang as $list) {
-			$no++;
-			$output .='
-				<option value="'.$list['id_cabang'].'">'.$list['id_cabang'].' - '.$list['nama_cabang'].'</option>
-			';
+            $no++;
+            if ($list['id_cabang'] == $id) {
+
+                $output .='
+                    <option value="'.$list['id_cabang'].'" selected>'.$list['id_cabang'].' - '.$list['nama_cabang'].'</option>
+                ';
+            }else{
+                $output .='
+                    <option value="'.$list['id_cabang'].'">'.$list['id_cabang'].' - '.$list['nama_cabang'].'</option>
+                ';
+            }
         }
         echo '<option value="">--- Pilih Cabang ---</option>';
         echo $output;
 		
     }
 
-    public function ajax_get_lokasi2()
+    public function ajax_get_lokasi2($id=null)
     {
         $output = '';
 		$no = 0;
@@ -1934,9 +1990,15 @@ class Master_Data extends CI_Controller {
             $listlokasi = $this->mmasdat->getLokasiByid($idlokasi);
             foreach ($listlokasi as $list) {
                 $no++;
-                $output .='
-                    <option value="'.$list['id_lokasi'].'">'.$list['id_lokasi'].' - '.$list['nama_lokasi'].'</option>
-                ';
+                if ($list['id_lokasi']==$id) {
+                    $output .='
+                        <option value="'.$list['id_lokasi'].'" selected>'.$list['id_lokasi'].' - '.$list['nama_lokasi'].'</option>
+                    ';
+                }else{
+                    $output .='
+                        <option value="'.$list['id_lokasi'].'">'.$list['id_lokasi'].' - '.$list['nama_lokasi'].'</option>
+                    ';
+                }
             }
 
         }
