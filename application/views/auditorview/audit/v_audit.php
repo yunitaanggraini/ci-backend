@@ -1,10 +1,9 @@
-<div class="wrapper wrapper-content m-t-xl wrapper wrapper-content animated fadeInRight">
-
+<div class="wrapper wrapper-content m-t-n-md wrapper wrapper-content animated fadeInRight">
             <div class="row">
                 <div class="col-lg-12">
                 <div class="panel panel-bluedark">
                     <div class="panel-heading">
-                        <h3><i class="fa fa-info-circle"></i> Data Audit Unit</h3>
+                        <h3><i class="fa fa-info-circle"></i> Audit</h3>
                     </div>
                     <div class="panel-body">
                     <div class="row">
@@ -27,7 +26,7 @@
 
                                 <div class="col-sm-1" >
                                     <div class="form-group m-t-md">
-                                    <a id="preview" class="btn btn-primary">Preview</a>
+                                    <a id="preview" class="btn btn-primary">Scan Data</a>
                                    </div>                                           
                                 </div> 
                             </form>                                

@@ -1,7 +1,3 @@
-<body class="md-skin fixed-nav fixed-nav-basic fixed-sidebar">
-    
-    <div id="wrapper">
-
     <nav class="navbar-default navbar-static-side" role="navigation">
         <div class="sidebar-collapse">
             <ul class="nav metismenu" id="side-menu">

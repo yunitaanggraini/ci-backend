@@ -30,7 +30,7 @@
                     <div class="ibox-title float-e-margins">
                             <label class="col-sm-3"> <h5>List Inventory Office</h5></label>
                             <div class="col-sm-9 text-right">
-                                <input type="submit" value="Add Data" id="add" name="add" class="btn btn-success" onclick="show()">
+                                <a href="<?php echo base_url() ?>transaksi/management_office" value="Add Data" id="add" name="add" class="btn btn-success"> Tambah Inventory </a>
                             </div>
                       <span id="info_message"></span>
                     </div>
@@ -42,54 +42,37 @@
                     <table class="table table-striped table-bordered table-hover dataTables-example" >
                     <thead>
                     <tr>
-                        <th width="3%">No</th>
-                        <th width="5%">Aksi</th>
-                        <th>ID Inventory Office</th>
-                        <th>Status Inventory</th>
-                        <th>Jenis Inventory</th>
-                        <th>Sub Inventory</th>
-                        <th>Nilai Awal</th>
-                        <th>DDP</th>
-                        <th>Nilai Asset</th>
-                        <th>Nilai Total Keseluruhan</th>
-                        <th>Tahun Pembuatan</th>
-                        <th>Pengguna</th>
-                        <th>Vendor</th>
-                        <th>Tanggal Barang Diterima</th>
-                        <th>Jenis Pembayaran</th>
-                        <th>Keterangan</th>
-                        <th>Stok</th>
-                        <th>foto</th>
-                        <th>PPN</th>
-                        <th>Merk</th>
-                        <th>Aksesoris Tambahan</th>
+                        <th class="text-center" width="3%">NO</th>
+                        <th class="text-center" width="5%">AKSI</th>
+                        <th class="text-center">ID INVENTORY OFFICE</th>
+                        <th class="text-center">JENIS INVENTORY</th>
+                        <th class="text-center">SUB INVENTORY</th>
+                        <th class="text-center">NILAI AWAL</th>
+                        <th class="text-center">TANGGAL BARANG DITERIMA</th>
+                        <th class="text-center">VENDOR</th>
+                        <th class="text-center">PEMBAYARAN</th>
+                        <th class="text-center">LOKASI</th>
+                        <th class="text-center">PENGGUNA</th>
+                        <th class="text-center">KETERANGAN</th>
+                        
                     </tr>
                     </thead>
                     <tbody id="inv_office">
                     </tbody>
                     <tfoot>
                     <tr>
-                        <th>No</th>
-                        <th>Aksi</th>
-                        <th>ID Inventory Office</th>
-                        <th>Status Inventory</th>
-                        <th>Jenis Inventory</th>
-                        <th>Sub Inventory</th>
-                        <th>Nilai Awal</th>
-                        <th>DDP</th>
-                        <th>Nilai Asset</th>
-                        <th>Nilai Total Keseluruhan</th>
-                        <th>Tahun Pembuatan</th>
-                        <th>Pengguna</th>
-                        <th>Vendor</th>
-                        <th>Tanggal Barang Diterima</th>
-                        <th>Jenis Pembayaran</th>
-                        <th>Keterangan</th>
-                        <th>Stok</th>
-                        <th>foto</th>
-                        <th>PPN</th>
-                        <th>Merk</th>
-                        <th>Aksesoris Tambahan</th>
+                        <th class="text-center">NO</th>
+                        <th class="text-center">AKSI</th>
+                        <th class="text-center">ID INVENTORY OFFICE</th>
+                        <th class="text-center">JENIS INVENTORY</th>
+                        <th class="text-center">SUB INVENTORY</th>
+                        <th class="text-center">NILAI AWAL</th>
+                        <th class="text-center">TANGGAL BARANG DITERIMA</th>
+                        <th class="text-center">VENDOR</th>
+                        <th class="text-center">PEMBAYARAN</th>
+                        <th class="text-center">LOKASI</th>
+                        <th class="text-center">PENGGUNA</th>
+                        <th class="text-center">KETERANGAN</th>
                     </tr>
                     </tfoot>
                     </table>

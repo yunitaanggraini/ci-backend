@@ -25,8 +25,7 @@ class Transaksi_Auditor extends CI_Controller {
                 'judul'=> "Audit",
                 'judul1'=>'Transaksi Auditor'
             ];
-            $this->load->view('_partial/header.php',$data);
-            $this->load->view('_partial/sidebar.php');      
+            $this->load->view('_partial/header.php',$data);     
             $this->load->view('auditorview/audit/v_audit.php',$data);       
             $this->load->view('auditorview/audit/_partial/footer.php');
             
@@ -475,7 +474,7 @@ class Transaksi_Auditor extends CI_Controller {
                 var_dump($postscan);die;
                 $getunit = $this->mtransauditor->getUnit();
                 if ($getunit) {
-                    foreach ($getunit as $unit) {
+                    foreach ($getunit as $list) {
                         $output .='
                                 <tr> 
                                     <td>'.$offset.'</td>

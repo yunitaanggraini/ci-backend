@@ -181,20 +181,13 @@
         $listJadwalAudit =$this->maudit->getAudit($offset);
         foreach ($listJadwalAudit as $list){
             if ($list['keterangan']=='waiting') {
-            }else if($list['keterangan']=='in progress'){
-
+            }elseif($list['keterangan']=='in progress'){
+                $link = base_url()."transaksi/audit?id=".$list['id_cabang'];
                 $list['keterangan']='
-                <form action="'.$base.'data_temporary/unit" method="POST">
-                <input type="hidden" name="id_cabang" value="'.$list['id_cabang'].'"/>
-                <button type="submit" name="submit" class="btn btn-success">BUKA</button>
-                </form>
+                <a class="btn btn-success" onClick="MyWindow=window.open(\''.$link.'\',\'MyWindow\',\'width=683,height=576\'); return false;">BUKA</a>
                 ';
-            }else if ($list['keterangan']=='done'){     
+            }elseif ($list['keterangan']=='done'){     
             }
-            $data = array(
-                'id_cabang' => $list['id_cabang']
-            );
-            $this->session->set_userdata( $data );
             $offset++;
             $output .='
             <tr> 

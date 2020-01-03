@@ -18,21 +18,18 @@
 </head>
 
 <body class="gray-bg">
-<div class="panel panel-default">
-
-<div class="middle-box animated fadeInDown">
-        
-        <div>
-        <div>
+<div class="middle-box text-center animated fadeInDown">
+    <div class="panel" >
+        <div class="panel-heading red-bg">
             <div>
-
-                <h2 class="logo-name text-center">SIMA</h2>
-
+                <h2 class="logo-name text-white">SIMA</h2>
             </div>
-            <div class="label-danger text-center">
-            <h3>Sistem Management Audit</h3>
+            <div class=" m-t-n text-white">
+            <h4>Sistem Informasi Management Audit</h4>
             </div>
-            
+        </div>
+        <div class="panel-body">
+
             <form method="post" action="<?php echo base_url() ?>login/login">
             <?php 
             foreach($tampil as $e):
@@ -53,7 +50,7 @@
                 $iv = substr(hash('sha256', $iv_key), 0, 16);
                 $username = base64_decode($username);
                 $username = openssl_decrypt($username, $encrypt_method, $key, 0, $iv);   
-
+    
                 $password = $e['password'];
                 $password2 = 'PASSWORD';
                 $iv_key = 'honda12345';
@@ -62,7 +59,7 @@
                 $iv = substr(hash('sha256', $iv_key), 0, 16);
                 $password = base64_decode($password);
                 $password = openssl_decrypt($password, $encrypt_method, $key, 0, $iv);    
-
+    
                 $database = $e['db'];
                 $database2 = 'DATABASE';
                 $iv_key = 'honda12345';
@@ -74,7 +71,7 @@
                 ?>
                 
                 
-
+    
                 <div class="form-group">
                 <label>Hostname</label>
                 <input type="hidden" class="form-control" id="id" name="id" value="<?php echo $e['id'] ?>" readonly>
@@ -84,7 +81,7 @@
                     <label>Username</label>
                     <input type="text" class="form-control" id="username" name="username" value="<?php echo $username ?>"  readonly>
                 </div>
-
+    
                 <div class="form-group">
                     <label>Password</label>
                     <input type="password" class="form-control" id="password" name="password" value="<?php echo $password ?>"  readonly>
@@ -104,11 +101,12 @@
                 </div>
                 </div>
             </form>
+        </div>
+            
 
         </div>
     </div>
 
-</div>
     
 
     <!-- Mainly scripts -->

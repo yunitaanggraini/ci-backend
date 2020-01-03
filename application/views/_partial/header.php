@@ -45,3 +45,7 @@
 </style>
 
 </head>
+
+<body class="md-skin fixed-nav fixed-nav-basic fixed-sidebar">
+    
+    <div id="wrapper">

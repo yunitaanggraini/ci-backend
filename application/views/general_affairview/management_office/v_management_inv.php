@@ -1,22 +1,31 @@
 <div class="wrapper wrapper-content m-t-xl wrapper wrapper-content animated fadeInRight">
 <div class="row">
                 <div class="col-lg-12">
-                    <form class="form-horizontal" method="post" action="<?php echo base_url('master_data/post_management_inv') ?>" id="FormJadwalAudit">
+                    <form class="form-horizontal" method="post" action="<?php echo base_url('transaksi_ga/post_inventory') ?>" id="FormInventory">
                     <div class="panel panel-default"  >
                         <div class="panel-heading">
 
                         <div class="col-lg-10" ><h4><i class="fa fa-info-circle"></i> Input Inventory</h4></div>
                         <div >
-                        <a href="<?php echo base_url('master_data/input_management_inv') ?>" type="submit" class="btn btn-m btn-danger">Batal</a>
+                        <a href="<?php echo base_url('transaksi/monitoring_office') ?>" type="submit" class="btn btn-m btn-danger">Batal</a>
                         <button type="submit" class="btn btn-success btn-m" id="btn-simpan">Simpan</button>                        
                         </div>
                       
                     </div>
 
                         <div class="panel-body">
-                                <div class="form-group"><label class="col-sm-2 control-label">ID Inventory</label>
-                                    <div class="col-sm-10"><input type="text" class="form-control" name="id_inventory" id="id_inventory"y></div>
+                            <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group"><label class="col-sm-3 control-label">ID Inventory</label>
+                                    <div class="col-sm-9"><input type="text" class="form-control" name="id_inventory" id="id_inventory" readonly/></div>
                                 </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="col-sm-2">
+                                    <a class="btn btn-warning" onclick="generate()">Generate</a>
+                                </div>
+                                </div>
+                            </div>
 
                                 <div class="col-sm-6">
                                         <div class="form-group"><label class="col-sm-3 control-label">Status Inventory</label>
@@ -42,19 +51,20 @@
 
 
                                         <div class="form-group"><label class="col-sm-3 control-label">Nilai Awal</label>
-                                            <div class="col-sm-9"><input type="text" class="form-control" name="nilai_awal">
-                                            <!-- <span class="help-block m-b-none">* Harga Sebelum PPn</span> -->
+                                            <div class="col-sm-9"><input type="text" class="form-control" name="nilai_awal" id="nilai_awal" readonly>
+                                            <span class="help-block m-b-none">* Harga Sebelum PPn</span>
                                             </div>
                                         </div>
 
                                          <div class="form-group"><label class="col-sm-3 control-label">DDP</label>
-                                            <div class="col-sm-9"><input type="text" class="form-control" name="ddp">
+                                            <div class="col-sm-9"><input type="text" class="form-control" name="ddp" id="dpp">
                                         </div>
                                         </div>
 
                                         <div class="form-group"><label class="col-sm-3 control-label">Nilai Asset</label>
-                                            <div class="col-sm-9"><input type="text" class="form-control" name="nilai_asset">
-                                            </div>
+                                            <div class="col-sm-6"><input type="text" class="form-control" name="nilai_asset" id="nilai_asset">
+                                        </div>
+                                        <div class="col-sm-2"><a onclick="hitung()" class="btn btn-primary"> Hitung</a></div>
                                         </div>
 
                                         <div class="form-group"><label class="col-sm-3 control-label">Nilai Total Keseluruhan</label>
@@ -128,16 +138,21 @@
 
                                          <div class="form-group"><label class="col-sm-3 control-label">Foto</label>
                                             <div class="col-sm-9">
-                                            <div class="fileinput fileinput-new" data-provides="fileinput">
-                                                <span class="btn btn-default btn-file"><span class="fileinput-new">Select file</span>
-                                                <span class="fileinput-exists">Change</span><input type="file" name="..."></span>
+                                            <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                                                <div class="form-control" data-trigger="fileinput">
                                                 <span class="fileinput-filename"></span>
-                                                <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">×</a>
+                                                </div>
+                                                <span class="input-group-addon btn btn-default btn-file">
+                                                    <span class="fileinput-new">Select file</span>
+                                                    <span class="fileinput-exists">Change</span>
+                                                    <input type="file" name="foto"/>
+                                                </span>
+                                                <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
                                             </div> 
                                             </div>
                                         </div>  
 
-                                         <div class="form-group"><label class="col-sm-3 control-label">Asal Hadiah</label>
+                                         <div id="hadiah" class="hidden"><label class="col-sm-3 control-label">Asal Hadiah</label>
                                             <div class="col-sm-9"><input type="text" class="form-control" name="asal_hadiah" id="asal_hadiah">
                                             </div>
                                         </div>
@@ -165,31 +180,49 @@
                                         <div class="col-sm-9"><input type="text" class="form-control" name="aksesoris_tambahan">
                                         </div>
                                         </div>
-
-                                        <div class="form-group"><label class="col-sm-3 control-label">Serial Number</label>
-                                            <div class="col-sm-9"><input type="text" class="form-control" name="serial_number">
+                                        <div id="elec" class="hidden">
+                                            <div class="form-group"><label class="col-sm-3 control-label">Serial Number</label>
+                                                <div class="col-sm-9"><input type="text" class="form-control" name="serial_number">
+                                                </div>
                                             </div>
                                         </div>
-
-                                        <div class="form-group"><label class="col-sm-3 control-label">Uang Muka</label>
-                                            <div class="col-sm-9"><input type="text" class="form-control" name="uang_muka">
+                                        <div id="oto" class="hidden">
+                                            <div class="form-group"><label class="col-sm-3 control-label">No. Mesin</label>
+                                                <div class="col-sm-9"><input type="text" class="form-control" name="no_mesin" id="no_mesin">
+                                                </div>
+                                            </div>
+                                            <div class="form-group"><label class="col-sm-3 control-label">No. Rangka</label>
+                                                <div class="col-sm-9"><input type="text" class="form-control" name="no_rangka" id="no_rangka">
+                                                </div>
                                             </div>
                                         </div>
-
-                                        <div class="form-group"><label class="col-sm-3 control-label">Cicilan Perbulan</label>
-                                            <div class="col-sm-9"><input type="text" class="form-control" name="cicilan_perbulan">
+                                        <div id="kredit" class="hidden">
+                                            <div class="form-group"><label class="col-sm-3 control-label">Uang Muka</label>
+                                                <div class="col-sm-9"><input type="text" class="form-control" name="uang_muka" id="uang_muka">
+                                                </div>
                                             </div>
+    
+                                            <div class="form-group"><label class="col-sm-3 control-label">Cicilan Perbulan</label>
+                                                <div class="col-sm-9"><input type="text" class="form-control" name="cicilan_perbulan" id="cicilan_perbulan">
+                                                </div>
+                                            </div>
+    
+                                            <div class="form-group"><label class="col-sm-3 control-label">Tenor</label>
+                                                <div class="col-sm-2"><input type="text" class="form-control" name="tenor" id="tenor">
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <label class="control-label text-left">/bln</label>
+                                            </div>
+                                            <div class="col-sm-5">
+                                            <a id="total" class="btn btn-primary"> Hitung</a>
+                                            </div>
+                                            </div>
+    
+                                            <div class="form-group"><label class="col-sm-3 control-label">Nilai Total</label>
+                                                <div class="col-sm-9"><input type="text" class="form-control" name="nilai_total" id="nilai_total" readonly>
+                                                </div>
+                                            </div> 
                                         </div>
-
-                                        <div class="form-group"><label class="col-sm-3 control-label">Tenor</label>
-                                            <div class="col-sm-9"><input type="text" class="form-control" name="tenor">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group"><label class="col-sm-3 control-label">Nilai Total</label>
-                                            <div class="col-sm-9"><input type="text" class="form-control" name="nilai_total">
-                                            </div>
-                                        </div> 
 
                                 </div>
 

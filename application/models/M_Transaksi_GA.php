@@ -9,14 +9,14 @@ class M_Transaksi_GA extends CI_Model {
     public function __construct()
         {
             parent::__construct();
-            $this->_client = new Client([
-                'base_uri'=> SERVER_BASE.'ci-server-lala/api/transaksi/'
-            ]);
+                $this->_client = new Client([
+                    'base_uri'=> SERVER_BASE.'ci-server-lala/api/transaksi/'
+                ]);
         }
     
     public function getInv()
     {
-        $respon =  $this->_client->request('GET', 'transaksi_inventory');
+        $respon =  $this->_client->request('GET', 'inv');
 
         $result = json_decode($respon->getBody()->getContents(),true);
 
@@ -33,7 +33,7 @@ class M_Transaksi_GA extends CI_Model {
 
         $result = json_decode($respon->getBody()->getContents(),true);
         if ($result['status']==true) {
-            return $result['data']['0']; 
+            return $result['data']; 
         }else{
             return false;
         }
@@ -224,6 +224,15 @@ class M_Transaksi_GA extends CI_Model {
 
         $result = json_decode($respon->getBody()->getContents(),true);
 
+        
+    }
+
+    public function getCountInv()
+    {
+        $respon =  $this->_client->request('GET', 'countOffice');
+
+        $result = json_decode($respon->getBody()->getContents(),true);
+        
         if ($result['status']==true) {
             return $result['data'];
         }else{

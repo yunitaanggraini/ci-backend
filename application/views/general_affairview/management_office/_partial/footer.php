@@ -21,10 +21,9 @@
     <script>
         $( "#FormInventory" ).validate({
         rules: {
-            idtransaksi_inv:{
+            id_inventory:{
                 required: true,
-                maxlength: 8,
-                minlength:3
+                minlength:6
             },
             idstatus_inventory:{
                 required:true
@@ -36,16 +35,20 @@
                 required:true
             },
             nilai_awal:{
-                required:true
+                required:true,
+                number:true
             },
             ddp:{
-                required:true
+                required:true,
+                number:true
             },
             nilai_asset:{
-                required:true
+                required:true,
+                number:true
             },
             nilai_total_keseluruhan:{
-                required:true
+                required:true,
+                number:true
             },
             tanggal_barang_terima:{
                 required:true
@@ -71,9 +74,6 @@
             stok:{
                 required:true
             },
-            foto:{
-                required:true
-            },
             asal_hadiah:{
                 required:true
             },
@@ -93,16 +93,20 @@
                 required:true
             },
             uang_muka:{
-                required:true
+                required:true,
+                number:true
             },
             cicilan_perbulan:{
-                required:true
+                required:true,
+                number:true
             },
             tenor:{
-                required:true
+                required:true,
+                number:true
             },
             nilai_total:{
-                required:true
+                required:true,
+                number:true
             },
 
         }
@@ -113,6 +117,7 @@
     <script src="<?php echo base_url() ?>assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
     <!-- Idle Timer plugin -->
     <script src="<?php echo base_url() ?>assets/js/plugins/idle-timer/idle-timer.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/js/plugins/jasny/jasny-bootstrap.min.js"></script>
     <!-- Custom and plugin javascript -->
     <script src="<?php echo base_url() ?>assets/js/inspinia.js"></script>
     <script src="<?php echo base_url() ?>assets/js/plugins/pace/pace.min.js"></script>
@@ -181,7 +186,8 @@
     $('#OptStatusInv').load("<?php echo base_url() ?>transaksi_ga/ajax_get_statusinv2");
     $('#OptVendor').load("<?php echo base_url() ?>transaksi_ga/ajax_get_vendor2");
     $('#OptJenisInv').load("<?php echo base_url() ?>transaksi_ga/ajax_get_jenisinv2");
-   $('#OptJenisInv').on('change', function(){
+
+    $('#OptJenisInv').on('change', function(){
        var idjenis_inventory = $(this).val();
 
        if(idjenis_inventory == "")
@@ -202,6 +208,7 @@
        }
    })
    $('#OptCabang').load("<?php echo base_url() ?>transaksi_ga/ajax_get_cabang2");
+   
    $('#OptCabang').on('change', function(){
        var id_cabang = $('#OptCabang').val();
 
@@ -223,7 +230,6 @@
        }
    })
     
-
     function search() {
             var username =$('#username').val();
             var nama = $('#nama').val();
@@ -280,11 +286,78 @@
               }
           }
       });
+
         $('#nama').keyup(function(e) {
           if(e.keyCode == 13) {
              search();
           }
       });
+
+        $('#OptStatusInv').change(function() {
+            var asal = $('#OptStatusInv').val();
+            var hadiah = $('#asal_hadiah').val();
+
+            if (asal=='ST004') {
+                console.log('berhasil');
+                hadiah =null;
+                $('#hadiah').removeClass('hidden');
+                // $('#hadiah').addClass('form-group');
+            }else{
+                // $('#hadiah').removeClass('form-group');
+                $('#hadiah').addClass('hidden');
+                console.log('gagal');
+                
+            }
+            
+        });
+
+        $('#OptJenisPemb').change(function() {
+            var jenisPem = $('#OptJenisPemb').val();
+            console.log(jenisPem);
+            
+            if (jenisPem =='Kredit') {
+                $('#kredit').removeClass('hidden');
+                // $('#kredit').addClass('form-group');
+            }else{
+                $('#kredit').addClass('hidden');
+                // $('#kredit').removeClass('form-group');
+            }
+        });
+
+        $('#OptJenisInv').change(function() {
+            var jenisInv = $('#OptJenisInv').val();
+            console.log(jenisInv);
+            
+            if (jenisInv =='ELEC') {
+                $('#elec').removeClass('hidden');
+                // $('#elec').addClass('form-group');
+            }else{
+                $('#elec').addClass('hidden');
+                // $('#elec').removeClass('form-group');
+            }
+            if (jenisInv =='OTO') {
+                $('#oto').removeClass('hidden');
+                // $('#oto').addClass('form-group');
+            }else{
+                $('#oto').addClass('hidden');
+                // $('#oto').removeClass('form-group');
+            }
+        });
+        $('#total').click(function() {
+            console.log('test');
+            
+             nilai_total();
+      });
+        function nilai_total() {
+            var uang_muka = parseInt($('#uang_muka').val());
+            var cicilan = parseInt($('#cicilan_perbulan').val());
+            var tenor = parseInt($('#tenor').val());
+            var nilai_total = 0 ;
+            
+            nilai_total = (cicilan*tenor)+uang_muka;
+
+            $('#nilai_total').val(nilai_total);
+        }
     });
 
     function edit(id) {
@@ -300,6 +373,70 @@
 
         });
       }
+
+      function hitung(){
+       var dpp = parseInt($('#dpp').val());
+       var nilai_asset = parseInt($('#nilai_asset').val());
+       var nilai  = dpp + nilai_asset;
+        $('#nilai_awal').val(nilai);
+
+       console.log(nilai);
+    //    return nilai;
+   }
+
+   function generate(){
+       var id = $('#OptSubInv').val();
+       var dealer = 'MD';
+       var bln = new Date();
+       a = (bln.getMonth()+1);
+       b= bln.getFullYear();
+        max = '<?php echo sprintf("%05s", ($max+1)) ?>';
+       switch (a) {
+           case 1:
+               a='I';
+               break;
+           case 2:
+               a='II';
+               break;
+           case 3:
+               a='III';
+               break;
+           case 4:
+               a='IV';
+               break;
+           case 5:
+               a='V';
+               break;
+           case 6:
+               a='VI';
+               break;
+           case 7:
+               a='VII';
+               break;
+           case 8:
+               a='VIII';
+               break;
+           case 9:
+               a='IX';
+               break;
+           case 10:
+               a='X';
+               break;
+           case 11:
+               a='XI';
+               break;
+           case 12:
+               a='XII';
+               break;
+       }
+       var id_inventory = id+'/TRIO'+dealer+'/'+a+'/'+b+'/'+max;
+       if (id == null) {
+        $('#id_inventory').val();
+       }else{
+           $('#id_inventory').val(id_inventory);
+       }
+
+   }
 
     
     </script>

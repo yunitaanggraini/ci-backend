@@ -26,6 +26,7 @@ class Transaksi_GA extends CI_Controller {
                 'judul'=> "Monitoring Inventory",
                 'judul1'=>'Transaksi GA'
             ];
+            // var_dump($data);die;
             $this->load->view('_partial/header.php',$data);
             $this->load->view('_partial/sidebar.php');      
             $this->load->view('general_affairview/monitoring_office/v_monitoring_inv.php',$data);       
@@ -36,12 +37,14 @@ class Transaksi_GA extends CI_Controller {
     {
         $data=[
             'judul'=> "Management Inventory",
-            'judul1'=>'Transaksi GA'
+            'judul1'=>'Transaksi GA',
+            'max' => $this->mtransga->getcountInv()
         ];
+        // var_dump($data);die;
         $this->load->view('_partial/header.php',$data);
         $this->load->view('_partial/sidebar.php');   
          $this->load->view('general_affairview/management_office/v_management_inv.php',$data);
-         $this->load->view('general_affairview/management_office/_partial/footer.php');
+         $this->load->view('general_affairview/management_office/_partial/footer.php',$data);
     }
 
     public function ajax_get_Inventory()
@@ -55,40 +58,24 @@ class Transaksi_GA extends CI_Controller {
             <tr>
                 <td>'.$no.'</td>
                 <td>
-                <a id="'.$list->id_inventory.'" class="text-warning"><i class="fa fa-pencil"></i></a>
-                <a id="'.$list->id_inventory.'" class="text-danger"><i class="fa fa-trash"></i></a>
+                <a id="'.$list['idtransaksi_inv'].'" class="text-warning"><i class="fa fa-pencil"></i></a>
+                <a id="'.$list['idtransaksi_inv'].'" class="text-danger"><i class="fa fa-trash"></i></a>
                 </td>
-                <td>'.$list->idtransaksi_inv.'</td>
-                <td>'.$list->status_inventory.'</td>
-                <td>'.$list->jenis_inventory.'</td>
-                <td>'.$list->sub_inventory.'</td>
-                <td>'.$list->nilai_awal.'</td>
-                <td>'.$list->ddp.'</td>
-                <td>'.$list->nilai_asset.'</td>
-                <td>'.$list->nilai_total_keseluruhan.'</td>
-                <td>'.$list->tanggal_barang_diterima.'</td>
-                <td>'.$list->nama_vendor.'</td>
-                <td>'.$list->jenis_pembayaran.'</td>
-                <td>'.$list->nama_cabang.'</td>
-                <td>'.$list->nama_lokasi.'</td>
-                <td>'.$list->nama_pengguna.'</td>               
-                <td>'.$list->keterangan.'</td>
-                <td>'.$list->stok.'</td>
-                <td>'.$list->foto.'</td>
-                <td>'.$list->asal_hadiah.'</td>
-                <td>'.$list->ppn.'</td>
-                <td>'.$list->ket_ppn.'</td>
-                <td>'.$list->merk.'</td>
-                <td>'.$list->aksesoris_tambahan.'</td>
-                <td>'.$list->serial_number.'</td>
-                <td>'.$list->uang_muka.'</td>
-                <td>'.$list->cicilan_perbulan.'</td>
-                <td>'.$list->tenor.'</td>
-                <td>'.$list->nilai_total.'</td>
+                <td>'.$list['idtransaksi_inv'].'</td>
+                <td>'.$list['jenis_inventory'].'</td>
+                <td>'.$list['sub_inventory'].'</td>
+                <td>'.$list['nilai_awal'].'</td>
+                <td>'.$list['tanggal_barang_diterima'].'</td>
+                <td>'.$list['nama_vendor'].'</td>
+                <td>'.$list['jenis_pembayaran'].'</td>
+                <td>'.$list['nama_lokasi'].'</td>
+                <td>'.$list['nama_pengguna'].'</td>               
+                <td>'.$list['keterangan'].'</td>
+                
             </tr>
           ';
        }
-       echo $output;
+       echo json_encode($output,true);
     }
 
 
@@ -97,47 +84,48 @@ class Transaksi_GA extends CI_Controller {
     public function post_inventory()
     {
         $data =[
-                'idtransaksi_inv' => $this->input->post('idtransaksi_inv',true),
-                'idstatus_inventory' => $this->input->post('idstatus_inventory'),
-                'idjenis_inventory' =>$this->input->post('idjenis_inventory'),
-                'idsub_inventory' => $this->input->post('idsub_inventory'),
-                'nilai_awal' => $this->input->post('nilai_awal'),
-                'ddp' => $this->input->post('ddp'),
-                'nilai_asset' => $this->input->post('nilai_asset'),
-                'nilai_total_keseluruhan' => $this->input->post('nilai_total_keseluruhan'),
-                'tanggal_barang_diterima' => $this->input->post('tanggal_barang_diterima'),
-                'id_vendor' => $this->input->post('id_vendor'),
-                'jenis_pembayaran' => $this->input->post('jenis_pembayaran'),
-                'id_cabang' => $this->input->post('id_cabang'),
-                'id_lokasi' => $this->input->post('id_lokasi'),
-                'nama_pengguna' => $this->input->post('nama_pengguna'),              
-                'keterangan' => $this->input->post('keterangan'),
-                'stok' => $this->input->post('stok'),
-                'foto' => $this->input->post('foto'),
-                'asal_hadiah' => $this->input->post('asal_hadiah'),
-                'ppn' => $this->input->post('ppn'),
-                'ket_ppn' => $this->input->post('ket_ppn'),
-                'merk' => $this->input->post('merk'),
-                'aksesoris_tambahan' => $this->input->post('aksesoris_tambahan'),
-                'serial_number' => $this->input->post('serial_number'),
-                'uang_muka' => $this->input->post('uang_muka'),
-                'cicilan_perbulan' => $this->input->post('cicilan_perbulan'),
-                'tenor' => $this->input->post('tenor'),
-                'nilai_total' => $this->input->post('nilai_total'),
-                'barcode' => $this->input->post('barcode'),
-                'qrcode' => $this->input->post('qrcode'),
+                'idtransaksi_inv' => $this->input->post('id_inventory',true),
+                'idstatus_inventory' => $this->input->post('idstatus_inventory',true),
+                'idjenis_inventory' =>$this->input->post('idjenis_inventory',true),
+                'idsub_inventory' => $this->input->post('idsub_inventory',true),
+                'nilai_awal' => $this->input->post('nilai_awal',true),
+                'ddp' => $this->input->post('ddp',true),
+                'nilai_asset' => $this->input->post('nilai_asset' ,true),
+                'nilai_total_keseluruhan' => $this->input->post('nilai_total_keseluruhan' ,true),
+                'tanggal_barang_diterima' => $this->input->post('tanggal_barang_diterima' ,true),
+                'id_vendor' => $this->input->post('id_vendor' ,true),
+                'jenis_pembayaran' => $this->input->post('jenis_pembayaran',true),
+                'id_cabang' => $this->input->post('id_cabang' ,true),
+                'id_lokasi' => $this->input->post('id_lokasi' ,true),
+                'nama_pengguna' => $this->input->post('nama_pengguna' ,true),              
+                'keterangan' => $this->input->post('keterangan' ,true),
+                'stok' => $this->input->post('stok' ,true),
+                'foto' => $this->input->post('foto' ,true),
+                'asal_hadiah' => $this->input->post('asal_hadiah',true),
+                'ppn' => $this->input->post('ppn' ,true),
+                'ket_ppn' => $this->input->post('ket_ppn',true),
+                'merk' => $this->input->post('merk',true),
+                'aksesoris_tambahan' => $this->input->post('aksesoris_tambahan',true),
+                'serial_number' => $this->input->post('serial_number' ,true),
+                'uang_muka' => $this->input->post('uang_muka',true),
+                'cicilan_perbulan' => $this->input->post('cicilan_perbulan',true),
+                'tenor' => $this->input->post('tenor',true),
+                'nilai_total' => $this->input->post('nilai_total',true),
+                'no_mesin' => $this->input->post('no_mesin',true),
+                'no_rangka' => $this->input->post('no_rangka',true),
                 'user'  => $this->session->userdata('username')
             
         ];
+        var_dump($data);die;
 
-        $config['upload_path']      = './upload/';
-        $config['allowed_types']    = 'gif|jpg|png';
-        $config['max_size']         = 100;
-        $config['max_width']        = 1024;
-        $config['max_height']       = 768;
-        $config['file_name']        = $this->input->post('idtransaksi_inv');
+        // $config['upload_path']      = './upload/';
+        // $config['allowed_types']    = 'gif|jpg|png';
+        // $config['max_size']         = 100;
+        // $config['max_width']        = 1024;
+        // $config['max_height']       = 768;
+        // $config['file_name']        = $this->input->post('idtransaksi_inv');
 
-        $id = $this->input->post('idtransaksi_inv',true);
+        $id = $this->input->post('id_inventory',true);
 
         $inventory = $this->mtransga->getInventoryById($id);
         if ($inventory) {
@@ -146,7 +134,7 @@ class Transaksi_GA extends CI_Controller {
             redirect('transaksi/management_office');
             
         } else {
-            if ($result = $this->mtransga->addInv($data)) {
+            if ($this->mtransga->addInv($data)) {
                 $this->session->set_flashdata('berhasil', 'berhasil ditambah');
                 
                 redirect('transaksi/management_office');
