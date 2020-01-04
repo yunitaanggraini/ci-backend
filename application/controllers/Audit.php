@@ -357,7 +357,7 @@
 
             $cek = $this->maudit->getJadwalAuditById($id);
              /*var_dump($cek);die;*/
-            if ($cek['status']===true) {
+            if ($cek) {
 
                 $this->session->set_flashdata('warning', 'sudah ada');
                 
@@ -392,15 +392,15 @@
         if ($auditor!= null && $tanggal_audit!=null && $jenis_audit!=null) {
             $listJdwAudit = $this->maudit->carijadwalaudit($auditor,$tanggal_audit,$jenis_audit);
         }elseif($auditor!=null&& $tanggal_audit==null&& $jenis_audit==null){
-            $$listJdwAudit = $this->maudit->cariauditor($auditor);
+            $listJdwAudit = $this->maudit->cariauditor($auditor);
         }elseif ($auditor==null && $tanggal_audit!=null && $jenis_audit==null) {
-            $$listJdwAudit = $this->maudit->caritanggalaudit($tanggal_audit);
+            $listJdwAudit = $this->maudit->caritanggalaudit($tanggal_audit);
         }elseif ($auditor==null && $tanggal_audit==null && $jenis_audit!=null) {
-            $$listJdwAudit = $this->maudit->carijenisaudit($jenis_audit);
+            $listJdwAudit = $this->maudit->carijenisaudit($jenis_audit);
         }
         
         if ($$listJdwAudit) {
-            foreach ($$listJdwAudit as $list) {
+            foreach ($listJdwAudit as $list) {
                 $no++;
             $output .='
             <tr> 

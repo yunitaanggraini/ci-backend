@@ -32,7 +32,6 @@
         <div class="panel-body">
             <form id="FormLog" method="post" action="<?php echo base_url() ?>login/login">
             <?php if ($this->session->userdata('pesan')) {?>
-                
                     <?php echo $this->session->userdata('pesan'); ?>
             <?php
             }?>
