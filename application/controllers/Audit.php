@@ -97,7 +97,6 @@
             
         }
 
-
         public function viewTempPart()
         {
             $data=[
@@ -108,8 +107,7 @@
             $this->load->view('_partial/header.php',$data);
             $this->load->view('_partial/sidebar.php');      
             $this->load->view('auditorview/temp_part/v_temp_part.php',$data);       
-            $this->load->view('auditorview/temp_part/_partial/footer.php');
-            
+            $this->load->view('auditorview/temp_part/_partial/footer.php');    
         }
 
         public function viewTempUnit()
@@ -182,12 +180,12 @@
         foreach ($listJadwalAudit as $list){
             if ($list['keterangan']=='waiting') {
             }else if($list['keterangan']=='in progress'){
-
                 $list['keterangan']='
                 <form action="'.$base.'data_temporary/unit" method="POST">
                 <input type="hidden" name="id_cabang" value="'.$list['id_cabang'].'"/>
                 <button type="submit" name="submit" class="btn btn-success">BUKA</button>
                 </form>
+
                 ';
             }else if ($list['keterangan']=='done'){     
             }
@@ -285,8 +283,6 @@
         }
         echo $output;
     }
-
-
 
     //-----------------------------------------VIEW SELECT OPTION----------------------------------------------//
     public function ajax_get_cabang2()

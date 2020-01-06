@@ -17,6 +17,7 @@
                     <div class="col-sm-6">
                         <a href="<?php echo site_url('laporan_auditor/lap_belum_sesuai'); ?>" type="button" class="btn btn-w-md btn-danger btn-outline">Report Unit Belum Sesuai</a><br><br>
                         <a href="<?php echo site_url('laporan_auditor/lap_belum_ditemukan'); ?>" type="button" class="btn btn-w-md btn-danger btn-outline">Report Unit Belum Ditemukan</a><br><br>
+                        <a href="<?php echo site_url('laporan_auditor/lap_not_ready'); ?>" type="button" class="btn btn-w-md btn-danger btn-outline">Report Unit Not Ready</a><br><br>
                     </div>
                         
 

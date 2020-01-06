@@ -126,6 +126,19 @@ class laporan_auditor extends CI_Controller {
             $this->load->view('auditorview/audit/_partial/footer.php');
             
         }
+
+        public function Lap_not_ready()
+        {
+            $data=[
+                'judul'=> "Laporan Not Ready",
+                'judul1'=>'Laporan Auditor'
+            ];
+            $this->load->view('_partial/header.php',$data);
+            $this->load->view('_partial/sidebar.php');      
+            $this->load->view('auditorview/laporan_unit/v_laporan_not_ready.php',$data);       
+            $this->load->view('auditorview/audit/_partial/footer.php');
+            
+        }
         //------------------GET DATA--------------//
         public function ajax_get_cabang2()
     {
