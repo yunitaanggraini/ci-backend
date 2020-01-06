@@ -14,11 +14,12 @@ class M_Transaksi_Auditor extends CI_Model {
         }
 
 
-    public function getUnit($offset)
+    public function getUnit($cabang,$offset)
     {
-      $respon =  $this->_client->request('GET', 'unit',[
+      $respon =  $this->_client->request('GET', 'unitvalid',[
           'query' => [
-              'offset' => $offset
+            'id_cabang' => $cabang,
+            'offset' => $offset
           ]
       ]);
 
@@ -212,6 +213,22 @@ class M_Transaksi_Auditor extends CI_Model {
             return 0;
         }
     }
+    public function countunit1($a)
+    {
+        $respon =  $this->_client->request('GET', 'countunit1',[
+            'query'=>[
+                'id_cabang' => $a
+            ]
+        ]);
+
+        $result = json_decode($respon->getBody()->getContents(),true);
+
+        if ($result['status']==true) {
+            return $result['data'];              
+        }else{
+            return 0;
+        }
+    }
 
     public function getUnitField($no_mesin)
     {
@@ -252,13 +269,28 @@ class M_Transaksi_Auditor extends CI_Model {
 
       public function addScanUnit($data)
       {
-        var_dump($data);die;
           $respon =  $this->_client->request('POST', 'listaud',[
               'form_params'=> $data
           ]);
           $result = json_decode($respon->getBody()->getContents(),true);
   
           return $result['data'];
+      }
+
+      public function cek($a, $b)
+      {
+        $respon =  $this->_client->request('GET', 'list',[
+            'query'=>[
+                'id' =>$a,
+                'id_cabang' => $b
+            ] 
+        ]);
+        $result = json_decode($respon->getBody()->getContents(),true);
+        if($result['status']==true){
+            return $result['data'];
+        }else{
+            return false;
+        }
       }
 
 

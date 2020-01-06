@@ -1,5 +1,18 @@
 <div class="wrapper wrapper-content m-t-xl wrapper wrapper-content animated fadeInRight">
-            
+    <div class="row">
+        <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                    <div class="form-group">
+                    <div class="col-sm-2"><label>Cari User Group</label></div>
+                    <div class="col-sm-8"><input type="text" class="form-control" id="Inusergroup"></div>
+                    <div class="col-sm-2 text-center"><button class="btn btn-w-m btn-success" id="caribtn">Cari Data</button>     
+                    </div>
+                    </div>
+            </div>
+            </div>
+            </div>
+    </div>
             
 
             <div class="row">
@@ -22,19 +35,6 @@
                     </div>
                     <div class="panel-body">
                         <div class="row">
-                            <div class="col-lg-12">
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                             
-                                        <div class="form-group">
-                                        
-                                        <div class="col-sm-3"><label>Cari User Group</label><input type="text" class="form-control" id="Inusergroup"></div>
-                                        <div class="col-sm-2 text-center"><button class="btn btn-w-m btn-success" id="caribtn">Cari Data</button>     
-                                        </div>
-                                        </div>
-                                </div>
-                                </div>
-                                </div>
                             </div>
 
 

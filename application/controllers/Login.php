@@ -29,8 +29,14 @@ class Login extends CI_Controller {
                 $data = [
                     'nama' => $log['nama'],
                     'username' => $username,
-                    'usergroup' => $log['id_usergroup']
+                    'usergroup' => $log['id_usergroup'],
+                    'nik' => $log['nik'],
+                    'perusahaan' => $log['nama_perusahaan'],
+                    'cabang' => $log['nama_cabang'],
+                    'lokasi' => $log['nama_lokasi'],
+                    'status' => $log['status']
                 ];
+                // var_dump($data);die;
                 $this->session->set_userdata($data);
                 // var_dump($log['id_usergroup']);
                 if ($log['id_usergroup']=='UG005') {
@@ -43,7 +49,7 @@ class Login extends CI_Controller {
                 
             }
         }elseif ($login['status']==false) {
-            $this->session->set_flashdata("pesan",'Login Gagal !');
+            $this->session->set_flashdata("pesan",'<div class="alert alert-danger">Login Gagal !</div>');
             Redirect('login/sima_login');
         }
         

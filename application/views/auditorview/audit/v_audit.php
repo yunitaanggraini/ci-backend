@@ -1,70 +1,69 @@
-<div class="wrapper wrapper-content m-t-xl wrapper wrapper-content animated fadeInRight">
-
+<div class="wrapper wrapper-content m-t-n-md wrapper wrapper-content animated fadeInRight">
             <div class="row">
                 <div class="col-lg-12">
                 <div class="panel panel-bluedark">
                     <div class="panel-heading">
-                        <h3><i class="fa fa-info-circle"></i> Data Audit Unit</h3>
+                        <h3><i class="fa fa-info-circle"></i> Audit</h3>
                     </div>
                     <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-body">
-                            <form action="" method="post">
-                                <div class="col-sm-4">
-                                    <label>Cabang</label>
+                                <div class="row">
                                     <div class="form-group">
-                                        <select name="id_cabang" class="form-control" id="OptCabang"></select>
-                                    </div>        
-                                </div> 
-                                <div class="col-sm-6">
-                                        <label>Data Unit</label>
-                                        <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Cari Data Unit" id="cari">
+                                            <label class="col-sm-2 control-label">Data Unit</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" placeholder="Cari Data Unit" id="cari">
+                                            <span class="help-block m-b-none text-danger" id="info"></span>
                                         </div>
-                                </div>  
-
-                                <div class="col-sm-1" >
-                                    <div class="form-group m-t-md">
-                                    <a id="preview" class="btn btn-primary">Preview</a>
-                                   </div>                                           
-                                </div> 
-                            </form>                                
-                           
+                                        <div class="col-sm-1" >
+                                            <a id="doCari" class="btn btn-primary">Scan Data</a>                                          
+                                        </div>                           
+                                    </div>
+                            </div>  
+                            <div id="manual" class="row">
+                                <div class="form-group col-sm-12">
+                                    <label>No. Mesin</label>
+                                    <input type="text" class="form-control" placeholder="No Mesin" id="no_mesin" required>
+                                </div>
+                                <div class="form-group col-sm-12">
+                                    <label>No. Rangka</label>
+                                    <input type="text" class="form-control" placeholder="No Rangka" id="no_rangka" required>
+                                </div>
+                                <div class="form-group col-sm-12">
+                                    <label>Lokasi</label>
+                                    <select class="form-control" name="id_lokasi" id="id_lokasi"></select>
+                                </div>
+                                <div class="form-group col-sm-12">
+                                <a id="audit" class="btn btn-primary">Audit</a>                                          
+                                </div>
                             </div>
-                        
+                                </div>
+                            
+                        </div>
                     </div>
                 </div>
-            </div>
-
-                    <div class="row">
-                        <div class="col-lg-12" >
-                    <div class="table-responsive">
+                
+                <div class="row">
+                    <div class="col-lg-12" >
+                        
+                        <div class="table-responsive">
                     <table class="table table-striped table-bordered table-hover dataTables-example gray-bg" >
                     <thead>
                     <tr >
                         <th class="text-center" width="3%">No</th>
                         <th class="text-center" width="3%">Aksi</th>
-                        <th class="text-center">ID Unit</th>
                         <th class="text-center">No Mesin</th>
                         <th class="text-center">No Rangka</th>
-                        <th class="text-center">Cabang</th>
                         <th class="text-center">Lokasi</th>
                         <th class="text-center">Umur Unit</th>
                         <th class="text-center">Status Unit</th>
-                        <th class="text-center">Aki</th>
-                        <th class="text-center">Spion</th>
-                        <th class="text-center">Helm</th>
-                        <th class="text-center">Tools</th>
-                        <th class="text-center">Buku Servis</th>
                         <th class="text-center">Tahun</th>
                         <th class="text-center">Type</th>
                         <th class="text-center">Kode Item</th>
-                        <th class="text-center">Foto</th>
                         <th class="text-center">Keterangan</th>
                         <th class="text-center">Is Ready</th>
-                        <th class="text-center">Tanggal Audit</th>
                     </tr>
                     </thead>
                     <tbody id="audit_unit">
@@ -73,25 +72,16 @@
                     <tr>
                         <th class="text-center" width="3%">No</th>
                         <th class="text-center" width="3%">Aksi</th>
-                        <th class="text-center">ID Unit</th>
                         <th class="text-center">No Mesin</th>
                         <th class="text-center">No Rangka</th>
-                        <th class="text-center">Cabang</th>
                         <th class="text-center">Lokasi</th>
                         <th class="text-center">Umur Unit</th>
                         <th class="text-center">Status Unit</th>
-                        <th class="text-center">Aki</th>
-                        <th class="text-center">Spion</th>
-                        <th class="text-center">Helm</th>
-                        <th class="text-center">Tools</th>
-                        <th class="text-center">Buku Servis</th>
                         <th class="text-center">Tahun</th>
                         <th class="text-center">Type</th>
                         <th class="text-center">Kode Item</th>
-                        <th class="text-center">Foto</th>
                         <th class="text-center">Keterangan</th>
                         <th class="text-center">Is Ready</th>
-                        <th class="text-center">Tanggal Audit</th>
                     </tr>
                     </tfoot>
                     </table>

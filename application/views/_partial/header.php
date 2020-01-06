@@ -34,5 +34,18 @@
         }
         document.oncontextmenu = redirectKK;
 </script>
+<style>
+#loading{
+  text-align: center;
+  background: url('<?php echo base_url() ?>assets/images/loader.gif') no-repeat center;
+  background-size: 30px;
+  width: 100%;
+  height: 100px;
+}
+</style>
 
 </head>
+
+<body class="md-skin fixed-nav fixed-nav-basic fixed-sidebar">
+    
+    <div id="wrapper">

@@ -179,6 +179,7 @@
         $listJadwalAudit =$this->maudit->getAudit($offset);
         foreach ($listJadwalAudit as $list){
             if ($list['keterangan']=='waiting') {
+<<<<<<< HEAD
             }else if($list['keterangan']=='in progress'){
                 $list['keterangan']='
                 <form action="'.$base.'data_temporary/unit" method="POST">
@@ -186,13 +187,15 @@
                 <button type="submit" name="submit" class="btn btn-success">BUKA</button>
                 </form>
 
+=======
+            }elseif($list['keterangan']=='in progress'){
+                $link = base_url()."transaksi/audit?id=".$list['id_cabang'];
+                $list['keterangan']='
+                <a class="btn btn-success" onClick="MyWindow=window.open(\''.$link.'\',\'MyWindow\',\'width=683,height=576\'); return false;">BUKA</a>
+>>>>>>> eec27884f787cdd902fa303a6880a5bbcd56b1c0
                 ';
-            }else if ($list['keterangan']=='done'){     
+            }elseif ($list['keterangan']=='done'){     
             }
-            $data = array(
-                'id_cabang' => $list['id_cabang']
-            );
-            $this->session->set_userdata( $data );
             $offset++;
             $output .='
             <tr> 
@@ -360,7 +363,7 @@
 
             $cek = $this->maudit->getJadwalAuditById($id);
              /*var_dump($cek);die;*/
-            if ($cek['status']===true) {
+            if ($cek) {
 
                 $this->session->set_flashdata('warning', 'sudah ada');
                 
@@ -395,15 +398,15 @@
         if ($auditor!= null && $tanggal_audit!=null && $jenis_audit!=null) {
             $listJdwAudit = $this->maudit->carijadwalaudit($auditor,$tanggal_audit,$jenis_audit);
         }elseif($auditor!=null&& $tanggal_audit==null&& $jenis_audit==null){
-            $$listJdwAudit = $this->maudit->cariauditor($auditor);
+            $listJdwAudit = $this->maudit->cariauditor($auditor);
         }elseif ($auditor==null && $tanggal_audit!=null && $jenis_audit==null) {
-            $$listJdwAudit = $this->maudit->caritanggalaudit($tanggal_audit);
+            $listJdwAudit = $this->maudit->caritanggalaudit($tanggal_audit);
         }elseif ($auditor==null && $tanggal_audit==null && $jenis_audit!=null) {
-            $$listJdwAudit = $this->maudit->carijenisaudit($jenis_audit);
+            $listJdwAudit = $this->maudit->carijenisaudit($jenis_audit);
         }
         
         if ($$listJdwAudit) {
-            foreach ($$listJdwAudit as $list) {
+            foreach ($listJdwAudit as $list) {
                 $no++;
             $output .='
             <tr> 

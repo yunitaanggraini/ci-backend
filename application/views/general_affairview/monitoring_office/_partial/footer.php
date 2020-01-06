@@ -87,7 +87,18 @@
     </script>
     <script>
    $(document).ready(function() {
-    $('#inv_office').load("<?php echo base_url() ?>transaksi_ga/ajax_get_Inventory");
+    // $('#inv_office').load("<?php echo base_url() ?>transaksi");
+    get_data();
+
+    function get_data() {
+    $.ajax({
+           url: "<?php echo base_url() ?>transaksi_ga/ajax_get_Inventory",
+           dataType:'JSON',
+           success:function(data){
+            $('#inv_office').html(data);
+           }
+       })
+    }
     function search(){
             var jenisinv =$('#inv_office').val();
 

@@ -88,6 +88,7 @@
     $('#status_inv').load("<?php echo base_url() ?>master_data/ajax_get_status_inv");
     function search() {
             var statusinv =$('#Instatusinv').val();
+            $("#status_inv").html('<tr> <td colspan="10" id="loading"> </td></tr>');
 
             if (statusinv!='') {
                 $.ajax({

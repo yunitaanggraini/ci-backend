@@ -92,6 +92,7 @@
     function search() {
             var subinv =$('#subinv').val();
             var jenisinv = $('#jenisinv').val();
+            $("#sub_inv").html('<tr> <td colspan="10" id="loading"> </td></tr>');
             
 
             if (subinv!='' && jenisinv!='') {

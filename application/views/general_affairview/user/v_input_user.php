@@ -7,7 +7,7 @@
 
                         <div class="col-lg-10" ><h3><i class="fa fa-info-circle"></i> Input Data User</h3></div>
                         <div >
-                        <a href="<?php echo base_url('user') ?>" type="submit" class="btn btn-ws-m btn-danger">Batal</a>
+                        <a href="<?php echo base_url('master_data/user') ?>" type="submit" class="btn btn-ws-m btn-danger">Batal</a>
                             <button type="submit" class="btn btn-primary btn-ws-m" id="btn-simpan">Simpan</button>
                         </div>
                       

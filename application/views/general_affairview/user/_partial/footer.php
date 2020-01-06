@@ -54,8 +54,49 @@
 
     <script src="<?php echo base_url() ?>assets/js/plugins/toastr/toastr.min.js"></script>
 
-
     <script>
+     $(document).ready(function() { 
+        <?php if($this->session->flashdata('berhasil')) {?>
+        setTimeout(function() {
+                    toastr.options = {
+                        positionClass: 'toast-bottom-left',
+                        closeButton: true,
+                        progressBar: true,
+                        showMethod: 'slideDown',
+                        timeOut: 4000
+                    };
+                    toastr.success('<?php echo $this->session->flashdata('berhasil') ?>', 'Status');
+        
+                }, 1300);
+            <?php }?>
+        <?php if($this->session->flashdata('gagal')) {?>
+        setTimeout(function() {
+                    toastr.options = {
+                        positionClass: 'toast-bottom-left',
+                        closeButton: true,
+                        progressBar: true,
+                        showMethod: 'slideDown',
+                        timeOut: 4000
+                    };
+                    toastr.error('<?php echo $this->session->flashdata('gagal') ?>', 'Status');
+        
+                }, 1300);
+            <?php }?>
+        <?php if($this->session->flashdata('warning')) {?>
+        setTimeout(function() {
+                    toastr.options = {
+                        positionClass: 'toast-bottom-left',
+                        closeButton: true,
+                        progressBar: true,
+                        showMethod: 'slideDown',
+                        timeOut: 4000
+                    };
+                    toastr.warning('<?php echo $this->session->flashdata('warning') ?>', 'Status');
+        
+                }, 1300);
+            <?php }?>
+                $( document ).idleTimer( 10000);
+    });
     $(document).ready(function() { 
             
                 // setTimeout(function() {
@@ -81,10 +122,9 @@
         // function you want to fire when the user becomes active again
         document.getElementById("stat").innerHTML="<span class='label label-success'> <span class='text-info'><i class='fa fa-circle'></i></span> Online</span>";
     });
-
     </script>
     <script>
-   $(document).ready(function() { 
+   $(document).ready(function() {
     $('#user').load("<?php echo base_url();?>master_data/ajax_get_user");
     $('#Optusergroup').load("<?php echo base_url();?>master_data/ajax_get_usergroup2");
     $('#Optperusahaan').load("<?php echo base_url();?>master_data/ajax_get_perusahaan2");
@@ -114,6 +154,7 @@
     function search() {
             var username =$('#username').val();
             var nama = $('#nama').val();
+            $("#user").html('<tr> <td colspan="10" id="loading"> </td></tr>');
 
             if (username!='' && nama!='') {
                 $.ajax({
@@ -171,6 +212,11 @@
           if(e.keyCode == 13) {
              search();
           }
+      });
+      $('#btn-reset').click(function(e){
+        e.preventDefault();
+        $('#password').attr('disabled',false);
+        $('#confirm').toggleClass('hidden form-group');
       });
     });
 

@@ -88,6 +88,7 @@
     $('#perusahaan').load("<?php echo base_url() ?>master_data/ajax_get_perusahaan");
     function search() {
             var perusahaan =$('#Inperusahaan').val();
+            $("#perusahaan").html('<tr> <td colspan="10" id="loading"> </td></tr>');
 
             if (perusahaan!='') {
                 $.ajax({

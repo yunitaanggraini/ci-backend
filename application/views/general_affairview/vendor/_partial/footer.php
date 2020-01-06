@@ -88,6 +88,7 @@
     $('#vendor').load("<?php echo base_url() ?>master_data/ajax_get_vendor");
     function search() {
             var vendor =$('#Invendor').val();
+            $("#vendor").html('<tr> <td colspan="10" id="loading"> </td></tr>');
 
             if (vendor!='') {
                 $.ajax({
@@ -164,8 +165,6 @@
             }
             
             load_country_data(1);
-
-            });
 
     </script>
 
