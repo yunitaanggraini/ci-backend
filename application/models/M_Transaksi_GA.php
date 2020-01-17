@@ -10,17 +10,53 @@ class M_Transaksi_GA extends CI_Model {
         {
             parent::__construct();
                 $this->_client = new Client([
-                    'base_uri'=> SERVER_BASE.'ci-server-lala/api/transaksi/'
+                    'base_uri'=> SERVER_BASE.'api/transaksi/'
                 ]);
         }
     
-    public function getInv()
+    public function getInv($start = null)
     {
-        $respon =  $this->_client->request('GET', 'inv');
+        $respon =  $this->_client->request('GET', 'inv',[
+            'query' => [
+                'offset' => $start
+            ]
+        ]);
+
+        $result = json_decode($respon->getBody()->getContents(),true);
+
+        if ($result['status']==true) {
+            return $result['data']; 
+        }else{
+            return false;
+        }
+    }
+    public function getInvbyId($id = null)
+    {
+        $respon =  $this->_client->request('GET', 'inv',[
+            'query' => [
+                'id' => $id
+            ]
+        ]);
 
         $result = json_decode($respon->getBody()->getContents(),true);
 
         return $result['data'];
+    }
+    public function cariinv($id = null,$offset = null)
+    {
+        $respon =  $this->_client->request('GET', 'cariinv',[
+            'query'=>[
+                'id' =>$id,
+                'offset' => $offset
+            ]
+        ]);
+
+        $result = json_decode($respon->getBody()->getContents(),true);
+        if ($result['status']==true) {
+            return $result['data'];
+        }else{
+            return false;
+        }
     }
 
     public function getInventoryById($id)
@@ -47,10 +83,14 @@ class M_Transaksi_GA extends CI_Model {
 
         $result = json_decode($respon->getBody()->getContents(),true);
 
-        return $result['data'];
+        if ($result['status']==true) {
+            return $result['data']; 
+        }else{
+            return false;
+        }
     }
 
-    public function UpdateInv($data)
+    public function EditInv($data)
     {
         $respon =  $this->_client->request('PUT', 'inv',[
           'form_params'=>  $data
@@ -58,13 +98,17 @@ class M_Transaksi_GA extends CI_Model {
 
         $result = json_decode($respon->getBody()->getContents(),true);
 
-        return $result['data'];
+        if ($result['status']==true) {
+            return $result['data']; 
+        }else{
+            return false;
+        }
 
     }
 
     public function delInv($id)
     { 
-        $respon =  $this->_client->request('DELETE', 'transaksi_inventory',[
+        $respon =  $this->_client->request('DELETE', 'inv',[
           'form_params'=>[
               'id'=> $id
           ]
@@ -72,7 +116,11 @@ class M_Transaksi_GA extends CI_Model {
 
       $result = json_decode($respon->getBody()->getContents(),true);
 
-      return true;       
+      if ($result['status']==true) {
+        return true; 
+    }else{
+        return false;
+    }    
     }
 
     //------------------------//
@@ -83,7 +131,11 @@ class M_Transaksi_GA extends CI_Model {
 
         $result = json_decode($respon->getBody()->getContents(),true);
 
-        return $result['data'];
+        if ($result['status']==true) {
+            return $result['data']; 
+        }else{
+            return false;
+        }
     }
     public function getSubInv($id)
     {
@@ -91,7 +143,11 @@ class M_Transaksi_GA extends CI_Model {
 
         $result = json_decode($respon->getBody()->getContents(),true);
 
-        return $result['data'];
+        if ($result['status']==true) {
+            return $result['data']; 
+        }else{
+            return false;
+        }
     }
 
     public function getStatusInv()
@@ -100,7 +156,11 @@ class M_Transaksi_GA extends CI_Model {
 
         $result = json_decode($respon->getBody()->getContents(),true);
 
-        return $result['data'];
+        if ($result['status']==true) {
+            return $result['data']; 
+        }else{
+            return false;
+        }
     }
 
     public function getVendor()
@@ -109,7 +169,11 @@ class M_Transaksi_GA extends CI_Model {
 
         $result = json_decode($respon->getBody()->getContents(),true);
 
-        return $result['data'];
+        if ($result['status']==true) {
+            return $result['data']; 
+        }else{
+            return false;
+        }
     }
 
     public function getCabang()
@@ -118,7 +182,11 @@ class M_Transaksi_GA extends CI_Model {
 
         $result = json_decode($respon->getBody()->getContents(),true);
 
-        return $result['data'];              
+        if ($result['status']==true) {
+            return $result['data']; 
+        }else{
+            return false;
+        }              
     }
     
     public function getLokasi()
@@ -127,7 +195,11 @@ class M_Transaksi_GA extends CI_Model {
 
         $result = json_decode($respon->getBody()->getContents(),true);
 
-        return $result['data'];              
+        if ($result['status']==true) {
+            return $result['data']; 
+        }else{
+            return false;
+        }             
     }
 
     public function getLokasiCabang($id)
@@ -140,7 +212,11 @@ class M_Transaksi_GA extends CI_Model {
 
         $result = json_decode($respon->getBody()->getContents(),true);
 
-        return $result['data'];              
+        if ($result['status']==true) {
+            return $result['data']; 
+        }else{
+            return false;
+        }             
     }
 
     //---//
@@ -227,9 +303,13 @@ class M_Transaksi_GA extends CI_Model {
         
     }
 
-    public function getCountInv()
+    public function getCountInv($id = null)
     {
-        $respon =  $this->_client->request('GET', 'countOffice');
+        $respon =  $this->_client->request('GET', 'countOffice',[
+            'query'=>[
+                'id' => $id
+            ]
+        ]);
 
         $result = json_decode($respon->getBody()->getContents(),true);
         

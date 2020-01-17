@@ -58,8 +58,11 @@
 
                                 <div class="form-group"><label class="col-sm-2 control-label">Waktu</label>
                                     <div class="col-sm-5">
+                                    <?php 
+                                    $wkt = time()+28800;
+                                    $wkt = date('H:i',$wkt); ?>
                                 <div class="input-group clockpicker" data-autoclose="true">
-                                    <input type="text" class="form-control" name="waktu" id="waktu" >
+                                    <input type="text" class="form-control" name="waktu" id="waktu" value="<?php echo $wkt; ?>" >
                                     <span class="input-group-addon">
                                         <span class="fa fa-clock-o"></span>
                                     </span>

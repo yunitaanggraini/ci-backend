@@ -122,6 +122,10 @@ class ComposerStaticInit5ad674a21ff5f834fc445412e1676e40
         ),
         'P' => 
         array (
+            'PHPQRCode' => 
+            array (
+                0 => __DIR__ . '/..' . '/aferrandini/phpqrcode/lib',
+            ),
             'PHPExcel' => 
             array (
                 0 => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes',

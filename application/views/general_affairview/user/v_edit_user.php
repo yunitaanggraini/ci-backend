@@ -11,7 +11,10 @@
                             </div>
                         </div>
                         <div class="panel-body">
-                <?php foreach($user as $u){ ?>
+                <?php foreach($user as $u){
+                    $lokasi = $u['id_lokasi'];
+                    
+                    ?>
                     <input type="hidden" class="form-control" name="nik" id="nik" value="<?php echo $u['nik']?>">
                                     <div class="form-group"><label class="col-sm-2 control-label">ID User</label>
                                     <div class="col-sm-10"><input type="text" class="form-control" name="nik" id="nik" value="<?php echo $u['nik']?>" disabled></div>

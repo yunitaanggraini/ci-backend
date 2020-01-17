@@ -11,10 +11,13 @@
     <link href="<?php echo base_url() ?>assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo base_url() ?>assets/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="<?php echo base_url() ?>assets/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <link href="<?php echo base_url() ?>assets/css/plugins/ladda/ladda-themeless.min.css" rel="stylesheet">
     <link href="<?php echo base_url() ?>assets/css/plugins/jasny/jasny-bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url() ?>assets/css/plugins/chosen/bootstrap-chosen.css" rel="stylesheet">
     <link href="<?php echo base_url() ?>assets/css/animate.css" rel="stylesheet">
     <link href="<?php echo base_url() ?>assets/css/style.css" rel="stylesheet">
     <link href="<?php echo base_url() ?>assets/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="<?php echo base_url() ?>assets/css/plugins/textSpinners/spinners.css" rel="stylesheet">
     <link href="<?php echo base_url() ?>assets/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
     <link href="<?php echo base_url() ?>assets/css/plugins/clockpicker/clockpicker.css" rel="stylesheet">
 
@@ -36,7 +39,7 @@
 </script>
 <style>
 #loading{
-  text-align: center;
+  /* text-align: center; */
   background: url('<?php echo base_url() ?>assets/images/loader.gif') no-repeat center;
   background-size: 30px;
   width: 100%;

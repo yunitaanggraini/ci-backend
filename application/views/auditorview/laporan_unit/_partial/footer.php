@@ -191,6 +191,7 @@
         var status = $('#status').val();
         var action ='preview';
         console.log(tgl_akhir);
+        $('#unit').html("<tr> <td id='loading' colspan='8'></td></tr>");
         
         $.ajax({
             method: 'post',

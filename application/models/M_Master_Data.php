@@ -9,7 +9,7 @@ class M_Master_Data extends CI_Model {
         {
             parent::__construct();
             $this->_client = new Client([
-                'base_uri'=> SERVER_BASE.'ci-server-lala/api/master/'
+                'base_uri'=> SERVER_BASE.'api/master/'
             ]);
         }
 
@@ -32,7 +32,7 @@ class M_Master_Data extends CI_Model {
     {
         $respon =  $this->_client->request('GET', 'user',[
             'query' =>[
-                'pages' => $offset
+                'offset' => $offset
             ]
         ]);
 
@@ -45,9 +45,13 @@ class M_Master_Data extends CI_Model {
             return false;
         }  
     }
-    public function countUser()
+    public function countUser($id = null)
     {
-        $respon =  $this->_client->request('GET', 'countuser');
+        $respon =  $this->_client->request('GET', 'countuser',[
+            'query'=>[
+                'id' => $id
+            ]
+        ]);
 
         $result = json_decode($respon->getBody()->getContents(),true);
 
@@ -62,9 +66,13 @@ class M_Master_Data extends CI_Model {
 
 
 
-    public function getUserGroup()
+    public function getUserGroup($offset = null)
     {
-      $respon =  $this->_client->request('GET', 'usergroup');
+      $respon =  $this->_client->request('GET', 'usergroup',[
+          'query'=>[
+              'offset' => $offset
+          ]
+      ]);
 
       $result = json_decode($respon->getBody()->getContents(),true);
 
@@ -76,9 +84,13 @@ class M_Master_Data extends CI_Model {
         }
     }
 
-    public function getJenisInv ()
+    public function getJenisInv ($start = null)
     {
-        $respon =  $this->_client->request('GET', 'jenisinv');
+        $respon =  $this->_client->request('GET', 'jenisinv',[
+            'query' =>[
+                'offset' =>$start
+            ]
+        ]);
       
         $result = json_decode($respon->getBody()->getContents(),true);
 
@@ -90,9 +102,13 @@ class M_Master_Data extends CI_Model {
         }              
     }
 
-    public function getSubInv()
+    public function getSubInv($offset=null)
     {
-        $respon =  $this->_client->request('GET', 'subinv');
+        $respon =  $this->_client->request('GET', 'subinv',[
+            'query' => [
+                'offset' => $offset
+            ]
+        ]);
 
         $result = json_decode($respon->getBody()->getContents(),true);
 
@@ -118,9 +134,13 @@ class M_Master_Data extends CI_Model {
         
     }
 
-    public function getPerusahaan()
+    public function getPerusahaan($offset = null)
     {
-        $respon =  $this->_client->request('GET', 'perusahaan');
+        $respon =  $this->_client->request('GET', 'perusahaan',[
+            'query' =>[
+                'offset' => $offset
+            ]
+        ]);
 
         $result = json_decode($respon->getBody()->getContents(),true);
 
@@ -131,10 +151,31 @@ class M_Master_Data extends CI_Model {
             return false;
         }              
     }
-
-    public function getCabang()
+    public function perusahaancount($id = null)
     {
-        $respon =  $this->_client->request('GET', 'cabang');
+        $respon =  $this->_client->request('GET', 'countperusahaan',[
+            'query'=>[
+                'id' => $id
+            ]
+        ]);
+
+        $result = json_decode($respon->getBody()->getContents(),true);
+
+        if ($result['status']==true) {
+
+            return $result['data'];
+        }else {
+            return false;
+        }  
+    }
+
+    public function getCabang($offset=null)
+    {
+        $respon =  $this->_client->request('GET', 'cabang',[
+            'query'=>[
+                'offset' => $offset
+            ]
+        ]);
 
         $result = json_decode($respon->getBody()->getContents(),true);
 
@@ -177,9 +218,13 @@ class M_Master_Data extends CI_Model {
         return $result['data'];              
     }
 
-    public function getVendor()
+    public function getVendor($offset = null)
     {
-        $respon =  $this->_client->request('GET', 'vendor');
+        $respon =  $this->_client->request('GET', 'vendor',[
+            'query' =>[
+                'offset' => $offset
+            ]
+        ]);
 
         $result = json_decode($respon->getBody()->getContents(),true);
 
@@ -374,7 +419,11 @@ class M_Master_Data extends CI_Model {
 
         $result = json_decode($respon->getBody()->getContents(),true);
 
-        return $result['data'];
+        if ($result['status']==true) {
+            return $result['data']; 
+        }else{
+            return false;
+        }
     }
 
     public function addUserGroup($data)
@@ -385,7 +434,11 @@ class M_Master_Data extends CI_Model {
 
         $result = json_decode($respon->getBody()->getContents(),true);
 
-        return $result['data'];
+        if ($result['status']==true) {
+            return $result['data']; 
+        }else{
+            return false;
+        }
     }
 
     public function addJenisInv($data)
@@ -396,7 +449,11 @@ class M_Master_Data extends CI_Model {
 
         $result = json_decode($respon->getBody()->getContents(),true);
 
-        return $result['data'];
+        if ($result['status']==true) {
+            return $result['data']; 
+        }else{
+            return false;
+        }
     }
 
     public function addSubInv($data)
@@ -407,7 +464,11 @@ class M_Master_Data extends CI_Model {
 
         $result = json_decode($respon->getBody()->getContents(),true);
 
-        return $result['data'];
+        if ($result['status']==true) {
+            return $result['data']; 
+        }else{
+            return false;
+        }
     }
 
     public function addStatusInv($data)
@@ -418,7 +479,11 @@ class M_Master_Data extends CI_Model {
 
         $result = json_decode($respon->getBody()->getContents(),true);
 
-        return $result['data'];
+        if ($result['status']==true) {
+            return $result['data']; 
+        }else{
+            return false;
+        }
     }
 
     public function addPerusahaan($data)
@@ -429,7 +494,11 @@ class M_Master_Data extends CI_Model {
 
         $result = json_decode($respon->getBody()->getContents(),true);
 
-        return $result['data'];
+        if ($result['status']==true) {
+            return $result['data']; 
+        }else{
+            return false;
+        }
     }
 
     public function addCabang($data)
@@ -440,7 +509,11 @@ class M_Master_Data extends CI_Model {
 
         $result = json_decode($respon->getBody()->getContents(),true);
 
-        return $result['data'];
+        if ($result['status']==true) {
+            return $result['data']; 
+        }else{
+            return false;
+        }
     }
 
     public function addLokasi($data)
@@ -451,7 +524,11 @@ class M_Master_Data extends CI_Model {
 
         $result = json_decode($respon->getBody()->getContents(),true);
 
-        return $result['data'];
+        if ($result['status']==true) {
+            return $result['data']; 
+        }else{
+            return false;
+        }
     }
 
     public function addVendor($data)
@@ -462,7 +539,11 @@ class M_Master_Data extends CI_Model {
 
         $result = json_decode($respon->getBody()->getContents(),true);
 
-        return $result['data'];
+        if ($result['status']==true) {
+            return $result['data']; 
+        }else{
+            return false;
+        }
     }
 
     public function addJenisAudit($data)
@@ -473,7 +554,11 @@ class M_Master_Data extends CI_Model {
 
         $result = json_decode($respon->getBody()->getContents(),true);
 
-        return $result['data'];
+        if ($result['status']==true) {
+            return $result['data']; 
+        }else{
+            return false;
+        }
     }
 
     //-------------------------------------------------UPDATE--------------------------------------------------------//
@@ -485,7 +570,11 @@ class M_Master_Data extends CI_Model {
 
         $result = json_decode($respon->getBody()->getContents(),true);
 
-        return $result['data'];
+        if ($result['status']==true) {
+            return $result['data']; 
+        }else{
+            return false;
+        }
 
     }
 
@@ -497,7 +586,11 @@ class M_Master_Data extends CI_Model {
 
         $result = json_decode($respon->getBody()->getContents(),true);
 
-        return $result['data'];
+        if ($result['status']==true) {
+            return $result['data']; 
+        }else{
+            return false;
+        }
 
     }
 
@@ -509,7 +602,11 @@ class M_Master_Data extends CI_Model {
 
         $result = json_decode($respon->getBody()->getContents(),true);
 
-        return $result['data'];
+        if ($result['status']==true) {
+            return $result['data']; 
+        }else{
+            return false;
+        }
 
     }
 
@@ -521,7 +618,11 @@ class M_Master_Data extends CI_Model {
 
         $result = json_decode($respon->getBody()->getContents(),true);
 
-        return $result['data'];
+        if ($result['status']==true) {
+            return $result['data']; 
+        }else{
+            return false;
+        }
 
     }
 
@@ -533,7 +634,11 @@ class M_Master_Data extends CI_Model {
         ]);
 
         $result = json_decode($respon->getBody()->getContents(),true);
-        return $result['data'];
+        if ($result['status']==true) {
+            return $result['data']; 
+        }else{
+            return false;
+        }
 
     }
 
@@ -545,7 +650,11 @@ class M_Master_Data extends CI_Model {
 
         $result = json_decode($respon->getBody()->getContents(),true);
 
-        return $result['data'];
+        if ($result['status']==true) {
+            return $result['data']; 
+        }else{
+            return false;
+        }
 
     }
 
@@ -557,7 +666,11 @@ class M_Master_Data extends CI_Model {
 
         $result = json_decode($respon->getBody()->getContents(),true);
 
-        return $result['data'];
+        if ($result['status']==true) {
+            return $result['data']; 
+        }else{
+            return false;
+        }
 
     }
 
@@ -569,7 +682,11 @@ class M_Master_Data extends CI_Model {
 
         $result = json_decode($respon->getBody()->getContents(),true);
 
-        return $result['data'];
+        if ($result['status']==true) {
+            return $result['data']; 
+        }else{
+            return false;
+        }
 
     }
 
@@ -581,7 +698,11 @@ class M_Master_Data extends CI_Model {
 
         $result = json_decode($respon->getBody()->getContents(),true);
 
-        return $result['data'];
+        if ($result['status']==true) {
+            return $result['data']; 
+        }else{
+            return false;
+        }
 
     }
 
@@ -594,7 +715,11 @@ class M_Master_Data extends CI_Model {
             
         $result = json_decode($respon->getBody()->getContents(),true);
 
-        return $result['data'];
+        if ($result['status']==true) {
+            return $result['data']; 
+        }else{
+            return false;
+        }
 
       }
 
@@ -609,7 +734,11 @@ class M_Master_Data extends CI_Model {
 
       $result = json_decode($respon->getBody()->getContents(),true);
 
-      return true;       
+      if ($result['status']==true) {
+        return true; 
+    }else{
+        return false;
+    }      
     }
 
     public function delUserGroup($id)
@@ -622,7 +751,11 @@ class M_Master_Data extends CI_Model {
 
       $result = json_decode($respon->getBody()->getContents(),true);
 
-      return true;       
+      if ($result['status']==true) {
+        return true; 
+    }else{
+        return false;
+    }       
     }
 
     public function delJenisInv($id)
@@ -635,7 +768,11 @@ class M_Master_Data extends CI_Model {
 
       $result = json_decode($respon->getBody()->getContents(),true);
 
-      return true;       
+      if ($result['status']==true) {
+        return true; 
+    }else{
+        return false;
+    }     
     }
 
     public function delSubInv($id)
@@ -648,7 +785,11 @@ class M_Master_Data extends CI_Model {
 
       $result = json_decode($respon->getBody()->getContents(),true);
 
-      return true;       
+      if ($result['status']==true) {
+        return true; 
+    }else{
+        return false;
+    }      
     }
 
     public function delStatusInv($id)
@@ -661,7 +802,11 @@ class M_Master_Data extends CI_Model {
 
       $result = json_decode($respon->getBody()->getContents(),true);
 
-      return true;       
+      if ($result['status']==true) {
+        return true; 
+    }else{
+        return false;
+    }      
     }
 
     public function delPerusahaan($id)
@@ -674,7 +819,11 @@ class M_Master_Data extends CI_Model {
 
       $result = json_decode($respon->getBody()->getContents(),true);
 
-      return true;       
+      if ($result['status']==true) {
+        return true; 
+    }else{
+        return false;
+    }       
     }
 
     public function delCabang($id)
@@ -687,7 +836,11 @@ class M_Master_Data extends CI_Model {
 
       $result = json_decode($respon->getBody()->getContents(),true);
 
-      return true;       
+      if ($result['status']==true) {
+        return true; 
+    }else{
+        return false;
+    }     
     }
 
     public function delLokasi($id)
@@ -700,7 +853,11 @@ class M_Master_Data extends CI_Model {
 
       $result = json_decode($respon->getBody()->getContents(),true);
 
-      return true;       
+      if ($result['status']==true) {
+        return true; 
+    }else{
+        return false;
+    }     
     }
 
     public function delVendor($id)
@@ -713,7 +870,11 @@ class M_Master_Data extends CI_Model {
 
       $result = json_decode($respon->getBody()->getContents(),true);
 
-      return true;       
+      if ($result['status']==true) {
+        return true; 
+    }else{
+        return false;
+    }       
     }
 
     public function delJenisAudit($id)
@@ -726,7 +887,11 @@ class M_Master_Data extends CI_Model {
 
       $result = json_decode($respon->getBody()->getContents(),true);
 
-      return true;       
+      if ($result['status']==true) {
+        return true; 
+    }else{
+        return false;
+    }      
     }
     
     //-------------------------------------------------KODE OTOMATIS--------------------------------------------------------//
@@ -744,12 +909,44 @@ class M_Master_Data extends CI_Model {
             return 0;
         }
     }
+    public function buatkodejenisinv()
+    {
+      $respon =  $this->_client->request('GET', 'countjenisinv');
+
+      $result = json_decode($respon->getBody()->getContents(),true);
+
+      if ($result['status']==true) {
+        return $result['data']; 
+        }else{
+            return 0;
+        }
+    }
+    public function buatkodecabang($id = null)
+    {
+      $respon =  $this->_client->request('GET', 'countcabang',[
+          'query' =>[
+              'id' => $id
+          ]
+      ]);
+
+      $result = json_decode($respon->getBody()->getContents(),true);
+
+      if ($result['status']==true) {
+        return $result['data']; 
+        }else{
+            return 0;
+        }
+    }
 
     
 
-    public function buatkodesubinventory()
+    public function buatkodesubinventory($id=null)
     {
-      $respon =  $this->_client->request('GET', 'subinvcount');
+      $respon =  $this->_client->request('GET', 'subinvcount',[
+          'query' =>[
+              'id'=> $id
+          ]
+      ]);
 
       $result = json_decode($respon->getBody()->getContents(),true);
 
@@ -773,9 +970,13 @@ class M_Master_Data extends CI_Model {
         }
     }
 
-    public function buatkodevendor()
+    public function buatkodevendor($id = null)
     {
-      $respon =  $this->_client->request('GET', 'vendorcount');
+      $respon =  $this->_client->request('GET', 'vendorcount',[
+          'query' =>[
+              'id' => $id
+          ]
+      ]);
 
       $result = json_decode($respon->getBody()->getContents(),true);
 
@@ -800,52 +1001,15 @@ class M_Master_Data extends CI_Model {
     }
 
     //---------------------------------------------CARI------------------------------------------------------------//
-    public function cariUser($username,$nama)
+    public function cariUser($id=null, $offset=null)
     {
         
         $respon =  $this->_client->request('GET', 'cariuser',[
             'query'=>[
-                'username'=> $username,
-                'nama'=> $nama
+                'id'=> $id,
+                'offset' => $offset
             ]
         ]);
-
-        $result = json_decode($respon->getBody()->getContents(),true);
-
-        if ($result['status']==true) {
-            return $result['data'];
-        }else{
-            return false;
-        }
-    }
-    public function cariUsername($username)
-    {
-        
-        $respon =  $this->_client->request('GET', 'cariuser',[
-                'query'=>[
-                    'username'=> $username
-                ]
-        ]);
-
-        $result = json_decode($respon->getBody()->getContents(),true);
-
-        if ($result['status']==true) {
-            return $result['data'];
-        }else{
-            return false;
-        }
-    }
-
-    public function cariNama($nama)
-    {
-        
-        $respon =  $this->_client->request('GET', 'cariuser',[
-                'query'=>[
-                    'username'=>null,
-                    'nama'=> $nama
-                ]
-        ]);
-
         $result = json_decode($respon->getBody()->getContents(),true);
 
         if ($result['status']==true) {
@@ -908,11 +1072,12 @@ class M_Master_Data extends CI_Model {
         }
       }
 
-      public function cariSub($id)
+      public function cariSub($id =null,$offset=null)
       {
-          $respon =  $this->_client->request('GET', 'carisubinv',[
+          $respon =  $this->_client->request('GET', 'carisubinv2',[
             'query' =>[
-                'subinv'=> $id
+                'id'=> $id,
+                'offset'=> $offset
             ]
         ]);
 
@@ -961,11 +1126,12 @@ class M_Master_Data extends CI_Model {
         }
       }
 
-      public function cariPerusahaan($id)
+      public function cariPerusahaan($id=null, $offset=null)
       {
           $respon =  $this->_client->request('GET', 'cariperusahaan',[
             'query' =>[
-                'perusahaan'=> $id
+                'perusahaan'=> $id,
+                'offset' => $offset
             ]
         ]);
 
@@ -978,11 +1144,12 @@ class M_Master_Data extends CI_Model {
         }
       }
 
-      public function cariCabang($id)
+      public function cariCabang($id= null, $offset =null)
       {
           $respon =  $this->_client->request('GET', 'caricabang',[
             'query' =>[
-                'cabang'=> $id
+                'cabang'=> $id,
+                'offset' => $offset
             ]
         ]);
 
@@ -995,11 +1162,12 @@ class M_Master_Data extends CI_Model {
         }
       }
 
-      public function cariLokasi($id)
+      public function cariLokasi($id=null, $offset=null)
       {
           $respon =  $this->_client->request('GET', 'carilokasi',[
             'query' =>[
-                'lokasi'=> $id
+                'lokasi'=> $id,
+                'offset' =>$offset
             ]
         ]);
 
@@ -1012,11 +1180,12 @@ class M_Master_Data extends CI_Model {
         }
       }
 
-      public function cariVendor($id)
+      public function cariVendor($id =null, $offset=null)
       {
           $respon =  $this->_client->request('GET', 'carivendor',[
             'query' =>[
-                'vendor'=> $id
+                'vendor'=> $id,
+                'offset' => $offset
             ]
         ]);
 
@@ -1045,9 +1214,13 @@ class M_Master_Data extends CI_Model {
             return false;
         }
       }
-      public function countlokasi()
+      public function countlokasi($id = null)
       {
-          $respon =  $this->_client->request('GET', 'countlokasi');
+          $respon =  $this->_client->request('GET', 'countlokasi',[
+              'query'=>[
+                  'id' => $id
+              ]
+          ]);
 
         $result = json_decode($respon->getBody()->getContents(),true);
         // var_dump($result['data'][0]);die;

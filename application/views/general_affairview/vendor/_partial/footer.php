@@ -85,32 +85,57 @@
     </script>
     <script>
    $(document).ready(function() {
-    $('#vendor').load("<?php echo base_url() ?>master_data/ajax_get_vendor");
-    function search() {
+    // $('#vendor').load("<?php echo base_url() ?>master_data/ajax_get_vendor");
+    get_data(1);
+    $(document).on('click', '.pagination li a', function(event) {
+        event.preventDefault();
+        var page = $(this).data('ci-pagination-page');
+        var vendor =$('#Invendor').val();
+        if (vendor) {
+            search(page);
+        }else{
+            get_data(page);
+        }
+    });
+    function get_data(page){
+        $("#vendor").html('<tr> <td colspan="10" id="loading"> </td></tr>');
+
+        $.ajax({
+            type:'POST',
+            dataType: 'JSON',
+            url: "<?php echo base_url() ?>master_data/ajax_get_vendor/"+page,
+            success:function(data){
+                $("#vendor").html(data.output);
+                $("#pagination").html(data.pagination);
+            }
+        })
+    }
+    function search(page) {
             var vendor =$('#Invendor').val();
             $("#vendor").html('<tr> <td colspan="10" id="loading"> </td></tr>');
 
             if (vendor!='') {
                 $.ajax({
                     type:"post",
-                    url:"<?php echo base_url() ?>master_data/search_data_vendor",
+                    dataType: 'JSON',
+                    url:"<?php echo base_url() ?>master_data/search_data_vendor/"+page,
                     data:"vendor="+vendor,
                     success:function(data){
-                      $("#vendor").html(data);
+                        $("#vendor").html(data.output);
+                $("#pagination").html(data.pagination);
                       $("#search").val("");
                     }
                 });
             }else{
-
-                $('#vendor').load("<?php echo base_url() ?>master_data/ajax_get_vendor");
+                get_data();
                     }
         }
         $('#caribtn').click(function(){
-            search();
+            search(1);
         });
         $('#Invendor').keyup(function(e) {
           if(e.keyCode == 13) {
-             search();
+             search(1);
           }
       });
 

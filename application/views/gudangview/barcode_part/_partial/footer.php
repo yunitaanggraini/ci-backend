@@ -87,47 +87,63 @@
     </script>
     <script>
    $(document).ready(function() {
-    $('#OptCabang').load("<?php echo base_url();?>barcode/ajax_get_cabang2");
+    $('#OptCabang').load("<?php echo base_url();?>gudang/ajax_get_cabang2");
 
         $('#data_5 .input-daterange').datepicker({
         keyboardNavigation: false,
         forceParse: false,
         autoclose: true
     });
-
     $('#preview').click(function(e){
         e.preventDefault();
-        preview(1);
+        get_data(1);
+        
+    });
+    $('#data_1 .input-group.date').datepicker({
+        format: 'mm/dd/yyyy',
+        todayBtn: "linked",
+        keyboardNavigation: false,
+        forceParse: false,
+        calendarWeeks: true,
+        autoclose: true
     });
 
+    $('#data_5 .input-daterange').datepicker({
+        format: 'mm/dd/yyyy',
+        keyboardNavigation: false,
+        forceParse: false,
+        autoclose: true
+    });
     $(document).on('click', '.pagination li a', function(event) {
         event.preventDefault();
         var page = $(this).data('ci-pagination-page');
-        preview(page);
+        get_data(page);
         
     });
     
-    function preview(page) {
+    function get_data(page) {
         var cabang = $('#OptCabang').val();
         var tgl_awal = $('#tgl_awal').val();
         var tgl_akhir = $('#tgl_akhir').val();
-        var status = $('#status').val();
-        var action ='preview';
+        console.log(tgl_akhir);
+        $('#part').html("<tr> <td id='loading' colspan='7'></td></tr>");
+        
         $.ajax({
             method: 'post',
             dataType:'JSON',
-            url: '<?php echo base_url() ?>transaksi_auditor/preview/'+page,
-            data:{id_cabang: cabang, tgl_awal: tgl_awal, tgl_akhir: tgl_akhir, status: status, action: action},
+            url: '<?php echo base_url() ?>gudang/previewpart/'+page,
+            data:{id_cabang: cabang, tgl_awal: tgl_awal, tgl_akhir: tgl_akhir},
             // data: 'id_cabang='+cabang+'&&tgl_awal='+tgl_awal+'&&tgl_akhir='+tgl_akhir+'&&status='+status+'&&pages='+valu,
-            
-            success:function(data){    
-            $('#audit_unit').html(data.unit_list);
+            success:function(data){
+                console.log(data);
+                
+            $('#part').html(data.part_list);
             $('#pagination').html(data.pagination_link);
             $('#rows_entry').html(data.row_entry);
-            }          
             
+            }
         });
-    } 
+    }
 })
 
 

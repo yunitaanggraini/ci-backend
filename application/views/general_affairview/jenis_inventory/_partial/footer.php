@@ -85,7 +85,27 @@
     </script>
     <script>
    $(document).ready(function() {
-    $('#jenis_inv').load("<?php echo base_url() ?>master_data/ajax_get_jenis_inv");
+    // $('#jenis_inv').load("<?php echo base_url() ?>master_data/ajax_get_jenis_inv");
+    $(document).on('click', '.pagination li a', function(event) {
+        event.preventDefault();
+        var page = $(this).data('ci-pagination-page');
+        get_data(page);
+        
+    });
+    get_data(1);
+    function get_data(page){
+        $("#jenis_inv").html('<tr> <td colspan="10" id="loading"> </td></tr>');
+
+        $.ajax({
+            type: 'POST',
+            dataType: 'JSON',
+            url: "<?php echo base_url() ?>master_data/ajax_get_jenis_inv/"+page,
+            success:function(data) {
+                $('#jenis_inv').html(data.output);
+                $('#pagination').html(data.pagination);
+            }
+        })
+    }
     function search(){
             var jenisinv =$('#Injenisinv').val();
             $("#jenis_inv").html('<tr> <td colspan="10" id="loading"> </td></tr>');
@@ -101,7 +121,7 @@
                     }
                 });
             }else{
-                $('#jenis_inv').load("<?php echo base_url() ?>master_data/ajax_get_jenis_inv");
+                get_data(1);
         }
         }
         $('#caribtn').click(function(){

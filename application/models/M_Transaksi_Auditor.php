@@ -9,7 +9,7 @@ class M_Transaksi_Auditor extends CI_Model {
         {
             parent::__construct();
             $this->_client = new Client([
-                'base_uri'=> SERVER_BASE.'ci-server-lala/api/audit/'
+                'base_uri'=> SERVER_BASE.'api/audit/'
             ]);
         }
 
@@ -17,6 +17,24 @@ class M_Transaksi_Auditor extends CI_Model {
     public function getUnit($cabang,$offset)
     {
       $respon =  $this->_client->request('GET', 'unitvalid',[
+          'query' => [
+            'id_cabang' => $cabang,
+            'offset' => $offset
+          ]
+      ]);
+
+      $result = json_decode($respon->getBody()->getContents(),true);
+
+        if ($result['status']==true) {
+
+        return $result['data'];
+        }else {
+            return false;
+        }   
+    }
+    public function getPartValid($cabang,$offset)
+    {
+      $respon =  $this->_client->request('GET', 'partvalid',[
           'query' => [
             'id_cabang' => $cabang,
             'offset' => $offset
@@ -55,19 +73,13 @@ class M_Transaksi_Auditor extends CI_Model {
 
       $result = json_decode($respon->getBody()->getContents(),true);
 
-      return $result['data'];
+      if ($result['status']==true) {
+        return $result['data']; 
+    }else{
+        return false;
+    }
     }
 
-    public function addUnit($data)
-    {
-        $respon =  $this->_client->request('POST', 'user',[
-            'form_params'=> $data
-        ]);
-
-        $result = json_decode($respon->getBody()->getContents(),true);
-
-        return $result['data'];
-    }
 
     public function getCabang()
     {
@@ -75,7 +87,11 @@ class M_Transaksi_Auditor extends CI_Model {
 
         $result = json_decode($respon->getBody()->getContents(),true);
 
-        return $result['data'];              
+        if ($result['status']==true) {
+            return $result['data']; 
+        }else{
+            return false;
+        }              
     }
 
     // public function countunit()
@@ -148,19 +164,10 @@ class M_Transaksi_Auditor extends CI_Model {
         $aksi='';
         if ($result['status']==true) {
             foreach ($result['data'] as $res ) {
-                if ($res['status_unit']=='Sesuai') {
-                    $aksi='<i></i>
-                            ';
-                }else if ($res['status_unit']=='Belum Sesuai'){
+                
                     $aksi='
-                    <a href="'.$base."transaksi_auditor/edit_audit?id=".$res['no_mesin'].'" class="text-warning"><i class="fa fa-pencil"></i></a>
+                    <a href="'.$base.'transaksi_auditor/edit_audit?id='.$res['no_mesin'].'&&a='.base64_encode($res['id_lokasi']).'&&s='.base64_encode($res['id_cabang']).'" class="text-warning"><i class="fa fa-pencil"></i></a>
                     ';
-                    
-                }else if ($res['status_unit']=='Belum ditemukan'){
-                    $aksi='
-                    <a href="'.$base."transaksi_auditor/edit_audit?id=".$res['no_mesin'].'" class="text-warning"><i class="fa fa-pencil"></i></a>
-                    ';
-                }
                 $e++;
                 $output.='
                     <tr>
@@ -194,6 +201,39 @@ class M_Transaksi_Auditor extends CI_Model {
         }
         return $output;
     }
+
+    public function downloadunit($id)
+    {
+        $respon =  $this->_client->request('GET', 'dataunit',[
+            'query'=>[
+                'id_cabang' => $id
+            ]
+        ]);
+
+        $result = json_decode($respon->getBody()->getContents(),true);
+
+        if ($result['status']==true) {
+            return $result['data'];              
+        }else{
+            return false;
+        }
+    }
+    public function downloadpart($id)
+    {
+        $respon =  $this->_client->request('GET', 'datapart',[
+            'query'=>[
+                'id_cabang' => $id
+            ]
+        ]);
+
+        $result = json_decode($respon->getBody()->getContents(),true);
+
+        if ($result['status']==true) {
+            return $result['data'];              
+        }else{
+            return false;
+        }
+    }
     public function countunit($a,$b,$c,$d)
     {
         $respon =  $this->_client->request('GET', 'countunit',[
@@ -213,9 +253,25 @@ class M_Transaksi_Auditor extends CI_Model {
             return 0;
         }
     }
-    public function countunit1($a)
+    public function countunit1($a=null)
     {
         $respon =  $this->_client->request('GET', 'countunit1',[
+            'query'=>[
+                'id_cabang' => $a
+            ]
+        ]);
+
+        $result = json_decode($respon->getBody()->getContents(),true);
+
+        if ($result['status']==true) {
+            return $result['data'];              
+        }else{
+            return 0;
+        }
+    }
+    public function countPart1($a)
+    {
+        $respon =  $this->_client->request('GET', 'countpart1',[
             'query'=>[
                 'id_cabang' => $a
             ]
@@ -267,6 +323,24 @@ class M_Transaksi_Auditor extends CI_Model {
         }
       }
 
+    public function caripart($id,$cabang)
+      {
+          $respon =  $this->_client->request('GET', 'listaudpart',[
+            'query' =>[
+                'id'=> $id,
+                'id_cabang' => $cabang
+            ]
+        ]);
+
+        $result = json_decode($respon->getBody()->getContents(),true);
+
+        if ($result['status']==true) {
+          return $result['data'];
+        }else{
+          return false;
+        }
+      }
+
       public function addScanUnit($data)
       {
           $respon =  $this->_client->request('POST', 'listaud',[
@@ -274,7 +348,63 @@ class M_Transaksi_Auditor extends CI_Model {
           ]);
           $result = json_decode($respon->getBody()->getContents(),true);
   
-          return $result['data'];
+          if ($result['status']==true) {
+            return $result['data']; 
+        }else{
+            return false;
+        }
+      }
+      public function addunitready($data)
+      {
+          $respon =  $this->_client->request('POST', 'unitready',[
+              'form_params'=> $data
+          ]);
+          $result = json_decode($respon->getBody()->getContents(),true);
+  
+          if ($result['status']==true) {
+            return $result['data']; 
+        }else{
+            return false;
+        }
+      }
+      public function addScanPart($data)
+      {
+          $respon =  $this->_client->request('POST', 'listaudpart',[
+              'form_params'=> $data
+          ]);
+          $result = json_decode($respon->getBody()->getContents(),true);
+  
+          if ($result['status']==true) {
+            return $result['data']; 
+        }else{
+            return false;
+        }
+      }
+      public function editScanPart($data)
+      {
+          $respon =  $this->_client->request('PUT', 'listaudpart',[
+              'form_params'=> $data
+          ]);
+          $result = json_decode($respon->getBody()->getContents(),true);
+  
+          if ($result['status']==true) {
+            return $result['data']; 
+        }else{
+            return false;
+        }
+      }
+      public function editUnit($data)
+      {
+          $respon =  $this->_client->request('PUT', 'listaud',[
+              'form_params'=> $data
+          ]);
+          $result = json_decode($respon->getBody()->getContents(),true);
+  
+          if ($result['status']==true) {
+            return $result['data']; 
+        }else{
+            return false;
+        }
       }
 
       public function cek($a, $b)
@@ -292,7 +422,120 @@ class M_Transaksi_Auditor extends CI_Model {
             return false;
         }
       }
+      public function cekPart($a, $b)
+      {
+        $respon =  $this->_client->request('GET', 'listPart',[
+            'query'=>[
+                'id' =>$a,
+                'id_cabang' => $b
+            ] 
+        ]);
+        $result = json_decode($respon->getBody()->getContents(),true);
+        if($result['status']==true){
+            return $result['data'];
+        }else{
+            return false;
+        }
+      }
 
+      public function counttempunit($a=null)
+    {
+        $respon =  $this->_client->request('GET', 'counttempunit',[
+            'query'=>[
+                'cabang' => $a
+            ]
+        ]);
+
+        $result = json_decode($respon->getBody()->getContents(),true);
+
+        if ($result['status']==true) {
+            return $result['data'];              
+        }else{
+            return 0;
+        }
+    }
+      public function counttemppart($a=null)
+    {
+        $respon =  $this->_client->request('GET', 'counttemppart',[
+            'query'=>[
+                'cabang' => $a
+            ]
+        ]);
+
+        $result = json_decode($respon->getBody()->getContents(),true);
+
+        if ($result['status']==true) {
+            return $result['data'];              
+        }else{
+            return 0;
+        }
+    }
+
+    public function getToUnit($cabang=null,$offset=null)
+    {
+      $respon =  $this->_client->request('GET', 'tounit',[
+          'query' => [
+            'id_cabang' => $cabang,
+            'offset' => $offset
+          ]
+      ]);
+
+      $result = json_decode($respon->getBody()->getContents(),true);
+
+        if ($result['status']==true) {
+
+        return $result['data'];
+        }else {
+            return false;
+        }   
+    }
+    public function getToPart($cabang=null,$offset=null)
+    {
+      $respon =  $this->_client->request('GET', 'topart',[
+          'query' => [
+            'id_cabang' => $cabang,
+            'offset' => $offset
+          ]
+      ]);
+
+      $result = json_decode($respon->getBody()->getContents(),true);
+
+        if ($result['status']==true) {
+
+        return $result['data'];
+        }else {
+            return false;
+        }   
+    }
+    public function closeaudit($id=null,$a=null)
+    {
+        
+        $respon =  $this->_client->request('GET', 'auditend',[
+            'query'=>[
+                'id_cabang' => $id
+            ]
+        ]);
+
+        $result = json_decode($respon->getBody()->getContents(),true);
+        $data=[
+            'idjadwal_audit' => $a,
+            'keterangan' => 'done'
+        ];
+            $respon1 =  $this->_client->request('PUT', 'auditket',[
+                'form_params'=>$data
+            ]);
+    
+            $result1 = json_decode($respon1->getBody()->getContents(),true);
+            if ($result1['status']==true) {
+                if($result['status']==true){
+                    return $result['data'];
+                }else {
+                    return false;
+                }
+                }else {
+                    return false;
+                }
+    }
 
 }
 

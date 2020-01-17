@@ -6,10 +6,9 @@
         rules: {
             idjadwal_audit:{
                 required: true,
-                maxlength: 5,
                 minlength:3
             },
-            auditor:{
+            idjenis_audit:{
                 required:true
             },
             tanggal:{

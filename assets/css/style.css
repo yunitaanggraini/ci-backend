@@ -38,6 +38,22 @@ h5 {
   margin-top: 5px;
   font-weight: 600;
 }
+.img_preview {
+  width: 300px;
+  position: relative;
+  display: none;
+  }
+.img_old {
+  width: 300px;
+  position: relative;
+  display: none;
+  }
+  img#img_old {
+  width: 100%;
+  }
+  img#img_preview {
+  width: 100%;
+  }
 .nav > li > a {
   color: #a7b1c2;
   font-weight: 600;
@@ -4782,6 +4798,7 @@ body.mini-navbar.fixed-sidebar .logo-element {
   z-index: 100;
   margin: 0 auto;
   margin-top: 0px;
+  padding-top:100px;
   padding-left: 20px;
   padding-right: 20px;
 }
@@ -8668,3 +8685,5 @@ body.md-skin {
 
 /*Custom*/
 }
+
+

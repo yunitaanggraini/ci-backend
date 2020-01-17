@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Sabberworm\\CSS' => array($vendorDir . '/sabberworm/php-css-parser/lib'),
+    'PHPQRCode' => array($vendorDir . '/aferrandini/phpqrcode/lib'),
     'PHPExcel' => array($vendorDir . '/phpoffice/phpexcel/Classes'),
     'BaconQrCode' => array($vendorDir . '/bacon/bacon-qr-code/src'),
 );

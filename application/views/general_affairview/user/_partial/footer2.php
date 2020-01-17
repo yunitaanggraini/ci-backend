@@ -97,6 +97,24 @@
     $('#Optusergroup').load("<?php echo base_url();?>master_data/ajax_get_usergroup2/<?php echo $usergroup ?>");
     $('#Optperusahaan').load("<?php echo base_url();?>master_data/ajax_get_perusahaan2/<?php echo $perusahaan ?>");
     $('#Optcabang').load("<?php echo base_url();?>master_data/ajax_get_cabang2/<?php echo $cabang ?>");
+    var id_cabang = "<?php echo $cabang ?>";
+       if(id_cabang == "")
+       {
+        $('#Optlokasi').prop('disabled',true);
+       }
+       else
+       {
+        $('#Optlokasi').prop('disabled',false);
+        var lokasi ="<?php echo  $lokasi ?>";
+        $.ajax({
+            url:"<?php echo base_url();?>master_data/ajax_get_lokasi2",
+            type: "POST",
+            data: {'id_cabang':id_cabang ,id_lokasi: lokasi},
+            success: function(data){
+                $('#Optlokasi').html(data);
+            }
+        });
+       }
    $('#Optcabang').on('change', function(){
        var id_cabang = $(this).val();
        var id_lokasi = '<?php echo $lokasi ?>';
@@ -117,69 +135,6 @@
         });
        }
    })
-    
-
-    function search() {
-            var username =$('#username').val();
-            var nama = $('#nama').val();
-
-            if (username!='' && nama!='') {
-                $.ajax({
-                    type:"post",
-                    url:"<?php echo base_url() ?>master_data/search_data_user",
-                    data:"username="+username+"&nama="+nama,
-                    success:function(data){
-                      $("#user").html(data);
-                      $("#search").val("");
-                    }
-                });
-            }else{
-                if (username!= '' && nama=='') {
-                    $.ajax({
-                    type:"post",
-                    url:"<?php echo base_url() ?>master_data/search_data_user",
-                    data:"username="+username,
-                    success:function(data){
-                      $("#user").html(data);
-                      $("#search").val("");
-                    }
-                });
-                } else {
-                    if (username==''&& nama!='') {
-                        $.ajax({
-                        type:"post",
-                        url:"<?php echo base_url() ?>master_data/search_data_user",
-                        data:"nama="+nama,
-                        success:function(data){
-                        $("#user").html(data);
-                        $("#search").val("");
-                    }
-                    });
-                    }else{
-                        $('#user').load("<?php echo base_url();?>master_data/ajax_get_user");  
-                    }
-                }
-            }
-        }
-
-        $('#caribtn').click(function() {
-            search();
-        });
-
-        $('#username').keyup(function(e) {
-          if(e.keyCode == 13) {
-             search();
-          }else{
-              if (e.keyCode == 9) {
-                  $('#nama').focus();
-              }
-          }
-      });
-        $('#nama').keyup(function(e) {
-          if(e.keyCode == 13) {
-             search();
-          }
-      });
       $('#btn-reset').click(function(e){
         e.preventDefault();
         $('#password').attr('disabled',false);
@@ -187,19 +142,6 @@
       });
     });
 
-    function edit(id) {
-        // var id = $(this).attr('data-id');
-        $.ajax({
-            url: "<?php echo base_url().$this->uri->segment(1) ?>/edit_user",
-            type: 'post',
-            data:"id="+id,
-            dataType:'html',
-            success: function(data) {
-                $('#data_input').html(data);
-            }
-
-        });
-      }
 
     
     </script>

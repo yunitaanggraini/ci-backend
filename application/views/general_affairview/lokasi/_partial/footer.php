@@ -87,58 +87,57 @@
     <script>
    $(document).ready(function() {
     // $('#lokasi').load("<?php echo base_url() ?>master_data/ajax_get_lokasi");
-    $('#lokasi').ready(function () {
-        var valu = getUrlParameter('pages');
-        console.log(valu);
+    $(document).on('click', '.pagination li a', function(event) {
+        event.preventDefault();
+        var page = $(this).data('ci-pagination-page');
+        var lokasi =$('#Inlokasi').val();
+        if (lokasi) {
+            search(page);
+        }else{
+            get_data(page);
+        }
+    });
+    get_data(1);
+    function get_data(page) {
+        $('#lokasi').html("<tr><td colspan='4' class='text-center' id='loading'></td></tr>");
         
         $.ajax({
             type:'post',
-            url:"<?php echo base_url() ?>master_data/ajax_get_lokasi",
-            data:"pages="+valu,
+            dataType:'JSON',
+            url:"<?php echo base_url() ?>master_data/ajax_get_lokasi/"+page,
             success:function (res) {
                 // console.log(res);
-                $('#lokasi').html(res);
+                $('#lokasi').html(res.output);
+                $('#pagination').html(res.pagination);
             }
         })
-    });
-    var getUrlParameter = function getUrlParameter(sParam) {
-    var sPageURL = window.location.search.substring(1),
-        sURLVariables = sPageURL.split('&'),
-        sParameterName,
-        i;
-
-    for (i = 0; i < sURLVariables.length; i++) {
-        sParameterName = sURLVariables[i].split('=');
-
-        if (sParameterName[0] === sParam) {
-            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
-        }
     }
-};
-    function search(){
+    function search(page){
             var lokasi =$('#Inlokasi').val();
 
             if (lokasi!='') {
                 $.ajax({
                     type:"post",
-                    url:"<?php echo base_url() ?>master_data/search_data_lokasi",
+                    dataType:'JSON',
+                    url:"<?php echo base_url() ?>master_data/search_data_lokasi/"+page,
                     data:"lokasi="+lokasi,
                     success:function(data){
-                      $("#lokasi").html(data);
+                      $("#lokasi").html(data.output);
+                      $('#pagination').html(data.pagination);
                       $("#search").val("");
                     }
                 });
             }else{
-                $('#lokasi').load("<?php echo base_url() ?>master_data/ajax_get_lokasi");
+                get_data(1);
         }
         }
         $('#caribtn').click(function(){
-            search();
+            search(1);
         });
 
         $('#Inlokasi').keyup(function(e) {
           if(e.keyCode == 13) {
-             search();
+             search(1);
           }
       });
 

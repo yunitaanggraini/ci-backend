@@ -26,11 +26,9 @@
                         <th>Cabang</th>
                         <th>Lokasi</th>
                         <th>Part Number</th>
-                        <th>ID Rak</th>
-                        <th>ID Bin Box</th>
+                        <th>KD Bin Box</th>
                         <th>Deskripsi</th>
                         <th>Qty</th>
-                        <th>Status</th>
 
                     </tr>
                     </thead>
@@ -44,11 +42,9 @@
                         <th>Cabang</th>
                         <th>Lokasi</th>
                         <th>Part Number</th>
-                        <th>ID Rak</th>
-                        <th>ID Bin Box</th>
+                        <th>KD Bin Box</th>
                         <th>Deskripsi</th>
                         <th>Qty</th>
-                        <th>Status</th>
                     </tr>
                     </tfoot>
                     </table>

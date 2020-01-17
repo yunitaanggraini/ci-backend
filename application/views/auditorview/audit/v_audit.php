@@ -13,13 +13,16 @@
                                 <div class="row">
                                     <div class="form-group">
                                             <label class="col-sm-2 control-label">Data Unit</label>
-                                        <div class="col-sm-8">
+                                        <div class="col-sm-7">
                                             <input type="text" class="form-control" placeholder="Cari Data Unit" id="cari">
                                             <span class="help-block m-b-none text-danger" id="info"></span>
                                         </div>
-                                        <div class="col-sm-1" >
-                                            <a id="doCari" class="btn btn-primary">Scan Data</a>                                          
-                                        </div>                           
+                                        <div class="col-sm-2" >
+                                            <a id="doCari" class=" btn btn-primary">Scan Data</a>                                          
+                                            <a href="<?php echo base_url() ?>transaksi_auditor/temp_unit?id=<?php echo $_GET['id'] ?>" class="btn btn-warning">Temporary Data</a> 
+                                            <?php $id = $_GET['id']; ?>
+                                            <a id="close" onclick="return confirm('Konfirmasi Closing Scan Audit <?php echo $id ?>');" class="btn btn-danger">Close Audit</a>                     
+                                        </div>
                                     </div>
                             </div>  
                             <div id="manual" class="row">

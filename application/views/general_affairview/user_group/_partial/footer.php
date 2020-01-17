@@ -87,7 +87,26 @@
     
     <script>
    $(document).ready(function() {
-    $('#usergroup').load("<?php echo base_url() ?>master_data/ajax_get_usergroup");
+    // $('#usergroup').load("<?php echo base_url() ?>master_data/ajax_get_usergroup");
+    $(document).on('click', '.pagination li a', function(event) {
+        event.preventDefault();
+        var page = $(this).data('ci-pagination-page');
+        get_data(page);
+        
+    });
+    get_data(1);
+    function get_data(page) {
+    $("#usergroup").html('<tr> <td colspan="4" id="loading"> </td></tr>');
+        $.ajax({
+            type: 'POST',
+            dataType:'JSON',
+            url:"<?php echo base_url() ?>master_data/ajax_get_usergroup/"+page,
+            success:function(data){
+                $('#usergroup').html(data.output);
+                $('#pagination').html(data.pagination);
+            }
+        })
+    }
     function search() {
             var usergroup =$('#Inusergroup').val();
             console.log(usergroup);
@@ -95,6 +114,7 @@
             if (usergroup!='') {
                 $.ajax({
                     type:"post",
+                    dataType:'JSON',
                     url:"<?php echo base_url() ?>master_data/search_data_usergroup",
                     data:"id="+usergroup,
                     success:function(data){
@@ -103,9 +123,8 @@
                     }
                 });
             }else{
-
-                $('#usergroup').load("<?php echo base_url() ?>master_data/ajax_get_usergroup");
-                    }
+                get_data();
+            }
         }
         $('#caribtn').click(function(){
             search();

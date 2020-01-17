@@ -14,8 +14,7 @@
 
             $this->pdfgenerator->generate($html,'contoh');
         }
+    }
 
     
     /* End of file Laporan.php */
-    
-?>

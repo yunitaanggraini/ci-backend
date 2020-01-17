@@ -8,12 +8,7 @@
                         <div class="col-sm-10">
                             <div>
                                 <div class="form-group"><label class="col-sm-4 control-label">Pencarian Berdasarkan Sub Inv</label>
-                                <div class="col-sm-8"><input type="text" class="form-control" nama="sub_inventory" id="subinv"></div></div>        
-                            </div>        
-                    
-                            <div>
-                                <div class="form-group"><label class="col-sm-4 control-label">Pencarian Berdasarkan Jenis Inv</label>
-                                <div class="col-sm-8"><select name="jenis_inventory" class="form-control" id="jenisinv"></select></div></div>
+                                <div class="col-sm-8"><input type="text" class="form-control" nama="cari" id="cari"></div></div>        
                             </div>
                         </div>
 

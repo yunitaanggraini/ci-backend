@@ -87,7 +87,7 @@
     </script>
     <script>
    $(document).ready(function() {
-    $('#OptCabang').load("<?php echo base_url();?>barcode/ajax_get_cabang2");
+    $('#OptCabang').load("<?php echo base_url();?>gudang/ajax_get_cabang2");
 
         $('#data_5 .input-daterange').datepicker({
         keyboardNavigation: false,
@@ -116,7 +116,7 @@
         $.ajax({
             method: 'post',
             dataType:'JSON',
-            url: '<?php echo base_url() ?>transaksi_auditor/preview/'+page,
+            url: '<?php echo base_url() ?>gudang/preview/'+page,
             data:{id_cabang: cabang, tgl_awal: tgl_awal, tgl_akhir: tgl_akhir, status: status, action: action},
             // data: 'id_cabang='+cabang+'&&tgl_awal='+tgl_awal+'&&tgl_akhir='+tgl_akhir+'&&status='+status+'&&pages='+valu,
             

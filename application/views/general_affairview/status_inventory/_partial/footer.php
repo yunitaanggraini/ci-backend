@@ -85,7 +85,20 @@
     </script>
     <script>
    $(document).ready(function() {
-    $('#status_inv').load("<?php echo base_url() ?>master_data/ajax_get_status_inv");
+    // $('#status_inv').load("<?php echo base_url() ?>master_data/ajax_get_status_inv");
+    get_data();
+    function get_data() {
+        $("#status_inv").html('<tr> <td colspan="4" id="loading"> </td></tr>');
+
+        $.ajax({
+            type: 'POST',
+            dataType: 'JSON',
+            url: "<?php echo base_url() ?>master_data/ajax_get_status_inv",
+            success:function(data){
+                $('#status_inv').html(data);
+            }
+        })
+    }
     function search() {
             var statusinv =$('#Instatusinv').val();
             $("#status_inv").html('<tr> <td colspan="10" id="loading"> </td></tr>');
@@ -93,6 +106,7 @@
             if (statusinv!='') {
                 $.ajax({
                     type:"post",
+                    dataType: 'JSON',
                     url:"<?php echo base_url() ?>master_data/search_data_statusinv",
                     data:"status_inv="+statusinv,
                     success:function(data){
@@ -101,8 +115,8 @@
                     }
                 });
             }else{
-                $('#status_inv').load("<?php echo base_url() ?>master_data/ajax_get_status_inv");
-                    }
+                get_data();
+                }
         }
         $('#caribtn').click(function(){
             search();

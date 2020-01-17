@@ -85,31 +85,58 @@
     </script>
     <script>
    $(document).ready(function() {
-    $('#perusahaan').load("<?php echo base_url() ?>master_data/ajax_get_perusahaan");
-    function search() {
-            var perusahaan =$('#Inperusahaan').val();
+    // $('#perusahaan').load("<?php echo base_url() ?>master_data/ajax_get_perusahaan");
+    get_data(1);
+    $(document).on('click', '.pagination li a', function(event) {
+        event.preventDefault();
+        var page = $(this).data('ci-pagination-page');
+        var id=$('#Inperusahaan').val();
+        if (id) {
+            search(page);
+        }else{
+            get_data(page);
+        }
+    });
+    function get_data(page) {
+        $("#perusahaan").html('<tr> <td colspan="4" id="loading"> </td></tr>');
+
+        $.ajax({
+            type: 'POST',
+            dataType: 'JSON',
+            url: "<?php echo base_url() ?>master_data/ajax_get_perusahaan/"+page,
+            success:function(data){
+                $("#perusahaan").html(data.output);
+                $("#pagination").html(data.pagination);
+            }
+        })
+    }
+    function search(page) {
+            var id=$('#Inperusahaan').val();
             $("#perusahaan").html('<tr> <td colspan="10" id="loading"> </td></tr>');
 
-            if (perusahaan!='') {
+            if (id!='') {
                 $.ajax({
                     type:"post",
-                    url:"<?php echo base_url() ?>master_data/search_data_perusahaan",
-                    data:"perusahaan="+perusahaan,
+                    dataType: 'JSON',
+                    url:"<?php echo base_url() ?>master_data/search_data_perusahaan/"+page,
+                    data:"id="+id,
                     success:function(data){
-                      $("#perusahaan").html(data);
-                      $("#search").val("");
+                        console.log(data);
+                        
+                        $("#perusahaan").html(data.output);
+                        $("#pagination").html(data.pagination);
                     }
                 });
             }else{
-                $('#perusahaan').load("<?php echo base_url() ?>master_data/ajax_get_perusahaan");
+                get_data(1);
                     }
         }
         $('#caribtn').click(function(){
-            search();
+            search(1);
         });
         $('#Inperusahaan').keyup(function(e) {
           if(e.keyCode == 13) {
-             search();
+             search(1);
           }
       });
 

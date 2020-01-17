@@ -87,73 +87,61 @@
 
 
    $(document).ready(function() {
-    $('#sub_inv').load("<?php echo base_url() ?>master_data/ajax_get_sub_inv");
-    $('#jenisinv').load("<?php echo base_url() ?>master_data/ajax_get_jenis_inv2");
-    function search() {
-            var subinv =$('#subinv').val();
-            var jenisinv = $('#jenisinv').val();
-            $("#sub_inv").html('<tr> <td colspan="10" id="loading"> </td></tr>');
+    // $('#sub_inv').load("<?php echo base_url() ?>master_data/ajax_get_sub_inv");
+    get_data(1);
+    function get_data(page) {
+        $("#sub_inv").html('<tr> <td colspan="5" id="loading"> </td></tr>');
+        
+        $.ajax({
+            type:'POST',
+            dataType: 'JSON',
+            url:"<?php echo base_url() ?>master_data/ajax_get_sub_inv/"+page,
+            success:function(data) {
+                $("#sub_inv").html(data.output);
+                $("#pagination").html(data.pagination);
+            }
+        })
+    }
+    $(document).on('click', '.pagination li a', function(event) {
+        event.preventDefault();
+        var page = $(this).data('ci-pagination-page');
+        var id=$('#cari').val();
+        if (id) {
+            search(page);
+        }else{
+            get_data(page);
+        }
+    });
+    // $('#jenisinv').load("<?php echo base_url() ?>master_data/ajax_get_jenis_inv2");
+    function search(page) {
+        var id=$('#cari').val();
+            $("#sub_inv").html('<tr> <td colspan="5" id="loading"> </td></tr>');
             
 
-            if (subinv!='' && jenisinv!='') {
+            if (id!='') {
                     // $("#sub_inv").html(subinv);
                 $.ajax({
                     type:"post",
-                    url:"<?php echo base_url() ?>master_data/search_data_subinventory",
-                    data:"subinv="+subinv+"&jenisinv="+jenisinv,
+                    dataType: 'JSON',
+                    url:"<?php echo base_url() ?>master_data/search_data_subinventory/"+page,
+                    data:"id="+id,
                     success:function(data){
-                      $("#sub_inv").html(data);
-                      $("#subinv").val("");
-                      $("#jenisinv").val("");
+                      $("#sub_inv").html(data.output);
+                      $("#pagination").html(data.pagination);
                     }
                 });
             }else{
-                if (subinv!= '' && jenisinv=='') {
-                    $.ajax({
-                    type:"post",
-                    url:"<?php echo base_url() ?>master_data/search_data_subinventory",
-                    data:"subinv="+subinv,
-                    success:function(data){
-                      $("#sub_inv").html(data);
-                      $("#subinv").val("");
-                      $("#jenisinv").val("");
-                    }
-                });
-                } else {
-                    if (subinv==''&& jenisinv!='') {
-                        $.ajax({
-                        type:"post",
-                        url:"<?php echo base_url() ?>master_data/search_data_subinventory",
-                        data:"jenisinv="+jenisinv,
-                        success:function(data){
-                        $("#sub_inv").html(data);
-                        $("#subinv").val("");
-                        $("#jenisinv").val("");
-                    }
-                    });
-                    }else{
-                        $('#sub_inv').load("<?php echo base_url();?>master_data/ajax_get_sub_inv");  
-                    }
-                }
+                get_data(1);  
             }
         }
 
         $('#caribtn').click(function() {
-            search();
+            search(1);
         });
 
-        $('#subinv').keyup(function(e) {
+        $('#cari').keyup(function(e) {
           if(e.keyCode == 13) {
-             search();
-          }else{
-              if (e.keyCode == 9) {
-                  $('#jenisinv').focus();
-              }
-          }
-      });
-        $('#jenisinv').keyup(function(e) {
-          if(e.keyCode == 13) {
-             search();
+             search(1);
           }
       });
     });

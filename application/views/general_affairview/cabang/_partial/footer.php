@@ -85,30 +85,56 @@
     </script>
     <script>
    $(document).ready(function() {
-    $('#cabang').load("<?php echo base_url() ?>master_data/ajax_get_cabang");
-    function search() {
+    // $('#cabang').load("<?php echo base_url() ?>master_data/ajax_get_cabang");
+    $(document).on('click', '.pagination li a', function(event) {
+        event.preventDefault();
+        var page = $(this).data('ci-pagination-page');
+        var cabang =$('#Incabang').val();
+        if (cabang) {
+            search(page);
+        }else{
+            get_data(page);
+        }
+        
+    });
+    get_data(1);
+    function get_data(page) {
+        $('#cabang').html('<tr><td colspan="4" class="text-right" id="loading"></td></tr>');
+        $.ajax({
+            type: 'POST',
+            dataType: 'JSON',
+            url:"<?php echo base_url() ?>master_data/ajax_get_cabang/"+page,
+            success:function(data){
+                $('#cabang').html(data.output);
+                $('#pagination').html(data.pagination);
+            }
+        })
+    }
+    function search(page) {
             var cabang =$('#Incabang').val();
-
+            $('#cabang').html('<tr><td colspan="4" class="text-right" id="loading"></td></tr>');
             if (cabang!='') {
                 $.ajax({
                     type:"post",
-                    url:"<?php echo base_url() ?>master_data/search_data_cabang",
+                    dataType: 'JSON',
+                    url:"<?php echo base_url() ?>master_data/search_data_cabang/"+page,
                     data:"cabang="+cabang,
                     success:function(data){
-                      $("#cabang").html(data);
+                      $("#cabang").html(data.output);
+                      $("#pagination").html(data.pagination);
                       $("#search").val("");
                     }
                 });
             }else{
-                $('#cabang').load("<?php echo base_url() ?>master_data/ajax_get_cabang");
+                get_data(1);
                     }
         }
         $('#caribtn').click(function(){
-            search();
+            search(1);
         });
         $('#Incabang').keyup(function(e) {
           if(e.keyCode == 13) {
-             search();
+             search(1);
           }
       });
 

@@ -60,9 +60,7 @@
                     <thead>
                     <tr >
                         <th class="text-center" width="3%">No</th>
-                        <th class="text-center" width="3%">Aksi</th>
-                        <th class="text-center">Cetak Barcode/QRCode</th>
-                        <th class="text-center">ID Unit</th>
+                        <th class="text-center">Cetak QR code</th>
                         <th class="text-center">No Mesin</th>
                         <th class="text-center">No Rangka</th>
                         <th class="text-center">Cabang</th>
@@ -88,9 +86,7 @@
                     <tfoot>
                     <tr>
                         <th class="text-center" width="3%">No</th>
-                        <th class="text-center" width="3%">Aksi</th>
-                        <th class="text-center">Cetak Barcode/QRCode</th>
-                        <th class="text-center">ID Unit</th>
+                        <th class="text-center">Cetak QRCode</th>
                         <th class="text-center">No Mesin</th>
                         <th class="text-center">No Rangka</th>
                         <th class="text-center">Cabang</th>

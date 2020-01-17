@@ -18,6 +18,7 @@
     <script src="<?php echo base_url() ?>assets/js/jquery-3.1.1.min.js"></script>
     <script src="<?php echo base_url() ?>assets/js/jquery.validate.js"></script>
     <script src="<?php echo base_url() ?>assets/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+    <script src="<?php echo base_url() ?>assets/js/plugins/chosen/chosen.jquery.js"></script>
     <script>
         $( "#FormInventory" ).validate({
         rules: {
@@ -123,6 +124,7 @@
     <script src="<?php echo base_url() ?>assets/js/plugins/pace/pace.min.js"></script>
 
     <script src="<?php echo base_url() ?>assets/js/plugins/toastr/toastr.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/js/plugins/datapicker/bootstrap-datepicker.js"></script>
 
 
     <script>
@@ -182,11 +184,38 @@
     </script>
     <script>
    $(document).ready(function() { 
+    $('.chosen-select').chosen({width: "100%"});
+    $('#foto').on('change',function(){
+            
+            $("#image").show();
+        
+            var imgpreview=DisplayImagePreview(this);
+            $("#image").hide();
+            $(".img_preview").show();
+        });	
+        function DisplayImagePreview(input){
+            console.log(input.files);
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    // $('#image').html('');
+                    $('#img_preview').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        
     $('#user').load("<?php echo base_url();?>master_data/ajax_get_user");
     $('#OptStatusInv').load("<?php echo base_url() ?>transaksi_ga/ajax_get_statusinv2");
     $('#OptVendor').load("<?php echo base_url() ?>transaksi_ga/ajax_get_vendor2");
     $('#OptJenisInv').load("<?php echo base_url() ?>transaksi_ga/ajax_get_jenisinv2");
-
+    $('#tanggal_barang_terima').datepicker({
+        format: 'mm/dd/yyyy',
+        keyboardNavigation: false,
+        forceParse: false,
+        autoclose: true
+    });
     $('#OptJenisInv').on('change', function(){
        var idjenis_inventory = $(this).val();
 
@@ -197,11 +226,13 @@
        else
        {
         $('#OptSubInv').prop('disabled',false);
+        $('#load1').html('<span class="loading dots"></span>');
         $.ajax({
             url:"<?php echo base_url();?>transaksi_ga/ajax_get_subinv2",
             type: "POST",
             data: {'idjenis_inventory':idjenis_inventory},
             success: function(data){
+                $('#load1').html('');
                 $('#OptSubInv').html(data);
             }
         });
@@ -219,12 +250,14 @@
        else
        {
         $('#OptLokasi').prop('disabled',false);
+        $('#load').html('<span class="loading dots"></span>');
         $.ajax({
             url:"<?php echo base_url();?>transaksi_ga/ajax_get_lokasi2",
             type: "POST",
             data: {'id_cabang':id_cabang},
             success: function(data){
                 $('#OptLokasi').html(data);
+                $('#load').html('');
             }
         });
        }
@@ -301,9 +334,9 @@
                 console.log('berhasil');
                 hadiah =null;
                 $('#hadiah').removeClass('hidden');
-                // $('#hadiah').addClass('form-group');
+                $('#hadiah').addClass('form-group');
             }else{
-                // $('#hadiah').removeClass('form-group');
+                $('#hadiah').removeClass('form-group');
                 $('#hadiah').addClass('hidden');
                 console.log('gagal');
                 
@@ -431,7 +464,7 @@
        }
        var id_inventory = id+'/TRIO'+dealer+'/'+a+'/'+b+'/'+max;
        if (id == null) {
-        $('#id_inventory').val();
+        $('#id_inventory').val('');
        }else{
            $('#id_inventory').val(id_inventory);
        }
@@ -440,7 +473,5 @@
 
     
     </script>
-
-</body>
 
 </html>

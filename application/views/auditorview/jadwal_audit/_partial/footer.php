@@ -17,34 +17,6 @@
     <!-- Mainly scripts -->
     <script src="<?php echo base_url() ?>assets/js/jquery-3.1.1.min.js"></script>
     <script src="<?php echo base_url() ?>assets/js/jquery.validate.js"></script>
-    <script>
-    $('#Optcabang').load("<?php echo base_url() ?>audit/ajax_get_cabang2");
-     $('#Optjenisaudit').load("<?php echo base_url();?>audit/ajax_get_jenis_audit2");
-        $( "#FormUser" ).validate({
-        rules: {
-            nik:{
-                required: true,
-                minlength: 8
-            },
-            username:{
-                required: true,
-                minlength: 5
-            },
-            nama:"required",
-            usergroup:"required",
-            divisi:"required",
-            status:"required",
-            password: {
-                required: true,
-                minlength:6
-            },
-            confirm_password: {
-            equalTo: "#password"
-            }
-
-        }
-        });
-    </script>
     <script src="<?php echo base_url() ?>assets/js/bootstrap.min.js"></script>
     <script src="<?php echo base_url() ?>assets/js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="<?php echo base_url() ?>assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
@@ -59,9 +31,13 @@
     <script src="<?php echo base_url() ?>assets/js/plugins/datapicker/bootstrap-datepicker.js"></script>
 
     <script src="<?php echo base_url() ?>assets/js/plugins/clockpicker/clockpicker.js"></script>
-
+    
     <script>
-     $(document).ready(function() { 
+        window.onunload = refreshParent;
+        function refreshParent() {
+            window.opener.location.reload();
+        }
+     $(document).ready(function() {
         <?php if($this->session->flashdata('berhasil')) {?>
         setTimeout(function() {
                     toastr.options = {
@@ -121,35 +97,29 @@
     $('#Optjenisaudit').load("<?php echo base_url();?>audit/ajax_get_jenis_audit2");
     $('#audit_part').load("<?php echo base_url() ?>transaksi_auditor/ajax_get_part");
     $('#OptCabang').load("<?php echo base_url() ?>audit/ajax_get_cabang2");
+    get_data(1);
+    $(document).on('click', '.pagination li a', function(event) {
+        event.preventDefault();
+        var page = $(this).data('ci-pagination-page');
+        $('#list_jadwal_audit').html('<tr><td colspan="13" class="text-center" id="loading"></td></tr>');
 
-    $('#list_jadwal_audit').ready(function () {
-        var valu = getUrlParameter('pages');
-        console.log(valu);
+        preview(page);
         
+    });
+    function get_data(page) {
+        $('#list_jadwal_audit').html('<tr><td colspan="13" class="text-center" id="loading"></td></tr>');
+
         $.ajax({
             type:'post',
-            url:"<?php echo base_url() ?>audit/ajax_get_jadwal_audit",
-            data:"pages="+valu,
+            dataType: 'JSON',
+            url:"<?php echo base_url() ?>audit/ajax_get_jadwal_audit/"+page,
             success:function (res) {
                 console.log(res);
-                $('#list_jadwal_audit').html(res);
+                $('#list_jadwal_audit').html(res.output);
+                $('#pagination').html(res.pagination);
             }
         });
-    }); 
-    var getUrlParameter = function getUrlParameter(sParam) {
-    var sPageURL = window.location.search.substring(1),
-        sURLVariables = sPageURL.split('&'),
-        sParameterName,
-        i;
-
-    for (i = 0; i < sURLVariables.length; i++) {
-        sParameterName = sURLVariables[i].split('=');
-
-        if (sParameterName[0] === sParam) {
-            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
-        }
     }
-    };
     $('#data_1 .input-group.date').datepicker({
         todayBtn: "linked",
         keyboardNavigation: false,
@@ -159,6 +129,30 @@
     });
 
     $('.clockpicker').clockpicker();
+
+    function search(){
+            var audit =$('#jdwal').val();
+            $('#list_jadwal_audit').html('<tr><td colspan="13" class="text-center" id="loading"></td></tr>');
+
+            if (audit!='') {
+                $.ajax({
+                    type:"post",
+                    dataType: 'JSON',
+                    url:"<?php echo base_url() ?>audit/search_audit",
+                    data:"id="+audit,
+                    success:function(data){
+                        $('#list_jadwal_audit').html(data);
+                        $('#pagination').html('');
+                      $("#search").val("");
+                    }
+                });
+            }else{
+                get_data(1);
+        }
+        }
+        $('#caribtn').click(function(){
+            search();
+        });
 
 }); 
     </script>

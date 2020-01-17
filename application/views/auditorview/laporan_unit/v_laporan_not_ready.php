@@ -3,13 +3,13 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                <div class="panel panel-default">
+                <div class="panel panel-bluedark">
                     <div class="panel-heading">
-                        <h4><i class="fa fa-info-circle"></i> List Data Audit Sesuai</h4>
+                        <h4><i class="fa fa-info-circle"></i> List Data Not Ready</h4>
                     </div>
                     <div class="panel-body">
                     <div class="row">
-                    <form class="form-horizontal" action="<?php echo base_url()?>laporan_auditor/cetakexcel" method="post">
+                    <form class="form-horizontal" action="<?php echo base_url()?>laporan_auditor/cetakexcelnotready" method="post">
 
                         <div class="col-sm-4">
                             <div class="form-group">
@@ -31,7 +31,7 @@
                                 </div>
                         </div>
                         <div class="col-sm-3">
-                            <input type="hidden" name="status" value="Sesuai" id="status"/>
+                            <input type="hidden" name="ready" value="NRFS" id="ready"/>
                             <a id="preview" class="btn btn-primary">Preview</a>
                             <button type="submit" class="btn btn-primary" id="type" name="type" value="excel"><i class="fa fa-fw fa-print"></i>Excel</button>
                             <button type="submit" class="btn btn-danger" id="type" name="type" value="pdf"><i class="fa fa-fw fa-file-pdf-o"></i>Pdf</button>
@@ -42,7 +42,7 @@
                         <div class="row">
                       <div class="col-lg-12">
                         <div class="table-responsive">
-                    <table class="table table-striped table-bordered table-hover dataTables-example" >
+                    <table class="table table-striped table-bordered" >
                     <thead>
                     <tr>
                         <th>No</th>
@@ -53,6 +53,7 @@
                         <th>Usia Unit</th>
                         <th>Lokasi</th>
                         <th>Status</th>  
+                        <th>Is Ready</th>
                         </tr>
                     </thead>
                     <tbody id="unit">
@@ -67,6 +68,7 @@
                         <th>Usia Unit</th>
                         <th>Lokasi</th>
                         <th>Status</th>  
+                        <th>Is Ready</th>  
                         </tr>
                     </tfoot>
                     </table>

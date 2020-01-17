@@ -30,10 +30,10 @@
                         <a class="btn btn-primary btn-rounded btn-block" href="<?php echo site_url('laporan_auditor/lap_belum_ditemukan'); ?>"><i class="fa fa-info-circle"></i> Report Unit Belum Ditemukan</a> -->
 
                         
-                        <div class="col-sm-5 text-center m-t-lg">
+                        <!-- <div class="col-sm-5 text-center m-t-lg">
                             
                             <a href="<?php echo site_url('laporan_auditor/laporan_unit'); ?>" type="button" class="btn btn-m btn-success">Back</a>
-                        </div>
+                        </div> -->
                         </div>
                         
                         </div>

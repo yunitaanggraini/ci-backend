@@ -87,39 +87,21 @@
     </script>
     <script>
    $(document).ready(function() {
+       
     $('#OptCabang').load("<?php echo base_url();?>transaksi_auditor/ajax_get_cabang2");
-    // $('#audit_unit').load("<?php echo base_url() ?>transaksi_auditor/ajax_get_unit");
+    
+    
+       $('#data_1 .input-group.date').datepicker({
+        format: 'mm/dd/yyyy',
+        todayBtn: "linked",
+        keyboardNavigation: false,
+        forceParse: false,
+        calendarWeeks: true,
+        autoclose: true
+    });
 
-    // $('#audit_unit').ready(function () {
-    //     var valu = getUrlParameter('pages');
-    //     console.log(valu);
-        
-    //     $.ajax({
-    //         type:'post',
-    //         url:"<?php echo base_url() ?>transaksi_auditor/ajax_get_unit",
-    //         data:"pages="+valu,
-    //         success:function (res) {
-    //             // console.log(res);
-    //             $('#audit_unit').html(res);
-    //         }
-    //     })
-    // });
-    //     var getUrlParameter = function getUrlParameter(sParam) {
-    //     var sPageURL = window.location.search.substring(1),
-    //         sURLVariables = sPageURL.split('&'),
-    //         sParameterName,
-    //         i;
-
-    //     for (i = 0; i < sURLVariables.length; i++) {
-    //         sParameterName = sURLVariables[i].split('=');
-
-    //         if (sParameterName[0] === sParam) {
-    //             return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
-    //         }
-    //     }
-    // };
-
-        $('#data_5 .input-daterange').datepicker({
+    $('#data_5 .input-daterange').datepicker({
+        format: 'mm/dd/yyyy',
         keyboardNavigation: false,
         forceParse: false,
         autoclose: true
@@ -143,6 +125,8 @@
         var tgl_akhir = $('#tgl_akhir').val();
         var status = $('#status').val();
         var action ='preview';
+        $('#audit_unit').html('<tr><td colspan="20" id="loading"></td></tr>');
+
         $.ajax({
             method: 'post',
             dataType:'JSON',

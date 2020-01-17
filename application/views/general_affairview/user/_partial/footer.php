@@ -125,13 +125,14 @@
     </script>
     <script>
    $(document).ready(function() {
-    $('#user').load("<?php echo base_url();?>master_data/ajax_get_user");
+    // $('#user').load("<?php echo base_url();?>master_data/ajax_get_user");
+    // $('#user').load("<?php echo base_url();?>master_data/ajax_get_user");
     $('#Optusergroup').load("<?php echo base_url();?>master_data/ajax_get_usergroup2");
     $('#Optperusahaan').load("<?php echo base_url();?>master_data/ajax_get_perusahaan2");
-    $('#Optcabang').load("<?php echo base_url();?>master_data/ajax_get_cabang2");
+    $('#Optcabang').load("<?php echo base_url();?>master_data/ajax_get_cabang2/");
+    
    $('#Optcabang').on('change', function(){
        var id_cabang = $(this).val();
-
        if(id_cabang == "")
        {
         $('#Optlokasi').prop('disabled',true);
@@ -142,75 +143,75 @@
         $.ajax({
             url:"<?php echo base_url();?>master_data/ajax_get_lokasi2",
             type: "POST",
-            data: {'id_cabang':id_cabang},
+            data: {'id_cabang':id_cabang },
             success: function(data){
                 $('#Optlokasi').html(data);
             }
         });
        }
    })
-    
 
-    function search() {
-            var username =$('#username').val();
-            var nama = $('#nama').val();
+    get_data(1);
+
+    $(document).on('click', '.pagination li a', function(event) {
+        event.preventDefault();
+        var page = $(this).data('ci-pagination-page');
+        var id=$('#cari').val();
+        if (id) {
+            search(page);
+        }else{
+        get_data(page);
+        }
+        
+    });
+
+    function get_data(page) {
+    $("#user").html('<tr> <td colspan="10" id="loading"> </td></tr>');
+    $('#pagination').html('');
+        $.ajax({
+            type:'POST',
+            dataType:'JSON',
+            url:"<?php echo base_url();?>master_data/ajax_get_user/"+page,
+            success:function(data){
+                console.log(data);
+                
+                $('#user').html(data.output);
+                $('#pagination').html(data.pagination);
+            }
+        });
+    }
+
+    function search(page) {
+            var id=$('#cari').val();
             $("#user").html('<tr> <td colspan="10" id="loading"> </td></tr>');
+            $('#pagination').html('');
 
-            if (username!='' && nama!='') {
+            console.log(id);
+            
+            if (id!='') {
                 $.ajax({
                     type:"post",
-                    url:"<?php echo base_url() ?>master_data/search_data_user",
-                    data:"username="+username+"&nama="+nama,
+                    dataType:'JSON',
+                    url:"<?php echo base_url() ?>master_data/search_data_user/"+page,
+                    data:{id : id},
                     success:function(data){
-                      $("#user").html(data);
+                      $("#user").html(data.output);
+                      $("#pagination").html(data.pagination);
                       $("#search").val("");
                     }
                 });
             }else{
-                if (username!= '' && nama=='') {
-                    $.ajax({
-                    type:"post",
-                    url:"<?php echo base_url() ?>master_data/search_data_user",
-                    data:"username="+username,
-                    success:function(data){
-                      $("#user").html(data);
-                      $("#search").val("");
-                    }
-                });
-                } else {
-                    if (username==''&& nama!='') {
-                        $.ajax({
-                        type:"post",
-                        url:"<?php echo base_url() ?>master_data/search_data_user",
-                        data:"nama="+nama,
-                        success:function(data){
-                        $("#user").html(data);
-                        $("#search").val("");
-                    }
-                    });
-                    }else{
-                        $('#user').load("<?php echo base_url();?>master_data/ajax_get_user");  
-                    }
-                }
+                get_data(1); 
             }
         }
 
         $('#caribtn').click(function() {
-            search();
+            search(1);
         });
 
-        $('#username').keyup(function(e) {
+        $('#cari').keyup(function(e) {
           if(e.keyCode == 13) {
-             search();
-          }else{
-              if (e.keyCode == 9) {
-                  $('#nama').focus();
-              }
-          }
-      });
-        $('#nama').keyup(function(e) {
-          if(e.keyCode == 13) {
-             search();
+             search(1);
           }
       });
       $('#btn-reset').click(function(e){
@@ -219,20 +220,6 @@
         $('#confirm').toggleClass('hidden form-group');
       });
     });
-
-    function edit(id) {
-        // var id = $(this).attr('data-id');
-        $.ajax({
-            url: "<?php echo base_url().$this->uri->segment(1) ?>/edit_user",
-            type: 'post',
-            data:"id="+id,
-            dataType:'html',
-            success: function(data) {
-                $('#data_input').html(data);
-            }
-
-        });
-      }
 
     
     </script>

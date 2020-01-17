@@ -85,7 +85,20 @@
     </script>
     <script>
    $(document).ready(function() {
-    $('#jenis_audit').load("<?php echo base_url() ?>master_data/ajax_get_jenis_audit");
+    // $('#jenis_audit').load("<?php echo base_url() ?>master_data/ajax_get_jenis_audit");
+    get_data();
+    function get_data(){
+        $("#jenis_audit").html('<tr> <td colspan="10" id="loading"> </td></tr>');
+
+        $.ajax({
+            type:'POST',
+            dataType: 'JSON',
+            url: "<?php echo base_url() ?>master_data/ajax_get_jenis_audit",
+            success:function(data){
+                $("#jenis_audit").html(data);
+            }
+        })
+    }
     function search() {
             var jenisaudit =$('#Injenisaudit').val();
             $("#jenis_audit").html('<tr> <td colspan="10" id="loading"> </td></tr>');
@@ -93,6 +106,7 @@
             if (jenisaudit!='') {
                 $.ajax({
                     type:"post",
+                    dataType: 'JSON',
                     url:"<?php echo base_url() ?>master_data/search_data_jenisaudit",
                     data:"jenisaudit="+jenisaudit,
                     success:function(data){
@@ -102,7 +116,7 @@
                 });
             }else{
 
-                $('#jenis_audit').load("<?php echo base_url() ?>master_data/ajax_get_jenis_audit");
+                get_data();
             }
         }
         $('#caribtn').click(function(){

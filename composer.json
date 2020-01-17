@@ -16,7 +16,9 @@
 		"picqer/php-barcode-generator": "^0.3.0",
 		"endroid/qr-code": "^2.5",
 		"phpoffice/phpexcel": "^1.8",
-		"fpdf/fpdf": "^1.81"
+		"fpdf/fpdf": "^1.81",
+		"aferrandini/phpqrcode": "^1.0",
+		"spomky-labs/jose": "^6.1"
 	},
 	"autoload": {
 		"classmap": [

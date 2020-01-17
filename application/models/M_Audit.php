@@ -8,7 +8,7 @@ class M_Audit extends CI_Model {
         {
             parent::__construct();
             $this->_client = new Client([
-                'base_uri'=> SERVER_BASE.'ci-server-lala/api/audit/'
+                'base_uri'=> SERVER_BASE.'api/audit/'
             ]);
         }
 
@@ -28,7 +28,22 @@ class M_Audit extends CI_Model {
             }else {
                 return false;
             }              
-        }  
+        }
+        public function cariaudit($id = null)
+    {
+        $respon =  $this->_client->request('GET', 'cariaudit',[
+            'query'=>[
+                'id' =>$id
+            ]
+        ]);
+
+        $result = json_decode($respon->getBody()->getContents(),true);
+        if ($result['status']==true) {
+            return $result['data'];
+        }else{
+            return false;
+        }
+    }
         
     public function getCabang()
     {
@@ -181,7 +196,11 @@ class M_Audit extends CI_Model {
 
       $result = json_decode($respon->getBody()->getContents(),true);
 
-      return true;       
+      if ($result['status']==true) {
+        return true; 
+    }else{
+        return false;
+    }    
     }
     //----------------BUAT KODE------------------//
     public function buatkodejadwalaudit()
@@ -247,6 +266,7 @@ class M_Audit extends CI_Model {
               return false;
           }
       }
+      
 
     
 

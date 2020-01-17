@@ -19,35 +19,72 @@
                       <span id="info_message"></span>
                     </div>
                     <div class="panel-body">
-                        <div class="row">
-                    <form action="<?php echo base_url()?>laporan_auditor/cetakexcel" method="post">
-
-                        <div class="col-sm-4">
+                    <form id="FormLap" action="<?php echo base_url()?>laporan_auditor/cetakperlokasi" method="post">
+            <div class="row">
+                <div class="col-sm-9">
+                    <div class="col-sm-5 form-group">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Cabang</label>
+                            <div class="col-sm-9"><select name="id_cabang" class="form-control" id="OptCabang" required></select>
+                            </div>
+                        </div>        
+                    </div> 
+                    <div class="col-sm-7 form-group">
+                            <div class="form-group" id="data_5">
+                                <label class="col-sm-3 control-label">Periode Tanggal</label>
+                                <div class="col-sm-9">
+                                <div class="input-daterange input-group" id="datepicker">
+                                    <input type="text" class="input-m form-control" name="tgl_awal" id="tgl_awal" value="<?php echo $tgl ?>" required/>
+                                    <span class="input-group-addon" id="tgl_awal">s/d</span>
+                                    <input type="text" class="input-m form-control" name="tgl_akhir" id="tgl_akhir" value="<?php echo $tgl ?>" required/>
+                                </div>
+                            </div>
+                            </div>
+                    </div>
+                    <span id="change" class="hidden">
+                        <div  class="col-sm-5">
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">Cabang</label>
-                                <div class="col-sm-9"><select name="id_cabang" class="form-control" id="OptCabang"></select>
-                                </div>
-                            </div>        
-                        </div> 
-                        <div class="col-sm-5">
-                                <div class="form-group" id="data_5">
-                                    <label class="col-sm-3 control-label">Periode Tanggal</label>
-                                    <div class="col-sm-9">
-                                    <div class="input-daterange input-group" id="datepicker">
-                                        <input type="text" class="input-m form-control" name="tgl_awal" id="tgl_awal" value="<?php echo $tgl ?>"/>
-                                        <span class="input-group-addon" id="tgl_awal">s/d</span>
-                                        <input type="text" class="input-m form-control" name="tgl_akhir" id="tgl_akhir" value="<?php echo $tgl ?>" />
-                                    </div>
-                                </div>
-                                </div>
+                            <label class="col-sm-3 control-label">Auditor</label>
+                            <div class="col-sm-9"><input type="text" id="auditor" class="form-control" name="auditor" required></div>
+                            </div>
                         </div>
-                        <div class="col-sm-3">
-                            <input type="hidden" name="status" value="Sesuai" id="tgl_akhir"/>
-                            <a onclick="preview()" class="btn btn-primary">Preview</a>
-                            <button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-print"></i> CETAK</button>
-                        </div> 
-                        </form>
+                    <div class="col-sm-5">
+                        <div class="form-group">
+                        <label class="col-sm-3 control-label">Tempat</label>
+                        <div class="col-sm-9"><input type="text" id="tempat" class="form-control" name="tempat" required></div>
                         </div>
+                    </div>
+                    <div  class="col-sm-2">
+                        <div class="form-group">
+                        <button type="submit" class="btn btn-danger btn-block" id="type" name="type" value="pdf">OK</button>
+                    </div>
+                </div>
+                <div class="col-sm-5 ">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Counter</label>
+                        <div class="col-sm-9"><input type="text" id="counter" class="form-control" name="counter" required></div>
+                    </div>
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="form-group">
+                        <label class="col-sm-3 control-label">Kepala Cabang</label>
+                        <div class="col-sm-9"><input type="text" id="kacab" class="form-control" name="kacab" required></div>
+                        </div>
+                    </div>
+                    <div  class="col-sm-2">
+                        <div class="form-group">
+                        <a class="btn btn-warning btn-block" id="cancel" >Cancel</a>
+                    </div>
+                </div>
+                    </span>
+                </div>
+                <div class="col-sm-3">
+                        <a id="dataPreview" class="btn btn-primary">Preview</a>
+                        <a id="open" class="btn btn-danger xshow"><i class="fa fa-fw fa-file-pdf-o"></i> Download Pdf</a>
+
+                </div>
+            </div>
+                    </form>
                         <hr size="100px">
                         <div class="row">
                       <div class="col-lg-12">
@@ -58,8 +95,8 @@
                         
                         <tr>
                         <th rowspan="2" class="text-center">No</th>
-                        <th rowspan="2">Lokasi</th>
-                        <th rowspan="2">Jumlah Unit</th>
+                        <th rowspan="2" class="text-center">Lokasi</th>
+                        <th rowspan="2" class="text-center">Jumlah Unit</th>
                         <th colspan="5" class="text-center">Jumlah Aksesoris</th>
                         <th colspan="5" class="text-center">Selisih</th>
                         </tr>
@@ -78,7 +115,7 @@
                         </tr> 
                     </tr>
                     </thead>
-                    <tbody id="unit_perlokasi">
+                    <tbody id="aksesoris">
                     </tbody >
                     </table>
                         </div>

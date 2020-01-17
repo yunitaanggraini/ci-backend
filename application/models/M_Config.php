@@ -10,7 +10,7 @@ class M_Config extends CI_Model {
         {
             parent::__construct();
             $this->_client = new Client([
-                'base_uri'=> SERVER_BASE.'ci-server-lala/api/config/'
+                'base_uri'=> SERVER_BASE.'api/config/'
             ]);
         }
 
@@ -31,7 +31,11 @@ class M_Config extends CI_Model {
 
             $result = json_decode($respon->getBody()->getContents(),true);
 
-            return $result['data'];
+            if ($result['status']==true) {
+                return $result['data']; 
+            }else{
+                return false;
+            }
 
         }
 

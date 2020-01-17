@@ -86,8 +86,22 @@
     </script>
     <script>
    $(document).ready(function() {
+       download();
        get_data(1);
        lokasi();
+       function download() {
+           var id = "<?php echo $this->input->get('id')?>";
+           $('#info').html("<div id='loading'></div>");
+           $.ajax({
+                type: 'POST',
+                dataType: 'JSON',
+                url :"<?php echo base_url() ?>transaksi_auditor/downloadunit",
+                data: {id : id},
+                success:function(data){
+                    $('#info').html(data);
+                }
+           })
+       }
        function lokasi() {
             var cabang = "<?php echo $_GET['id']?>";
             $.ajax({
@@ -103,6 +117,29 @@
            
        }
     $('#jadwal_audit').load("<?php echo base_url() ?>audit/ajax_get_jadwal_audit");
+    $('#close').click(function() {
+        close_audit();
+    })
+    function close_audit() {
+        var id = "<?php echo $_GET['id'] ?>";
+        var a = "<?php echo $_GET['a'] ?>";
+        $.ajax({
+             type: 'POST',
+             dataType: 'JSON',
+             data: {id: id, a: a},
+             url: "<?php echo base_url() ?>transaksi_auditor/closeaudit",
+             success:function(data){
+                 if (data.status == true) {
+                 window.alert('Audit Scan Successful');
+                    window.opener.location.reload(true);
+                 window.close();
+                 }else{
+                 window.alert('Audit Close Failed');
+                 }
+                 
+             }
+         });
+    }
     $('#audit').click(function(){
          var no_mesin = $('#no_mesin').val();
          var no_rangka = $('#no_rangka').val();

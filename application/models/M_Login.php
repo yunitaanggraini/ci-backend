@@ -9,7 +9,7 @@ class M_Login extends CI_Model {
         {
             parent::__construct();
             $this->_client = new Client([
-                'base_uri'=> SERVER_BASE.'ci-server-lala/api/'
+                'base_uri'=> SERVER_BASE.'api/'
             ]);
         }
 

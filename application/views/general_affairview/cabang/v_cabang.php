@@ -73,7 +73,7 @@
                     </tfoot>
                     </table>
                         </div>
-
+                            <div id="pagination" class="text-right"></div>
                     </div>
                 </div>
                 </div>

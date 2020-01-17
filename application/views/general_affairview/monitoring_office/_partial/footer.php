@@ -1,3 +1,4 @@
+
 <div class="footer fixed">
             <div class="pull-right">
                 <div id="stat">
@@ -88,43 +89,51 @@
     <script>
    $(document).ready(function() {
     // $('#inv_office').load("<?php echo base_url() ?>transaksi");
-    get_data();
-
-    function get_data() {
+    get_data(1);
+    $(document).on('click', '.pagination li a', function(event) {
+        event.preventDefault();
+        var page = $(this).data('ci-pagination-page');
+        var inv =$('#inv').val();
+        if (inv) {
+            search(page);
+        }else{
+            get_data(page);
+        }
+    });
+    function get_data(page) {
+        $('#inv_office').html('<tr><td colspan="13" class="text-center" id="loading"></td></tr>');
     $.ajax({
-           url: "<?php echo base_url() ?>transaksi_ga/ajax_get_Inventory",
+        type:'post',
+           url: "<?php echo base_url() ?>transaksi_ga/ajax_get_Inventory/"+page,
            dataType:'JSON',
            success:function(data){
-            $('#inv_office').html(data);
+            $('#inv_office').html(data.output);
+            $('#pagination').html(data.pagination);
            }
        })
     }
-    function search(){
-            var jenisinv =$('#inv_office').val();
+    function search(page){
+            var inv =$('#inv').val();
+            $('#inv_office').html('<tr><td colspan="13" class="text-center" id="loading"></td></tr>');
 
-            if (jenisinv!='') {
+            if (inv!='') {
                 $.ajax({
                     type:"post",
-                    url:"<?php echo base_url() ?>master_data/search_data_jenisinv",
-                    data:"id="+jenisinv,
+                    dataType: 'JSON',
+                    url:"<?php echo base_url() ?>transaksi_ga/search/"+page,
+                    data:"id="+inv,
                     success:function(data){
-                      $("#jenis_inv").html(data);
-                      $("#search").val("");
+                        $('#inv_office').html(data.output);
+                        $('#pagination').html(data.pagination);
                     }
                 });
             }else{
-                $('#jenis_inv').load("<?php echo base_url() ?>master_data/ajax_get_jenis_inv");
+                get_data(1);
         }
         }
         $('#caribtn').click(function(){
-            search();
+            search(1);
         });
-
-        $('#Injenisinv').keyup(function(e) {
-          if(e.keyCode == 13) {
-             search();
-          }
-      });
     });
 
     function edit(id) {

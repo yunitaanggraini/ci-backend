@@ -7,8 +7,10 @@
         rules: {
             idjadwal_audit:{
                 required: true,
-                maxlength: 5,
                 minlength:3
+            },
+            idjenis_audit:{
+                required:true
             },
             auditor:{
                 required:true
@@ -24,9 +26,37 @@
             }
 
         }
+        
+
         });
     </script>
+    <script>
+    $(document).ready(function() {
+        $('#data_1 .input-group.date').datepicker({
+        todayBtn: "linked",
+        keyboardNavigation: false,
+        forceParse: false,
+        calendarWeeks: true,
+        autoclose: true
+    });
 
+        $('.clockpicker').clockpicker();
+    })
+    </script>
+<script src="<?php echo base_url() ?>assets/js/bootstrap.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="<?php echo base_url() ?>assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <!-- Idle Timer plugin -->
+    <script src="<?php echo base_url() ?>assets/js/plugins/idle-timer/idle-timer.min.js"></script>
+    <!-- Custom and plugin javascript -->
+    <script src="<?php echo base_url() ?>assets/js/inspinia.js"></script>
+    <script src="<?php echo base_url() ?>assets/js/plugins/pace/pace.min.js"></script>
+
+    <script src="<?php echo base_url() ?>assets/js/plugins/toastr/toastr.min.js"></script>
+
+    <script src="<?php echo base_url() ?>assets/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+
+    <script src="<?php echo base_url() ?>assets/js/plugins/clockpicker/clockpicker.js"></script>
 
 </body>
 

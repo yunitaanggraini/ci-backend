@@ -49,7 +49,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'login/login';
+$route['default_controller'] = 'login/sima_login';
 
 $route['dashboard']="dashboard";
 $route['profil']="profil/profil";
@@ -77,6 +77,9 @@ $route['data_audit/input']="audit/input";
 $route['monitoring/audit']="monitoring_audit/viewMonitoringAudit";
 $route['transaksi/monitoring_office']="transaksi_GA/viewOffice";
 $route['transaksi/management_office']="transaksi_GA/inputOffice";
+$route['transaksi/editoffice']="transaksi_GA/editOffice";
+$route['transaksi/detail']="transaksi_GA/detailOffice";
+$route['transaksi/input_office']="transaksi_Cabang/inputOffice";
 $route['laporan/inventory_office']="laporan_GA/viewLaporanOffice";
 $route['laporan/audit']="laporan_audit/viewLaporanAudit";
 $route['translate_uri_dashes'] = FALSE;
@@ -86,15 +89,19 @@ $route['audit/list_audit']="audit/viewListAudit";
 $route['data_temporary/unit']="audit/viewTempUnit";
 $route['data_temporary/part']="audit/viewTempPart";
 $route['transaksi/audit']="transaksi_auditor/audit";
+$route['transaksi/auditPart']="transaksi_auditor/auditpart";
 $route['transaksi/audit_unit']="transaksi_auditor/audit_unit";
 $route['transaksi/audit_part']="transaksi_auditor/audit_part";
+$route['transaksi/aksesoris']="transaksi_auditor/aksesoris";
 $route['transaksi/audit_inventory']="transaksi_auditor/audit_inventory";
 $route['transaksi/list_audit_inventory']="transaksi_auditor/listaudit_inventory";
 $route['transaksi/list_audit_part']="transaksi_auditor/listaudit_part";
 $route['laporan/laporan_audit_unit']="laporan_auditor/laporan_unit";
+$route['laporan/laporan_audit_part']="laporan_auditor/laporan_part";
 
-$route['cetak_barcode/data_part']="barcode/BarcodePart";
-$route['cetak_barcode/data_unit']="barcode/BarcodeUnit";
+$route['cetak_barcode/data_part']="gudang/Part";
+$route['cetak_barcode/data_unit']="gudang/Unit";
+$route['cetak_barcode/data_office']="gudang/Office";
 
 
 

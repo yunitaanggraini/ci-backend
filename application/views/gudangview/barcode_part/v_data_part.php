@@ -4,7 +4,7 @@
                 <div class="col-lg-12">
                 <div class="panel panel-bluedark">
                     <div class="panel-heading">
-                        <h3><i class="fa fa-info-circle"></i> Data Audit Unit</h3>
+                        <h3><i class="fa fa-info-circle"></i> Data Part</h3>
                     </div>
                     <div class="panel-body">
                     <div class="row">
@@ -29,17 +29,6 @@
                                         </div>
                                 </div>  
 
-                                <div class="col-sm-3">
-                                    <label>Status Unit</label>
-                                    <div class="form-group">
-                                    <select name="status_unit" class="form-control" id="status">
-                                    <option value="hide">--- Pilih Status Part ---</option>
-                                    <option value="Sesuai" id="sesuai">Baik</option>
-                                    <option value="Belum Sesuai" id="belum_sesuai">Rusak</option>
-                                    </select>
-                                    </div>      
-                                </div>
-
                                 <div class="col-sm-1" >
                                     <div class="form-group m-t-md">
                                     <a id="preview" class="btn btn-primary">Preview</a>
@@ -60,34 +49,29 @@
                     <thead>
                     <tr>
                         <th width="3%">No</th>
-                        <th width="5%">Aksi</th>
-                        <th>ID Part</th>
-                        <th>Cabang</th>
+                        <th width="5%">Cetak </th>
                         <th>Lokasi</th>
                         <th>Part Number</th>
-                        <th>ID Rak</th>
-                        <th>ID Bin Box</th>
+                        <th>KD Bin Box</th>
                         <th>Deskripsi</th>
                         <th>Qty</th>
-                        <th>Status</th>
+                        <th>Tanggal Audit</th>
+
 
                     </tr>
                     </thead>
-                    <tbody id="audit_part">
+                    <tbody id="part">
                     </tbody >
                     <tfoot>
                     <tr>
-                        <th>No</th>
-                        <th>Aksi</th>
-                        <th>ID Part</th>
-                        <th>Cabang</th>
+                    <th width="3%">No</th>
+                        <th width="5%">Cetak </th>
                         <th>Lokasi</th>
                         <th>Part Number</th>
-                        <th>ID Rak</th>
-                        <th>ID Bin Box</th>
+                        <th>KD Bin Box</th>
                         <th>Deskripsi</th>
                         <th>Qty</th>
-                        <th>Status</th>
+                        <th>Tanggal Audit</th>
                     </tr>
                     </tfoot>
                     </table>

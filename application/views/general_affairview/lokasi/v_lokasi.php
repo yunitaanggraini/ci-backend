@@ -77,11 +77,7 @@
                     </table>  
                     </div>
 
-
-                    <div class="pull-right m-t-n-xl">
-                    <?php echo $pagination;?>
-                    </div>
-
+<div id="pagination" class="text-right"></div>
                         </div>
                 </div>
                 </div>
