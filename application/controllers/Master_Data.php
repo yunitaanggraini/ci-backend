@@ -1064,7 +1064,7 @@ class Master_Data extends CI_Controller
 
 
         $this->load->view('general_affairview/vendor/v_edit_vendor.php', $data);
-        $this->load->view('general_affairview/user_group/_partial/footer2.php');
+        $this->load->view('general_affairview/vendor/_partial/footer2.php');
     }
 
     public function edit_jenisaudit()

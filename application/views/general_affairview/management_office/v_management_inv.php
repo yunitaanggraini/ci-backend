@@ -2,15 +2,15 @@
     <div class="row">
         <div class="col-lg-12">
             <form class="form-horizontal" method="post" enctype="multipart/form-data" action="<?php echo base_url('transaksi_ga/post_inventory') ?>" id="FormInventory">
-                <div class="panel panel-default">
+                <div class="panel panel-primary">
                     <div class="panel-heading">
 
                         <div class="col-lg-10">
                             <h4><i class="fa fa-info-circle"></i> Input Inventory</h4>
                         </div>
                         <div>
-                            <a href="<?php echo base_url('transaksi/monitoring_office') ?>" type="submit" class="btn btn-m btn-danger">Batal</a>
-                            <button type="submit" class="btn btn-success btn-m" id="btn-simpan">Simpan</button>
+                            <a href="<?php echo base_url('transaksi/monitoring_office') ?>" type="submit" class="btn btn-m btn-danger">Cancel</a>
+                            <button type="submit" class="btn btn-success btn-m" id="btn-simpan">Submit</button>
                         </div>
 
                     </div>

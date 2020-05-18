@@ -2,7 +2,7 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                <div class="panel panel-default">
+                <div class="panel panel-primary">
                     <div class="panel-heading">
                             <h3>List Data Audit Belum Sesuai</h3>
                     </div>

@@ -3,7 +3,7 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                <div class="panel panel-default">
+                <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h4><i class="fa fa-info-circle"></i> List Data Audit Sesuai</h4>
                     </div>

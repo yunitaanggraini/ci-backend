@@ -2,7 +2,7 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                <div class="panel panel-bluedark">
+                <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h3><i class="fa fa-info-circle"></i> Data Audit Unit</h3>
                     </div>

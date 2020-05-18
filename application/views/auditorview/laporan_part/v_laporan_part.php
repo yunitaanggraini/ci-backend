@@ -24,7 +24,7 @@
 
     <div class="row">
         <div class="col-lg-12">
-                <div class="panel panel-default">
+                <div class="panel panel-primary">
                     <div class="panel-heading">
                     <h3><i class="fa fa-info-circle"></i> Data Audit Part</h3>
                       <span id="info_message"></span>

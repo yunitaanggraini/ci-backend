@@ -2,7 +2,7 @@
     <!-- <?php print_r($edit) ?> -->
     <div class="row">
         <div class="col-lg-12">
-            <form class="form-horizontal" method="post" enctype="multipart/form-data" action="<?php echo base_url('transaksi_ga/put_inventory') ?>" id="FormInventory">
+            <form class="form-horizontal" method="post" enctype="multipart/form-data" action="<?php echo base_url('transaksi_cabang/put_inventory') ?>" id="FormInventory">
                 <div class="panel panel-default">
                     <div class="panel-heading">
 
@@ -99,13 +99,7 @@
                                         </select>
                                     </div>
                                 </div>
-
-
-                                <div class="form-group"><label class="col-sm-3 control-label">Cabang</label>
-                                    <div class="col-sm-9"><select class="form-control m-b" name="id_cabang" id="OptCabang">
-                                        </select>
-                                    </div>
-                                </div>
+                                <input type="hidden" name="id_usergroup" value="$e['id_cabang']">
 
 
                                 <div class="form-group"><label class="col-sm-3 control-label">Lokasi</label>

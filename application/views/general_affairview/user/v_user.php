@@ -13,7 +13,7 @@
                         </div>
 
                         <div class="col-sm-2 text-center">
-                            <button class="btn btn-w-m btn-info" id="caribtn">Cari Data</button>
+                            <button class="btn btn-w-m btn-success" id="caribtn">Cari Data</button>
                         </div>
                     </div>
                 </div>

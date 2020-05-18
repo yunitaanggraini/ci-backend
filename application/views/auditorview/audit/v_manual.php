@@ -1,6 +1,6 @@
 <div class="wrapper wrapper-content m-t-xl wrapper wrapper-content animated fadeInRight">
     <form class="form-horizontal" method="post" action="<?php echo base_url('transaksi_auditor/audit_unit') ?>" id="FormJadwalAudit">
-    <div class="panel panel-bluedark">
+    <div class="panel panel-primary">
         <div class="panel-heading" >
             <div class="col-lg-10" ><h4><i class="fa fa-info-circle"></i> Manual Audit</h4></div>
                         <div >

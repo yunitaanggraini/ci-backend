@@ -11,6 +11,15 @@ class Menu extends CI_Controller
         ini_set('max_execution_time', 0);
         $this->load->model('m_master_data', 'mmasdat');
         $this->load->model('m_menu', 'mmenu');
+        if (!$this->session->userdata('username')) {
+            $this->session->set_flashdata('pesan', '<div class="alert alert-danger">Login Dulu!</div>');
+            redirect('login/sima_login');
+        } else {
+            if ($this->session->userdata('usergroup') == 'UG005') {
+            } else {
+                redirect('error');
+            }
+        }
     }
 
     public function rules()

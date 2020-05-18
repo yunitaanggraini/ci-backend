@@ -11,7 +11,7 @@ class Dashboard extends CI_Controller
         parent::__construct();
         $this->load->model('m_dashboard', 'mdashboard');
         $this->load->model('m_transaksi_auditor', 'mtransauditor');
-
+        $this->load->model('m_transaksi_GA', 'mtransga');
         $this->load->model('m_master_data', 'mmasdat');
 
         if (!$this->session->userdata('username')) {
@@ -27,10 +27,49 @@ class Dashboard extends CI_Controller
         $data['usergroup'] = $this->mmasdat->buatkodeusergroup();
         $data['auditunit'] = $this->mtransauditor->countunit1();
         $data['auditpart'] = $this->mtransauditor->countpart1(null);
+        $data['inventory'] = $this->mtransga->getcountInv();
+        $data['cabang'] = $this->mmasdat->buatkodecabang();
+
+        // var_dump($data);
+        // die;
         $this->load->view('_partial/header.php', $data);
         $this->load->view('_partial/sidebar.php');
         $this->load->view('v_dashboard', $data);
-        $this->load->view('general_affairview/user/_partial/footer.php');
+        $this->load->view('_partial/footer.php');
+    }
+    public function change()
+    {
+        $data['judul'] = 'Change Password';
+        $this->load->view('_partial/header.php', $data);
+        $this->load->view('_partial/sidebar.php');
+        $this->load->view('v_changepass.php', $data);
+        $this->load->view('_partial/footer.php');
+    }
+    public function post_change()
+    {
+        $data = [
+            'id'   => $this->session->userdata('nik'),
+            'password'   => $this->input->post('newpass', true),
+        ];
+
+        $valid = [
+            'id'   => $this->session->userdata('nik'),
+            'password'   => $this->input->post('currpass', true),
+        ];
+        $id = $this->mmasdat->cekPassword($valid);
+        if ($id) {
+            $exec = $this->mmasdat->UpdatePass($data);
+            if ($exec) {
+                $this->session->set_flashdata('berhasil', 'berhasil diupdate');
+                redirect('dashboard/change');
+            } else {
+                $this->session->set_flashdata('gagal', 'gagal diupdate');
+                redirect('dashboard/change');
+            }
+        } else {
+            $this->session->set_flashdata('warning', 'Current Password Wrong');
+            redirect('dashboard/change');
+        }
     }
 }
 

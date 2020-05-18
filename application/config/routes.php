@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -51,62 +51,64 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'login/sima_login';
 
-$route['dashboard']="dashboard";
-$route['profil']="profil/profil";
+$route['dashboard'] = "dashboard";
+$route['profil'] = "profil/profil";
 
 
-$route['home']="welcome/home";
+$route['home'] = "welcome/home";
 
-$route['master_data/user']="master_data/viewUser";
-$route['user/input']="master_data/input_user";
-$route['user/edit']="master_data/edit_user";
+$route['master_data/user'] = "master_data/viewUser";
+$route['user/input'] = "master_data/input_user";
+$route['user/edit'] = "master_data/edit_user";
 
-$route['master_data/user_group']="master_data/viewUserGroup";
-$route['master_data/jenis_inventory']="master_data/viewJenisInv";
-$route['master_data/sub_inventory']="master_data/viewSubInv";
-$route['master_data/status_inventory']="master_data/viewStatusInv";
-$route['master_data/perusahaan']="master_data/viewPerusahaan";
-$route['master_data/cabang']="master_data/viewCabang";
-$route['master_data/lokasi']="master_data/viewLokasi";
-$route['master_data/vendor']="master_data/viewVendor";
-$route['master_data/jenis_audit']="master_data/viewJenisAudit";
-$route['barcode_dan_qrcode/input_kode']="master_data/viewBuatBarQRcode";
+$route['master_data/user_group'] = "master_data/viewUserGroup";
+$route['master_data/jenis_inventory'] = "master_data/viewJenisInv";
+$route['master_data/sub_inventory'] = "master_data/viewSubInv";
+$route['master_data/status_inventory'] = "master_data/viewStatusInv";
+$route['master_data/perusahaan'] = "master_data/viewPerusahaan";
+$route['master_data/cabang'] = "master_data/viewCabang";
+$route['master_data/lokasi'] = "master_data/viewLokasi";
+$route['master_data/vendor'] = "master_data/viewVendor";
+$route['master_data/jenis_audit'] = "master_data/viewJenisAudit";
+$route['barcode_dan_qrcode/input_kode'] = "master_data/viewBuatBarQRcode";
 
-$route['data_audit/list']="audit/viewAudit";
-$route['data_audit/input']="audit/input";
-$route['monitoring/audit']="monitoring_audit/viewMonitoringAudit";
-$route['transaksi/monitoring_office']="transaksi_GA/viewOffice";
-$route['transaksi/management_office']="transaksi_GA/inputOffice";
-$route['transaksi/editoffice']="transaksi_GA/editOffice";
-$route['transaksi/detail']="transaksi_GA/detailOffice";
-$route['transaksi/input_office']="transaksi_Cabang/inputOffice";
-$route['laporan/inventory_office']="laporan_GA/viewLaporanOffice";
-$route['laporan/audit']="laporan_audit/viewLaporanAudit";
+$route['data_audit/list'] = "audit/viewAudit";
+$route['data_audit/input'] = "audit/input";
+$route['monitoring/audit'] = "monitoring_audit/viewMonitoringAudit";
+$route['transaksi/monitoring_office'] = "transaksi_GA/viewOffice";
+$route['transaksi/management_office'] = "transaksi_GA/inputOffice";
+$route['transaksi/editoffice'] = "transaksi_GA/editOffice";
+$route['transaksi/detail'] = "transaksi_GA/detailOffice";
+$route['transaksi/input_office'] = "transaksi_Cabang/inputOffice";
+$route['transaksi/mutasi_office'] = "transaksi_Cabang/mutasiOffice";
+$route['transaksi/monit_office'] = "transaksi_Cabang/monitOffice";
+$route['laporan/inventory_office'] = "laporan_GA/viewLaporanOffice";
+$route['laporan/audit'] = "laporan_audit/viewLaporanAudit";
 $route['translate_uri_dashes'] = FALSE;
 
-$route['audit/input_jadwal']="audit/JadwalAudit";
-$route['audit/list_audit']="audit/viewListAudit";
-$route['data_temporary/unit']="audit/viewTempUnit";
-$route['data_temporary/part']="audit/viewTempPart";
-$route['transaksi/audit']="transaksi_auditor/audit";
-$route['transaksi/auditPart']="transaksi_auditor/auditpart";
-$route['transaksi/audit_unit']="transaksi_auditor/audit_unit";
-$route['transaksi/audit_part']="transaksi_auditor/audit_part";
-$route['transaksi/aksesoris']="transaksi_auditor/aksesoris";
-$route['transaksi/audit_inventory']="transaksi_auditor/audit_inventory";
-$route['transaksi/list_audit_inventory']="transaksi_auditor/listaudit_inventory";
-$route['transaksi/list_audit_part']="transaksi_auditor/listaudit_part";
-$route['laporan/laporan_audit_unit']="laporan_auditor/laporan_unit";
-$route['laporan/laporan_audit_part']="laporan_auditor/laporan_part";
+$route['audit/input_jadwal'] = "audit/JadwalAudit";
+$route['audit/list_audit'] = "audit/viewListAudit";
+$route['data_temporary/unit'] = "audit/viewTempUnit";
+$route['data_temporary/part'] = "audit/viewTempPart";
+$route['transaksi/audit'] = "transaksi_auditor/audit";
+$route['transaksi/auditPart'] = "transaksi_auditor/auditpart";
+$route['transaksi/audit_unit'] = "transaksi_auditor/audit_unit";
+$route['transaksi/audit_part'] = "transaksi_auditor/audit_part";
+$route['transaksi/aksesoris'] = "transaksi_auditor/aksesoris";
+$route['transaksi/audit_inventory'] = "transaksi_auditor/audit_inventory";
+$route['transaksi/list_audit_inventory'] = "transaksi_auditor/listaudit_inventory";
+$route['transaksi/list_audit_part'] = "transaksi_auditor/listaudit_part";
+$route['laporan/laporan_audit_unit'] = "laporan_auditor/laporan_unit";
+$route['laporan/laporan_audit_part'] = "laporan_auditor/laporan_part";
 
-$route['cetak_barcode/data_part']="gudang/Part";
-$route['cetak_barcode/data_unit']="gudang/Unit";
-$route['cetak_barcode/data_office']="gudang/Office";
+$route['cetak_barcode/data_part'] = "gudang/Part";
+$route['cetak_barcode/data_unit'] = "gudang/Unit";
+$route['cetak_barcode/data_office'] = "gudang/Office";
 
 
 
-$route['error']='error';
-
+$route['error'] = 'error/err403';
+// $route['404_override'] = 'error/err404';
 /*
 | -------------------------------------------------------------------------
 | Sample REST API Routes

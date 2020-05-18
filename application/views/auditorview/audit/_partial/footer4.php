@@ -5,14 +5,12 @@
         </div>
     </div>
     <div>
-        <strong>Copyright</strong> Example Company &copy; 2014-2017
+        <strong>Copyright</strong> &copy; 2019-2020
     </div>
 </div>
 
 </div>
 
-</div>
-</div>
 
 <!-- Mainly scripts -->
 <script src="<?php echo base_url() ?>assets/js/jquery-3.1.1.min.js"></script>

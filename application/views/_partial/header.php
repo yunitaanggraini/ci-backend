@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title><?php echo SITE_NAME ?> | <?php echo $judul ?></title>
+    <link rel="shortcut icon" type="image/png" href="<?php echo base_url() ?>assets/images/icon.png" />
     <link href="<?php echo base_url() ?>assets/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
     <link href="<?php echo base_url() ?>assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo base_url() ?>assets/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -36,19 +37,19 @@
             }
         }
         document.oncontextmenu = redirectKK;
-</script>
-<style>
-#loading{
-  /* text-align: center; */
-  background: url('<?php echo base_url() ?>assets/images/loader.gif') no-repeat center;
-  background-size: 30px;
-  width: 100%;
-  height: 100px;
-}
-</style>
+    </script>
+    <style>
+        #loading {
+            /* text-align: center; */
+            background: url('<?php echo base_url() ?>assets/images/loader.gif') no-repeat center;
+            background-size: 30px;
+            width: 100%;
+            height: 100px;
+        }
+    </style>
 
 </head>
 
 <body class="md-skin fixed-nav fixed-nav-basic fixed-sidebar">
-    
+
     <div id="wrapper">

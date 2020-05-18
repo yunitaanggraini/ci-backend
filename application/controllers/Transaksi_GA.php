@@ -26,7 +26,7 @@ class Transaksi_GA extends CI_Controller
     public function viewOffice()
     {
         $data = [
-            'judul' => "Monitoring Inventory",
+            'judul' => "Management Inventory Office",
             'judul1' => 'Transaksi GA'
         ];
         // var_dump($data);die;
@@ -39,7 +39,7 @@ class Transaksi_GA extends CI_Controller
     public function inputOffice()
     {
         $data = [
-            'judul' => "Management Inventory",
+            'judul' => "Input Inventory",
             'judul1' => 'Transaksi GA',
             'max' => $this->mtransga->getcountInv()
         ];
@@ -61,6 +61,7 @@ class Transaksi_GA extends CI_Controller
             $vendor = $o['id_vendor'];
             $asal = $o['asal_hadiah'];
             $jPem = $o['jenis_pembayaran'];
+            $cabang = $o['id_cabang'];
         }
         // var_dump($office);die;
         $data = [
@@ -74,7 +75,8 @@ class Transaksi_GA extends CI_Controller
             'lokasi' => $lokasi,
             'vendor' => $vendor,
             'jPem' => $jPem,
-            'asal' => $asal
+            'asal' => $asal,
+            'cabang' => $cabang
         ];
         // var_dump($data);die;
         $this->load->view('_partial/header.php', $data);
@@ -94,6 +96,7 @@ class Transaksi_GA extends CI_Controller
             $vendor = $o['id_vendor'];
             $asal = $o['asal_hadiah'];
             $jPem = $o['jenis_pembayaran'];
+            $cabang = $o['id_cabang'];
         }
         // var_dump($office);die;
         $data = [
@@ -104,6 +107,7 @@ class Transaksi_GA extends CI_Controller
             'jenis' => $jenis,
             'status' => $status,
             'sub' => $sub,
+            'cabang' => $cabang,
             'lokasi' => $lokasi,
             'vendor' => $vendor,
             'jPem' => $jPem,
@@ -129,7 +133,10 @@ class Transaksi_GA extends CI_Controller
 
             redirect('transaksi/monitoring_office');
         } else {
-            if ($this->mtransga->delInv($id)) {
+            $exec = $this->mtransga->delInv($id);
+            // var_dump($exec);
+            // die;
+            if ($exec) {
                 $this->session->set_flashdata('berhasil', 'Berhasil dihapus');
 
                 redirect('transaksi/monitoring_office');
@@ -232,6 +239,7 @@ class Transaksi_GA extends CI_Controller
         $tgl = strtotime($tgl);
         $tgl = date('Y-m-d', $tgl);
         $nama = str_replace('/', '-', $this->input->post('id_inventory', true));
+        $nama = str_replace('.', '_', $nama);
         $config['upload_path'] = './assets/images/';
         $config['allowed_types'] = 'gif|jpg|png';
         $config['overwrite'] = true;
@@ -321,6 +329,7 @@ class Transaksi_GA extends CI_Controller
         $tgl = strtotime($tgl);
         $tgl = date('Y-m-d', $tgl);
         $nama = str_replace('/', '-', $this->input->post('id_inventory', true));
+        $nama = str_replace('.', '_', $nama);
         $config['upload_path'] = './assets/images/';
         $config['allowed_types'] = 'gif|jpg|jpeg|png';
         $config['overwrite'] = true;
@@ -482,16 +491,22 @@ class Transaksi_GA extends CI_Controller
         echo $output;
     }
 
-    public function ajax_get_cabang2()
+    public function ajax_get_cabang2($id = null)
     {
         $output = '';
         $no = 0;
         $listcabang = $this->mtransga->getCabang();
         foreach ($listcabang as $list) {
             $no++;
-            $output .= '
-				<option value="' . $list['id_cabang'] . '">' . $list['id_cabang'] . ' - ' . $list['nama_cabang'] . '</option>
-			';
+            if ($list['id_cabang'] == $id) {
+                $output .= '
+                    <option value="' . $list['id_cabang'] . '" selected>' . $list['id_cabang'] . ' - ' . $list['nama_cabang'] . '</option>
+                ';
+            } else {
+                $output .= '
+                    <option value="' . $list['id_cabang'] . '">' . $list['id_cabang'] . ' - ' . $list['nama_cabang'] . '</option>
+                ';
+            }
         }
         echo '<option value="">--- Pilih Cabang ---</option>';
         echo $output;

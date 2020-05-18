@@ -5,7 +5,15 @@
                     <h3>SIMA</h3>
                 </li>
                 <li class="<?php if ($this->uri->segment(1) == 'dashboard') echo 'active'; ?>">
-                    <a href="<?php echo base_url() ?>dashboard"><i class="fa fa-home fa-lg"></i> <span class="nav-label">Dashboard</span></a>
+                    <a href="<?php echo base_url() ?>dashboard"><i class="fa fa-home fa-lg"></i> <span class="nav-label">
+                            <?php
+                            if ($this->session->userdata('usergroup') != 'UG005') {
+                                echo "Beranda";
+                            } else {
+                                echo "Dashboard";
+                            }
+                            ?>
+                        </span></a>
                 </li>
 
                 <!--Area Menu Dinamis -->
@@ -66,7 +74,7 @@
                                                                                                         ?> <b class="caret"></b></span></a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
                             <li><a data-toggle="modal" data-target="#myModal">Profile</a></li>
-                            <li><a href="contacts.html">Change Password</a></li>
+                            <li><a href="<?php echo base_url() ?>dashboard/change">Change Password</a></li>
                             <li class="divider"></li>
                             <li><a href="<?php echo base_url() ?>login/logout"> <i class="fa fa-sign-out"></i> <strong>Logout</strong> </a></li>
                         </ul>
@@ -84,65 +92,65 @@
                         <div class="modal-body">
                             <div id="profil">
                                 <div class="row">
-                                    <div class="col-sm-3">
+                                    <div class="col-md-3 col-sm-3 col-lg-3 col-xl-3 col-xs-3">
                                         <label>NIK</label>
                                     </div>
-                                    <div class="col-sm-1">
+                                    <div class="col-md-1 col-sm-1 col-lg-1 col-xl-1 col-xs-1">
                                         <label>:</label>
                                     </div>
-                                    <div class="col-sm-8">
+                                    <div class="col-md-8 col-sm-8 col-lg-8 col-lg-8 col-xs-8">
                                         <?php echo
                                             $this->session->userdata('nik');
                                         ?>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-3">
+                                    <div class="col-md-3 col-sm-3 col-lg-3 col-xl-3 col-xs-3">
                                         <label>Username</label>
                                     </div>
-                                    <div class="col-sm-1">
+                                    <div class="col-md-1 col-sm-1 col-lg-1 col-xl-1 col-xs-1">
                                         <label>:</label>
                                     </div>
-                                    <div class="col-sm-8">
+                                    <div class="col-md-8 col-sm-8 col-lg-8 col-lg-8 col-xs-8">
                                         <?php echo
                                             $this->session->userdata('username');
                                         ?>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-3">
+                                    <div class="col-md-3 col-sm-3 col-lg-3 col-xl-3 col-xs-3">
                                         <label>Perusahaan</label>
                                     </div>
-                                    <div class="col-sm-1">
+                                    <div class="col-md-1 col-sm-1 col-lg-1 col-xl-1 col-xs-1">
                                         <label>:</label>
                                     </div>
-                                    <div class="col-sm-8">
+                                    <div class="col-md-8 col-sm-8 col-lg-8 col-lg-8 col-xs-8">
                                         <?php echo
                                             $this->session->userdata('perusahaan');
                                         ?>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-3">
+                                    <div class="col-md-3 col-sm-3 col-lg-3 col-xl-3 col-xs-3">
                                         <label>Cabang</label>
                                     </div>
-                                    <div class="col-sm-1">
+                                    <div class="col-md-1 col-sm-1 col-lg-1 col-xl-1 col-xs-1">
                                         <label>:</label>
                                     </div>
-                                    <div class="col-sm-8">
+                                    <div class="col-md-8 col-sm-8 col-lg-8 col-lg-8 col-xs-8">
                                         <?php echo
                                             $this->session->userdata('cabang');
                                         ?>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-3">
+                                    <div class="col-md-3 col-sm-3 col-lg-3 col-xl-3 col-xs-3">
                                         <label>Status</label>
                                     </div>
-                                    <div class="col-sm-1">
+                                    <div class="col-md-1 col-sm-1 col-lg-1 col-xl-1 col-xs-1">
                                         <label>:</label>
                                     </div>
-                                    <div class="col-sm-8">
+                                    <div class="col-md-8 col-sm-8 col-lg-8 col-lg-8 col-xs-8">
                                         <?php echo
                                             $this->session->userdata('status');
                                         ?>

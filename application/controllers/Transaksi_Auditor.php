@@ -171,17 +171,17 @@ class Transaksi_Auditor extends CI_Controller
         $this->load->view('auditorview/aksesoris/_partial/footer.php');
     }
 
-    public function Audit_Inventory()
-    {
-        $data = [
-            'judul' => "Audit Inventory",
-            'judul1' => 'Transaksi Auditor'
-        ];
-        $this->load->view('_partial/header.php', $data);
-        $this->load->view('_partial/sidebar.php');
-        $this->load->view('auditorview/audit_inventory/v_audit_inventory.php', $data);
-        $this->load->view('auditorview/audit_inventory/_partial/footer.php');
-    }
+    // public function Audit_Inventory()
+    // {
+    //     $data = [
+    //         'judul' => "Audit Inventory",
+    //         'judul1' => 'Transaksi Auditor'
+    //     ];
+    //     $this->load->view('_partial/header.php', $data);
+    //     $this->load->view('_partial/sidebar.php');
+    //     $this->load->view('auditorview/audit_inventory/v_audit_inventory.php', $data);
+    //     $this->load->view('auditorview/audit_inventory/_partial/footer.php');
+    // }
 
     public function ListAudit_Inventory()
     {
@@ -543,6 +543,7 @@ class Transaksi_Auditor extends CI_Controller
                 <td>' . $list['kd_lokasi_rak'] . '</td>
                 <td>' . $list['deskripsi'] . '</td>
                 <td>' . $list['qty'] . '</td>
+                <td>' . $list['status'] . '</td>
             </tr>
             
             ';
@@ -856,6 +857,7 @@ class Transaksi_Auditor extends CI_Controller
     {
         $scanunit = $this->input->post('id');
         $cabang = $this->input->post('cabang');
+        $lokasi = $this->input->post('lokasi');
         $manual = false;
         // $scanunit = 'JBN1E1172125';
         // $cabang ='T13';
@@ -867,25 +869,49 @@ class Transaksi_Auditor extends CI_Controller
         }
         if ($dataUnit) {
             foreach ($dataUnit as $unit) {
-                $data = [
-                    'id_unit' => $unit['id_unit'],
-                    'no_mesin' => $unit['no_mesin'],
-                    'no_rangka' => $unit['no_rangka'],
-                    'umur_unit' => null,
-                    'tahun' => $unit['tahun'],
-                    'id_cabang' => $unit['id_cabang'],
-                    'id_lokasi' => $unit['id_lokasi'],
-                    'buku_service' => null,
-                    'helm' => null,
-                    'aki' => null,
-                    'tools' => null,
-                    'spion' => null,
-                    'status' => 'Sesuai',
-                    'is_ready' => 'RFS',
-                    'foto' => null,
-                    'type' => $unit['type'],
-                    'kode_item' => $unit['kode_item']
-                ];
+                if ($unit['id_lokasi'] == $lokasi) {
+                    $data = [
+                        'id_unit' => $unit['id_unit'],
+                        'no_mesin' => $unit['no_mesin'],
+                        'no_rangka' => $unit['no_rangka'],
+                        'umur_unit' => null,
+                        'tahun' => $unit['tahun'],
+                        'id_cabang' => $unit['id_cabang'],
+                        'id_lokasi' => $unit['id_lokasi'],
+                        'buku_service' => null,
+                        'helm' => null,
+                        'aki' => null,
+                        'tools' => null,
+                        'spion' => null,
+                        'status' => 'Sesuai',
+                        'is_ready' => 'RFS',
+                        'foto' => null,
+                        'type' => $unit['type'],
+                        'kode_item' => $unit['kode_item'],
+
+                    ];
+                } else {
+                    $data = [
+                        'id_unit' => $unit['id_unit'],
+                        'no_mesin' => $unit['no_mesin'],
+                        'no_rangka' => $unit['no_rangka'],
+                        'umur_unit' => null,
+                        'tahun' => $unit['tahun'],
+                        'id_cabang' => $unit['id_cabang'],
+                        'id_lokasi' => $lokasi,
+                        'buku_service' => null,
+                        'helm' => null,
+                        'aki' => null,
+                        'tools' => null,
+                        'spion' => null,
+                        'status' => 'Sesuai',
+                        'is_ready' => 'RFS',
+                        'foto' => null,
+                        'type' => $unit['type'],
+                        'kode_item' => $unit['kode_item'],
+                        'keterangan' => 'Lokasi Tidak Sesuai'
+                    ];
+                }
             }
             $cek = $this->mtransauditor->cek($scanunit, $cabang);
             if ($cek) {
@@ -1088,6 +1114,9 @@ class Transaksi_Auditor extends CI_Controller
     {
         $scanpart = $this->input->post('id');
         $cabang = $this->input->post('cabang');
+        $lokasi = $this->input->post('lokasi');
+        $rakbin = $this->input->post('rakbin');
+        $kondisi = $this->input->post('kondisi');
         $output = '';
         $base = base_url();
         $info = '';
@@ -1097,15 +1126,16 @@ class Transaksi_Auditor extends CI_Controller
             $dataPart = null;
         }
         if ($dataPart) {
-            $cek = $this->mtransauditor->cekPart($scanpart, $cabang);
+            $cek = $this->mtransauditor->cekPart($scanpart, $cabang, $rakbin, $lokasi, $kondisi);
             if ($cek) {
                 foreach ($cek as $c) {
                     $part = $c['qty'];
                     $data = [
-                        'id' => $c['part_number'],
+                        'id' => $c['id_part'],
                         'qty' => $part + 1,
                     ];
                 }
+                // var_dump($data);
                 $info = 'Data Diupdate';
                 if ($this->mtransauditor->editscanpart($data)) {
                     $output = '';
@@ -1158,21 +1188,23 @@ class Transaksi_Auditor extends CI_Controller
                                                 <td>' . $list['deskripsi'] . '</td>
                                                 <td>' . $list['kd_lokasi_rak'] . '</td>
                                                 <td>' . $list['qty'] . '</td>
+                                                <td>' . $list['status'] . '</td>
                                             </tr>       
                                             ';
                         }
                     }
                 }
             } else {
+
                 foreach ($dataPart as $part) {
                     $data = [
                         'id_cabang' => $part['id_cabang'],
-                        'id_lokasi' => $part['id_lokasi'],
+                        'id_lokasi' => $lokasi,
                         'part_number' => $part['part_number'],
-                        'kd_lokasi_rak' => $part['kd_lokasi_rak'],
+                        'kd_lokasi_rak' => $rakbin,
                         'deskripsi' => $part['deskripsi'],
                         'qty' => 1,
-                        'status' => 'Bagus'
+                        'status' => $kondisi
                     ];
                 }
                 $info = 'Data Ditambahkan';
@@ -1227,6 +1259,7 @@ class Transaksi_Auditor extends CI_Controller
                                                 <td>' . $list['deskripsi'] . '</td>
                                                 <td>' . $list['kd_lokasi_rak'] . '</td>
                                                 <td>' . $list['qty'] . '</td>
+                                                <td>' . $list['status'] . '</td>
                                             </tr>       
                                             ';
                         }
@@ -1285,6 +1318,7 @@ class Transaksi_Auditor extends CI_Controller
                                                 <td>' . $list['deskripsi'] . '</td>
                                                 <td>' . $list['kd_lokasi_rak'] . '</td>
                                                 <td>' . $list['qty'] . '</td>
+                                                <td>' . $list['status'] . '</td>
                                             </tr>       
                                             ';
                 }

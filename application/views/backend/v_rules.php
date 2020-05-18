@@ -13,7 +13,7 @@
                         </div>
 
                         <div class="col-sm-2 text-center">
-                            <button class="btn btn-w-m btn-info" id="caribtn">Cari Data</button>
+                            <button class="btn btn-w-m btn-success" id="caribtn">Cari Data</button>
                         </div>
                     </div>
                 </div>
@@ -21,19 +21,19 @@
         </div>
     </div>
     <div class="row">
-                <div class="col-lg-12" id="data_input">
-                </div>
-            </div>
+        <div class="col-lg-12" id="data_input">
+        </div>
+    </div>
     <div class="row">
         <div class="col-lg-12">
-            <div class="panel panel-bluedark">
+            <div class="panel panel-primary">
                 <div class="panel-heading">
-                <div class="col-sm-10">
-                    <h3><i class="fa fa-info-circle"></i> Akses Menu User</h3>
-                </div>
-                <div >
-                        <input type="submit" value="Add Data" id="add" name="add" class="btn btn-success"  onclick="show()">
-                        </div>
+                    <div class="col-sm-10">
+                        <h3><i class="fa fa-info-circle"></i> Akses Menu User</h3>
+                    </div>
+                    <div>
+                        <input type="submit" value="Add Data" id="add" name="add" class="btn btn-success" onclick="show()">
+                    </div>
                 </div>
                 <div class="panel-body">
 
@@ -43,7 +43,7 @@
                                 <table class="table table-striped table-bordered table-hover dataTables-example gray-bg">
                                     <thead>
                                         <tr>
-                                            <th class="text-center col-sm-3" >NO</th>
+                                            <th class="text-center" width="3%">NO</th>
                                             <th class="text-center" width="5%">AKSI</th>
                                             <th class="text-center" width="15%">Menu Akses</th>
 

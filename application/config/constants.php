@@ -86,4 +86,5 @@ defined('EXIT__AUTO_MAX')      or define('EXIT__AUTO_MAX', 125); // highest auto
 
 define('SITE_NAME', 'SIMA');
 // define('SERVER_BASE','http://192.168.1.18/');
-define('SERVER_BASE', 'http://localhost/ci-api/');
+define('SERVER_BASE', 'http://' . getHostByName(getHostName()) . '/ci-api/');
+// define('SERVER_BASE', 'http://localhost/ci-api/');
